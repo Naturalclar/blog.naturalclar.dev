@@ -47,6 +47,6 @@ this blog possible!
 
 ## 💫 Deploy
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-blog)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-blog) [![Greenkeeper badge](https://badges.greenkeeper.io/Naturalclar/blog.naturalclar.dev.svg)](https://greenkeeper.io/)
 
 <!-- AUTO-GENERATED-CONTENT:END -->
