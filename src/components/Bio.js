@@ -11,12 +11,7 @@ function Bio() {
       render={data => {
         const { author, social } = data.site.siteMetadata
         return (
-          <div
-            style={{
-              display: `flex`,
-              marginBottom: rhythm(2.5),
-            }}
-          >
+          <div style={{ display: `flex`, marginBottom: rhythm(2.5) }}>
             <Image
               fixed={data.avatar.childImageSharp.fixed}
               alt={author}
@@ -28,12 +23,11 @@ function Bio() {
               }}
             />
             <p>
-              Written by <strong>{author}</strong> who lives and works in
-              Minneapolis building silly things.
-              {` `}
-              <a href={`https://twitter.com/${social.twitter}`}>
-                You should follow him on Twitter
-              </a>
+              Author: <strong>{author}</strong>
+              <p>
+                <a href={`${social.twitter}`}>Twitter</a>{' '}
+                <a href={`${social.github}`}>Github</a>
+              </p>
             </p>
           </div>
         )
@@ -56,6 +50,7 @@ const bioQuery = graphql`
         author
         social {
           twitter
+          github
         }
       }
     }
