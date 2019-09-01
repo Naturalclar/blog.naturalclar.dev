@@ -1,9 +1,32 @@
 import React from 'react'
-import { render } from 'react-dom'
+// @ts-ignore @types not provided
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live'
 
-export const Code = ({ codeString, language, ...props }) => {
+type Line = {
+  token: string
+  key: number
+}
+
+type LineProps = {
+  line: Line[]
+  key: number
+}
+
+type Token = Line[]
+
+type Props = {
+  codeString: string
+  language: string
+  className: string
+  style: Record<string, any>
+  'react-live': boolean
+  tokens: Token[]
+  getLineProps: (props: LineProps) => LineProps
+  getTokenProps: (props: any) => Record<string, any>
+}
+
+export const Code = ({ codeString, language, ...props }: Props) => {
   if (props['react-live']) {
     return (
       <LiveProvider code={codeString} noInline={true}>
@@ -15,7 +38,7 @@ export const Code = ({ codeString, language, ...props }) => {
   } else {
     return (
       <Highlight {...defaultProps} code={codeString} language={language}>
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        {({ className, style, tokens, getLineProps, getTokenProps }: Props) => (
           <pre className={className} style={style}>
             {tokens.map((line, i) => (
               <div {...getLineProps({ line, key: i })}>

@@ -1,4 +1,6 @@
+// @ts-ignore
 import Typography from 'typography'
+// @ts-ignore
 import Wordpress2016 from 'typography-theme-wordpress-2016'
 
 Wordpress2016.overrideThemeStyles = () => {
@@ -11,6 +13,7 @@ Wordpress2016.overrideThemeStyles = () => {
 
 delete Wordpress2016.googleFonts
 
+// @ts-ignore
 const typography = new Typography(Wordpress2016)
 
 // Hot reload typography in development.

@@ -53,6 +53,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    // Google Analytics
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
@@ -140,5 +141,14 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
+    // Enable typescript in gatsby
+    {
+      resolve: `gatsby-plugin-typescript`,
+      options: {
+        isTSX: false,
+      },
+    },
+    // Adds type checker when developing
+    'gatsby-plugin-typescript-checker',
   ],
 }

@@ -68,9 +68,9 @@ function SEO({ description, lang, meta, keywords, title }) {
 }
 
 SEO.defaultProps = {
-  lang: `en`,
+  lang: `jp`,
   meta: [],
-  keywords: [],
+  keywords: ['react','react-native'],
 }
 
 SEO.propTypes = {
