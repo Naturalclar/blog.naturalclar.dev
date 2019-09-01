@@ -3,7 +3,7 @@ module.exports = {
     title: `naturalclar.dev`,
     author: `Naturalclar (Jesse Katsumata)`,
     description: `Tech blog`,
-    siteUrl: `https://gatsby-starter-blog-mdx-demo.netlify.com/`,
+    siteUrl: `https://blog.naturalclar.dev`,
     social: {
       twitter: `https://twitter.com/natural_clar`,
       github: `https://github.com/Naturalclar`,
@@ -56,7 +56,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
+        trackingId: `UA-92016705-3`,
       },
     },
     {
