@@ -5,10 +5,12 @@ module.exports = {
   },
   "plugins": [
     "react",
+    "@typescript-eslint"
   ],
   "globals": {
     "graphql": false,
   },
+  "parser":"@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
     "ecmaFeatures": {
