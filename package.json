@@ -1,11 +1,32 @@
 {
   "name": "blog.naturalclar.dev",
+  "version": "0.1.0",
   "private": true,
   "description": "Blog, powered by Gatsby",
-  "version": "0.1.0",
-  "author": "Jesse Katsumata <jesse.katsumata@gmail.com>",
+  "keywords": [
+    "gatsby"
+  ],
+  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+  },
+  "license": "MIT",
+  "author": "Jesse Katsumata <jesse.katsumata@gmail.com>",
+  "main": "n/a",
+  "scripts": {
+    "build": "gatsby build",
+    "dev": "gatsby develop",
+    "develop": "gatsby develop",
+    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js",
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js' 'src/**/*.md'",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx --ignore-pattern public .",
+    "new": "scaffdog generate",
+    "start": "npm run develop",
+    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "dependencies": {
     "@mdx-js/mdx": "^0.16.6",
@@ -47,26 +68,7 @@
     "eslint": "5",
     "eslint-plugin-react": "^7.11.1",
     "prettier": "^1.14.2",
+    "scaffdog": "^0.1.2",
     "typescript": "^3.6.2"
-  },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
-  "main": "n/a",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
-  },
-  "scripts": {
-    "dev": "gatsby develop",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx --ignore-pattern public .",
-    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js' 'src/**/*.md'",
-    "develop": "gatsby develop",
-    "start": "npm run develop",
-    "build": "gatsby build",
-    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
   }
 }
