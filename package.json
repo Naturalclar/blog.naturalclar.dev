@@ -2,17 +2,18 @@
   "name": "blog.naturalclar.dev",
   "version": "0.1.0",
   "private": true,
-  "description": "Blog, powered by Gatsby",
+  "description": "My Tech Blog, powered by Gatsby",
   "keywords": [
-    "gatsby"
+    "gatsby",
+    "blog"
   ],
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://blog.naturalclar.dev",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/Naturalclar/blog.naturalclar.dev/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/Naturalclar/blog.naturalclar.dev.git"
   },
   "license": "MIT",
   "author": "Jesse Katsumata <jesse.katsumata@gmail.com>",
