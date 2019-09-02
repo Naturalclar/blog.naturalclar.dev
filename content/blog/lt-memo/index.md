@@ -13,7 +13,7 @@ date: '2019-08-28T18:00:00.000Z'
 
   東京都港区三田 3-11-24 国際興業三田第 2 ビル 9 階
 
-- slide: TBD
+- slide: [https://code-surfer-v3.naturalclar.now.sh/](https://code-surfer-v3.naturalclar.now.sh/)
 
 ## Ginza.js#4
 
