@@ -117,11 +117,12 @@ react-redux の v7.1 から、hooks に対応した API が出たのでそれら
 ```js useFoo.ts
 import { useState, useCallback } form 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { State, FooAction } from './types'
 
 export const useFoo = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const items = useSelector(state=> state.foo.items)
+  const items = useSelector((state:State)=> state.foo.items)
   const dispatch = useDispatch<Dispatch<FooAction>>()
 
   const getFoo = useCallback(async () => {
@@ -129,12 +130,13 @@ export const useFoo = () => {
     try {
     const result = await fetch('/getFoo')
         setLoading(false)
-        dispatch({{type: 'FOO_SUCCESS', result})
+        dispatch({type: 'FOO_SUCCESS', result})
     } catch (e) {
         setLoading(false)
         setError(e.message)
+      }
     },[loading, error, items])
-  }
+
   return [items, getFoo, loading, error]
 }
 
