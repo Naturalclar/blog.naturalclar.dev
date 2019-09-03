@@ -32,3 +32,9 @@ github actions の artifact は circle ci のように静的ファイルを S3 �
 ### electron と applescript を組み合わせた、Touchbar の Dock
 
 Shortcut 一覧ではなく、実際の Dock を Touchbar に表示させたい
+
+### github api いい加減使えるようになろう
+
+やりたいこと
+github のレポジトリ一覧を取得してポートフォリオに貼るとか
+issue のコメントを探して更新するとか。

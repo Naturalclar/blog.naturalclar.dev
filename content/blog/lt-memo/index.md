@@ -23,7 +23,7 @@ date: '2019-08-28T18:00:00.000Z'
 
   東京都中央区銀座 6-10-1 GINZA SIX 10F
 
-- slide: TBD
+- slide: [https://you-may-not-need-thunk.naturalclar.now.sh](https://you-may-not-need-thunk.naturalclar.now.sh)
 
 ## React Native Tokyo
 
@@ -33,7 +33,7 @@ date: '2019-08-28T18:00:00.000Z'
 
 東京都港区六本木 6-10-1(六本木ヒルズ森タワー)
 
-- slide: TBD
+- slide: [https://visual-regression-test-with-react-native.naturalclar.now.sh/](https://visual-regression-test-with-react-native.naturalclar.now.sh/)
 
 ## React LT 会
 
