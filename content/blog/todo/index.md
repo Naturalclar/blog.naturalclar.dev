@@ -3,6 +3,18 @@ title: やりたいことメモ
 date: '2019-08-29T12:00:00.000Z'
 ---
 
+## このブログでやりたいこと
+
+### code snippet にファイル名を追加する。
+
+### URL から oembed card を表示できるようにする
+
+### typescript の Snippet を type error 込みで表示出来るようにする。
+
+### tsx の syntax highlighting を入れる
+
+## その他雑にやりたいこと
+
 ### npm install した時に cli メッセージを出す
 
 `postinstall` でなんとかなるかな。
@@ -19,6 +31,8 @@ react-native + firebase で github login の仕組みを作る。
 - firebase
 - markdown
 - github api
+
+### 簡単な gist editor アプリの作成
 
 ### github actions と reg-suit の組み合わせ
 
