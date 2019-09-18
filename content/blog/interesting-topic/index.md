@@ -20,3 +20,10 @@ Storybook とはまた別らしい？詳細がわからないのでそれを読�
 ## AuthProvider
 
 React の Context と Hooks を使った汎用 Auth を作りたい。100 万番煎じだけど。
+authToken の Persist をどうやるかが課題
+
+## Github Actions Issue hooks
+
+Issue の中身を読んで、特定の文字列が入っている場合に自動的に Label をつける Github Actions を作成したい。
+これを参考にして、Array じゃなくても Label を付けられるものを作る。
+https://github.com/adamzolyak/issue-labeler-action
