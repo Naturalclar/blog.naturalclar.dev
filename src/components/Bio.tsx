@@ -9,7 +9,7 @@ const Bio = () => {
     <StaticQuery
       query={bioQuery}
       render={data => {
-        const { author, social } = data.site.siteMetadata
+        const { author, social, org } = data.site.siteMetadata
         return (
           <div style={{ display: `flex`, marginBottom: rhythm(2.5) }}>
             <Image
@@ -24,6 +24,8 @@ const Bio = () => {
             />
             <p>
               Author: <strong>{author}</strong>
+              <p>Member of <a href={`${org.reactNativeCommunity}`}>react-native-community</a> and <a href={`${org.reasonReactNative}`}>reason-react-native</a></p>
+              <p>Staff of <a href={`${org.jsconfjp}`}>JSConfJP</a> and <a href={`${org.tsconfjp}`}>TSConfJP</a></p>
               <p>
                 <a href={`${social.twitter}`}>Twitter</a>{' '}
                 <a href={`${social.github}`}>Github</a>

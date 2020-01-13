@@ -8,6 +8,12 @@ module.exports = {
       twitter: `https://twitter.com/natural_clar`,
       github: `https://github.com/Naturalclar`,
     },
+    org:{
+      reactNativeCommunity: 'https://github.com/react-native-community',
+      reasonReactNative: 'https://github.com/reason-react-native',
+      tsconfjp:'https://github.com/typescript-jp',
+      jsconfjp:'https://github.com/jsconfjp',
+    }
   },
   plugins: [
     {
