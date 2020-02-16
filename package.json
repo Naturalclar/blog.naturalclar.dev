@@ -32,7 +32,7 @@
   "dependencies": {
     "@mdx-js/mdx": "^0.16.6",
     "@mdx-js/tag": "^0.16.6",
-    "gatsby": "^2.18.21",
+    "gatsby": "^2.19.17",
     "gatsby-image": "^2.0.22",
     "gatsby-mdx": "^0.3.5",
     "gatsby-plugin-feed": "^2.0.8",
@@ -64,12 +64,13 @@
     "typography-theme-wordpress-2016": "^0.15.10"
   },
   "devDependencies": {
+    "@types/node": "^13.7.1",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "eslint": "5",
     "eslint-plugin-react": "^7.11.1",
-    "prettier": "^1.14.2",
+    "prettier": "^1.19.1",
     "scaffdog": "^0.1.2",
-    "typescript": "^3.6.2"
+    "typescript": "^3.7.5"
   }
 }

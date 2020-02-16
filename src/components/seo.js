@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
-function SEO({ description, lang, meta, keywords, title }) {
+function SEO({ description, lang, meta, keywords, title, thumbnail }) {
+  const imageSrc = thumbnail && thumbnail.childImageSharp.sizes.src;
+  const origin = typeof window !== "undefined" ? window.location.origin : ""
+  const image = origin + imageSrc
   return (
     <StaticQuery
       query={detailsQuery}
@@ -50,6 +53,10 @@ function SEO({ description, lang, meta, keywords, title }) {
                 name: `twitter:description`,
                 content: metaDescription,
               },
+              {
+                name: `twitter.image`,
+                content: image
+              }
             ]
               .concat(
                 keywords.length > 0
