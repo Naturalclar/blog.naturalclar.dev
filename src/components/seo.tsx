@@ -14,7 +14,6 @@ type Props = {
 function SEO({ description, lang, meta, keywords, title, thumbnail }:Props) {
   const imageSrc = thumbnail && thumbnail.childImageSharp.sizes.src;
   const origin = typeof window !== "undefined" ? window.location.origin : ""
-  const image = imageSrc ? origin + imageSrc : ''
   return (
     <StaticQuery
       query={detailsQuery}
@@ -63,7 +62,7 @@ function SEO({ description, lang, meta, keywords, title, thumbnail }:Props) {
               },
               {
                 name: `twitter:image:src`,
-                content: image || data.defaultThumbnail.childImageSharp.sizes.src
+                content: imageSrc? origin + imageSrc : origin + data.defaultThumbnail.childImageSharp.sizes.src
               }
             ]
               .concat(
