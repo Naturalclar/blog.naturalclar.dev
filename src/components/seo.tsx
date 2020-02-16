@@ -1,12 +1,20 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
-function SEO({ description, lang, meta, keywords, title, thumbnail }) {
+type Props = {
+  description: string,
+  lang: string,
+  meta: any[],
+  keywords: string[],
+  title: string,
+  thumbnail: {childImageSharp:{sizes:{src:string}}}
+}
+
+function SEO({ description, lang, meta, keywords, title, thumbnail }:Props) {
   const imageSrc = thumbnail && thumbnail.childImageSharp.sizes.src;
   const origin = typeof window !== "undefined" ? window.location.origin : ""
-  const image = imageSrc ? origin + imageSrc : "https://naturalclar.dev/static/twitter_card.png"
+  const image = imageSrc ? origin + imageSrc : ''
   return (
     <StaticQuery
       query={detailsQuery}
@@ -55,7 +63,7 @@ function SEO({ description, lang, meta, keywords, title, thumbnail }) {
               },
               {
                 name: `twitter:image:src`,
-                content: image
+                content: image || data.defaultThumbnail.childImageSharp.sizes.src
               }
             ]
               .concat(
@@ -80,18 +88,17 @@ SEO.defaultProps = {
   keywords: ['react','react-native'],
 }
 
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.array,
-  keywords: PropTypes.arrayOf(PropTypes.string),
-  title: PropTypes.string.isRequired,
-}
-
 export default SEO
 
 const detailsQuery = graphql`
   query DefaultSEOQuery {
+    defaultThumbnail: file(absolutePath: { regex: "/twitter-card.png/" }) {
+      childImageSharp {
+        sizes(maxWidth: 600) {
+              ...GatsbyImageSharpSizes
+        }
+      }
+    }
     site {
       siteMetadata {
         title
