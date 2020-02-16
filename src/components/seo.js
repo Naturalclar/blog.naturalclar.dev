@@ -6,7 +6,7 @@ import { StaticQuery, graphql } from 'gatsby'
 function SEO({ description, lang, meta, keywords, title, thumbnail }) {
   const imageSrc = thumbnail && thumbnail.childImageSharp.sizes.src;
   const origin = typeof window !== "undefined" ? window.location.origin : ""
-  const image = origin + imageSrc
+  const image = imageSrc ? origin + imageSrc : "https://naturalclar.dev/static/twitter_card.png"
   return (
     <StaticQuery
       query={detailsQuery}
@@ -39,7 +39,7 @@ function SEO({ description, lang, meta, keywords, title, thumbnail }) {
               },
               {
                 name: `twitter:card`,
-                content: `summary`,
+                content: `summary_large_image`,
               },
               {
                 name: `twitter:creator`,
@@ -54,7 +54,7 @@ function SEO({ description, lang, meta, keywords, title, thumbnail }) {
                 content: metaDescription,
               },
               {
-                name: `twitter.image`,
+                name: `twitter:image:src`,
                 content: image
               }
             ]
