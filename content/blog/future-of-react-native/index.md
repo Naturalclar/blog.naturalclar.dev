@@ -13,8 +13,8 @@ date: '2020-02-05T16:37:46.346Z'
 
 2020年は React Native が大きく変わる年になります。現在、React Native は内部設計を徐々に変更しています。この内部設計の変化については、React Native Re-architecture として2018年からいくつかの技術カンファレンスにて発表がありました。
 
-[The New React Native - React Native EU](https://www.youtube.com/watch?v=52El0EUI6D0)
-[React Native: the Past, the Present and the Future - React Advanced](https://www.youtube.com/watch?v=7gm0owyO8HU)
+- [The New React Native - React Native EU](https://www.youtube.com/watch?v=52El0EUI6D0)
+- [React Native: the Past, the Present and the Future - React Advanced](https://www.youtube.com/watch?v=7gm0owyO8HU)
 
 この記事ではその Re-architecture について、自分の理解を共有します。
 

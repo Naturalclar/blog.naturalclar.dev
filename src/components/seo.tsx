@@ -3,24 +3,26 @@ import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
 type Props = {
-  description: string,
-  lang: string,
-  meta: any[],
-  keywords: string[],
-  title: string,
-  thumbnail: {childImageSharp:{sizes:{src:string}}}
+  description: string
+  lang: string
+  meta: any[]
+  keywords: string[]
+  title: string
+  thumbnail: { childImageSharp: { sizes: { src: string } } }
 }
 
-function SEO({ description, lang, meta, keywords, title, thumbnail }:Props) {
-  const imageSrc = thumbnail && thumbnail.childImageSharp.sizes.src;
-  const origin = typeof window !== "undefined" ? window.location.origin : ""
+function SEO({ description, lang, meta, keywords, title, thumbnail }: Props) {
+  const imageSrc = thumbnail && thumbnail.childImageSharp.sizes.src
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://blog.naturalclar.dev/'
   return (
     <StaticQuery
       query={detailsQuery}
       render={data => {
         const metaDescription =
           description || data.site.siteMetadata.description
-          const imageUrl = imageSrc? origin + imageSrc : origin + data.defaultThumbnail.childImageSharp.sizes.src
+        const imageUrl = imageSrc
+          ? origin + imageSrc
+          : origin + data.defaultThumbnail.childImageSharp.sizes.src
         return (
           <Helmet
             htmlAttributes={{
@@ -47,7 +49,7 @@ function SEO({ description, lang, meta, keywords, title, thumbnail }:Props) {
               },
               {
                 property: `og:image`,
-                content: imageUrl
+                content: imageUrl,
               },
               {
                 name: `twitter:card`,
@@ -67,8 +69,8 @@ function SEO({ description, lang, meta, keywords, title, thumbnail }:Props) {
               },
               {
                 name: `twitter:image:src`,
-                content: imageUrl
-              }
+                content: imageUrl,
+              },
             ]
               .concat(
                 keywords.length > 0
@@ -89,7 +91,7 @@ function SEO({ description, lang, meta, keywords, title, thumbnail }:Props) {
 SEO.defaultProps = {
   lang: `jp`,
   meta: [],
-  keywords: ['react','react-native'],
+  keywords: ['react', 'react-native'],
 }
 
 export default SEO
@@ -99,7 +101,7 @@ const detailsQuery = graphql`
     defaultThumbnail: file(absolutePath: { regex: "/twitter-card.png/" }) {
       childImageSharp {
         sizes(maxWidth: 600) {
-              ...GatsbyImageSharpSizes
+          ...GatsbyImageSharpSizes
         }
       }
     }
