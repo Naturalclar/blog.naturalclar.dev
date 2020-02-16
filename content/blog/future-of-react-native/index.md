@@ -1,7 +1,7 @@
 ---
 title: 'Future of React Native'
 date: '2020-02-05T16:37:46.346Z'
-thumbnail: './react-native-architecture.png'
+thumbnail: './twitter-card.png'
 ---
 
 この記事は [Meguro.es #25](meguro-es) で登壇した内容です。
