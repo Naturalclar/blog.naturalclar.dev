@@ -7,8 +7,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: naturalclar/issue-action@v0.0.3
+      - uses: Naturalclar/issue-action@v1.0.0
         with:
-          keywords: 'feature'
-          action: 'label Feature'
+          keywords: '["post"]'
+          action: '["Post Idea"]'
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+      - uses: Naturalclar/issue-action@v1.0.0
+        with:
+          keywords: '["feature"]'
+          action: '["feature request"]'
           github-token: '${{ secrets.GITHUB_TOKEN }}'
