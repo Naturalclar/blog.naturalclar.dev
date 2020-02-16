@@ -20,6 +20,7 @@ function SEO({ description, lang, meta, keywords, title, thumbnail }:Props) {
       render={data => {
         const metaDescription =
           description || data.site.siteMetadata.description
+          const imageUrl = imageSrc? origin + imageSrc : origin + data.defaultThumbnail.childImageSharp.sizes.src
         return (
           <Helmet
             htmlAttributes={{
@@ -45,6 +46,10 @@ function SEO({ description, lang, meta, keywords, title, thumbnail }:Props) {
                 content: `website`,
               },
               {
+                property: `og:image`,
+                content: imageUrl
+              },
+              {
                 name: `twitter:card`,
                 content: `summary_large_image`,
               },
@@ -62,7 +67,7 @@ function SEO({ description, lang, meta, keywords, title, thumbnail }:Props) {
               },
               {
                 name: `twitter:image:src`,
-                content: imageSrc? origin + imageSrc : origin + data.defaultThumbnail.childImageSharp.sizes.src
+                content: imageUrl
               }
             ]
               .concat(
