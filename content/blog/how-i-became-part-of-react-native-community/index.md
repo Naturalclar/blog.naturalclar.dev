@@ -17,6 +17,23 @@ date: '2020-03-09T06:34:26.677Z'
 
 ## なぜ入ろうと思ったのか
 
+## 入るまでの過程
 
+## 自分の担当範囲
 
+現在、自分は以下のコミュニティパッケージのメンテナンスを行っています。
+数が多く
+
+- `@react-native-community/segmented-control`
+- `@react-native-community/push-notification-ios`
+- `@react-native-community/clipboard`
+- `@react-native-community/progress-view`
+- `@react-native-community/progress-bar-android`
+- `@react-native-community/voice`
+
+## 入ることで出来ること
+
+react-native-community の一員や、react-native の contributor は community の discord に招待されます。基本的に react-native は OSS として、活動内容も外部に発信していますが、リリースのタイミングや、レビューの対応など、メンバー間での迅速なコミュニケーションが必要な際は内部の Discord で行われます。
+
+最新版のリリース時に行われてるやり取りや JSI、Fabric、Turbo Modules などの最新の情報をキャッチアップできます。
 
