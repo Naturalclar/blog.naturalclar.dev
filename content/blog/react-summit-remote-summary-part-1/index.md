@@ -23,7 +23,7 @@ Main Track と Alt Track の 2 Track があり、Main Track は React につい�
 
 また、公式サイトでは時間に合わせてどのトラックでどういうトークやディスカッションが行われているかが簡単に可視化できるタイムラインが用意されており、とてもまとまっている印象を受けました。今後も行われていくであろうリモートカンファレンスの参考になるかもしれません。
 
-![React Summit のタイムライン](./react-summit-timeline)
+![React Summit のタイムライン](./react-summit-timeline.png)
 
 
 ## トークまとめ
