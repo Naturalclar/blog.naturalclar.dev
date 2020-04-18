@@ -101,7 +101,7 @@ React Native には Firebase との連携が行える [React Native Firebase](ht
 
 MLKit を使うことで顔面解析や自然言語解析など、様々なことが行えるようになります。
 
-### Styles and Theming with Restyle in React Native by Haris Mahmood
+#### Styles and Theming with Restyle in React Native by Haris Mahmood
 
 次に、Shopify のエンジニアである Haris氏の LT です。
 
@@ -113,7 +113,7 @@ Restyle を使うことで使い回されるテーマや、スタイルはほと
 
 最近自分もアプリのダークモード実装を行っていて、似たようなアプローチで実装を進めていたので安心しました。
 
-### React Native at Microsoft by Eloy Duran and Kiki Saintonge
+#### React Native at Microsoft by Eloy Duran and Kiki Saintonge
 
 次は Microsoft の Eloy氏と Kiki氏による Microsoft での React Native の開発についての発表でした。
 
@@ -130,7 +130,7 @@ React Native Windows では Windows PC はもちろん、タブレットPC、2-i
 この LT では、実際に新規の React Native プロジェクトを Mac、及び Windows で立ち上げるデモを行っていました。
 最近、Community で管理している [react-native-webview](https://github.com/react-native-community/react-native-webview) にも Mac と Windows のサポートが入ったので、それをつかって、デスクトップアプリとして Mac と Windows で React Native のホームページを見せるデモを行っていました。
 
-### End your development nightmares with envinfo and Solidarity by Trevor Brindle
+#### End your development nightmares with envinfo and Solidarity by Trevor Brindle
 
 このセッションの最後の LT は envinfo の作成者である Trevor氏の LT です。
 
