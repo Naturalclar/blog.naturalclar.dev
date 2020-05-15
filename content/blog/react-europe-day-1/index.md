@@ -18,7 +18,7 @@ React Europe ではオンラインカンファレンスの他に、２日に渡�
 
 YouTube Live のリンクは[こちら](https://www.youtube.com/watch?v=41Ia291KIvI)
 
-#### The State of React
+### The State of React
 
 React Europe カンファレンス最初のトークは、[@johnadetutu93](https://twitter.com/johnadetutu93)による State of React という発表でした。
 
@@ -33,7 +33,7 @@ react-spring も例外ではなく、`useSpring` や `useTransition`, `useChain
 ただ、Reactの性質上、現状のAPIでは、Componentが画面を去る際にアニメーションをつけるのは難しい状態です。
 その問題について、[rfc](https://github.com/reactjs/rfcs/issues/128)が上がっていたり、今後の Concurrent Mode でどう変わっていくかには要注目です。
 
-#### On Next.js
+### On Next.js
 
 ２つ目のセッションでは、Vercel (旧ZEIT) のエンジニアである[@timneutkens](https://twitter.com/timneutkens)が Next.js について話していました。
 
@@ -50,7 +50,7 @@ Next は React を使ってアプリを高速で書けるフレームワーク�
 - Fast Refresh: この機能が追加されたことにより、Component の State をリセットすることなく、Component の変更が即時に反映できるようになった。
 
 
-#### Bringing webgl to react
+### Bringing webgl to react
 
 ３つ目のセッションでは、react-springなどのライブラリの作者である[@0xca0a](https://twitter.com/0xca0a)がreact-three-fiberについて話していました。
 
@@ -60,7 +60,7 @@ React Reconciler をベースとして作られており、DOMを持たないの
 
 また、[drei](https://github.com/react-spring/drei)という react-three-fiber のヘルパーについても少し説明されていました。`<HTML/>`というComponentを使うことで、webglの中にhtmlの内容を埋め込めるというのを実演していました。
 
-# Scaling the Web with Gatsby
+### Scaling the Web with Gatsby
 
 前半最後のセッションは Gatsby のコアチームの一員である[@chatsidhartha](https://twitter.com/chatsidhartha) が、Gatsby のこれまでと今後について話していました。
 
