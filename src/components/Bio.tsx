@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import Image from 'gatsby-image'
 
@@ -8,32 +8,42 @@ const Bio = () => {
   return (
     <StaticQuery
       query={bioQuery}
-      render={data => {
+      render={(data) => {
         const { author, social } = data.site.siteMetadata
         return (
-          <div style={{ display: `flex`, marginBottom: rhythm(2.5) }}>
+          <div style={styles.container}>
             <Image
               fixed={data.avatar.childImageSharp.fixed}
               alt={author}
-              style={{
-                marginRight: rhythm(1 / 2),
-                marginBottom: 0,
-                minWidth: 50,
-                borderRadius: `100%`,
-              }}
+              style={styles.avatar}
             />
-            <p>
-              Author: <strong>{author}</strong>
+            <div>
+              <p style={styles.authorString}>
+                Author: <strong>{author}</strong>
+              </p>
               <p>
                 <a href={`${social.twitter}`}>Twitter</a>{' '}
                 <a href={`${social.github}`}>Github</a>
               </p>
-            </p>
+            </div>
           </div>
         )
       }}
     />
   )
+}
+
+const styles = {
+  container: { display: `flex`, marginBottom: rhythm(2.5) },
+  avatar: {
+    marginRight: rhythm(1 / 2),
+    marginBottom: 0,
+    minWidth: 50,
+    borderRadius: `100%`,
+  },
+  authorString: {
+    margin: '0',
+  },
 }
 
 const bioQuery = graphql`

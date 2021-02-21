@@ -1,8 +1,7 @@
-import React from 'react'
-// @ts-ignore @types not provided
-import Highlight, { defaultProps } from 'prism-react-renderer'
+import * as React from 'react'
+import Highlight, { defaultProps, Language } from 'prism-react-renderer'
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live'
-
+import dracula from 'prism-react-renderer/themes/dracula'
 type Line = {
   token: string
   key: number
@@ -17,7 +16,7 @@ type Token = Line[]
 
 type Props = {
   codeString: string
-  language: string
+  language: Language
   className: string
   style: Record<string, any>
   'react-live': boolean
@@ -37,8 +36,13 @@ export const Code = ({ codeString, language, ...props }: Props) => {
     )
   } else {
     return (
-      <Highlight {...defaultProps} code={codeString} language={language}>
-        {({ className, style, tokens, getLineProps, getTokenProps }: Props) => (
+      <Highlight
+        {...defaultProps}
+        code={codeString}
+        language={language}
+        theme={dracula}
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre className={className} style={style}>
             {tokens.map((line, i) => (
               <div {...getLineProps({ line, key: i })}>
