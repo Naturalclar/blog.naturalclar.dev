@@ -1,16 +1,17 @@
 ---
 name: 'post'
-message: 'Enter Title of your article (no space)'
 root: './content/blog/'
 output: './content/blog/'
+questions:
+  title: 'Enter Title of your article (no space)'
 ignore: []
 ---
 
-# {{ input }}/index.md`
+# {{ inputs.title }}/index.md`
 
 ```markdown
 ---
-title: '{{ input }}'
+title: '{{ inputs.title }}'
 date: '{{ 'new Date().toISOString()' | eval }}'
 ---
 ```
