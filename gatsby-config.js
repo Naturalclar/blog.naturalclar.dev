@@ -11,21 +11,7 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/content/blog`,
-        name: `blog`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/content/assets`,
-        name: `assets`,
-      },
-    },
-    {
-      resolve: `gatsby-mdx`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: ['.mdx', '.md'],
         gatsbyRemarkPlugins: [
@@ -51,7 +37,20 @@ module.exports = {
         ],
       },
     },
-    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/blog`,
+        name: `blog`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/assets`,
+        name: `assets`,
+      },
+    },
     `gatsby-plugin-sharp`,
     // Google Analytics
     {
@@ -79,11 +78,11 @@ module.exports = {
             serialize: ({ query: { site, allMdx } }) => {
               return allMdx.edges.map(edge => {
                 return Object.assign({}, edge.node.frontmatter, {
-                  description: edge.node.excerpt,
+                  description: edge.node.description,
                   data: edge.node.frontmatter.date,
                   url: site.siteMetadata.siteUrl + edge.node.fields.slug,
                   guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  custom_elements: [{ 'content:encoded': edge.node.code.boy }],
+                  custom_elements: [{ 'content:encoded': edge.node.body }],
                 })
               })
             },
@@ -102,9 +101,6 @@ module.exports = {
               ) {
                 edges {
                   node {
-                    code {
-                      body
-                    }
                     fields { slug }
                     frontmatter {
                       title
@@ -148,7 +144,5 @@ module.exports = {
         isTSX: false,
       },
     },
-    // Adds type checker when developing
-    'gatsby-plugin-typescript-checker',
   ],
 }

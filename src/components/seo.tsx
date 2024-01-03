@@ -8,11 +8,10 @@ type Props = {
   meta: any[]
   keywords: string[]
   title: string
-  thumbnail: { childImageSharp: { sizes: { src: string } } }
 }
 
-function SEO({ description, lang, meta, keywords, title, thumbnail }: Props) {
-  const imageSrc = thumbnail && thumbnail.childImageSharp.sizes.src
+function SEO({ description, lang, meta, keywords, title }: Props) {
+  
   const origin = typeof window !== 'undefined' ? window.location.origin : 'https://blog.naturalclar.dev/'
   return (
     <StaticQuery
@@ -20,9 +19,6 @@ function SEO({ description, lang, meta, keywords, title, thumbnail }: Props) {
       render={data => {
         const metaDescription =
           description || data.site.siteMetadata.description
-        const imageUrl = imageSrc
-          ? origin + imageSrc
-          : origin + data.defaultThumbnail.childImageSharp.sizes.src
         return (
           <Helmet
             htmlAttributes={{
@@ -49,7 +45,7 @@ function SEO({ description, lang, meta, keywords, title, thumbnail }: Props) {
               },
               {
                 property: `og:image`,
-                content: imageUrl,
+                content: `${origin}/ogp.png`,
               },
               {
                 name: `twitter:card`,
@@ -69,7 +65,7 @@ function SEO({ description, lang, meta, keywords, title, thumbnail }: Props) {
               },
               {
                 name: `twitter:image:src`,
-                content: imageUrl,
+                content: `${origin}/ogp.png`,
               },
             ]
               .concat(
@@ -96,15 +92,9 @@ SEO.defaultProps = {
 
 export default SEO
 
+// TODO: add twitter card
 const detailsQuery = graphql`
   query DefaultSEOQuery {
-    defaultThumbnail: file(absolutePath: { regex: "/twitter-card.png/" }) {
-      childImageSharp {
-        sizes(maxWidth: 600) {
-          ...GatsbyImageSharpSizes
-        }
-      }
-    }
     site {
       siteMetadata {
         title

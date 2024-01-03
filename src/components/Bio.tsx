@@ -13,7 +13,7 @@ const Bio = () => {
         return (
           <div style={{ display: `flex`, marginBottom: rhythm(2.5) }}>
             <Image
-              fixed={data.avatar.childImageSharp.fixed}
+              fixed={{width: 50, height: 50, srcSet:'https://www.github.com/Naturalclar.png', src:'https://www.github.com/Naturalclar.png'}}
               alt={author}
               style={{
                 marginRight: rhythm(1 / 2),
@@ -38,13 +38,6 @@ const Bio = () => {
 
 const bioQuery = graphql`
   query BioQuery {
-    avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
-      childImageSharp {
-        fixed(width: 50, height: 50) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
     site {
       siteMetadata {
         author
