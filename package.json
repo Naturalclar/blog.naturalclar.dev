@@ -70,10 +70,10 @@
     "eslint": "^7",
     "eslint-plugin-react": "^7.11.1",
     "prettier": "^2.0.5",
-    "scaffdog": "^0.2.3",
+    "scaffdog": "^3.0.0",
     "typescript": "^3.8.3"
   },
   "volta": {
-    "node": "16.20.2"
+    "node": "18.19.0"
   }
 }
