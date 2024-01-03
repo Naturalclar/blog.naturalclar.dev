@@ -1,14 +1,4 @@
 module.exports = {
-  siteMetadata: {
-    title: `naturalclar.dev`,
-    author: `Naturalclar (Jesse Katsumata)`,
-    description: `Tech blog`,
-    siteUrl: `https://blog.naturalclar.dev`,
-    social: {
-      twitter: `https://twitter.com/natural_clar`,
-      github: `https://github.com/Naturalclar`,
-    },
-  },
   plugins: [
     {
       resolve: `gatsby-plugin-mdx`,
@@ -126,7 +116,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        icon: `content/assets/profile-pic.jpg`,
       },
     },
     `gatsby-plugin-offline`,

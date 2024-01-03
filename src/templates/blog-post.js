@@ -6,10 +6,11 @@ import Bio from '../components/Bio'
 import Layout from '../components/Layout'
 import SEO from '../components/seo'
 import { rhythm, scale } from '../utils/typography'
+import { siteTitle } from '../data/static'
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.mdx
-  const siteTitle = data.site.siteMetadata.title
+
   const { previous, next } = pageContext
   const thumbnail = post.frontmatter.thumbnail
 
@@ -67,12 +68,6 @@ export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query($slug: String!) {
-    site {
-      siteMetadata {
-        title
-        author
-      }
-    }
     mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
