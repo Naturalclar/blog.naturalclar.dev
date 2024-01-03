@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
-import MDXRenderer from 'gatsby-mdx/mdx-renderer'
+import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
 
 import Bio from '../components/Bio'
 import Layout from '../components/Layout'
@@ -27,7 +27,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
       >
         {post.frontmatter.date}
       </p>
-      <MDXRenderer>{post.code.body}</MDXRenderer>
+      <MDXRenderer>{post.body}</MDXRenderer>
       <hr
         style={{
           marginBottom: rhythm(1),
@@ -79,17 +79,8 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
-        thumbnail {
-          childImageSharp {
-            sizes(maxWidth: 600) {
-              ...GatsbyImageSharpSizes
-            }
-          }
-        }
       }
-      code {
-        body
-      }
+      body
     }
   }
 `
