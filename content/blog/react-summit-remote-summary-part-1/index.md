@@ -12,7 +12,6 @@ YouTube Live で視聴するのみなら参加費は無料（！）で大変あ�
 
 開催時間が日本時間の22:00-2:30で、質問する体力がでなさそうだったので、今回は無料枠で参加しました。
 
-
 ## React Summit とは
 
 React Summit はその名の通り ReactJS の技術カンファレンスです。React や React Native のセッションが全体を占めており、Next.js の共同作成者である Guillermo Rauch氏や、海外のt_wadaとも言える Kent C. Dodds氏、React Native のリリースやコミュニティの運営に深く関わっていた Lorenzo Sciandra (Kelset) 氏など、界隈の有名人が多く集まっていました。
@@ -24,7 +23,6 @@ Main Track と Alt Track の 2 Track があり、Main Track は React につい�
 また、公式サイトでは時間に合わせてどのトラックでどういうトークやディスカッションが行われているかが簡単に可視化できるタイムラインが用意されており、とてもまとまっている印象を受けました。今後も行われていくであろうリモートカンファレンスの参考になるかもしれません。
 
 ![React Summit のタイムライン](./react-summit-timeline.png)
-
 
 ## トークまとめ
 
@@ -65,7 +63,6 @@ React Native のリリースプロセスについては [react-native-community/
 
 このトークでチラッと議題に上がったのは開発元である Facebook が React Native をどのように使っているかです。
 Facebook は内部で独自の Monorepo を持っており、React Native はその中の一つです。内部で行われた変更が、Github上でも公開されている React Native のリポジトリにミラーリングされるようになっているようです。
-
 
 トークタイトルの The 1.0 is a Lie についてですが、一般的に、ライブラリのバージョンは 1.0 を持って「安定」していると言うケースが多いです。
 

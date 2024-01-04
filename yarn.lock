@@ -4958,7 +4958,7 @@ __metadata:
     gatsby-source-filesystem: "npm:^4"
     gatsby-transformer-remark: "npm:^4"
     mdx-utils: "npm:^0.0.2"
-    prettier: "npm:^2.0.5"
+    prettier: "npm:^3.1.1"
     prism-react-renderer: "npm:^0.1.5"
     react: "npm:^17"
     react-dom: "npm:^17"
@@ -15143,12 +15143,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.0.5":
-  version: 2.0.5
-  resolution: "prettier@npm:2.0.5"
+"prettier@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "prettier@npm:3.1.1"
   bin:
-    prettier: bin-prettier.js
-  checksum: 2018d0e54ee673128c906976ecc5186249a840a1875c7e9daf56acd0eedf7ec772b1c2a020da6b0529fca2b0ee3fb5403a667eb613dc7ac5d7f8d63d31323634
+    prettier: bin/prettier.cjs
+  checksum: e5d5f64d90e33842bf96bad723ef5816ed6eca30614ccb91006440db8225ee026775880db3d31196af9d72d462cea1cbba5b5be1de006761e8b0789f3e3cdccf
   languageName: node
   linkType: hard
 

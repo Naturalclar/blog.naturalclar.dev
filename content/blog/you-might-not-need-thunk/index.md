@@ -188,7 +188,7 @@ export const FooList = () => {
     <div>
       {error ? <p>{error}</p> : null}
       <ul>
-        {items.map(item => {
+        {items.map((item) => {
           return <li>{item.contents}</li>
         })}
       </ul>

@@ -9,7 +9,7 @@ date: '2020-02-05T16:37:46.346Z'
 
 最近 [React Native Community](https://github.com/react-native-community) の Github org の一員となりました。去年の [Advent Calendar](https://blog.naturalclar.dev/react-native-review-2019/) で目標を立てていたのですが、新年入って１週間足らずで達成できました。Community の一員になれた経緯はまた別の記事で書こうと思います。Community の一員として Contributors の Discord channel に招待されて、色々な知見が手に入るので、今回はその一部をシェアします。
 
-## The New React Native 
+## The New React Native
 
 2020年は React Native が大きく変わる年になります。現在、React Native は内部設計を徐々に変更しています。この内部設計の変化については、React Native Re-architecture として2018年からいくつかの技術カンファレンスにて発表がありました。
 
@@ -90,7 +90,3 @@ Bridge の撤去作業は2020年後半に開始され、まだ少し時間が掛
 ## まとめ
 
 2018年から言われ続けていた React Native の Re-architecture ですが、React の Concurrent Mode も実装されてくる中、2020年には大きな動きを見せてきています。JSI の登場によって、iOS や Android のより深いところに直接触りに行けるので、従来の iOS や Android アプリよりも一部パフォーマンスが出るようになることも夢では無いかもしれません。最近は Microsoft も [React Native Windows](https://github.com/microsoft/react-native-windows) に力を入れていたり React Native 自体の改善も積極的に行っています。Turbo Modules への移行などは自分も積極的に Contribute していくつもりです。React Native の今後の改善を楽しみにしていてください。
-
-
-
-

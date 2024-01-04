@@ -59,7 +59,7 @@ module.exports = {
           {
             serialize: ({ query: { allMdx } }) => {
               const siteUrl = 'https://blog.naturalclar.dev'
-              return allMdx.edges.map(edge => {
+              return allMdx.edges.map((edge) => {
                 return Object.assign({}, edge.node.frontmatter, {
                   description: edge.node.description,
                   data: edge.node.frontmatter.date,

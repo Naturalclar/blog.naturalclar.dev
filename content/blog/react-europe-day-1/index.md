@@ -49,7 +49,6 @@ Next は React を使ってアプリを高速で書けるフレームワーク�
 
 - Fast Refresh: この機能が追加されたことにより、Component の State をリセットすることなく、Component の変更が即時に反映できるようになった。
 
-
 ### Bringing webgl to react
 
 ３つ目のセッションでは、react-springなどのライブラリの作者である[@0xca0a](https://twitter.com/0xca0a)がreact-three-fiberについて話していました。
@@ -130,8 +129,8 @@ Beat Saber の譜面作成には３Dグラフィックスが欠かせません�
 
 作成されたものは[beatmapper.app](https://beatmapper.app/)で公開されています。
 
-
 ## まとめ
+
 他にもたくさんのセッションがありましたが、他の用事があったのと眠気に限界が来てしまったので聞けてません。
 個人的には[@Baconbrix](https://twitter.com/Baconbrix)の Expo Web についてのセッションが気になるので、明日また見ようと思います。
 

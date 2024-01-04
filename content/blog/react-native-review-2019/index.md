@@ -98,7 +98,6 @@ v0.61にて、Fast Refreshが実装されました。
 
 実際、Expo では共通の Expo サーバを使ったアプリのビルド待ちがあるため、Expo よりも React Native での開発のほうが効率的とさえ思います。
 
-
 以上が、今年の React Native の大まかな振り返りとなります。
 
 ## React Nativeの今後について
@@ -154,7 +153,7 @@ JS と Native Modules の繋ぎこみを自動化する `CodeGen`。
 詳しくは先日、React Advanced にて React Native Community の Core Memberである Kelset が発表した React Native の未来にて語られています。
 これからの React Native にもかなり期待できると個人的に思っています。
 
-https://www.youtube.com/watch?v=7gm0owyO8HU 
+https://www.youtube.com/watch?v=7gm0owyO8HU
 
 React Native: the Past, the Present and the Future - Lorenzo Sciandra
 
@@ -168,16 +167,16 @@ React Native Communityにある何かしらのLibraryのMaintainerを目指し�
 
 React Native Advent Calendar, 4 日目は キッチハイクの ariiyuさん([@ariiyu][twitter-ariiyu])です。
 
-[react-native-microsoft]:https://github.com/microsoft/react-native
-[reason-react-native]:https://reason-react-native.github.io/en/docs/
-[hermes]:https://github.com/facebook/hermes
-[react-fabric]:https://github.com/react-native-community/discussions-and-proposals/issues/4
-[react-devtools]:https://github.com/facebook/react/tree/master/packages/react-devtools
-[react-navigation-next]:https://reactnavigation.org/docs/en/next/getting-started.html
-[lean-core-issue]:https://github.com/facebook/react-native/issues/23313
-[rn-diff-purge]:https://github.com/react-native-community/rn-diff-purge
-[upgrade-helper]:https://react-native-community.github.io/upgrade-helper/
-[github-pvinis]:https://github.com/pvinis
+[react-native-microsoft]: https://github.com/microsoft/react-native
+[reason-react-native]: https://reason-react-native.github.io/en/docs/
+[hermes]: https://github.com/facebook/hermes
+[react-fabric]: https://github.com/react-native-community/discussions-and-proposals/issues/4
+[react-devtools]: https://github.com/facebook/react/tree/master/packages/react-devtools
+[react-navigation-next]: https://reactnavigation.org/docs/en/next/getting-started.html
+[lean-core-issue]: https://github.com/facebook/react-native/issues/23313
+[rn-diff-purge]: https://github.com/react-native-community/rn-diff-purge
+[upgrade-helper]: https://react-native-community.github.io/upgrade-helper/
+[github-pvinis]: https://github.com/pvinis
 [qiita-react-native-advent-calendar]: https://qiita.com/advent-calendar/2019/react-native
 [qiita-prev]: https://qiita.com/watanabe_yu/items/e59008eda79356d23918
 [twitter-account]: https://twitter.com/natural_clar
@@ -188,10 +187,10 @@ React Native Advent Calendar, 4 日目は キッチハイクの ariiyuさん([@a
 [react-native-web]: https://github.com/necolas/react-native-web
 [storybook]: https://storybook.js.org/
 [react-native-debugger]: https://github.com/jhen0409/react-native-debugger
-[react-navigation-hooks]:https://github.com/react-navigation/hooks
-[react-redux]:https://github.com/reduxjs/react-redux/
-[react-native-windows]:https://github.com/microsoft/react-native-windows
-[mac-catalyst]:https://developer.apple.com/mac-catalyst/
-[twitter-ariiyu]:https://twitter.com/ariiyu
-[react-navigation]:https://reactnavigation.org/
-[reasonml]:https://reasonml.github.io/
+[react-navigation-hooks]: https://github.com/react-navigation/hooks
+[react-redux]: https://github.com/reduxjs/react-redux/
+[react-native-windows]: https://github.com/microsoft/react-native-windows
+[mac-catalyst]: https://developer.apple.com/mac-catalyst/
+[twitter-ariiyu]: https://twitter.com/ariiyu
+[react-navigation]: https://reactnavigation.org/
+[reasonml]: https://reasonml.github.io/

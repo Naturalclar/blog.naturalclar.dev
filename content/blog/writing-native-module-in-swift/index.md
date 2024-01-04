@@ -86,9 +86,9 @@ JavaScript 側では以下のように Native Module を読み込むことがで
 import { HostComponent, requireNativeComponent } from 'react-native'
 import type { MenuComponentProps } from './types'
 
-const MenuComponent = requireNativeComponent('RCTUIMenu') as HostComponent<
-  MenuComponentProps
->
+const MenuComponent = requireNativeComponent(
+  'RCTUIMenu'
+) as HostComponent<MenuComponentProps>
 
 export default MenuComponent
 ```
