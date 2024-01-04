@@ -11,11 +11,12 @@ type Props = {
 }
 
 function SEO({ description, lang, meta, keywords, title }: Props) {
+  const origin =
+    typeof window !== 'undefined'
+      ? window.location.origin
+      : 'https://blog.naturalclar.dev/'
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://blog.naturalclar.dev/'
-
-  const metaDescription =
-    description || siteDescription
+  const metaDescription = description || siteDescription
   return (
     <Helmet
       htmlAttributes={{
@@ -68,9 +69,9 @@ function SEO({ description, lang, meta, keywords, title }: Props) {
         .concat(
           keywords.length > 0
             ? {
-              name: `keywords`,
-              content: keywords.join(`, `),
-            }
+                name: `keywords`,
+                content: keywords.join(`, `),
+              }
             : []
         )
         .concat(meta)}

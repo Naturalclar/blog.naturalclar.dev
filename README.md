@@ -5,4 +5,3 @@
 Naturalclar's Blog
 
 Updating whenever I feel like it
-

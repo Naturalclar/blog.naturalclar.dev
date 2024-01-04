@@ -4,7 +4,6 @@ import { rhythm } from '../utils/typography'
 import { author, social } from '../data/static'
 
 const Bio = () => {
-
   return (
     <div style={{ display: `flex`, marginBottom: rhythm(2.5) }}>
       <img
@@ -22,8 +21,7 @@ const Bio = () => {
       <p>
         Author: <strong>{author}</strong>
         <p>
-          <a href={`${social.x}`}>X</a>{' '}
-          <a href={`${social.github}`}>Github</a>
+          <a href={`${social.x}`}>X</a> <a href={`${social.github}`}>Github</a>
         </p>
       </p>
     </div>

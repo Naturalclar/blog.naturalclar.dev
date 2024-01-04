@@ -5,28 +5,23 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   const blogPost = path.resolve(`./src/templates/blog-post.js`)
-  return graphql(
-    `
-      {
-        allMdx(
-          sort: { fields: [frontmatter___date], order: DESC }
-          limit: 1000
-        ) {
-          edges {
-            node {
-              id
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-              }
+  return graphql(`
+    {
+      allMdx(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
+        edges {
+          node {
+            id
+            fields {
+              slug
+            }
+            frontmatter {
+              title
             }
           }
         }
       }
-    `
-  ).then(result => {
+    }
+  `).then((result) => {
     if (result.errors) {
       throw result.errors
     }

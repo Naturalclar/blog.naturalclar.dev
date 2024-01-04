@@ -42,16 +42,17 @@ Pressable は TouchableOpacity や TouchableHighlight のような新しい　on
 Pressable は「押された状態」を持っています。子 Component に `pressed` の状態をもたせ、押された状態と押されていない状態で見た目を変更するなどが行えるようになります。
 
 ```jsx
-import {View, Pressable, Text} from 'react-native'
+import { View, Pressable, Text } from 'react-native'
 
 const PressableExample = () => {
   return (
     <View>
       <Pressable
-        onPress={() => {console.log('Event fired!')}}>
-        {({pressed}) => (
-        <Text>{pressed ? 'Pressed!' : 'Press Me'}</Text>
-        )}
+        onPress={() => {
+          console.log('Event fired!')
+        }}
+      >
+        {({ pressed }) => <Text>{pressed ? 'Pressed!' : 'Press Me'}</Text>}
       </Pressable>
     </View>
   )
@@ -67,25 +68,25 @@ iOS なら UI Standard Colors や UI Element Colors のような [UI Colors](htt
 それぞれ、DarkMode と LightColor の色が用意されているので、この API を使うだけで、自前で LightMode と DarkMode の色を設定しなくても Dark Mode の対応が行えるようになっています。
 
 ```jsx
-import {View, Text, StyleSheet, Platform, PlatformColor} from 'react-native'
+import { View, Text, StyleSheet, Platform, PlatformColor } from 'react-native'
 
 const PlatformColorExample = () => {
   return (
-    <View style={{backgroundColor: labelColor}}>
+    <View style={{ backgroundColor: labelColor }}>
       <Text style={styles.label}>Hello World!</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-   label: {
+  label: {
     ...Platform.select({
-      ios: {color: PlatformColor('labelColor')},
-      android: {color: PlatformColor('?attr/colorControlNormal')},
-      default: {color: 'black'},
+      ios: { color: PlatformColor('labelColor') },
+      android: { color: PlatformColor('?attr/colorControlNormal') },
+      default: { color: 'black' },
     }),
   },
-});
+})
 ```
 
 ### DynamicColorIOS
@@ -97,8 +98,8 @@ light mode, dark mode でそれぞれ使用する色を設定することがで�
 ```jsx
 const headerTextColor = DynamicColorIOS({
   dark: 'white',
-  light: 'black'
-});
+  light: 'black',
+})
 ```
 
 0.62 にて追加された `Appearance` API や、今回追加される `PlatformColor` や `DynamicColorIOS` API の追加によって、Dark Mode 対応はよりやりやすくなるでしょう。

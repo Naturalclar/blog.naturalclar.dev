@@ -1,6 +1,6 @@
 ---
 title: "What's new in React Native 0.62"
-date: "2020-03-21T08:48:32.044Z"
+date: '2020-03-21T08:48:32.044Z'
 ---
 
 この記事は [React Native Tech Blog #2](https://ducklings.connpass.com/event/169637/) で発表した内容です。
@@ -35,15 +35,14 @@ React Native 0.62 では試験的に LogBox という新しいエラーメッセ
 エントリーポイントである `index.js` にて、`unstable_enableLogBox()` を呼び出すことで新しい LogBox の UI が有効化されます。
 
 ```js subtitle='Add code above to index.js'
-import { unstable_enableLogBox } from 'react-native';
+import { unstable_enableLogBox } from 'react-native'
 
-unstable_enableLogBox();
+unstable_enableLogBox()
 ```
 
 ## Appearance API
 
 ![appearance](./appearance.png)
-
 
 0.62 では端末の Appearance 設定を取得できる Appearance API が追加されました。
 端末のテーマ設定に合わせて、アプリのテーマを Dark Mode や Light Mode に変更することができます。
@@ -51,30 +50,30 @@ unstable_enableLogBox();
 `getColorScheme` 関数を呼び出すことで、端末のテーマ設定を取得できます。
 
 ```jsx
-import { Appearance } from 'react-native';
+import { Appearance } from 'react-native'
 
 const LoginPage = () => {
-  const colorScheme = Appearance.getColorScheme();
+  const colorScheme = Appearance.getColorScheme()
   if (colorScheme === 'dark') {
-    return <DarkContents/>
+    return <DarkContents />
   }
 
-  return <LightContents/>
+  return <LightContents />
 }
 ```
 
 また、午後6時からDarkModeを使う、などの特殊な状況でアプリのテーマ設定を変えたいときに、その変更を Listen するために、`useColorScheme` という custom hooks も提供されています。
 
 ```jsx
-import { useColorScheme } from 'react-native';
+import { useColorScheme } from 'react-native'
 
 const LoginPage = () => {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme()
   if (colorScheme === 'dark') {
-    return <DarkContents/>
+    return <DarkContents />
   }
 
-  return <LightContents/>
+  return <LightContents />
 }
 ```
 
@@ -106,7 +105,6 @@ const useThemeColor = () => {
 ```
 
 Appearance については、Polyfill が存在しており、Expo や古い React Native のバージョンでも使用できる、[react-native-appearance](https://github.com/expo/react-native-appearance) というライブラリも存在しています。
-
 
 ## その他
 

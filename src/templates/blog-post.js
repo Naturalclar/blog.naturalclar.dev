@@ -16,7 +16,11 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title={post.frontmatter.title} description={post.excerpt} thumbnail={thumbnail} />
+      <SEO
+        title={post.frontmatter.title}
+        description={post.excerpt}
+        thumbnail={thumbnail}
+      />
       <h1>{post.frontmatter.title}</h1>
       <p
         style={{
@@ -67,7 +71,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
