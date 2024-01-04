@@ -44,7 +44,7 @@ module.exports = {
         name: `assets`,
       },
     },
-    `gatsby-plugin-sharp`,
+    'gatsby-plugin-sharp',
     // Google Analytics
     {
       resolve: `gatsby-plugin-google-analytics`,
@@ -103,8 +103,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `Naturalclar's Blog`,
+        short_name: `blog.naturalclar.dev`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
@@ -113,7 +113,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-offline`,
-    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-typography`,
       options: {
