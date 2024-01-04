@@ -1,13 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `naturalclar.dev`,
-    author: `Naturalclar (Jesse Katsumata)`,
-    description: `Tech blog`,
     siteUrl: `https://blog.naturalclar.dev`,
-    social: {
-      twitter: `https://twitter.com/natural_clar`,
-      github: `https://github.com/Naturalclar`,
-    },
   },
   plugins: [
     {
@@ -62,26 +55,16 @@ module.exports = {
     {
       resolve: `gatsby-plugin-feed`,
       options: {
-        query: `
-          {
-            site {
-              siteMetadata {
-                title
-                description
-                siteUrl
-              }
-            }
-          }
-        `,
         feeds: [
           {
-            serialize: ({ query: { site, allMdx } }) => {
+            serialize: ({ query: { allMdx } }) => {
+              const siteUrl = 'https://blog.naturalclar.dev'
               return allMdx.edges.map(edge => {
                 return Object.assign({}, edge.node.frontmatter, {
                   description: edge.node.description,
                   data: edge.node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  url: siteUrl + edge.node.fields.slug,
+                  guid: siteUrl + edge.node.fields.slug,
                   custom_elements: [{ 'content:encoded': edge.node.body }],
                 })
               })
@@ -126,7 +109,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        icon: `content/assets/profile-pic.jpg`,
       },
     },
     `gatsby-plugin-offline`,
