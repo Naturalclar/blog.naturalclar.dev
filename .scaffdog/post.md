@@ -7,7 +7,7 @@ questions:
 ignore: []
 ---
 
-# {{ inputs.title }}/index.md`
+# {{ inputs.title }}/index.md
 
 ```markdown
 ---
