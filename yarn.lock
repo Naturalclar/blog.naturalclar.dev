@@ -4952,7 +4952,6 @@ __metadata:
     gatsby-plugin-offline: "npm:^5"
     gatsby-plugin-sharp: "npm:^4"
     gatsby-plugin-typescript: "npm:^4"
-    gatsby-plugin-typography: "npm:^4"
     gatsby-remark-copy-linked-files: "npm:^5"
     gatsby-remark-images: "npm:^6"
     gatsby-remark-responsive-iframe: "npm:^5"
@@ -4967,11 +4966,7 @@ __metadata:
     react-helmet: "npm:^5.2.0"
     react-live: "npm:^1.12.0"
     scaffdog: "npm:^3.0.0"
-    typeface-merriweather: "npm:0.0.43"
-    typeface-montserrat: "npm:0.0.43"
     typescript: "npm:^3.8.3"
-    typography: "npm:^0.16.17"
-    typography-theme-wordpress-2016: "npm:^0.15.10"
   languageName: unknown
   linkType: soft
 
@@ -5953,17 +5948,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"compass-vertical-rhythm@npm:^1.4.5":
-  version: 1.4.5
-  resolution: "compass-vertical-rhythm@npm:1.4.5"
-  dependencies:
-    convert-css-length: "npm:^1.0.1"
-    object-assign: "npm:^4.1.0"
-    parse-unit: "npm:^1.0.1"
-  checksum: 90b408dbe05e6891115f8baaf965dd798d65d73ac59b82e84b51aae52fbef6fabd44a5e94c5dfc75fc276f101d05f9cd80178dae40a45f0912097ada6648a703
-  languageName: node
-  linkType: hard
-
 "component-props@npm:1.1.1":
   version: 1.1.1
   resolution: "component-props@npm:1.1.1"
@@ -6072,13 +6056,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"console-polyfill@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "console-polyfill@npm:0.1.2"
-  checksum: f615bbf177d4ba71b88eb0fafdb24e81b4387bc3b7727a6df602993c8f39be27dc380dc91356b22144d6600b80f8e7552e9dc7d4fd629c9acb5f775538b77919
-  languageName: node
-  linkType: hard
-
 "constant-case@npm:^2.0.0":
   version: 2.0.0
   resolution: "constant-case@npm:2.0.0"
@@ -6113,16 +6090,6 @@ __metadata:
   version: 1.0.4
   resolution: "content-type@npm:1.0.4"
   checksum: 20bda9bccfb0086d4e4b35cc5c6073b693d4a8ff0a0da0b68cf283c34a649a5d07068fd240c1ed503a7696dbbf4c875cecb708ea219db1880fbfa40e8fb02620
-  languageName: node
-  linkType: hard
-
-"convert-css-length@npm:^1.0.1":
-  version: 1.0.2
-  resolution: "convert-css-length@npm:1.0.2"
-  dependencies:
-    console-polyfill: "npm:^0.1.2"
-    parse-unit: "npm:^1.0.1"
-  checksum: 59923befba3803ae4384990b72e55f46b44ba36737c17df955c16b2bda8844c2e245a81634cbe07c10d7ad54e6053292980a93d51317a1e99cd5580fc93a22ad
   languageName: node
   linkType: hard
 
@@ -9107,21 +9074,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-typography@npm:^4":
-  version: 4.25.0
-  resolution: "gatsby-plugin-typography@npm:4.25.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.15.4"
-  peerDependencies:
-    gatsby: ^4.0.0-next
-    react: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0
-    react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0
-    react-typography: ^0.16.1 || ^1.0.0-alpha.0
-    typography: ^0.16.0 || ^1.0.0-alpha.0
-  checksum: a539e62c50f84c821629dda2076b99c2594e5d829fe99dddcdf4df9380787a0721d7f2a7f99cc17586e830f973a1beeb6ed68be86c62d390d7a672ce1e6dfc71
-  languageName: node
-  linkType: hard
-
 "gatsby-plugin-utils@npm:^3.19.0":
   version: 3.19.0
   resolution: "gatsby-plugin-utils@npm:3.19.0"
@@ -9937,13 +9889,6 @@ __metadata:
     section-matter: "npm:^1.0.0"
     strip-bom-string: "npm:^1.0.0"
   checksum: a1554a503d24b5a846a7da2ff855d7515b7d2fe25e4eb6973b88c92f5f973a04774c302e2320b57e291f682af1eaa547d871cc1f1134520fa91a2d9e17a6bfe1
-  languageName: node
-  linkType: hard
-
-"gray-percentage@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "gray-percentage@npm:2.0.0"
-  checksum: 138c179944e94ee1cf131533f724a1c61c6542e6105e41ceab48e84f52cd9eafa5320650a4b2d13e8284ca61676d7dc4c3c0038e6f2f42854745c2633060224f
   languageName: node
   linkType: hard
 
@@ -12056,13 +12001,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.isnumber@npm:^3.0.0":
-  version: 3.0.3
-  resolution: "lodash.isnumber@npm:3.0.3"
-  checksum: 0627047d8f9ea8eac559feff8e53d3d5484a4993b1938c960eb619b6fc15d69f15eff41eed2fdb67c2858d6f4893b477bf3eb5e51e8729c00b02f94ee282d169
-  languageName: node
-  linkType: hard
-
 "lodash.map@npm:^4.4.0, lodash.map@npm:^4.6.0":
   version: 4.6.0
   resolution: "lodash.map@npm:4.6.0"
@@ -12159,7 +12097,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.13.1, lodash@npm:^4.17.10, lodash@npm:^4.17.13, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:~4.17.0":
+"lodash@npm:^4.17.10, lodash@npm:^4.17.13, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:~4.17.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 3ac18e92108d68f88429fcddee609e42cf2b653583d9bac22308815a4cd6b185b89a0ad0d9b0c670c371d9d6b61571a98fee6b36e1db14e52766ca253ed9cba0
@@ -13418,15 +13356,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"modularscale@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "modularscale@npm:1.0.2"
-  dependencies:
-    lodash.isnumber: "npm:^3.0.0"
-  checksum: 6b363bc91ff2fc78358668eff1110f6774eb4e14af116407804bc822578ff3a5c80a5b5d790a1a9de055ac1aeba4fd1c007d55e74b7098e2419cd7aec8839546
-  languageName: node
-  linkType: hard
-
 "moment@npm:^2.29.1":
   version: 2.30.1
   resolution: "moment@npm:2.30.1"
@@ -14418,13 +14347,6 @@ __metadata:
   version: 1.0.2
   resolution: "parse-srcset@npm:1.0.2"
   checksum: 951da5a72ff9040044a2f2a09facf185ac3b565d3b48c2a0313eb5cb326ad67ebf40d23ff473f4503ebeba312946025b7c689eb9606a6dc9bdf396e479831fd3
-  languageName: node
-  linkType: hard
-
-"parse-unit@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "parse-unit@npm:1.0.1"
-  checksum: 0d86a73f3b482bb6bf0a56abf1a919e09f74706a4096076211a30d45954cbdf3c44eecdc40f3bb3e3fe53101d16fe4b78719b67341f1c0e65b82e5b9d9c7e59a
   languageName: node
   linkType: hard
 
@@ -18301,20 +18223,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typeface-merriweather@npm:0.0.43":
-  version: 0.0.43
-  resolution: "typeface-merriweather@npm:0.0.43"
-  checksum: 00f5205af8757e28653e73342ca52328a4d71eedfa80c2f55bf6c4a9bd9ac353e3b34b9f7b7c4708e5a3321a829d61cae6bbe5ce34dbdc2b0db92ed98c385731
-  languageName: node
-  linkType: hard
-
-"typeface-montserrat@npm:0.0.43":
-  version: 0.0.43
-  resolution: "typeface-montserrat@npm:0.0.43"
-  checksum: 630fc286965127cedff034bff8607cb0379ee2f00491cf78d4394070225f0916da6fd9836f3b3568ab9751b934cb3039c5996445947fff3f47b38ae8e7cc9f69
-  languageName: node
-  linkType: hard
-
 "typescript@npm:^3.8.3":
   version: 3.8.3
   resolution: "typescript@npm:3.8.3"
@@ -18332,45 +18240,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: e21e9d13cdef7d1e9a38a01783d5419a0dab95ff5373a46b4fe8bf43f0c2d3bf9b5ed397c4d58b2d796ba30a97b3781936ce32b96ae9270241c332019a9b59e2
-  languageName: node
-  linkType: hard
-
-"typography-breakpoint-constants@npm:^0.15.10":
-  version: 0.15.10
-  resolution: "typography-breakpoint-constants@npm:0.15.10"
-  checksum: f5893b8b5044be198ea02a769344c901c4c968a885b0c6374ebf39da310f9eee20ef9a6fabf8dccda5470242647a9ef2ed0ab518563666a95fee3a10f5850b63
-  languageName: node
-  linkType: hard
-
-"typography-normalize@npm:^0.16.18":
-  version: 0.16.18
-  resolution: "typography-normalize@npm:0.16.18"
-  checksum: 4f207ea302a54edccb5f9130b91e50d3de7bc54feb2ca120726d63ca676d24e436095f6b854c68e7023db829c2dc70fae7e9e9c22e8f3ae6f6413e016076ed4b
-  languageName: node
-  linkType: hard
-
-"typography-theme-wordpress-2016@npm:^0.15.10":
-  version: 0.15.10
-  resolution: "typography-theme-wordpress-2016@npm:0.15.10"
-  dependencies:
-    gray-percentage: "npm:^2.0.0"
-    typography-breakpoint-constants: "npm:^0.15.10"
-  checksum: a67131efe278dc6acb984b51e54b9845bed7d820819398ee94039384b249f57357abd0a63a4cb463f3bdcbc937d6f4cb69027544ba92f546c24d741e23d3f88d
-  languageName: node
-  linkType: hard
-
-"typography@npm:^0.16.17":
-  version: 0.16.18
-  resolution: "typography@npm:0.16.18"
-  dependencies:
-    compass-vertical-rhythm: "npm:^1.4.5"
-    decamelize: "npm:^1.2.0"
-    gray-percentage: "npm:^2.0.0"
-    lodash: "npm:^4.13.1"
-    modularscale: "npm:^1.0.2"
-    object-assign: "npm:^4.1.0"
-    typography-normalize: "npm:^0.16.18"
-  checksum: 6426ba50298bcd60dea5c2b656625db1a2dd9802b357c950051b30837b11f4bd4959417bc0589f3bf69c5f23e5a8fe11d941d1b4ff0f02857721679dc2c32b29
   languageName: node
   linkType: hard
 

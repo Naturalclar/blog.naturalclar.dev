@@ -1,0 +1,18 @@
+h3 { 
+    font-size: 1.5em;
+}
+a {
+    box-shadow: 0 1px 0 0 currentColor;
+    color: #007acc;
+    text-decoration: none;
+}
+
+pre {
+    background: #000;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+pre > code {
+    color: #fff;
+}
