@@ -23,7 +23,6 @@
     "dev": "gatsby develop",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
-    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --ignore-pattern public .",
     "new": "scaffdog generate",
@@ -51,7 +50,8 @@
     "mdx-utils": "^0.2.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
