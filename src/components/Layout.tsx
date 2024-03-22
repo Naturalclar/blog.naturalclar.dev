@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import { rhythm, scale } from '../utils/typography'
-
 type Location = {
   pathname: string
 }
@@ -24,8 +22,7 @@ class Layout extends React.Component<Props> {
       header = (
         <h1
           style={{
-            ...scale(1.5),
-            marginBottom: rhythm(1.5),
+            marginBottom: '24px',
             marginTop: 0,
           }}
         >
@@ -47,7 +44,6 @@ class Layout extends React.Component<Props> {
           style={{
             fontFamily: `Montserrat, sans-serif`,
             marginTop: 0,
-            marginBottom: rhythm(-1),
           }}
         >
           <Link
@@ -68,8 +64,8 @@ class Layout extends React.Component<Props> {
         style={{
           marginLeft: `auto`,
           marginRight: `auto`,
-          maxWidth: rhythm(24),
-          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+          maxWidth: `680px`,
+          padding: `24px 12px`,
         }}
       >
         {header}

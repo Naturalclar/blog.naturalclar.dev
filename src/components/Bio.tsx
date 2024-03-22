@@ -1,29 +1,36 @@
 import React from 'react'
 
-import { rhythm } from '../utils/typography'
 import { author, social } from '../data/static'
 
 const Bio = () => {
   return (
-    <div style={{ display: `flex`, marginBottom: rhythm(2.5) }}>
+    <div
+      style={{
+        display: `flex`,
+        alignItems: 'center',
+        marginBottom: '40px',
+      }}
+    >
       <img
         src={'https://www.github.com/Naturalclar.png'}
         width={50}
         height={50}
         alt={author}
         style={{
-          marginRight: rhythm(1 / 2),
+          marginRight: '16px',
           marginBottom: 0,
           minWidth: 50,
           borderRadius: `100%`,
         }}
       />
-      <p>
-        Author: <strong>{author}</strong>
-        <p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <p style={{ margin: 0 }}>
+          Author: <strong>{author}</strong>
+        </p>
+        <p style={{ margin: 0 }}>
           <a href={`${social.x}`}>X</a> <a href={`${social.github}`}>Github</a>
         </p>
-      </p>
+      </div>
     </div>
   )
 }
