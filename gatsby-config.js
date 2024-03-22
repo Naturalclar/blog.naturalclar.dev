@@ -80,13 +80,12 @@ module.exports = {
              **/
             query: `
             {
-              allMdx(
-                limit: 1000,
-                sort: { order: DESC, fields: [frontmatter___date] },
-              ) {
+              allMdx(limit: 1000, sort: {frontmatter: {date: DESC}}) {
                 edges {
                   node {
-                    fields { slug }
+                    fields {
+                      slug
+                    }
                     frontmatter {
                       title
                       date
