@@ -1,13 +1,12 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
-import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
 
 import Bio from '../components/Bio'
 import Layout from '../components/Layout'
 import SEO from '../components/seo'
 import { siteTitle } from '../data/static'
 
-const BlogPostTemplate = ({ data, pageContext, location }) => {
+const BlogPostTemplate = ({ data, pageContext, location, children }) => {
   const post = data.mdx
 
   const { previous, next } = pageContext
@@ -29,7 +28,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
       >
         {post.frontmatter.date}
       </p>
-      <MDXRenderer>{post.body}</MDXRenderer>
+      {children}
       <hr
         style={{
           marginBottom: '16px',

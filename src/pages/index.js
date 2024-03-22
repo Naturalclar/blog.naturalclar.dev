@@ -50,7 +50,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(sort: { frontmatter: { date: DESC } }) {
       edges {
         node {
           excerpt
