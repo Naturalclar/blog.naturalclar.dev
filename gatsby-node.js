@@ -7,7 +7,7 @@ exports.createPages = ({ graphql, actions }) => {
   const blogPost = path.resolve(`./src/templates/blog-post.js`)
   return graphql(`
     {
-      allMdx(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
+      allMdx(sort: { frontmatter: { date: DESC } }, limit: 1000) {
         edges {
           node {
             id
@@ -16,6 +16,9 @@ exports.createPages = ({ graphql, actions }) => {
             }
             frontmatter {
               title
+            }
+            internal {
+              contentFilePath
             }
           }
         }
@@ -35,7 +38,7 @@ exports.createPages = ({ graphql, actions }) => {
 
       createPage({
         path: post.node.fields.slug,
-        component: blogPost,
+        component: `${blogPost}?__contentFilePath=${post.node.internal.contentFilePath}`,
         context: {
           slug: post.node.fields.slug,
           previous,
