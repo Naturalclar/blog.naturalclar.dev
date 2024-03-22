@@ -49,11 +49,9 @@
     "gatsby-source-filesystem": "^4",
     "gatsby-transformer-remark": "^4",
     "mdx-utils": "^0.0.2",
-    "prism-react-renderer": "^0.1.5",
     "react": "^18",
     "react-dom": "^18",
-    "react-helmet": "^5.2.0",
-    "react-live": "^1.12.0"
+    "react-helmet": "^5.2.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
