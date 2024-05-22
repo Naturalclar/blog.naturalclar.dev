@@ -1,4 +1,4 @@
-import './main.css'
-import { wrapRootElement as wrap } from './wrap-root-element'
+import "./main.css";
+import { wrapRootElement as wrap } from "./wrap-root-element";
 
-export const wrapRootElement = wrap
+export const wrapRootElement = wrap;

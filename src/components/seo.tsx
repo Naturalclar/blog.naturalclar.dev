@@ -5,6 +5,7 @@ import { author, siteDescription, siteTitle } from '../data/static'
 type Props = {
   description: string
   lang: string
+  // biome-ignore lint: allowing any type for meta
   meta: any[]
   keywords: string[]
   title: string
@@ -26,51 +27,51 @@ function SEO({ description, lang, meta, keywords, title }: Props) {
       titleTemplate={`%s | ${siteTitle}`}
       meta={[
         {
-          name: `description`,
+          name: 'description',
           content: metaDescription,
         },
         {
-          property: `og:title`,
+          property: 'og:title',
           content: title,
         },
         {
-          property: `og:description`,
+          property: 'og:description',
           content: metaDescription,
         },
         {
-          property: `og:type`,
-          content: `website`,
+          property: 'og:type',
+          content: 'website',
         },
         {
-          property: `og:image`,
+          property: 'og:image',
           content: `${origin}/twitter-card.png`,
         },
         {
-          name: `twitter:card`,
-          content: `summary_large_image`,
+          name: 'twitter:card',
+          content: 'summary_large_image',
         },
         {
-          name: `twitter:creator`,
+          name: 'twitter:creator',
           content: author,
         },
         {
-          name: `twitter:title`,
+          name: 'twitter:title',
           content: title,
         },
         {
-          name: `twitter:description`,
+          name: 'twitter:description',
           content: metaDescription,
         },
         {
-          name: `twitter:image:src`,
+          name: 'twitter:image:src',
           content: `${origin}/twitter-card.png`,
         },
       ]
         .concat(
           keywords.length > 0
             ? {
-                name: `keywords`,
-                content: keywords.join(`, `),
+                name: 'keywords',
+                content: keywords.join(', '),
               }
             : []
         )
@@ -80,7 +81,7 @@ function SEO({ description, lang, meta, keywords, title }: Props) {
 }
 
 SEO.defaultProps = {
-  lang: `jp`,
+  lang: 'jp',
   meta: [],
   keywords: ['react', 'react-native'],
 }
