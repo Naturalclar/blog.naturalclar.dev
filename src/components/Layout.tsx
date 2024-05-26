@@ -16,7 +16,7 @@ class Layout extends React.Component<Props> {
     const { location, title, children } = this.props
     // @ts-ignore
     const rootPath = `${__PATH_PREFIX__}/`
-    let header
+    let header: React.ReactNode
 
     if (location.pathname === rootPath) {
       header = (
@@ -28,11 +28,11 @@ class Layout extends React.Component<Props> {
         >
           <Link
             style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
+              boxShadow: 'none',
+              textDecoration: 'none',
+              color: 'inherit',
             }}
-            to={`/`}
+            to={'/'}
           >
             {title}
           </Link>
@@ -42,17 +42,17 @@ class Layout extends React.Component<Props> {
       header = (
         <h3
           style={{
-            fontFamily: `Montserrat, sans-serif`,
+            fontFamily: 'Montserrat, sans-serif',
             marginTop: 0,
           }}
         >
           <Link
             style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
+              boxShadow: 'none',
+              textDecoration: 'none',
+              color: 'inherit',
             }}
-            to={`/`}
+            to={'/'}
           >
             {title}
           </Link>
@@ -62,17 +62,16 @@ class Layout extends React.Component<Props> {
     return (
       <div
         style={{
-          marginLeft: `auto`,
-          marginRight: `auto`,
-          maxWidth: `680px`,
-          padding: `24px 12px`,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          maxWidth: '680px',
+          padding: '24px 12px',
         }}
       >
         {header}
         {children}
         <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
+          © {new Date().getFullYear()}, Built with{' '}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       </div>
