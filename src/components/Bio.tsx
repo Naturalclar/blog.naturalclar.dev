@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 import { author, social } from '../data/static'
 
@@ -11,8 +12,8 @@ const Bio = () => {
         marginBottom: '40px',
       }}
     >
-      <img
-        src={'https://www.github.com/Naturalclar.png'}
+      <Image
+        src="https://www.github.com/Naturalclar.png"
         width={50}
         height={50}
         alt={author}
@@ -20,7 +21,7 @@ const Bio = () => {
           marginRight: '16px',
           marginBottom: 0,
           minWidth: 50,
-          borderRadius: `100%`,
+          borderRadius: '100%',
         }}
       />
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>

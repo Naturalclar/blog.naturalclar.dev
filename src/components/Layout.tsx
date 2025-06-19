@@ -1,83 +1,73 @@
-import React from 'react'
-import { Link } from 'gatsby'
+'use client'
 
-type Location = {
-  pathname: string
-}
+import React from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 type Props = {
-  location: Location
   title: string
   children: React.ReactNode
 }
 
-class Layout extends React.Component<Props> {
-  render() {
-    const { location, title, children } = this.props
-    // @ts-ignore
-    const rootPath = `${__PATH_PREFIX__}/`
-    let header
-
-    if (location.pathname === rootPath) {
-      header = (
-        <h1
-          style={{
-            marginBottom: '24px',
-            marginTop: 0,
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
-            }}
-            to={`/`}
-          >
-            {title}
-          </Link>
-        </h1>
-      )
-    } else {
-      header = (
-        <h3
-          style={{
-            fontFamily: `Montserrat, sans-serif`,
-            marginTop: 0,
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
-            }}
-            to={`/`}
-          >
-            {title}
-          </Link>
-        </h3>
-      )
-    }
-    return (
-      <div
+const Layout: React.FC<Props> = ({ title, children }) => {
+  const pathname = usePathname()
+  const isRoot = pathname === '/'
+  
+  const header = isRoot ? (
+    <h1
+      style={{
+        marginBottom: '24px',
+        marginTop: 0,
+      }}
+    >
+      <Link
+        href="/"
         style={{
-          marginLeft: `auto`,
-          marginRight: `auto`,
-          maxWidth: `680px`,
-          padding: `24px 12px`,
+          boxShadow: 'none',
+          textDecoration: 'none',
+          color: 'inherit',
         }}
       >
-        {header}
-        {children}
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    )
-  }
+        {title}
+      </Link>
+    </h1>
+  ) : (
+    <h3
+      style={{
+        fontFamily: 'Montserrat, sans-serif',
+        marginTop: 0,
+      }}
+    >
+      <Link
+        href="/"
+        style={{
+          boxShadow: 'none',
+          textDecoration: 'none',
+          color: 'inherit',
+        }}
+      >
+        {title}
+      </Link>
+    </h3>
+  )
+
+  return (
+    <div
+      style={{
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        maxWidth: '680px',
+        padding: '24px 12px',
+      }}
+    >
+      {header}
+      {children}
+      <footer>
+        © {new Date().getFullYear()}, Built with{' '}
+        <a href="https://nextjs.org">Next.js</a>
+      </footer>
+    </div>
+  )
 }
 
 export default Layout
