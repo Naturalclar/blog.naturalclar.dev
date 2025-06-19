@@ -1,0 +1,71 @@
+3:I[3754,[],""]
+5:I[7754,[],""]
+6:I[7574,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"default"]
+7:I[8750,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],""]
+4:["slug","lt-memo","d"]
+0:["bVXrX63nls6mz3NDAu0w6",[[["",{"children":["posts",{"children":[["slug","lt-memo","d"],{"children":["__PAGE__?{\"slug\":\"lt-memo\"}",{}]}]}]},"$undefined","$undefined",true],["",{"children":["posts",{"children":[["slug","lt-memo","d"],{"children":["__PAGE__",{},[["$L1","$L2",null],null],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children","$4","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/997bb99dff39a320.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"children":["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"404 - Page Not Found"}],["$","p",null,{"children":"You just hit a route that doesn't exist... the sadness."}],["$","p",null,{"children":["$","$L7",null,{"href":"/","children":"Go back to the homepage"}]}]]}],"notFoundStyles":[]}]}]}]],null],null],["$L8",null]]]]
+a:I[4802,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"Image"]
+9:T7ef,<p>こういうのは graphql に置くべきなのではと思いつつなぐり書き</p>
+<h2>WEB エンジニア勉強会 #14</h2>
+<ul>
+<li>
+<p>Date: 2019/08/30 (金) 19:15 〜 21:30</p>
+</li>
+<li>
+<p><a href="https://web-engineer-meetup.connpass.com/event/141700/">connpass</a></p>
+</li>
+<li>
+<p>Venue: 株式会社カサレアル 泉岳寺セミナールーム</p>
+<p>東京都港区三田 3-11-24 国際興業三田第 2 ビル 9 階</p>
+</li>
+<li>
+<p>slide: <a href="https://code-surfer-v3.naturalclar.now.sh/">https://code-surfer-v3.naturalclar.now.sh/</a></p>
+</li>
+</ul>
+<h2>Ginza.js#4</h2>
+<ul>
+<li>
+<p>Date: 2019/09/02(月) 19:30 〜 22:00</p>
+</li>
+<li>
+<p><a href="https://ginzajs.connpass.com/event/141436/">connpass</a></p>
+</li>
+<li>
+<p>Venue: 株式会社プレイド</p>
+<p>東京都中央区銀座 6-10-1 GINZA SIX 10F</p>
+</li>
+<li>
+<p>slide: <a href="https://you-may-not-need-thunk.naturalclar.now.sh">https://you-may-not-need-thunk.naturalclar.now.sh</a></p>
+</li>
+</ul>
+<h2>React Native Tokyo</h2>
+<ul>
+<li>Date: 2019/09/03(火) 19:30 〜 21:30</li>
+<li><a href="https://r-n.connpass.com/event/141558/">connpass</a></li>
+<li>株式会社メルカリ</li>
+</ul>
+<p>東京都港区六本木 6-10-1(六本木ヒルズ森タワー)</p>
+<ul>
+<li>slide: <a href="https://visual-regression-test-with-react-native.naturalclar.now.sh/">https://visual-regression-test-with-react-native.naturalclar.now.sh/</a></li>
+</ul>
+<h2>React LT 会</h2>
+<ul>
+<li>Date: 2019/09/04(水) 18:40 〜 21:00</li>
+<li><a href="https://informetis.connpass.com/event/142183/">connpass</a></li>
+<li>Venue: インフォメティス株式会社</li>
+</ul>
+<p>東京都港区芝五丁目 5 番 1 号 ラウンドクロス三田 4F</p>
+<ul>
+<li>slide: TBD</li>
+</ul>
+<h2>Osaka Web Designers and Developers Meetup</h2>
+<ul>
+<li>Date: Saturday, October 26, 2019
+6:00 PM to 8:00 PM</li>
+<li><a href="https://www.meetup.com/Osaka-Web-Designers-and-Developers-Meetup/events/264050187/">meetup</a></li>
+<li>Venue: TBD</li>
+<li>slide: TBD</li>
+</ul>
+2:["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"登壇メモ"}],["$","p",null,{"style":{"display":"block","marginBottom":"16px"},"children":"August 29, 2019"}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$9"}}],["$","hr",null,{"style":{"marginBottom":"16px"}}],["$","div",null,{"style":{"display":"flex","alignItems":"center","marginBottom":"40px"},"children":[["$","$La",null,{"src":"https://www.github.com/Naturalclar.png","width":50,"height":50,"alt":"Naturalclar (Jesse Katsumata)","style":{"marginRight":"16px","marginBottom":0,"minWidth":50,"borderRadius":"100%"}}],["$","div",null,{"style":{"display":"flex","flexDirection":"column","gap":"8px"},"children":[["$","p",null,{"style":{"margin":0},"children":["Author: ",["$","strong",null,{"children":"Naturalclar (Jesse Katsumata)"}]]}],["$","p",null,{"style":{"margin":0},"children":[["$","a",null,{"href":"https://x.com/natural_clar","children":"X"}]," ",["$","a",null,{"href":"https://www.github.com/Naturalclar","children":"Github"}]]}]]}]]}],["$","ul",null,{"style":{"display":"flex","flexWrap":"wrap","justifyContent":"space-between","listStyle":"none","padding":0},"children":[["$","li",null,{"children":["$","$L7",null,{"href":"/posts/todo","rel":"prev","children":["← ","やりたいことメモ"]}]}],["$","li",null,{"children":null}]]}]]}]
+8:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"登壇メモ | naturalclar.dev"}],["$","meta","3",{"name":"description","content":"\nこういうのは graphql に置くべきなのではと思いつつなぐり書き\n\n## WEB エンジニア勉強会 #14\n\n- Date: 2019/08/30 (金) 19:15 〜 21:30\n- [connpass](https://web-engineer-meetup.connpass.com/event/141700/)\n- Venue: 株式会社カサレアル 泉岳寺セミナールーム\n\n  東京都..."}],["$","meta","4",{"name":"author","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","5",{"name":"keywords","content":"react, react-native, nextjs, blog"}],["$","meta","6",{"name":"creator","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","7",{"name":"publisher","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","8",{"name":"robots","content":"index, follow"}],["$","meta","9",{"property":"og:title","content":"登壇メモ | naturalclar.dev"}],["$","meta","10",{"property":"og:description","content":"\nこういうのは graphql に置くべきなのではと思いつつなぐり書き\n\n## WEB エンジニア勉強会 #14\n\n- Date: 2019/08/30 (金) 19:15 〜 21:30\n- [connpass](https://web-engineer-meetup.connpass.com/event/141700/)\n- Venue: 株式会社カサレアル 泉岳寺セミナールーム\n\n  東京都..."}],["$","meta","11",{"property":"og:url","content":"https://blog.naturalclar.dev/"}],["$","meta","12",{"property":"og:site_name","content":"naturalclar.dev"}],["$","meta","13",{"property":"og:image","content":"https://blog.naturalclar.dev/twitter-card.png"}],["$","meta","14",{"property":"og:image:width","content":"1200"}],["$","meta","15",{"property":"og:image:height","content":"630"}],["$","meta","16",{"property":"og:image:alt","content":"登壇メモ"}],["$","meta","17",{"property":"og:type","content":"website"}],["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","19",{"name":"twitter:creator","content":"@natural_clar"}],["$","meta","20",{"name":"twitter:title","content":"登壇メモ | naturalclar.dev"}],["$","meta","21",{"name":"twitter:description","content":"\nこういうのは graphql に置くべきなのではと思いつつなぐり書き\n\n## WEB エンジニア勉強会 #14\n\n- Date: 2019/08/30 (金) 19:15 〜 21:30\n- [connpass](https://web-engineer-meetup.connpass.com/event/141700/)\n- Venue: 株式会社カサレアル 泉岳寺セミナールーム\n\n  東京都..."}],["$","meta","22",{"name":"twitter:image","content":"https://blog.naturalclar.dev/twitter-card.png"}]]
+1:null

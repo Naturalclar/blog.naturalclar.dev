@@ -1,0 +1,96 @@
+3:I[3754,[],""]
+5:I[7754,[],""]
+6:I[7574,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"default"]
+7:I[8750,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],""]
+4:["slug","whats-coming-up-in-react-native-0.63","d"]
+0:["bVXrX63nls6mz3NDAu0w6",[[["",{"children":["posts",{"children":[["slug","whats-coming-up-in-react-native-0.63","d"],{"children":["__PAGE__?{\"slug\":\"whats-coming-up-in-react-native-0.63\"}",{}]}]}]},"$undefined","$undefined",true],["",{"children":["posts",{"children":[["slug","whats-coming-up-in-react-native-0.63","d"],{"children":["__PAGE__",{},[["$L1","$L2",null],null],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children","$4","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/997bb99dff39a320.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"children":["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"404 - Page Not Found"}],["$","p",null,{"children":"You just hit a route that doesn't exist... the sadness."}],["$","p",null,{"children":["$","$L7",null,{"href":"/","children":"Go back to the homepage"}]}]]}],"notFoundStyles":[]}]}]}]],null],null],["$L8",null]]]]
+a:I[4802,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"Image"]
+9:T14e5,<p>最近、React Native の最新バージョン、0.62 がリリースされました。
+React Native 0.62 の新機能については<a href="https://blog.naturalclar.dev/whats-new-in-react-native-0.62/">この記事</a>にて記載しています。</p>
+<p>そして、次のバージョンの Release Candidate である 0.63-rc.0 も新しくリリースされました。
+この記事では、次のバージョン、React Native 0.63 で予定されている新機能についてまとめます。</p>
+<h2>React Native の Release について</h2>
+<p>まず、React Native のリリースプロセスについて、少し説明します。
+React Native は facebook が開発しているフレームワークですが、リリースプロセスは facebook 社外のコミュニティである React Native Community が行っています。
+そのリリースプロセスや、各バージョンでリリースされる機能については、<a href="https://github.com/react-native-community/releases">@react-native-community/releases</a> のリポジトリに記載されています。</p>
+<p>0.63 で予定されている機能は<a href="https://github.com/react-native-community/releases/issues/186">この issue</a> にて議論されています。</p>
+<h2>React Native 0.63 新機能</h2>
+<p>次のバージョンで予定されていることは以下の通りです。</p>
+<ul>
+<li>LogBox</li>
+<li>Pressable</li>
+<li>PlatformColor API</li>
+<li>DynamicColorIOS API</li>
+</ul>
+<h3>LogBox</h3>
+<p><img src="./logbox.png" alt="logbox"></p>
+<p>LogBox は React Native 0.62 で試験的に導入された、新しいエラー画面です。
+0.62 ではオプトインでしたが、次のバージョンからは、デフォルトで入るようになります。</p>
+<p>今まで使われていた YellowBox は deprecated となり、LogBox API に置き換わります。</p>
+<h3>Pressable</h3>
+<p>Pressable は TouchableOpacity や TouchableHighlight のような新しい　onPress を持つ Component となります。</p>
+<p>Pressable は「押された状態」を持っています。子 Component に <code>pressed</code> の状態をもたせ、押された状態と押されていない状態で見た目を変更するなどが行えるようになります。</p>
+<pre><code class="language-jsx">import { View, Pressable, Text } from 'react-native'
+
+const PressableExample = () => {
+  return (
+    &#x3C;View>
+      &#x3C;Pressable
+        onPress={() => {
+          console.log('Event fired!')
+        }}
+      >
+        {({ pressed }) => &#x3C;Text>{pressed ? 'Pressed!' : 'Press Me'}&#x3C;/Text>}
+      &#x3C;/Pressable>
+    &#x3C;/View>
+  )
+}
+</code></pre>
+<h3>PlatformColor</h3>
+<p>PlatformColor は端末で設定されている基本色を取得するのに使用されます。</p>
+<p>iOS なら UI Standard Colors や UI Element Colors のような <a href="https://developer.apple.com/documentation/uikit/uicolor">UI Colors</a>, Android は [R.attrs](- <a href="https://developer.android.com/reference/android/R.attr">Android R.attr</a> に設定されている値が取得できます。</p>
+<p>それぞれ、DarkMode と LightColor の色が用意されているので、この API を使うだけで、自前で LightMode と DarkMode の色を設定しなくても Dark Mode の対応が行えるようになっています。</p>
+<pre><code class="language-jsx">import { View, Text, StyleSheet, Platform, PlatformColor } from 'react-native'
+
+const PlatformColorExample = () => {
+  return (
+    &#x3C;View style={{ backgroundColor: labelColor }}>
+      &#x3C;Text style={styles.label}>Hello World!&#x3C;/Text>
+    &#x3C;/View>
+  )
+}
+
+const styles = StyleSheet.create({
+  label: {
+    ...Platform.select({
+      ios: { color: PlatformColor('labelColor') },
+      android: { color: PlatformColor('?attr/colorControlNormal') },
+      default: { color: 'black' },
+    }),
+  },
+})
+</code></pre>
+<h3>DynamicColorIOS</h3>
+<p>DynamicColorIOS は Appearance に合わせた色を取得できる iOS専用の新しい API です。</p>
+<p>light mode, dark mode でそれぞれ使用する色を設定することができます。</p>
+<pre><code class="language-jsx">const headerTextColor = DynamicColorIOS({
+  dark: 'white',
+  light: 'black',
+})
+</code></pre>
+<p>0.62 にて追加された <code>Appearance</code> API や、今回追加される <code>PlatformColor</code> や <code>DynamicColorIOS</code> API の追加によって、Dark Mode 対応はよりやりやすくなるでしょう。</p>
+<h2>その他の変更点</h2>
+<h3>iOS 9 のサポート切り</h3>
+<p>iOS 9 のサポートが切られます。
+iPhone 4 以前の端末の対応が必要な場合、アップデートするのは控える必要があるかも。</p>
+<h3>Node.js 8 のサポート切り</h3>
+<p>先日、EOL を迎えた Node.js 8 のサポートが切られます。
+React Native の開発には Node.js 10以降のバージョンを使う必要があります。</p>
+<h3>Hermes 0.5.0</h3>
+<p><a href="https://github.com/facebook/hermes/releases">アップデートされた Hermes 0.5.0</a> が入ります。
+新しい version では、hermes のサイズが 140MB から 18MB に削減されます。</p>
+<h2>リリース予定日</h2>
+<p>次のバージョンのリリースは5月中旬を予定されています。</p>
+2:["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"What's coming up in React Native 0.63"}],["$","p",null,{"style":{"display":"block","marginBottom":"16px"},"children":"April 20, 2020"}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$9"}}],["$","hr",null,{"style":{"marginBottom":"16px"}}],["$","div",null,{"style":{"display":"flex","alignItems":"center","marginBottom":"40px"},"children":[["$","$La",null,{"src":"https://www.github.com/Naturalclar.png","width":50,"height":50,"alt":"Naturalclar (Jesse Katsumata)","style":{"marginRight":"16px","marginBottom":0,"minWidth":50,"borderRadius":"100%"}}],["$","div",null,{"style":{"display":"flex","flexDirection":"column","gap":"8px"},"children":[["$","p",null,{"style":{"margin":0},"children":["Author: ",["$","strong",null,{"children":"Naturalclar (Jesse Katsumata)"}]]}],["$","p",null,{"style":{"margin":0},"children":[["$","a",null,{"href":"https://x.com/natural_clar","children":"X"}]," ",["$","a",null,{"href":"https://www.github.com/Naturalclar","children":"Github"}]]}]]}]]}],["$","ul",null,{"style":{"display":"flex","flexWrap":"wrap","justifyContent":"space-between","listStyle":"none","padding":0},"children":[["$","li",null,{"children":["$","$L7",null,{"href":"/posts/react-europe-day-1","rel":"prev","children":["← ","React Europe Conference Day 1 まとめ"]}]}],["$","li",null,{"children":["$","$L7",null,{"href":"/posts/react-summit-remote-summary-part-1","rel":"next","children":["React Summit Remote Edition まとめ(前編)"," →"]}]}]]}]]}]
+8:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"What's coming up in React Native 0.63 | naturalclar.dev"}],["$","meta","3",{"name":"description","content":"\n最近、React Native の最新バージョン、0.62 がリリースされました。\nReact Native 0.62 の新機能については[この記事](https://blog.naturalclar.dev/whats-new-in-react-native-0.62/)にて記載しています。\n\nそして、次のバージョンの Release Candidate である 0.63-rc.0 も新しくリ..."}],["$","meta","4",{"name":"author","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","5",{"name":"keywords","content":"react, react-native, nextjs, blog"}],["$","meta","6",{"name":"creator","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","7",{"name":"publisher","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","8",{"name":"robots","content":"index, follow"}],["$","meta","9",{"property":"og:title","content":"What's coming up in React Native 0.63 | naturalclar.dev"}],["$","meta","10",{"property":"og:description","content":"\n最近、React Native の最新バージョン、0.62 がリリースされました。\nReact Native 0.62 の新機能については[この記事](https://blog.naturalclar.dev/whats-new-in-react-native-0.62/)にて記載しています。\n\nそして、次のバージョンの Release Candidate である 0.63-rc.0 も新しくリ..."}],["$","meta","11",{"property":"og:url","content":"https://blog.naturalclar.dev/"}],["$","meta","12",{"property":"og:site_name","content":"naturalclar.dev"}],["$","meta","13",{"property":"og:image","content":"https://blog.naturalclar.dev/twitter-card.png"}],["$","meta","14",{"property":"og:image:width","content":"1200"}],["$","meta","15",{"property":"og:image:height","content":"630"}],["$","meta","16",{"property":"og:image:alt","content":"What's coming up in React Native 0.63"}],["$","meta","17",{"property":"og:type","content":"website"}],["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","19",{"name":"twitter:creator","content":"@natural_clar"}],["$","meta","20",{"name":"twitter:title","content":"What's coming up in React Native 0.63 | naturalclar.dev"}],["$","meta","21",{"name":"twitter:description","content":"\n最近、React Native の最新バージョン、0.62 がリリースされました。\nReact Native 0.62 の新機能については[この記事](https://blog.naturalclar.dev/whats-new-in-react-native-0.62/)にて記載しています。\n\nそして、次のバージョンの Release Candidate である 0.63-rc.0 も新しくリ..."}],["$","meta","22",{"name":"twitter:image","content":"https://blog.naturalclar.dev/twitter-card.png"}]]
+1:null

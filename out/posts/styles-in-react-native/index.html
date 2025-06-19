@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/997bb99dff39a320.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-695d994ee6bbb75a.js"/><script src="/_next/static/chunks/3f5966fd-da022534e16ddcac.js" async=""></script><script src="/_next/static/chunks/313-804dc18f7265100e.js" async=""></script><script src="/_next/static/chunks/main-app-165d6d8e388c7c9d.js" async=""></script><script src="/_next/static/chunks/18-a08db35d0c492fb3.js" async=""></script><script src="/_next/static/chunks/802-8624e27f06c26e64.js" async=""></script><script src="/_next/static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js" async=""></script><title>styles in react-native | naturalclar.dev</title><meta name="description" content="
+[meguro.css #7](https://megurocss.connpass.com/event/145780/)で発表すること。
+
+CSS の勉強会に行くのは初めてなので、今回は基本的なところを抑えようという魂胆。
+
+## react-native とは
+
+- iOS や Android アプリなどのクロスプラットフォーム開発が出来るフレームワーク
+
+- react を知っていれば似た..."/><meta name="author" content="Naturalclar (Jesse Katsumata)"/><meta name="keywords" content="react, react-native, nextjs, blog"/><meta name="creator" content="Naturalclar (Jesse Katsumata)"/><meta name="publisher" content="Naturalclar (Jesse Katsumata)"/><meta name="robots" content="index, follow"/><meta property="og:title" content="styles in react-native | naturalclar.dev"/><meta property="og:description" content="
+[meguro.css #7](https://megurocss.connpass.com/event/145780/)で発表すること。
+
+CSS の勉強会に行くのは初めてなので、今回は基本的なところを抑えようという魂胆。
+
+## react-native とは
+
+- iOS や Android アプリなどのクロスプラットフォーム開発が出来るフレームワーク
+
+- react を知っていれば似た..."/><meta property="og:url" content="https://blog.naturalclar.dev/"/><meta property="og:site_name" content="naturalclar.dev"/><meta property="og:image" content="https://blog.naturalclar.dev/twitter-card.png"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image:alt" content="styles in react-native"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:creator" content="@natural_clar"/><meta name="twitter:title" content="styles in react-native | naturalclar.dev"/><meta name="twitter:description" content="
+[meguro.css #7](https://megurocss.connpass.com/event/145780/)で発表すること。
+
+CSS の勉強会に行くのは初めてなので、今回は基本的なところを抑えようという魂胆。
+
+## react-native とは
+
+- iOS や Android アプリなどのクロスプラットフォーム開発が出来るフレームワーク
+
+- react を知っていれば似た..."/><meta name="twitter:image" content="https://blog.naturalclar.dev/twitter-card.png"/><script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><div style="margin-left:auto;margin-right:auto;max-width:680px;padding:24px 12px"><h3 style="font-family:Montserrat, sans-serif;margin-top:0"><a style="box-shadow:none;text-decoration:none;color:inherit" href="/">naturalclar.dev</a></h3><h1>styles in react-native</h1><p style="display:block;margin-bottom:16px">October 03, 2019</p><div><p><a href="https://megurocss.connpass.com/event/145780/">meguro.css #7</a>で発表すること。</p>
+<p>CSS の勉強会に行くのは初めてなので、今回は基本的なところを抑えようという魂胆。</p>
+<h2>react-native とは</h2>
+<ul>
+<li>
+<p>iOS や Android アプリなどのクロスプラットフォーム開発が出来るフレームワーク</p>
+</li>
+<li>
+<p>react を知っていれば似たような記法でかける。</p>
+</li>
+<li>
+<p><code>&#x3C;div></code>や<code>&#x3C;p></code>等といった Web で良く使うタグの代わりに、<code>&#x3C;View></code>や<code>&#x3C;Text></code>など独自のタグを使う。</p>
+</li>
+</ul>
+<pre><code class="language-jsx">import React from 'react'
+import { View, Text } from 'react-native'
+
+export const HelloWorld = () => (
+  &#x3C;View>
+    &#x3C;Text>Hello World!&#x3C;/Text>
+  &#x3C;/View>
+)
+</code></pre>
+<h2>react-native における Style</h2>
+<p>react-native は Web と同じ様に書くことができますが、CSS ファイルをそのまま使うことはできません。</p>
+<p>かわりに、react-native が提供する<code>[StyleSheet](https://facebook.github.io/react-native/docs/styleSheet )]</code>という API を使用します。</p>
+<pre><code class="language-jsx">import React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+
+const styles = StyleSheet.create({
+  container: {
+    borderRadius: 4,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+  },
+  title: {
+    fontSize: 19,
+    fontWeight: 'bold',
+  },
+  activeTitle: {
+    color: 'red',
+  },
+})
+
+...
+</code></pre>
+<p>作成した Style を適応するには<code>style</code> prop に入れます。</p>
+<pre><code class="language-jsx">import React from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
+
+type Props = {
+  isActive: boolean,
+}
+
+export const Title = ({ isActive }: Props) => (
+  &#x3C;View style={styles.container}>
+    &#x3C;Text style={[styles.title, isActive &#x26;&#x26; styles.activeTitle]} />
+  &#x3C;/View>
+)
+
+const styles = StyleSheet.create({...})
+</code></pre>
+<p>要は CSS-in-JS ですね。</p>
+<p>StyleSheet と Component を分けて共通の Style を使いまわしたり、Component を持つファイルと一緒にして Scope を閉じたりは人それぞれです。私は後者のほうが好きです。</p>
+<h2>StyleSheet API</h2>
+<p>StyleSheet にはいくつか API が提供されています。</p>
+<h3>StyleSheet.create(obj)</h3>
+<p>渡された Object から StyleSheet を作成します。</p>
+<h3>StyleSheet.flatten(style)</h3>
+<p>本来、StyleSheet.create で作成された Style は、参照した時に id を返します。</p>
+<p>例えば</p>
+<pre><code class="language-JSX">import {StyleSheet} from 'react-native'
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1
+  }
+})
+
+console.log(styles.container) // 3 のような numberが返ってくる。
+</code></pre>
+<p>これでは、正しい Style が入っているかのデバッグが難しいです。</p>
+<p><code>StyleSheet.flatten()</code>を使用すれば、id から取得した Object が返ってくるので Debug しやすくなります。</p>
+<pre><code class="language-JSX">import {StyleSheet} from 'react-native'
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1
+  }
+})
+
+console.log(StyleSheet.flatten(styles.container)) // { flex: 1}
+</code></pre>
+<p>また、react-native では、style に配列を渡すことができ、そうした場合は渡した Style が Merge されたものが適応されます。</p>
+<pre><code class="language-jsx">import React from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
+
+type Props = {
+  isActive: boolean,
+}
+
+export const Title = ({ isActive }: Props) => (
+  &#x3C;View style={styles.container}>
+    {/* ここで複数のStyleを当てている */}
+    &#x3C;Text style={[styles.title, isActive &#x26;&#x26; styles.activeTitle]} />
+  &#x3C;/View>
+)
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 18,
+  },
+  activeTitle: {
+    color: 'red',
+  },
+})
+</code></pre>
+<p>この様に配列で Style を渡した時も、<code>StyleSheet.flatten()</code>を使えば、Merge された Style の内容が Object として返ってくるので、渡した Style が期待通りになっているかどうかのデバッグが行えます。</p>
+<pre><code class="language-jsx">const styles = StyleSheet.create({
+  title: {
+    fontSize: 18,
+  },
+  activeTitle: {
+    color: 'red',
+  },
+})
+
+console.log(StyleSheet.flatten([styles.title, styles.activeTitle])) // { fontSize: 18, color: 'red'}
+</code></pre>
+<h3>StyleSheet.hairlineWidth</h3>
+<p><code>StyleSheet.hairlineWidth</code> は、使用しているプラットフォームが描画可能な最小の width 値を返します。
+主に Border を作成する時に使います。</p>
+<pre><code class="language-jsx">const styles = StyleSheet.create({
+  separator: {
+    borderBottomColor: '#bbb',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+})
+</code></pre>
+<h3>StyleSheet.absoluteFill</h3>
+<p><code>position:absolute</code>で画面全体を覆いたい時に使えるショートハンドです。
+以下の要素を持つ Object を返します。
+Floating Action Button 画面右下に置きたいときや、キャンセルボタンを画面右上に固定したい時とかに使えますね。</p>
+<pre><code class="language-json">{
+  "position": "absolute",
+  "left": 0,
+  "right": 0,
+  "top": 0,
+  "bottom": 0
+}
+</code></pre>
+<p>要素自体は Override することができます。</p>
+<pre><code class="language-jsx">const styles = StyleSheet.create({
+  wrapper: {
+    ...StyleSheet.absoluteFill,
+    top: 10,
+    backgroundColor: 'transparent',
+  },
+})
+</code></pre>
+<h3>StyleSheet.absoluteFillObject</h3>
+<p><code>absoluteFill</code>と全く同じです。以前はこちらのみが Override 可能でしたが、今では差異はなくなりました。</p>
+<p><a href="https://github.com/facebook/react-native/blob/master/Libraries/StyleSheet/StyleSheet.js#L255">参考コード</a></p>
+<h2>React-Native と Web の違い</h2>
+<p>react-native の Style は基本的に Web の CSS と同じように使えますが、結構差異があります。</p>
+<h3>Display は基本 <code>flex</code></h3>
+<p>react-native の画面はすべて、FlexBox で表現します。</p>
+<p>これは、react-native が View の部分にて <code>[yoga](https://github.com/facebook/yoga)</code>という Facebook 製のクロスプラットフォームで Flexbox を実装するライブラリを使用しているためです。</p>
+<p>なので、<code>display</code> property は<code>flex</code>がデフォルトで、その他対応しているのは<code>none</code>のみです。<code>grid</code>は使えません。</p>
+<h3>flexDirection はデフォルトで<code>column</code></h3>
+<p>react-native では、基本的に要素が上から下に向かって描かれています。なので、<code>flexDirection</code> はデフォルトで<code>column</code>になっています。要素を横並びにしたい場合には、<code>flexDirection</code>を<code>row</code>に設定します。</p>
+<p>長く React Native をやっていると、Web で FlexBox を使う時に要素がデフォルトで横になっていることに違和感を覚えます。
+（私はこれを「RN 病」と呼んでいます。）</p>
+<h3>ショートハンドは使えない</h3>
+<p>react-native では基本的に　<code>margin: '10 0'</code> のようなショートハンドは使えず、基本的に 1 Property に一つの値しか受け付けません。</p>
+<p><code>margin</code>を Component 全体に均等に適用したい場合は、<code>margin: 10</code>と書けますが、上下左右で別の値を使う場合は、それぞれ<code>marginRight</code>, <code>marginTop</code>などに設定する必要があります。上下が同じ値、左右が同じ値の場合は<code>marginVertical</code>, <code>marginHorizontal</code>というプロパティを使えば、記入を少なくできます。</p>
+<h3>flex の微妙な差異</h3>
+<p>通常の CSS では<code>flex</code>プロパティは<code>flex-grow</code>, <code>flex-shrink</code>, <code>flex-basis</code>というプロパティのショートハンドです。</p>
+<p>WIP</p>
+<h2>参考サイト</h2>
+<ul>
+<li><a href="https://facebook.github.io/react-native/docs/stylesheet">react-native: StyleSheet</a></li>
+<li><a href="https://facebook.github.io/react-native/docs/layout-props.html">react-native: Layout Props</a>)</li>
+<li><a href="https://medium.com/@peterpme/taming-react-natives-scrollview-with-flex-144e6ff76c08">Taming React Native’s ScrollView with flex</a></li>
+</ul>
+</div><hr style="margin-bottom:16px"/><div style="display:flex;align-items:center;margin-bottom:40px"><img alt="Naturalclar (Jesse Katsumata)" loading="lazy" width="50" height="50" decoding="async" data-nimg="1" style="color:transparent;margin-right:16px;margin-bottom:0;min-width:50px;border-radius:100%" src="https://www.github.com/Naturalclar.png"/><div style="display:flex;flex-direction:column;gap:8px"><p style="margin:0">Author: <strong>Naturalclar (Jesse Katsumata)</strong></p><p style="margin:0"><a href="https://x.com/natural_clar">X</a> <a href="https://www.github.com/Naturalclar">Github</a></p></div></div><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/posts/contributing-to-hacktoberfest/">← <!-- -->Contributing to Hacktoberfest</a></li><li><a rel="next" href="/posts/react-navigation-v4-new-hooks/">new hooks in react-navigation v4<!-- --> →</a></li></ul><footer>© <!-- -->2025<!-- -->, Built with<!-- --> <a href="https://nextjs.org">Next.js</a></footer></div><script src="/_next/static/chunks/webpack-695d994ee6bbb75a.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0]);self.__next_f.push([2,null])</script><script>self.__next_f.push([1,"1:HL[\"/_next/static/css/997bb99dff39a320.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"2:I[8493,[],\"\"]\n5:I[3754,[],\"\"]\n7:I[7754,[],\"\"]\n8:I[7574,[\"18\",\"static/chunks/18-a08db35d0c492fb3.js\",\"802\",\"static/chunks/802-8624e27f06c26e64.js\",\"333\",\"static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js\"],\"default\"]\n9:I[8750,[\"18\",\"static/chunks/18-a08db35d0c492fb3.js\",\"802\",\"static/chunks/802-8624e27f06c26e64.js\",\"333\",\"static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js\"],\"\"]\nb:I[253,[],\"\"]\n6:[\"slug\",\"styles-in-react-native\",\"d\"]\nc:[]\n0:[\"$\",\"$L2\",null,{\"buildId\":\"bVXrX63nls6mz3NDAu0w6\",\"assetPrefix\":\"\",\"urlParts\":[\"\",\"posts\",\"styles-in-react-native\",\"\"],\"initialTree\":[\"\",{\"children\":[\"posts\",{\"children\":[[\"slug\",\"styles-in-react-native\",\"d\"],{\"children\":[\"__PAGE__?{\\\"slug\\\":\\\"styles-in-react-native\\\"}\",{}]}]}]},\"$undefined\",\"$undefined\",true],\"initialSeedData\":[\"\",{\"children\":[\"posts\",{\"children\":[[\"slug\",\"styles-in-react-native\",\"d\"],{\"children\":[\"__PAGE__\",{},[[\"$L3\",\"$L4\",null],null],null]},[null,[\"$\",\"$L5\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"posts\",\"children\",\"$6\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L7\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[null,[\"$\",\"$L5\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"posts\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L7\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/997bb99dff39a320.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"en\",\"children\":[\"$\",\"body\",null,{\"children\":[\"$\",\"$L5\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L7\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\""])</script><script>self.__next_f.push([1,"$undefined\",\"notFound\":[\"$\",\"$L8\",null,{\"title\":\"naturalclar.dev\",\"children\":[[\"$\",\"h1\",null,{\"children\":\"404 - Page Not Found\"}],[\"$\",\"p\",null,{\"children\":\"You just hit a route that doesn't exist... the sadness.\"}],[\"$\",\"p\",null,{\"children\":[\"$\",\"$L9\",null,{\"href\":\"/\",\"children\":\"Go back to the homepage\"}]}]]}],\"notFoundStyles\":[]}]}]}]],null],null],\"couldBeIntercepted\":false,\"initialHead\":[null,\"$La\"],\"globalErrorComponent\":\"$b\",\"missingSlots\":\"$Wc\"}]\n"])</script><script>self.__next_f.push([1,"e:I[4802,[\"18\",\"static/chunks/18-a08db35d0c492fb3.js\",\"802\",\"static/chunks/802-8624e27f06c26e64.js\",\"333\",\"static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js\"],\"Image\"]\nd:T224e,"])</script><script>self.__next_f.push([1,"\u003cp\u003e\u003ca href=\"https://megurocss.connpass.com/event/145780/\"\u003emeguro.css #7\u003c/a\u003eで発表すること。\u003c/p\u003e\n\u003cp\u003eCSS の勉強会に行くのは初めてなので、今回は基本的なところを抑えようという魂胆。\u003c/p\u003e\n\u003ch2\u003ereact-native とは\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003eiOS や Android アプリなどのクロスプラットフォーム開発が出来るフレームワーク\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003ereact を知っていれば似たような記法でかける。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ccode\u003e\u0026#x3C;div\u003e\u003c/code\u003eや\u003ccode\u003e\u0026#x3C;p\u003e\u003c/code\u003e等といった Web で良く使うタグの代わりに、\u003ccode\u003e\u0026#x3C;View\u003e\u003c/code\u003eや\u003ccode\u003e\u0026#x3C;Text\u003e\u003c/code\u003eなど独自のタグを使う。\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-jsx\"\u003eimport React from 'react'\nimport { View, Text } from 'react-native'\n\nexport const HelloWorld = () =\u003e (\n  \u0026#x3C;View\u003e\n    \u0026#x3C;Text\u003eHello World!\u0026#x3C;/Text\u003e\n  \u0026#x3C;/View\u003e\n)\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003ereact-native における Style\u003c/h2\u003e\n\u003cp\u003ereact-native は Web と同じ様に書くことができますが、CSS ファイルをそのまま使うことはできません。\u003c/p\u003e\n\u003cp\u003eかわりに、react-native が提供する\u003ccode\u003e[StyleSheet](https://facebook.github.io/react-native/docs/styleSheet )]\u003c/code\u003eという API を使用します。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-jsx\"\u003eimport React from 'react'\nimport { View, Text, StyleSheet } from 'react-native'\n\nconst styles = StyleSheet.create({\n  container: {\n    borderRadius: 4,\n    borderWidth: 0.5,\n    borderColor: '#d6d7da',\n  },\n  title: {\n    fontSize: 19,\n    fontWeight: 'bold',\n  },\n  activeTitle: {\n    color: 'red',\n  },\n})\n\n...\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e作成した Style を適応するには\u003ccode\u003estyle\u003c/code\u003e prop に入れます。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-jsx\"\u003eimport React from 'react-native'\nimport { View, Text, StyleSheet } from 'react-native'\n\ntype Props = {\n  isActive: boolean,\n}\n\nexport const Title = ({ isActive }: Props) =\u003e (\n  \u0026#x3C;View style={styles.container}\u003e\n    \u0026#x3C;Text style={[styles.title, isActive \u0026#x26;\u0026#x26; styles.activeTitle]} /\u003e\n  \u0026#x3C;/View\u003e\n)\n\nconst styles = StyleSheet.create({...})\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e要は CSS-in-JS ですね。\u003c/p\u003e\n\u003cp\u003eStyleSheet と Component を分けて共通の Style を使いまわしたり、Component を持つファイルと一緒にして Scope を閉じたりは人それぞれです。私は後者のほうが好きです。\u003c/p\u003e\n\u003ch2\u003eStyleSheet API\u003c/h2\u003e\n\u003cp\u003eStyleSheet にはいくつか API が提供されています。\u003c/p\u003e\n\u003ch3\u003eStyleSheet.create(obj)\u003c/h3\u003e\n\u003cp\u003e渡された Object から StyleSheet を作成します。\u003c/p\u003e\n\u003ch3\u003eStyleSheet.flatten(style)\u003c/h3\u003e\n\u003cp\u003e本来、StyleSheet.create で作成された Style は、参照した時に id を返します。\u003c/p\u003e\n\u003cp\u003e例えば\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-JSX\"\u003eimport {StyleSheet} from 'react-native'\n\nconst styles = StyleSheet.create({\n  container: {\n    flex:1\n  }\n})\n\nconsole.log(styles.container) // 3 のような numberが返ってくる。\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eこれでは、正しい Style が入っているかのデバッグが難しいです。\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003eStyleSheet.flatten()\u003c/code\u003eを使用すれば、id から取得した Object が返ってくるので Debug しやすくなります。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-JSX\"\u003eimport {StyleSheet} from 'react-native'\n\nconst styles = StyleSheet.create({\n  container: {\n    flex:1\n  }\n})\n\nconsole.log(StyleSheet.flatten(styles.container)) // { flex: 1}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eまた、react-native では、style に配列を渡すことができ、そうした場合は渡した Style が Merge されたものが適応されます。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-jsx\"\u003eimport React from 'react-native'\nimport { View, Text, StyleSheet } from 'react-native'\n\ntype Props = {\n  isActive: boolean,\n}\n\nexport const Title = ({ isActive }: Props) =\u003e (\n  \u0026#x3C;View style={styles.container}\u003e\n    {/* ここで複数のStyleを当てている */}\n    \u0026#x3C;Text style={[styles.title, isActive \u0026#x26;\u0026#x26; styles.activeTitle]} /\u003e\n  \u0026#x3C;/View\u003e\n)\n\nconst styles = StyleSheet.create({\n  title: {\n    fontSize: 18,\n  },\n  activeTitle: {\n    color: 'red',\n  },\n})\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eこの様に配列で Style を渡した時も、\u003ccode\u003eStyleSheet.flatten()\u003c/code\u003eを使えば、Merge された Style の内容が Object として返ってくるので、渡した Style が期待通りになっているかどうかのデバッグが行えます。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-jsx\"\u003econst styles = StyleSheet.create({\n  title: {\n    fontSize: 18,\n  },\n  activeTitle: {\n    color: 'red',\n  },\n})\n\nconsole.log(StyleSheet.flatten([styles.title, styles.activeTitle])) // { fontSize: 18, color: 'red'}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003eStyleSheet.hairlineWidth\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003eStyleSheet.hairlineWidth\u003c/code\u003e は、使用しているプラットフォームが描画可能な最小の width 値を返します。\n主に Border を作成する時に使います。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-jsx\"\u003econst styles = StyleSheet.create({\n  separator: {\n    borderBottomColor: '#bbb',\n    borderBottomWidth: StyleSheet.hairlineWidth,\n  },\n})\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003eStyleSheet.absoluteFill\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003eposition:absolute\u003c/code\u003eで画面全体を覆いたい時に使えるショートハンドです。\n以下の要素を持つ Object を返します。\nFloating Action Button 画面右下に置きたいときや、キャンセルボタンを画面右上に固定したい時とかに使えますね。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-json\"\u003e{\n  \"position\": \"absolute\",\n  \"left\": 0,\n  \"right\": 0,\n  \"top\": 0,\n  \"bottom\": 0\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e要素自体は Override することができます。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-jsx\"\u003econst styles = StyleSheet.create({\n  wrapper: {\n    ...StyleSheet.absoluteFill,\n    top: 10,\n    backgroundColor: 'transparent',\n  },\n})\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3\u003eStyleSheet.absoluteFillObject\u003c/h3\u003e\n\u003cp\u003e\u003ccode\u003eabsoluteFill\u003c/code\u003eと全く同じです。以前はこちらのみが Override 可能でしたが、今では差異はなくなりました。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/facebook/react-native/blob/master/Libraries/StyleSheet/StyleSheet.js#L255\"\u003e参考コード\u003c/a\u003e\u003c/p\u003e\n\u003ch2\u003eReact-Native と Web の違い\u003c/h2\u003e\n\u003cp\u003ereact-native の Style は基本的に Web の CSS と同じように使えますが、結構差異があります。\u003c/p\u003e\n\u003ch3\u003eDisplay は基本 \u003ccode\u003eflex\u003c/code\u003e\u003c/h3\u003e\n\u003cp\u003ereact-native の画面はすべて、FlexBox で表現します。\u003c/p\u003e\n\u003cp\u003eこれは、react-native が View の部分にて \u003ccode\u003e[yoga](https://github.com/facebook/yoga)\u003c/code\u003eという Facebook 製のクロスプラットフォームで Flexbox を実装するライブラリを使用しているためです。\u003c/p\u003e\n\u003cp\u003eなので、\u003ccode\u003edisplay\u003c/code\u003e property は\u003ccode\u003eflex\u003c/code\u003eがデフォルトで、その他対応しているのは\u003ccode\u003enone\u003c/code\u003eのみです。\u003ccode\u003egrid\u003c/code\u003eは使えません。\u003c/p\u003e\n\u003ch3\u003eflexDirection はデフォルトで\u003ccode\u003ecolumn\u003c/code\u003e\u003c/h3\u003e\n\u003cp\u003ereact-native では、基本的に要素が上から下に向かって描かれています。なので、\u003ccode\u003eflexDirection\u003c/code\u003e はデフォルトで\u003ccode\u003ecolumn\u003c/code\u003eになっています。要素を横並びにしたい場合には、\u003ccode\u003eflexDirection\u003c/code\u003eを\u003ccode\u003erow\u003c/code\u003eに設定します。\u003c/p\u003e\n\u003cp\u003e長く React Native をやっていると、Web で FlexBox を使う時に要素がデフォルトで横になっていることに違和感を覚えます。\n（私はこれを「RN 病」と呼んでいます。）\u003c/p\u003e\n\u003ch3\u003eショートハンドは使えない\u003c/h3\u003e\n\u003cp\u003ereact-native では基本的に　\u003ccode\u003emargin: '10 0'\u003c/code\u003e のようなショートハンドは使えず、基本的に 1 Property に一つの値しか受け付けません。\u003c/p\u003e\n\u003cp\u003e\u003ccode\u003emargin\u003c/code\u003eを Component 全体に均等に適用したい場合は、\u003ccode\u003emargin: 10\u003c/code\u003eと書けますが、上下左右で別の値を使う場合は、それぞれ\u003ccode\u003emarginRight\u003c/code\u003e, \u003ccode\u003emarginTop\u003c/code\u003eなどに設定する必要があります。上下が同じ値、左右が同じ値の場合は\u003ccode\u003emarginVertical\u003c/code\u003e, \u003ccode\u003emarginHorizontal\u003c/code\u003eというプロパティを使えば、記入を少なくできます。\u003c/p\u003e\n\u003ch3\u003eflex の微妙な差異\u003c/h3\u003e\n\u003cp\u003e通常の CSS では\u003ccode\u003eflex\u003c/code\u003eプロパティは\u003ccode\u003eflex-grow\u003c/code\u003e, \u003ccode\u003eflex-shrink\u003c/code\u003e, \u003ccode\u003eflex-basis\u003c/code\u003eというプロパティのショートハンドです。\u003c/p\u003e\n\u003cp\u003eWIP\u003c/p\u003e\n\u003ch2\u003e参考サイト\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://facebook.github.io/react-native/docs/stylesheet\"\u003ereact-native: StyleSheet\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://facebook.github.io/react-native/docs/layout-props.html\"\u003ereact-native: Layout Props\u003c/a\u003e)\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://medium.com/@peterpme/taming-react-natives-scrollview-with-flex-144e6ff76c08\"\u003eTaming React Native’s ScrollView with flex\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n"])</script><script>self.__next_f.push([1,"4:[\"$\",\"$L8\",null,{\"title\":\"naturalclar.dev\",\"children\":[[\"$\",\"h1\",null,{\"children\":\"styles in react-native\"}],[\"$\",\"p\",null,{\"style\":{\"display\":\"block\",\"marginBottom\":\"16px\"},\"children\":\"October 03, 2019\"}],[\"$\",\"div\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"$d\"}}],[\"$\",\"hr\",null,{\"style\":{\"marginBottom\":\"16px\"}}],[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"alignItems\":\"center\",\"marginBottom\":\"40px\"},\"children\":[[\"$\",\"$Le\",null,{\"src\":\"https://www.github.com/Naturalclar.png\",\"width\":50,\"height\":50,\"alt\":\"Naturalclar (Jesse Katsumata)\",\"style\":{\"marginRight\":\"16px\",\"marginBottom\":0,\"minWidth\":50,\"borderRadius\":\"100%\"}}],[\"$\",\"div\",null,{\"style\":{\"display\":\"flex\",\"flexDirection\":\"column\",\"gap\":\"8px\"},\"children\":[[\"$\",\"p\",null,{\"style\":{\"margin\":0},\"children\":[\"Author: \",[\"$\",\"strong\",null,{\"children\":\"Naturalclar (Jesse Katsumata)\"}]]}],[\"$\",\"p\",null,{\"style\":{\"margin\":0},\"children\":[[\"$\",\"a\",null,{\"href\":\"https://x.com/natural_clar\",\"children\":\"X\"}],\" \",[\"$\",\"a\",null,{\"href\":\"https://www.github.com/Naturalclar\",\"children\":\"Github\"}]]}]]}]]}],[\"$\",\"ul\",null,{\"style\":{\"display\":\"flex\",\"flexWrap\":\"wrap\",\"justifyContent\":\"space-between\",\"listStyle\":\"none\",\"padding\":0},\"children\":[[\"$\",\"li\",null,{\"children\":[\"$\",\"$L9\",null,{\"href\":\"/posts/contributing-to-hacktoberfest\",\"rel\":\"prev\",\"children\":[\"← \",\"Contributing to Hacktoberfest\"]}]}],[\"$\",\"li\",null,{\"children\":[\"$\",\"$L9\",null,{\"href\":\"/posts/react-navigation-v4-new-hooks\",\"rel\":\"next\",\"children\":[\"new hooks in react-navigation v4\",\" →\"]}]}]]}]]}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"2\",{\"children\":\"styles in react-native | naturalclar.dev\"}],[\"$\",\"meta\",\"3\",{\"name\":\"description\",\"content\":\"\\n[meguro.css #7](https://megurocss.connpass.com/event/145780/)で発表すること。\\n\\nCSS の勉強会に行くのは初めてなので、今回は基本的なところを抑えようという魂胆。\\n\\n## react-native とは\\n\\n- iOS や Android アプリなどのクロスプラットフォーム開発が出来るフレームワーク\\n\\n- react を知っていれば似た...\"}],[\"$\",\"meta\",\"4\",{\"name\":\"author\",\"content\":\"Naturalclar (Jesse Katsumata)\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"react, react-native, nextjs, blog\"}],[\"$\",\"meta\",\"6\",{\"name\":\"creator\",\"content\":\"Naturalclar (Jesse Katsumata)\"}],[\"$\",\"meta\",\"7\",{\"name\":\"publisher\",\"content\":\"Naturalclar (Jesse Katsumata)\"}],[\"$\",\"meta\",\"8\",{\"name\":\"robots\",\"content\":\"index, follow\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:title\",\"content\":\"styles in react-native | naturalclar.dev\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:description\",\"content\":\"\\n[meguro.css #7](https://megurocss.connpass.com/event/145780/)で発表すること。\\n\\nCSS の勉強会に行くのは初めてなので、今回は基本的なところを抑えようという魂胆。\\n\\n## react-native とは\\n\\n- iOS や Android アプリなどのクロスプラットフォーム開発が出来るフレームワーク\\n\\n- react を知っていれば似た...\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:url\",\"content\":\"https://blog.naturalclar.dev/\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:site_name\",\"content\":\"naturalclar.dev\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:image\",\"content\":\"https://blog.naturalclar.dev/twitter-card.png\"}],[\"$\",\"meta\",\"14\",{\"property\":\"og:image:width\",\"content\":\"1200\"}],[\"$\",\"meta\",\"15\",{\"property\":\"og:image:height\",\"content\":\"630\"}],[\"$\",\"meta\",\"16\",{\"property\":\"og:image:alt\",\"content\":\"styles in react-native\"}],[\"$\",\"meta\",\"17\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"18\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"19\",{\"name\":\"twitter:creator\",\"content\":\"@natural_clar\"}],[\"$\",\"meta\",\"20\",{\"name\":\"twitter:title\",\"content\":\"styles in react-native | naturalclar.dev\"}],[\"$\",\"meta\",\"21\",{\"name\":\"twitter:description\",\"content\":\"\\n[meguro.css #7](https://megurocss.connpass.com/event/145780/)で発表すること。\\n\\nCSS の勉強会に行くのは初めてなので、今回は基本的なところを抑えようという魂胆。\\n\\n## react-native とは\\n\\n- iOS や Android アプリなどのクロスプラットフォーム開発が出来るフレームワーク\\n\\n- react を知っていれば似た...\"}],[\"$\",\"meta\",\"22\",{\"name\":\"twitter:image\",\"content\":\"https://blog.naturalclar.dev/twitter-card.png\"}]]\n"])</script><script>self.__next_f.push([1,"3:null\n"])</script></body></html>

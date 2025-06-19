@@ -1,0 +1,90 @@
+3:I[3754,[],""]
+5:I[7754,[],""]
+6:I[7574,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"default"]
+7:I[8750,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],""]
+4:["slug","react-europe-day-1","d"]
+0:["bVXrX63nls6mz3NDAu0w6",[[["",{"children":["posts",{"children":[["slug","react-europe-day-1","d"],{"children":["__PAGE__?{\"slug\":\"react-europe-day-1\"}",{}]}]}]},"$undefined","$undefined",true],["",{"children":["posts",{"children":[["slug","react-europe-day-1","d"],{"children":["__PAGE__",{},[["$L1","$L2",null],null],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children","$4","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/997bb99dff39a320.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"children":["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"404 - Page Not Found"}],["$","p",null,{"children":"You just hit a route that doesn't exist... the sadness."}],["$","p",null,{"children":["$","$L7",null,{"href":"/","children":"Go back to the homepage"}]}]]}],"notFoundStyles":[]}]}]}]],null],null],["$L8",null]]]]
+a:I[4802,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"Image"]
+9:T2ba9,<p>2020/05/14 に開催された <a href="https://www.react-europe.org/">React Europe</a> を一部視聴していたのでそのレポートを書きます。
+最近、この手の技術カンファレンスがオンラインでリアルタイムで見れる用になり、登壇者も世界中から参加できるようになりましたね。</p>
+<p>React Europe ではオンラインカンファレンスの他に、２日に渡るオンラインワークショップもあり、React、React Native 関連の強い人からのオンラインハンズオンなどが開催されていたみたいです。</p>
+<h2>トークまとめ</h2>
+<p>各トークの概要やタイムテーブルなどは<a href="https://remote.reactsummit.com/">公式サイト</a>に記載されています。</p>
+<p>ツイッターでは <a href="https://twitter.com/hashtag/ReactEurope">#ReactEurope</a> のハッシュタグでつぶやかれています。</p>
+<p>また、<a>Discord</a> にて質問を募集していました。</p>
+<p>YouTube Live のリンクは<a href="https://www.youtube.com/watch?v=41Ia291KIvI">こちら</a></p>
+<h3>The State of React</h3>
+<p>React Europe カンファレンス最初のトークは、<a href="https://twitter.com/johnadetutu93">@johnadetutu93</a>による State of React という発表でした。</p>
+<p>彼は <a href="https://www.react-spring.io/">react-spring</a> という React のアニメーションライブラリの開発チームの一員で、発表内容も react-spring にフォーカスしているものでした。</p>
+<p>react は <a href="https://reactjs.org/docs/hooks-reference.html">hooks api</a> が導入されて以来、その便利さに使用者が爆発的に増えています。</p>
+<p>react-spring も例外ではなく、<code>useSpring</code> や <code>useTransition</code>, <code>useChain</code> などのカスタムフックが実装され、より便利にアニメーションが作成できるようになりました。</p>
+<p>このトークではライブコーディングを交えて、React Spring を hooks でどう動かすかについて紹介していました。</p>
+<p>ただ、Reactの性質上、現状のAPIでは、Componentが画面を去る際にアニメーションをつけるのは難しい状態です。
+その問題について、<a href="https://github.com/reactjs/rfcs/issues/128">rfc</a>が上がっていたり、今後の Concurrent Mode でどう変わっていくかには要注目です。</p>
+<h3>On Next.js</h3>
+<p>２つ目のセッションでは、Vercel (旧ZEIT) のエンジニアである<a href="https://twitter.com/timneutkens">@timneutkens</a>が Next.js について話していました。</p>
+<p>Next は React を使ってアプリを高速で書けるフレームワークです。</p>
+<p>このセッションでは、新しくリリースされた Next 9.4 によって追加された機能について、実演を交えながら説明していました。</p>
+<p>以下は説明されていた機能の一部です。</p>
+<ul>
+<li>
+<p>Preview Mode: Nextで立てられたサイト内容を変更した際、デプロイ前の内容を他の人にも見れる様なリンクを作成する</p>
+</li>
+<li>
+<p>Incremental Generation: 一度キャッシュされたページからdiffを取ることによって、デプロイ時に変更が高速で本番に反映される機能。</p>
+</li>
+<li>
+<p>Fast Refresh: この機能が追加されたことにより、Component の State をリセットすることなく、Component の変更が即時に反映できるようになった。</p>
+</li>
+</ul>
+<h3>Bringing webgl to react</h3>
+<p>３つ目のセッションでは、react-springなどのライブラリの作者である<a href="https://twitter.com/0xca0a">@0xca0a</a>がreact-three-fiberについて話していました。</p>
+<p><a href="https://github.com/react-spring/react-three-fiber">React Three Fiber</a> は React で Webgl を扱えるようになるライブラリです。<a href="https://threejs.org/">Three.js</a> をベースとして作られており、Three.js の機能をすべて使うことができます。Three.js の Wrapper では無いので、Three.js に大きな変更があったとしても、React Three Fiber は継続して使用することができます。</p>
+<p>React Reconciler をベースとして作られており、DOMを持たないので、Webではもちろん、React Native を使って Mobile でも使うことができるようです。</p>
+<p>また、<a href="https://github.com/react-spring/drei">drei</a>という react-three-fiber のヘルパーについても少し説明されていました。<code>&#x3C;HTML/></code>というComponentを使うことで、webglの中にhtmlの内容を埋め込めるというのを実演していました。</p>
+<h3>Scaling the Web with Gatsby</h3>
+<p>前半最後のセッションは Gatsby のコアチームの一員である<a href="https://twitter.com/chatsidhartha">@chatsidhartha</a> が、Gatsby のこれまでと今後について話していました。</p>
+<p><a href="https://www.gatsbyjs.org/">Gatsby</a> は React を使ってページを作成したり、GraphQLを使ってデータを取得して、少ない手順で静的サイトを作成できるフレームワークです。</p>
+<p>このトークは静的サイトジェネレーターの歴史から始まり、それらの利点、そして欠点について話していました。</p>
+<p>多くの静的サイトジェネレーターの欠点の一つは、ページ数が多くなるにつれビルド時間がとても長くなることです。これは、デプロイの前にすべてのページをビルドしないといけないために発生します。</p>
+<p>Gatsby は Gatsby Cloud というサービスを立ち上げ、その問題を解消しています。Gatsby Cloud を使うことによって、新しく追加したページのみをビルドする、Incremental Build の機能が使えるようになります。</p>
+<p>このセッションでは、Incremental Build 機能をつかって、コンテンツの更新から５秒で新しいデプロイが完了していたことを実演していました。</p>
+<p>静的サイトジェネレーターが持つもう一つの欠点は、BitCoinや株価の変化、ニュースサイトなどの、更新頻度がとても短いサイトに対応しづらいことです。
+これらのサイトは数秒の一回更新をする必要があるため、静的サイトとの相性はよくありませんでした。</p>
+<p>Gatsby Cloud では、 Streaming Build という機能があり、Gatsby の設定の中で継続的に新しいデータを取得してそれを数秒毎に更新することができます。</p>
+<p>セッション中も、setIntervalを使った、2~3秒毎に新しくデプロイする様子を実演していました。</p>
+<p>また、Gatsby の 2020年の予定についても触れていました。
+現在、Gatsby の Core のコードはすべて <a href="https://github.com/gatsbyjs/gatsby/issues/21995">TypeScript に置き換えられようとしています</a>。</p>
+<p>また、Gatsby のサイト上でi18nを容易に行うようにするためのAPIも実装中であるとのことです。</p>
+<p>現在、Gatsby のドキュメントは様々な言語に<a href="https://github.com/gatsbyjs/gatsby-ja">翻訳されています</a>。
+それらの翻訳も、新しい Gatsby の i18n api によって、Gatsby のドキュメントに組み込まれるようになるとのこと。</p>
+<h3>Render Props are Not Dead</h3>
+<p>休憩明けの最初のセッションは<a href="https://twitter.com/erikras">@erikras</a>による、render props についてでした。</p>
+<p>React でComponent間での state の共有方法は今までいろんな方法が実装されてきました。
+Mixin からはじまり、HOC、RenderPropsと時を経て、今では Hooks が主流となっています。</p>
+<p>このトークでは、Hooks の前に使われていた render props が hooks の時代の中でもまだ使える用途があるという話をしていました。</p>
+<p>Hooks の登場で、多くの状態管理は hooks を通して行う用になりました。
+Hooks に変更があった場合、React の Component は rerender が行われます。
+useCallbackなどのMemo化によって、Hooksの変更頻度をへらすことはできますが、一度変更があったら、rerenderを止めることはできません。</p>
+<p>もし、hooksを使っているComponentの中で、サードパーティ製の重いComponentを使っていたとしたらどうなるでしょうか？</p>
+<p>Hooks に変更がある度に、重いComponentのrerenderがはじまってしまいます。
+状態の影響範囲が重いComponent以外の箇所にある状況で、重いComponentが一緒にrerenderされるのは望ましいことではありません。</p>
+<p>renderPropsを使うことによって、重いComponentを含むComponentの中で、状態の変更に関心がある箇所のみのrerenderをさせて、パフォーマンスの改善を行うことができます。</p>
+<p>個人的には重いComponentにuseMemoを使えばよいのでは？と思いますが、renderProps にもまだ活躍の場は作れるのかもしれません。</p>
+<h3>Rejecting bongo kittens, achieving 3D blooms, and other lessons learned</h3>
+<p>次のセッションは Gatsby のコアチームである<a href="https://twitter.com/joshwcomeau">@joshwcomeau</a>の話でした。</p>
+<p>彼の発表内容は<a href="https://github.com/joshwcomeau/talk-2020-react-europe">Githubにもまとめられています</a>。</p>
+<p>Josh は昔から DDR などの音ゲーが好きで、今では Beat Saber を遊んでいます。</p>
+<p>Beat Saber ではいろんな楽曲の譜面を落としてきて遊ぶことができます。また、譜面を自分で作って遊ぶことも可能です。</p>
+<p>ただ、譜面を作るソフトウェアがUXがとても悪かったり、Windowsにしか対応していなかったりと問題がありました。</p>
+<p>このトークでは、Josh が React を使って BeatSaber の譜面エディタを作成、OSSとして公開した時の話をしていました。</p>
+<p>Beat Saber の譜面作成には３Dグラフィックスが欠かせません。
+なので、ここでも react-three-fiber を使って Three.js を用いた React での Webgl 開発を行っていました。</p>
+<p>作成されたものは<a href="https://beatmapper.app/">beatmapper.app</a>で公開されています。</p>
+<h2>まとめ</h2>
+<p>他にもたくさんのセッションがありましたが、他の用事があったのと眠気に限界が来てしまったので聞けてません。
+個人的には<a href="https://twitter.com/Baconbrix">@Baconbrix</a>の Expo Web についてのセッションが気になるので、明日また見ようと思います。</p>
+<p>React Europe は明日も数々のセッションがあるのでお見逃しなく。</p>
+2:["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"React Europe Conference Day 1 まとめ"}],["$","p",null,{"style":{"display":"block","marginBottom":"16px"},"children":"May 14, 2020"}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$9"}}],["$","hr",null,{"style":{"marginBottom":"16px"}}],["$","div",null,{"style":{"display":"flex","alignItems":"center","marginBottom":"40px"},"children":[["$","$La",null,{"src":"https://www.github.com/Naturalclar.png","width":50,"height":50,"alt":"Naturalclar (Jesse Katsumata)","style":{"marginRight":"16px","marginBottom":0,"minWidth":50,"borderRadius":"100%"}}],["$","div",null,{"style":{"display":"flex","flexDirection":"column","gap":"8px"},"children":[["$","p",null,{"style":{"margin":0},"children":["Author: ",["$","strong",null,{"children":"Naturalclar (Jesse Katsumata)"}]]}],["$","p",null,{"style":{"margin":0},"children":[["$","a",null,{"href":"https://x.com/natural_clar","children":"X"}]," ",["$","a",null,{"href":"https://www.github.com/Naturalclar","children":"Github"}]]}]]}]]}],["$","ul",null,{"style":{"display":"flex","flexWrap":"wrap","justifyContent":"space-between","listStyle":"none","padding":0},"children":[["$","li",null,{"children":["$","$L7",null,{"href":"/posts/react-native-review-2020","rel":"prev","children":["← ","React Native 2020年の振り返り"]}]}],["$","li",null,{"children":["$","$L7",null,{"href":"/posts/whats-coming-up-in-react-native-0.63","rel":"next","children":["What's coming up in React Native 0.63"," →"]}]}]]}]]}]
+8:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"React Europe Conference Day 1 まとめ | naturalclar.dev"}],["$","meta","3",{"name":"description","content":"\n2020/05/14 に開催された [React Europe](https://www.react-europe.org/) を一部視聴していたのでそのレポートを書きます。\n最近、この手の技術カンファレンスがオンラインでリアルタイムで見れる用になり、登壇者も世界中から参加できるようになりましたね。\n\nReact Europe ではオンラインカンファレンスの他に、２日に渡るオンラインワークショッ..."}],["$","meta","4",{"name":"author","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","5",{"name":"keywords","content":"react, react-native, nextjs, blog"}],["$","meta","6",{"name":"creator","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","7",{"name":"publisher","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","8",{"name":"robots","content":"index, follow"}],["$","meta","9",{"property":"og:title","content":"React Europe Conference Day 1 まとめ | naturalclar.dev"}],["$","meta","10",{"property":"og:description","content":"\n2020/05/14 に開催された [React Europe](https://www.react-europe.org/) を一部視聴していたのでそのレポートを書きます。\n最近、この手の技術カンファレンスがオンラインでリアルタイムで見れる用になり、登壇者も世界中から参加できるようになりましたね。\n\nReact Europe ではオンラインカンファレンスの他に、２日に渡るオンラインワークショッ..."}],["$","meta","11",{"property":"og:url","content":"https://blog.naturalclar.dev/"}],["$","meta","12",{"property":"og:site_name","content":"naturalclar.dev"}],["$","meta","13",{"property":"og:image","content":"https://blog.naturalclar.dev/twitter-card.png"}],["$","meta","14",{"property":"og:image:width","content":"1200"}],["$","meta","15",{"property":"og:image:height","content":"630"}],["$","meta","16",{"property":"og:image:alt","content":"React Europe Conference Day 1 まとめ"}],["$","meta","17",{"property":"og:type","content":"website"}],["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","19",{"name":"twitter:creator","content":"@natural_clar"}],["$","meta","20",{"name":"twitter:title","content":"React Europe Conference Day 1 まとめ | naturalclar.dev"}],["$","meta","21",{"name":"twitter:description","content":"\n2020/05/14 に開催された [React Europe](https://www.react-europe.org/) を一部視聴していたのでそのレポートを書きます。\n最近、この手の技術カンファレンスがオンラインでリアルタイムで見れる用になり、登壇者も世界中から参加できるようになりましたね。\n\nReact Europe ではオンラインカンファレンスの他に、２日に渡るオンラインワークショッ..."}],["$","meta","22",{"name":"twitter:image","content":"https://blog.naturalclar.dev/twitter-card.png"}]]
+1:null

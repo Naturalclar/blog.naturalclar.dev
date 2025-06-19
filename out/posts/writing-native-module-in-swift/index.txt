@@ -1,0 +1,214 @@
+3:I[3754,[],""]
+5:I[7754,[],""]
+6:I[7574,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"default"]
+7:I[8750,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],""]
+4:["slug","writing-native-module-in-swift","d"]
+0:["bVXrX63nls6mz3NDAu0w6",[[["",{"children":["posts",{"children":[["slug","writing-native-module-in-swift","d"],{"children":["__PAGE__?{\"slug\":\"writing-native-module-in-swift\"}",{}]}]}]},"$undefined","$undefined",true],["",{"children":["posts",{"children":[["slug","writing-native-module-in-swift","d"],{"children":["__PAGE__",{},[["$L1","$L2",null],null],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children","$4","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/997bb99dff39a320.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"children":["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"404 - Page Not Found"}],["$","p",null,{"children":"You just hit a route that doesn't exist... the sadness."}],["$","p",null,{"children":["$","$L7",null,{"href":"/","children":"Go back to the homepage"}]}]]}],"notFoundStyles":[]}]}]}]],null],null],["$L8",null]]]]
+a:I[4802,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"Image"]
+9:T2dd7,<p>この記事は <a href="https://qiita.com/advent-calendar/2020/react-native">React Native アドベントカレンダー</a> の 5 日目の記事です。</p>
+<p>この度、iOS 14 で新しく追加された機能である、UIButton に追加できる UIMenu を React Native で使う為の Native Component を作成しました。</p>
+<p><a href="https://github.com/react-native-menu/menu">react-native-menu/menu</a> で見る事ができて、自分が現在携わっているプロダクトでも活用しています。</p>
+<p>今回、このモジュールを Swift で書いたのですが、Swift で Native Module を書くための資料が自分の観測範囲ではかなり少ないので、学びを共有します。</p>
+<p>なお、自分は Objective-C や Swift の経験が皆無に等しいので、間違っている箇所がある場合は指摘いただけると助かります。</p>
+<h2>プロジェクトのセットアップ</h2>
+<p>Native Module を新しく作成するためのテンプレートはいくつかあるのですが、自分は<a href="https://github.com/callstack/react-native-builder-bob">@react-native-community/bob</a>を勧めます。</p>
+<p>理由としては以下の通りです。</p>
+<ul>
+<li>Swift/Kotlin のテンプレートが用意されている</li>
+<li>Turbo Module を使った C++ のモジュールのテンプレートも存在する</li>
+<li>生成されたファイルが TS で書かれている</li>
+<li>publish 時のビルド等の script がテンプレートに含まれている</li>
+<li>作成したモジュールを試すための Example プロジェクトがテンプレートに含まれている</li>
+<li>react-native のリリースを行っている callstack や react-navigation のメンバーがメンテしている</li>
+</ul>
+<p>以下のコマンドでテンプレートが作成されます</p>
+<pre><code>npx @react-native-community/bob create [プロジェクト名]
+</code></pre>
+<h2>各ファイルの説明</h2>
+<p>ここからは、自分が作成した React Native Menu に含まれているファイルを一つ一つ解説していきます。コードは 12/05 時点のものなので、アップデート等で変わっている可能性もあります。</p>
+<h3>RCTUIMenuManager.m</h3>
+<pre><code class="language-objective-c">#import &#x3C;React/RCTBridgeModule.h>
+#import &#x3C;React/RCTViewManager.h>
+
+@interface RCT_EXTERN_MODULE(RCTUIMenu, RCTViewManager)
+
+/**
+ * title: Short description to be displayed above the menu.
+ */
+RCT_EXPORT_VIEW_PROPERTY(title, NSString);
+/**
+ * actions: Array of actions that are included in the menu
+ */
+RCT_EXPORT_VIEW_PROPERTY(actions, NSArray);
+/**
+ * onPressAction: callback to be called once user selects an action
+ */
+RCT_EXPORT_VIEW_PROPERTY(onPressAction, RCTDirectEventBlock);
+
+@end
+</code></pre>
+<p>Swift で書くと言いつつ、唯一存在している Objective-C のファイルについて解説します。
+このファイルは React Native にて JavaScript と Objective-C を繋ぐためのファイルです。
+React Native は Swift のコードをそのまま扱うことができないので、Swift のファイルは一旦 Objective-C に落とし込んでから使用します。</p>
+<h4>RCT_EXTERN_MODULE</h4>
+<p>普段、Objective-C で React Native の Native Module を書く場合は、以下のように書きます。</p>
+<pre><code class="language-objective-c">@implementation ModuleName
+RCT_EXPORT_MODULE();
+@end
+</code></pre>
+<p>これは、<code>RCT_EXPORT_MODULE</code>という関数で<code>ModuleName</code>という名前のクラスを JavaScript 側から読み込めるようにします。</p>
+<p>しかし、Swift で Module を書く場合は、<code>RCT_EXTERN_MODULE</code>を使います。
+これは、外部にある Module を JavaScript 側から読み込める用にするための関数です。
+上の例では、<code>RCTUIMenu</code> という名前のクラスを JavaScript 側から読み込む用にしています。第二引数はクラスの型で、View を持つコンポーネントである場合、<code>RCTViewManager</code>、ネイティブの機能を呼び出すだけの場合、<code>NSObject</code>を入れます。</p>
+<p>JavaScript 側では以下のように Native Module を読み込むことができます。</p>
+<pre><code class="language-ts">import { HostComponent, requireNativeComponent } from 'react-native'
+import type { MenuComponentProps } from './types'
+
+const MenuComponent = requireNativeComponent(
+  'RCTUIMenu'
+) as HostComponent&#x3C;MenuComponentProps>
+
+export default MenuComponent
+</code></pre>
+<h4>RCT_EXPORT_VIEW_PROPERTY</h4>
+<p>ここは Swift でも Objective-C でも書き方は変わりません。
+Native の View Component を作成する際、props として受け取る値を定義します。
+例えば、以下の例では<code>title</code> という props を <code>NSString</code> 型として受け取り、Native 側に渡します。</p>
+<pre><code class="language-objectve-c">RCT_EXPORT_VIEW_PROPERTY(title, NSString);
+</code></pre>
+<p>JavaScript 側では以下のように書けば title が Native 側に渡されます</p>
+<pre><code class="language-tsx">&#x3C;MenuView title="Hello World!" />
+</code></pre>
+<h3>Menu-Bridging-Header.h</h3>
+<pre><code class="language-h">#import &#x3C;React/RCTBridgeModule.h>
+#import &#x3C;React/RCTViewManager.h>
+#import &#x3C;React/RCTView.h>
+</code></pre>
+<p><code>-Bridging-Header.h</code>という名前の Header ファイルは、Objective-C から Swift へと定義を渡すためのファイルです。</p>
+<p>このファイルがあることによって、Swift のファイルでも<code>RCTView</code>等のクラスが使用できます。</p>
+<h3>RCTUIMenuManager.swift</h3>
+<pre><code class="language-swift">@objc(RCTUIMenu)
+class RCTUIMenuManager: RCTViewManager {
+
+    @objc var onPressMenuItem: RCTBubblingEventBlock?;
+
+    override static func requiresMainQueueSetup() -> Bool {
+        return true
+    }
+
+    override func view() -> UIView! {
+        if #available(iOS 14.0, *) {
+            return MenuView();
+        } else {
+            return ActionSheetView();
+        }
+    }
+}
+
+</code></pre>
+<p>ここから Swift ファイルの解説です。</p>
+<p>class の上にかかれている <code>@objc(RCTUIMenu)</code>で、Objective-C 側で Swift のクラスを読み込める用にしています。<code>RCTUIMenuManager.m</code>の方で使っていた RCTUIMenu はこのクラスを参照しています。</p>
+<pre><code class="language-swift">    override static func requiresMainQueueSetup() -> Bool {
+        return true
+    }
+</code></pre>
+<p>この部分は React Native の UI Component であれば必要な部分です。React Native の Main Thread が立ち上がるまで、この Native Module が呼ばれない用にするもの（だという認識）</p>
+<pre><code class="language-swift">    override func view() -> UIView! {
+        if #available(iOS 14.0, *) {
+            return MenuView();
+        } else {
+            return ActionSheetView();
+        }
+    }
+</code></pre>
+<p>ここで別ファイルで定義した View Component を返しています。
+UIButton に UIMenu が追加できるようになったのは iOS14 以降のことなので、それ以前の OS では、ActionSheet が表示されるようにしています。</p>
+<h3>MenuView.swift</h3>
+<pre><code class="language-swift">import UIKit
+@available(iOS 14.0, *)
+@objc(MenuView)
+class MenuView: UIButton {
+
+    private var _actions: [UIAction] = [];
+    @objc var actions: [NSDictionary]? {
+        didSet {
+            guard let actions = self.actions else {
+                return
+            }
+            actions.forEach { menuAction in
+                _actions.append(RCTMenuAction(details: menuAction).createUIAction({action in self.sendButtonAction(action)}))
+            }
+            self.setup()
+        }
+    }
+
+    ...
+
+    @objc var onPressAction: RCTBubblingEventBlock?
+
+    @objc func sendButtonAction(_ action: UIAction) {
+        if let onPress = onPressAction {
+            onPress(["event":action.identifier.rawValue])
+        }
+    }
+
+    ...
+}
+</code></pre>
+<p>ここが UIMenu を追加できる UIButton の定義となります。実際に Swift で UIMenu を表示する方法などは省略して、ここでは React Native の Bridging で重要なところだけをおさえます。</p>
+<p><code>@objc</code> が先頭についている部分は、Objective-C からアクセスできる部分です。React Component の props から渡ってきた部分や、JavaScript の世界に返すものはすべて <code>@objc</code>を先頭に付けています。</p>
+<p>渡ってきた props の一つ、actions は <code>NSDictionary</code> の配列、JavaScript で言えば JSON の配列です。ここでは UIMenu で使う項目の配列を取得して、別ファイルに定義してある RCTMenuAction を受け取った JSON から作成します。</p>
+<p>もう一つの props、onPressAction は <code>RCTBubblingEventBlock</code>、これは JavaScript の関数が props として渡ってきたものです。ほかに、<code>RCTDirectEventBlock</code> もあるんですが、違いは把握してないです、誰か教えてください。</p>
+<p>このクラスでは UIMenu が押されたときに、<code>sendButtonAction</code>を通して、押された項目の event id を JavaScript 側から渡された onPressAction の引数として返しています。</p>
+<h3>RCTMenuItem.swift</h3>
+<pre><code class="language-swift">import UIKit;
+
+@available(iOS 13.0, *)
+class RCTMenuAction {
+
+    var identifier: UIAction.Identifier?;
+    var title: String;
+    var subtitle: String?;
+    var image: UIImage?
+    var attributes: UIAction.Attributes = [];
+    var state: UIAction.State = .off
+
+    init(details: NSDictionary){
+
+        if let identifier = details["id"] as? NSString {
+            self.identifier = UIAction.Identifier(rawValue: identifier as String);
+        }
+
+        if let image = details["image"] as? NSString {
+            self.image = UIImage(systemName: image as String);
+        }
+
+        if let title = details["title"] as? NSString {
+            self.title = title as String;
+        } else {
+            self.title = "";
+        }
+
+        ...
+
+    }
+
+    func createUIAction(_ handler: @escaping UIActionHandler) -> UIAction {
+        return UIAction(title: title, image: image, identifier: identifier, discoverabilityTitle: subtitle, attributes: attributes, state: state, handler: handler)
+    }
+}
+</code></pre>
+<p>最後に、RCTMenuAction の解説です。このファイルは、UIMenu で表示する項目、UIAction を定義するためのクラスです。</p>
+<p>React Component の Props から渡ってきた JSON を NSDictionary と扱って instance を作成します。
+JavaScript から渡された JSON の値を一つ一つ、Swift で使える型に変換して、それをもとに UIAction を作成します。</p>
+<h2>まとめ</h2>
+<p>以上が React Native Menu の Swift 実装の解説となります。
+普段 JavaScript しか書かない立場として、ネイティブ側の実装と聞くと身構えてしまいそうですが、一つ一つ紐を解いていくとそんなに複雑なことをしなくても良いということがわかります。</p>
+<p>これを期に、Native Module を書いてみるのはいかがでしょうか？</p>
+<h2>参考記事</h2>
+<ul>
+<li><a href="https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-1-modules-9bb8d054db03">Swift in React Native - the Ultimate Guide Part 1: Modules</a></li>
+</ul>
+2:["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"React Native の Native Module を Swift で書く"}],["$","p",null,{"style":{"display":"block","marginBottom":"16px"},"children":"December 05, 2020"}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$9"}}],["$","hr",null,{"style":{"marginBottom":"16px"}}],["$","div",null,{"style":{"display":"flex","alignItems":"center","marginBottom":"40px"},"children":[["$","$La",null,{"src":"https://www.github.com/Naturalclar.png","width":50,"height":50,"alt":"Naturalclar (Jesse Katsumata)","style":{"marginRight":"16px","marginBottom":0,"minWidth":50,"borderRadius":"100%"}}],["$","div",null,{"style":{"display":"flex","flexDirection":"column","gap":"8px"},"children":[["$","p",null,{"style":{"margin":0},"children":["Author: ",["$","strong",null,{"children":"Naturalclar (Jesse Katsumata)"}]]}],["$","p",null,{"style":{"margin":0},"children":[["$","a",null,{"href":"https://x.com/natural_clar","children":"X"}]," ",["$","a",null,{"href":"https://www.github.com/Naturalclar","children":"Github"}]]}]]}]]}],["$","ul",null,{"style":{"display":"flex","flexWrap":"wrap","justifyContent":"space-between","listStyle":"none","padding":0},"children":[["$","li",null,{"children":["$","$L7",null,{"href":"/posts/patching-with-pnpm","rel":"prev","children":["← ","patching-with-pnpm"]}]}],["$","li",null,{"children":["$","$L7",null,{"href":"/posts/react-native-review-2020","rel":"next","children":["React Native 2020年の振り返り"," →"]}]}]]}]]}]
+8:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"React Native の Native Module を Swift で書く | naturalclar.dev"}],["$","meta","3",{"name":"description","content":"\nこの記事は [React Native アドベントカレンダー](https://qiita.com/advent-calendar/2020/react-native) の 5 日目の記事です。\n\nこの度、iOS 14 で新しく追加された機能である、UIButton に追加できる UIMenu を React Native で使う為の Native Component を作成しました。\n\n[re..."}],["$","meta","4",{"name":"author","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","5",{"name":"keywords","content":"react, react-native, nextjs, blog"}],["$","meta","6",{"name":"creator","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","7",{"name":"publisher","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","8",{"name":"robots","content":"index, follow"}],["$","meta","9",{"property":"og:title","content":"React Native の Native Module を Swift で書く | naturalclar.dev"}],["$","meta","10",{"property":"og:description","content":"\nこの記事は [React Native アドベントカレンダー](https://qiita.com/advent-calendar/2020/react-native) の 5 日目の記事です。\n\nこの度、iOS 14 で新しく追加された機能である、UIButton に追加できる UIMenu を React Native で使う為の Native Component を作成しました。\n\n[re..."}],["$","meta","11",{"property":"og:url","content":"https://blog.naturalclar.dev/"}],["$","meta","12",{"property":"og:site_name","content":"naturalclar.dev"}],["$","meta","13",{"property":"og:image","content":"https://blog.naturalclar.dev/twitter-card.png"}],["$","meta","14",{"property":"og:image:width","content":"1200"}],["$","meta","15",{"property":"og:image:height","content":"630"}],["$","meta","16",{"property":"og:image:alt","content":"React Native の Native Module を Swift で書く"}],["$","meta","17",{"property":"og:type","content":"website"}],["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","19",{"name":"twitter:creator","content":"@natural_clar"}],["$","meta","20",{"name":"twitter:title","content":"React Native の Native Module を Swift で書く | naturalclar.dev"}],["$","meta","21",{"name":"twitter:description","content":"\nこの記事は [React Native アドベントカレンダー](https://qiita.com/advent-calendar/2020/react-native) の 5 日目の記事です。\n\nこの度、iOS 14 で新しく追加された機能である、UIButton に追加できる UIMenu を React Native で使う為の Native Component を作成しました。\n\n[re..."}],["$","meta","22",{"name":"twitter:image","content":"https://blog.naturalclar.dev/twitter-card.png"}]]
+1:null

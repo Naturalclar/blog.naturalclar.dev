@@ -1,0 +1,63 @@
+3:I[3754,[],""]
+5:I[7754,[],""]
+6:I[7574,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"default"]
+7:I[8750,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],""]
+4:["slug","2019-overview","d"]
+0:["bVXrX63nls6mz3NDAu0w6",[[["",{"children":["posts",{"children":[["slug","2019-overview","d"],{"children":["__PAGE__?{\"slug\":\"2019-overview\"}",{}]}]}]},"$undefined","$undefined",true],["",{"children":["posts",{"children":[["slug","2019-overview","d"],{"children":["__PAGE__",{},[["$L1","$L2",null],null],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children","$4","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/997bb99dff39a320.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"children":["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"404 - Page Not Found"}],["$","p",null,{"children":"You just hit a route that doesn't exist... the sadness."}],["$","p",null,{"children":["$","$L7",null,{"href":"/","children":"Go back to the homepage"}]}]]}],"notFoundStyles":[]}]}]}]],null],null],["$L8",null]]]]
+a:I[4802,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"Image"]
+9:T1b87,<h2>2019年振り返り</h2>
+<p>紅白みながらTL眺めてたら色んな人が今年を振り返っていたので、自分も活動記録を残すためにも今年を振り返ろうと思います。
+今年はエンジニアとして本格的に活動をはじめた年だったので、とても濃い一年でした。</p>
+<h2>登壇</h2>
+<p>今年はWeb勉強会にてはじめて登壇した年でした。</p>
+<p>アメリカから日本に引っ越してきて、周りには知り合いがほとんどいない状態でした。
+なんとか知り合いを増やしたくてConnpassから初めて参加したのが We are javascripters。
+正直、何の話をしているかさっぱりわからない状態で聞いていました。
+懇親会で話そうと試みるも圧倒的コミュ症を発揮してあまり知り合いは増えず。
+このままではいかんと思い、自分でも登壇をすることで存在感を増していこうとして初めて登壇をしたのが今年の１月にあった「ReactNativeにゆかりのあるスタートアップが集う会」でした。</p>
+<p>そこから登壇を続け、twitterでの認知度も少しは増えてきたのではないかと思います。
+今年行った登壇を数えていたところ、19回登壇していました。1.5登壇/月、なかなか多いのかな。</p>
+<p>登壇内容は主にreact-nativeに関する話。react-native-web, storybook を組み合わせた話が多かったかな。
+また、Circle CIやGithub Actionsなどを使った業務効率化に関しても話したりしました。
+5分登壇が多かったので、深い話はほとんどできなかったといった感触です。</p>
+<p>来年は登壇ペースを少し落として、もうすこし実のある登壇ができたら良いなと思っています。
+カンファレンスでの登壇を体験してみたいので、CFPを出していこう。</p>
+<h2>副業</h2>
+<p>登壇を続けていく中でいろんなところから副業の話が持ちかかりました。
+react-native の勉強会が多かったので、react-nativeに関する案件がかなり多かったです。</p>
+<p>その中で自分が受けたのは0からreact-nativeでアプリを作るというものでした。
+自分で技術構成やコーディングスタイルを選択し、技術顧問の様なことを今でも続けさせていただいています。
+自分でもバリバリ実装したり、あとから入ってきた副業メンバーのマネジメントを行ったりと幅広い体験を行えました。</p>
+<p>そこで培った経験は本業でもチームリーダーとして業務を進めることに大きく活かせることができたかなと思います。</p>
+<h2>カンファレンススタッフ</h2>
+<p>勉強会に参加してるうちに観測したのは勉強会の中の人同士で行う二次会では技術的に面白い話をしているなということです。
+自分もどこかのメンバーになれないかなと思っていたところ、会社の同僚である<a href="https://www.github.com/leko">Leko</a>さんからJSConfJPのスタッフはどうかという話を持ちかけられました。</p>
+<p>今年はじめて国内で行うJSConf、世界中から日本に技術者があつまる、このチャンスを逃す手は無いと思い飛びつきました。
+アメリカ人として、通訳や翻訳で活躍できるかなと思っていたところ、必要なタスクはすこし違くて、カンファレンストークの英語字幕の手配をできないかとのことでした。
+そもそも大規模なカンファレンスに参加したことがなく、そういう手配をすることも当然今まで無かったのですが、そこでチャンスを棒にふるわけにもいかないので、空の自信たっぷりに「できます！」と話を受けました。</p>
+<p>結果としては反省点も色々ありましたが、うまくいったかなと思います。
+2トラック分の字幕をスカイプ2つ繋いで、字幕提供者達や手伝ってくれたスタッフに状況を説明しながら進めることができました。
+トークをゆっくり聞く余裕はほとんど無かったですが、Twitterで字幕について聞いてみたところ、助かったという声があり安心しました。</p>
+<p>前夜祭、及びカンファレンス後に登壇者達とカラオケできたのが楽しかったです。</p>
+<p>来年の２月にはTSConfJPもお手伝いさせていただきます。</p>
+<h2>OSS 活動</h2>
+<p>去年のNode Festで行っていたCode and Learnにて、Node.jsにContributeしてから、いろんなところでContribute Chanceを探すようになりました。</p>
+<p>普段業務で使っているreact-nativeのgood first issueにcontributeしたり、
+前職でも行っていた翻訳を活かしてDanさんのブログの翻訳や、Reactのドキュメントの翻訳に携わらせていただきました。</p>
+<p>その他、普段使っている gatsby, aws-cdk, next.js, storybook, expo, definitely typed など、数多くのOSSに対して、typo修正から型の修正など、小さい修正をいくつもやりました。</p>
+<p>業務で特に使っているreact-nativeに関しては、cliに新しい機能を追加したり、リポジトリの整備を手伝ったり。</p>
+<p>個人的にかなり興味があるreason-react-nativeのwebサイト整備なども行い、reason-react-nativeのorg memberに入らせていただきました。</p>
+<p>個人でも、普段の業務を少し楽にするcli toolを作ったりしました。</p>
+<h2>来年に向けて</h2>
+<p>個人的にはかなり濃いと感じる一年でしたが、振り返ってみれば、色んなところからおこぼれを貰うだけで、「エンジニアとしての自分」を構成するための活動が全然できていないなと思いました。</p>
+<p>来年はカンファレンスにCFPを送ったり、コミュニティ活動を積極的に行い、もっと自分を確立していきたいと思います。</p>
+<p>まず、手始めにreact-native-communityのorgの一員になることを目標にしていきます。
+年末休みに入ってから20件のcontributionを行いました。
+今年とてもお世話になったrn-diff-purgeの作者にフォローされて色々会話できたりしていてテンション上がっています。</p>
+<p>また、今自分の中でReasonがとても熱いので来年はもっとReasonのコミュニティとも関わっていきたいです。
+react-native-communityに入るという目標を達成できたらその次はreasonmlやocamlをもっと手になじませていきたい。</p>
+<p>2020年もよろしくおねがいします。</p>
+<p>このブログもデフォルトの設定からほとんど何も弄ってない状態なのでもうちょっと整備していきたい。</p>
+2:["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"Looking back on 2019"}],["$","p",null,{"style":{"display":"block","marginBottom":"16px"},"children":"December 31, 2019"}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$9"}}],["$","hr",null,{"style":{"marginBottom":"16px"}}],["$","div",null,{"style":{"display":"flex","alignItems":"center","marginBottom":"40px"},"children":[["$","$La",null,{"src":"https://www.github.com/Naturalclar.png","width":50,"height":50,"alt":"Naturalclar (Jesse Katsumata)","style":{"marginRight":"16px","marginBottom":0,"minWidth":50,"borderRadius":"100%"}}],["$","div",null,{"style":{"display":"flex","flexDirection":"column","gap":"8px"},"children":[["$","p",null,{"style":{"margin":0},"children":["Author: ",["$","strong",null,{"children":"Naturalclar (Jesse Katsumata)"}]]}],["$","p",null,{"style":{"margin":0},"children":[["$","a",null,{"href":"https://x.com/natural_clar","children":"X"}]," ",["$","a",null,{"href":"https://www.github.com/Naturalclar","children":"Github"}]]}]]}]]}],["$","ul",null,{"style":{"display":"flex","flexWrap":"wrap","justifyContent":"space-between","listStyle":"none","padding":0},"children":[["$","li",null,{"children":["$","$L7",null,{"href":"/posts/future-of-react-native","rel":"prev","children":["← ","Future of React Native"]}]}],["$","li",null,{"children":["$","$L7",null,{"href":"/posts/clearning-up-unavailable-simulator","rel":"next","children":["Cleaning up unavailable XCode simulators"," →"]}]}]]}]]}]
+8:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"Looking back on 2019 | naturalclar.dev"}],["$","meta","3",{"name":"description","content":"\n## 2019年振り返り\n\n紅白みながらTL眺めてたら色んな人が今年を振り返っていたので、自分も活動記録を残すためにも今年を振り返ろうと思います。\n今年はエンジニアとして本格的に活動をはじめた年だったので、とても濃い一年でした。\n\n## 登壇\n\n今年はWeb勉強会にてはじめて登壇した年でした。\n\nアメリカから日本に引っ越してきて、周りには知り合いがほとんどいない状態でした。\nなんとか知り合いを増..."}],["$","meta","4",{"name":"author","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","5",{"name":"keywords","content":"react, react-native, nextjs, blog"}],["$","meta","6",{"name":"creator","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","7",{"name":"publisher","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","8",{"name":"robots","content":"index, follow"}],["$","meta","9",{"property":"og:title","content":"Looking back on 2019 | naturalclar.dev"}],["$","meta","10",{"property":"og:description","content":"\n## 2019年振り返り\n\n紅白みながらTL眺めてたら色んな人が今年を振り返っていたので、自分も活動記録を残すためにも今年を振り返ろうと思います。\n今年はエンジニアとして本格的に活動をはじめた年だったので、とても濃い一年でした。\n\n## 登壇\n\n今年はWeb勉強会にてはじめて登壇した年でした。\n\nアメリカから日本に引っ越してきて、周りには知り合いがほとんどいない状態でした。\nなんとか知り合いを増..."}],["$","meta","11",{"property":"og:url","content":"https://blog.naturalclar.dev/"}],["$","meta","12",{"property":"og:site_name","content":"naturalclar.dev"}],["$","meta","13",{"property":"og:image","content":"https://blog.naturalclar.dev/twitter-card.png"}],["$","meta","14",{"property":"og:image:width","content":"1200"}],["$","meta","15",{"property":"og:image:height","content":"630"}],["$","meta","16",{"property":"og:image:alt","content":"Looking back on 2019"}],["$","meta","17",{"property":"og:type","content":"website"}],["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","19",{"name":"twitter:creator","content":"@natural_clar"}],["$","meta","20",{"name":"twitter:title","content":"Looking back on 2019 | naturalclar.dev"}],["$","meta","21",{"name":"twitter:description","content":"\n## 2019年振り返り\n\n紅白みながらTL眺めてたら色んな人が今年を振り返っていたので、自分も活動記録を残すためにも今年を振り返ろうと思います。\n今年はエンジニアとして本格的に活動をはじめた年だったので、とても濃い一年でした。\n\n## 登壇\n\n今年はWeb勉強会にてはじめて登壇した年でした。\n\nアメリカから日本に引っ越してきて、周りには知り合いがほとんどいない状態でした。\nなんとか知り合いを増..."}],["$","meta","22",{"name":"twitter:image","content":"https://blog.naturalclar.dev/twitter-card.png"}]]
+1:null

@@ -1,0 +1,183 @@
+3:I[3754,[],""]
+5:I[7754,[],""]
+6:I[7574,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"default"]
+7:I[8750,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],""]
+4:["slug","you-might-not-need-thunk","d"]
+0:["bVXrX63nls6mz3NDAu0w6",[[["",{"children":["posts",{"children":[["slug","you-might-not-need-thunk","d"],{"children":["__PAGE__?{\"slug\":\"you-might-not-need-thunk\"}",{}]}]}]},"$undefined","$undefined",true],["",{"children":["posts",{"children":[["slug","you-might-not-need-thunk","d"],{"children":["__PAGE__",{},[["$L1","$L2",null],null],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children","$4","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/997bb99dff39a320.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"children":["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"404 - Page Not Found"}],["$","p",null,{"children":"You just hit a route that doesn't exist... the sadness."}],["$","p",null,{"children":["$","$L7",null,{"href":"/","children":"Go back to the homepage"}]}]]}],"notFoundStyles":[]}]}]}]],null],null],["$L8",null]]]]
+a:I[4802,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"Image"]
+9:T1cf2,<p>状態管理に redux を使っている人は以下の様なことをやりたいことがあるでしょう。</p>
+<ul>
+<li>ログイン処理でフォームを Submit した時に API を叩いて、返ってきた Auth 情報を store に保持する。</li>
+<li>ページを開いた時に API を叩いて、返ってきた Response を store に保持する。</li>
+</ul>
+<p>このような非同期処理の結果を redux に保持することが必要な時にはよく <code>redux-thunk</code>, または <code>redux-saga</code>が採用されていた。
+今回は非同期処理に thunk も saga も使う必要なくなったのでは？と言う話です。</p>
+<p>なお、筆者は redux-saga についてはそこまで使ったことが無いので、この記事では主に<code>redux-thunk</code>のリプレイスについて書きます。</p>
+<h2>tl;dr;</h2>
+<ul>
+<li>react-redux の hooks api を用いて custom hooks に非同期処理を入れる。</li>
+<li>redux で保持するべきはユーザが必要な情報（Loading は要らない）</li>
+<li>ロジックはすべて custom hooks に閉じ込めよう。</li>
+</ul>
+<h2>redux-thunk の流れ</h2>
+<p>redux-thunk で非同期処理の流れを簡単に書くと：</p>
+<ul>
+<li>非同期処理を始める前に、画面に「読み込み中‥」などを表示させるために、Loading 状態にする</li>
+<li>非同期処理を始める。</li>
+<li>非同期処理が無事終わったら、結果を store に反映させ、Loading 状態を外す</li>
+<li>非同期処理に何らかの問題が発生したら、その旨を表示させ、Loading 状態を外す</li>
+</ul>
+<p>となります。</p>
+<p>コードで書くとこういう感じです：</p>
+<p><code>fooReducer.ts</code></p>
+<pre><code class="language-js">
+type FooState = {
+  loadng: boolean,
+  list: Item[],
+  error: stirng
+}
+
+const initialState:FooState  = {
+  loading: false,
+  list: [],
+  error: string
+}
+
+export const fooReducer = (state:FooState = initialState, action:FooAction) => {
+  switch(action.type) {
+    case: 'FOO_START':
+      return { ...state, loading: true}
+    case: 'FOO_SUCCESS':
+      return { ...state, loading: false, list: action.result}
+    case: 'FOO_FAILED':
+      return { ...state, loading: false, error: action.error}
+    default:
+      return state;
+  }
+}
+</code></pre>
+<p><code>fooAction.ts</code></p>
+<pre><code class="language-js">export const fooAction = (): ThunkAction => async (dispatch: Dispatch) => {
+  // 非同期処理を開始するため、状態をLoadingにする
+  dispatch({ type: 'FOO_START' })
+  // 非同期処理を行う
+  try {
+    const result = await fetch('/getFoo')
+    // 成功したら結果をreduxに反映し、Loading状態を外す
+    dispatch({ type: 'FOO_SUCCESS', result })
+  } catch (e) {
+    // エラーが発生したらエラーメッセージを表示させ、Loading状態を外す
+    console.error(e)
+    dispatch({ type: 'FOO_FAILED', error: e.message })
+  }
+}
+</code></pre>
+<h2>redux-thunk のつらみ</h2>
+<p>上記の通り、redux-thunk がやっていること自体は単純なのですが、
+それを書くのに結構な量のコードを書く必要があります。
+上記に加えて、store の状態をもとに処理を分岐させる必要がある場合、thunk 内で getState を呼んだりと、処理が複雑化してきます。</p>
+<p>筆者が感じる Issue としては以下のようなことがあります：</p>
+<ul>
+<li><code>STARTED</code>, <code>SUCCESS</code>, <code>FAILED</code> の 3 つの Action を書く必要があった。</li>
+<li><code>Loading</code>の状態を reducer で持つ必要があった。</li>
+<li>非同期処理が行われる度に別々の Loading を書く必要があった。
+1 画面で複数の非同期処理が走る際、</li>
+</ul>
+<p>つまりやりたいことは：</p>
+<ul>
+<li>Action の発火は必要な状態が変わる一回に済ませたい。</li>
+<li>Loading は redux 外で管理したい。</li>
+<li>非同期処理の共通部分を使いまわしたい。</li>
+</ul>
+<h2>解決案</h2>
+<p>react の custom hooks を使えば解決します。
+react-redux の v7.1 から、hooks に対応した API が出たのでそれらを使っていきます。</p>
+<p>上で書いた redux-thunk の例を custom hooks を使って簡略化することができます。</p>
+<p>以下のことをやっていきます。</p>
+<ul>
+<li>loading は useState で保持して、hooks 内で完結させる。</li>
+<li>dispatch を使うのは、非同期処理が終わってからの一回のみで済ませる。</li>
+</ul>
+<p><code>useFoo.ts</code></p>
+<pre><code class="language-js">import { useState, useCallback } form 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { State, FooAction } from './types'
+
+export const useFoo = () => {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const items = useSelector((state:State)=> state.foo.items)
+  const dispatch = useDispatch&#x3C;Dispatch&#x3C;FooAction>>()
+
+  const getFoo = useCallback(async () => {
+    setLoading(true)
+    try {
+    const result = await fetch('/getFoo')
+        setLoading(false)
+        dispatch({type: 'FOO_SUCCESS', result})
+    } catch (e) {
+        setLoading(false)
+        setError(e.message)
+      }
+    },[loading, error, items])
+
+  return [items, getFoo, loading, error]
+}
+
+</code></pre>
+<p>loading と error を持つ必要がなくなったので、reducer も簡略化することができます。</p>
+<p><code>fooReducer.ts</code></p>
+<pre><code class="language-js">
+type FooState = {
+  list: Item[],
+}
+
+const initialState:FooState  = {
+  list: [],
+}
+
+export const fooReducer = (state:FooState = initialState, action:FooAction) => {
+  switch(action.type) {
+    case: 'FOO_SUCCESS':
+      return { ...state, list: action.result}
+    default:
+      return state;
+  }
+}
+</code></pre>
+<p>component での使用例はこんな感じです</p>
+<p><code>FooList.tsx</code></p>
+<pre><code class="language-js">import React, { useEffect } from 'react'
+import { useFoo } from './useFoo'
+
+export const FooList = () => {
+  const [items, getFoo, loading, error] = useFoo()
+  useEffect(() => {
+    getFoo()
+  }, [])
+
+  if (loading) {
+    return &#x3C;p>読込中…&#x3C;/p>
+  }
+
+  return (
+    &#x3C;div>
+      {error ? &#x3C;p>{error}&#x3C;/p> : null}
+      &#x3C;ul>
+        {items.map((item) => {
+          return &#x3C;li>{item.contents}&#x3C;/li>
+        })}
+      &#x3C;/ul>
+    &#x3C;/div>
+  )
+}
+</code></pre>
+<p>このような形で、ページ遷移時に非同期で何かを取得してくる処理を thunk 無しでも実現することができます。</p>
+<p>また、このように非同期処理のロジックを custom hooks に閉じ込めておくことで、別のページで同じ処理が必要になった時に hooks を使い回すことができます
+上の Compnent の例では、useEffect も useFoo の中に入れることで、完全にロジックと Component を分割させることができます。</p>
+<h2>あとがき</h2>
+<p>これはあくまで自分の redux-thunk の使い方なら redux-thunk 使わなくても出来るかなと言う話なので、
+redux-thunk や redux-saga じゃないとこれができないよ！みたいなことがあれば教えてほしいです。</p>
+2:["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"You might not need thunk"}],["$","p",null,{"style":{"display":"block","marginBottom":"16px"},"children":"September 01, 2019"}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$9"}}],["$","hr",null,{"style":{"marginBottom":"16px"}}],["$","div",null,{"style":{"display":"flex","alignItems":"center","marginBottom":"40px"},"children":[["$","$La",null,{"src":"https://www.github.com/Naturalclar.png","width":50,"height":50,"alt":"Naturalclar (Jesse Katsumata)","style":{"marginRight":"16px","marginBottom":0,"minWidth":50,"borderRadius":"100%"}}],["$","div",null,{"style":{"display":"flex","flexDirection":"column","gap":"8px"},"children":[["$","p",null,{"style":{"margin":0},"children":["Author: ",["$","strong",null,{"children":"Naturalclar (Jesse Katsumata)"}]]}],["$","p",null,{"style":{"margin":0},"children":[["$","a",null,{"href":"https://x.com/natural_clar","children":"X"}]," ",["$","a",null,{"href":"https://www.github.com/Naturalclar","children":"Github"}]]}]]}]]}],["$","ul",null,{"style":{"display":"flex","flexWrap":"wrap","justifyContent":"space-between","listStyle":"none","padding":0},"children":[["$","li",null,{"children":["$","$L7",null,{"href":"/posts/typescript-allowing-unused-param","rel":"prev","children":["← ","noUnusedParametersがtrueでも部分的にignoreできる話"]}]}],["$","li",null,{"children":["$","$L7",null,{"href":"/posts/chrome-devtool-console","rel":"next","children":["Chrome Developer ToolsのConsole"," →"]}]}]]}]]}]
+8:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"You might not need thunk | naturalclar.dev"}],["$","meta","3",{"name":"description","content":"\n状態管理に redux を使っている人は以下の様なことをやりたいことがあるでしょう。\n\n- ログイン処理でフォームを Submit した時に API を叩いて、返ってきた Auth 情報を store に保持する。\n- ページを開いた時に API を叩いて、返ってきた Response を store に保持する。\n\nこのような非同期処理の結果を redux に保持することが必要な時にはよく `..."}],["$","meta","4",{"name":"author","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","5",{"name":"keywords","content":"react, react-native, nextjs, blog"}],["$","meta","6",{"name":"creator","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","7",{"name":"publisher","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","8",{"name":"robots","content":"index, follow"}],["$","meta","9",{"property":"og:title","content":"You might not need thunk | naturalclar.dev"}],["$","meta","10",{"property":"og:description","content":"\n状態管理に redux を使っている人は以下の様なことをやりたいことがあるでしょう。\n\n- ログイン処理でフォームを Submit した時に API を叩いて、返ってきた Auth 情報を store に保持する。\n- ページを開いた時に API を叩いて、返ってきた Response を store に保持する。\n\nこのような非同期処理の結果を redux に保持することが必要な時にはよく `..."}],["$","meta","11",{"property":"og:url","content":"https://blog.naturalclar.dev/"}],["$","meta","12",{"property":"og:site_name","content":"naturalclar.dev"}],["$","meta","13",{"property":"og:image","content":"https://blog.naturalclar.dev/twitter-card.png"}],["$","meta","14",{"property":"og:image:width","content":"1200"}],["$","meta","15",{"property":"og:image:height","content":"630"}],["$","meta","16",{"property":"og:image:alt","content":"You might not need thunk"}],["$","meta","17",{"property":"og:type","content":"website"}],["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","19",{"name":"twitter:creator","content":"@natural_clar"}],["$","meta","20",{"name":"twitter:title","content":"You might not need thunk | naturalclar.dev"}],["$","meta","21",{"name":"twitter:description","content":"\n状態管理に redux を使っている人は以下の様なことをやりたいことがあるでしょう。\n\n- ログイン処理でフォームを Submit した時に API を叩いて、返ってきた Auth 情報を store に保持する。\n- ページを開いた時に API を叩いて、返ってきた Response を store に保持する。\n\nこのような非同期処理の結果を redux に保持することが必要な時にはよく `..."}],["$","meta","22",{"name":"twitter:image","content":"https://blog.naturalclar.dev/twitter-card.png"}]]
+1:null

@@ -1,0 +1,87 @@
+3:I[3754,[],""]
+5:I[7754,[],""]
+6:I[7574,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"default"]
+7:I[8750,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],""]
+4:["slug","whats-new-in-react-native-0.62","d"]
+0:["bVXrX63nls6mz3NDAu0w6",[[["",{"children":["posts",{"children":[["slug","whats-new-in-react-native-0.62","d"],{"children":["__PAGE__?{\"slug\":\"whats-new-in-react-native-0.62\"}",{}]}]}]},"$undefined","$undefined",true],["",{"children":["posts",{"children":[["slug","whats-new-in-react-native-0.62","d"],{"children":["__PAGE__",{},[["$L1","$L2",null],null],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children","$4","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[null,["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children","posts","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined"}]],null]},[[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/997bb99dff39a320.css","precedence":"next","crossOrigin":"$undefined"}]],["$","html",null,{"lang":"en","children":["$","body",null,{"children":["$","$L3",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"404 - Page Not Found"}],["$","p",null,{"children":"You just hit a route that doesn't exist... the sadness."}],["$","p",null,{"children":["$","$L7",null,{"href":"/","children":"Go back to the homepage"}]}]]}],"notFoundStyles":[]}]}]}]],null],null],["$L8",null]]]]
+a:I[4802,["18","static/chunks/18-a08db35d0c492fb3.js","802","static/chunks/802-8624e27f06c26e64.js","333","static/chunks/app/posts/%5Bslug%5D/page-113a3a94ad4fe476.js"],"Image"]
+9:T12c6,<p>この記事は <a href="https://ducklings.connpass.com/event/169637/">React Native Tech Blog #2</a> で発表した内容です。</p>
+<p>React Native の最新バージョン、0.62 がリリースされました。
+マイナーバージョンのアップデートは最後に行われたのが 2019年の9月なので半年ぶりのマイナーバージョンアップとなります。</p>
+<p>この記事では 0.62 で新しくなったことについてまとめて行きます。</p>
+<h2>Flipper のサポート</h2>
+<p>0.62は主に React Native のデバッグ周辺が改善されています。その大きな要因として、Flipper のサポートがデフォルトで入るようになりました。</p>
+<p>Flipper とは、Facebook が開発しているネイティブアプリ用のデバッグツールです。
+この度、React Native でもその恩恵を受けられるようになった他、React Devtools など、React Native ならではのツールも組み込まれるようになりました。
+React Devtools は新しい v4 が組み込まれているので、従来の React devtools よりもよりスッキリした見た目で使いやすくなっております。</p>
+<p><img src="./flipper-devtools.png" alt="flipper-devtools"></p>
+<p>また、Redux Inspector など、追加のプラグインもいれられるようになっています。</p>
+<p>React Native のデバッグにはこれまで React Native Debugger というツールが主に使われていましたが、アプリが複雑になると動作がかなり重くなったりといろんな問題がありました。Flipper はアプリのパフォーマンスをほとんど損なうことなく快適にアプリのデバッグが行えるようになります。</p>
+<h2>LogBox</h2>
+<p>React Native で開発している人なら誰もが一度は「赤い画面」を見たことがあると思います。</p>
+<p>React Native 0.62 では試験的に LogBox という新しいエラーメッセージの UI を試せるようになります。</p>
+<p><img src="./logbox.png" alt="logbox"></p>
+<p>エントリーポイントである <code>index.js</code> にて、<code>unstable_enableLogBox()</code> を呼び出すことで新しい LogBox の UI が有効化されます。</p>
+<pre><code class="language-js">import { unstable_enableLogBox } from 'react-native'
+
+unstable_enableLogBox()
+</code></pre>
+<h2>Appearance API</h2>
+<p><img src="./appearance.png" alt="appearance"></p>
+<p>0.62 では端末の Appearance 設定を取得できる Appearance API が追加されました。
+端末のテーマ設定に合わせて、アプリのテーマを Dark Mode や Light Mode に変更することができます。</p>
+<p><code>getColorScheme</code> 関数を呼び出すことで、端末のテーマ設定を取得できます。</p>
+<pre><code class="language-jsx">import { Appearance } from 'react-native'
+
+const LoginPage = () => {
+  const colorScheme = Appearance.getColorScheme()
+  if (colorScheme === 'dark') {
+    return &#x3C;DarkContents />
+  }
+
+  return &#x3C;LightContents />
+}
+</code></pre>
+<p>また、午後6時からDarkModeを使う、などの特殊な状況でアプリのテーマ設定を変えたいときに、その変更を Listen するために、<code>useColorScheme</code> という custom hooks も提供されています。</p>
+<pre><code class="language-jsx">import { useColorScheme } from 'react-native'
+
+const LoginPage = () => {
+  const colorScheme = useColorScheme()
+  if (colorScheme === 'dark') {
+    return &#x3C;DarkContents />
+  }
+
+  return &#x3C;LightContents />
+}
+</code></pre>
+<p>自分の場合、テーマ設定に合わせて役割色を取得する <code>useColorScheme</code> をラップした CutomHooks を作成して、アプリのダークモード対応に使っています。</p>
+<pre><code class="language-jsx">import { useColorScheme } from 'react-native';
+
+const defaultTheme = {
+  textColor: '#222',
+  backgroundColor: '#eee',
+  primaryColor: '#ff8800'
+  white: '#fff',
+  black: '#000'
+}
+
+const darkTheme = {
+  ...default,
+  textColor: '#eee',
+  backgroundColor: '#222',
+}
+
+const useThemeColor = () => {
+  const colorScheme = useColorScheme()
+  const isDark = colorScheme === 'dark'
+  return isDark? darkTheme : defaultTheme
+}
+
+</code></pre>
+<p>Appearance については、Polyfill が存在しており、Expo や古い React Native のバージョンでも使用できる、<a href="https://github.com/expo/react-native-appearance">react-native-appearance</a> というライブラリも存在しています。</p>
+<h2>その他</h2>
+<p>以上の3機能が、今回のアップデートの目玉となっております。</p>
+<p>他にも細かい修正があり、時間があるときに追記していきます。</p>
+2:["$","$L6",null,{"title":"naturalclar.dev","children":[["$","h1",null,{"children":"What's new in React Native 0.62"}],["$","p",null,{"style":{"display":"block","marginBottom":"16px"},"children":"March 21, 2020"}],["$","div",null,{"dangerouslySetInnerHTML":{"__html":"$9"}}],["$","hr",null,{"style":{"marginBottom":"16px"}}],["$","div",null,{"style":{"display":"flex","alignItems":"center","marginBottom":"40px"},"children":[["$","$La",null,{"src":"https://www.github.com/Naturalclar.png","width":50,"height":50,"alt":"Naturalclar (Jesse Katsumata)","style":{"marginRight":"16px","marginBottom":0,"minWidth":50,"borderRadius":"100%"}}],["$","div",null,{"style":{"display":"flex","flexDirection":"column","gap":"8px"},"children":[["$","p",null,{"style":{"margin":0},"children":["Author: ",["$","strong",null,{"children":"Naturalclar (Jesse Katsumata)"}]]}],["$","p",null,{"style":{"margin":0},"children":[["$","a",null,{"href":"https://x.com/natural_clar","children":"X"}]," ",["$","a",null,{"href":"https://www.github.com/Naturalclar","children":"Github"}]]}]]}]]}],["$","ul",null,{"style":{"display":"flex","flexWrap":"wrap","justifyContent":"space-between","listStyle":"none","padding":0},"children":[["$","li",null,{"children":["$","$L7",null,{"href":"/posts/react-summit-remote-summary-part-1","rel":"prev","children":["← ","React Summit Remote Edition まとめ(前編)"]}]}],["$","li",null,{"children":["$","$L7",null,{"href":"/posts/future-of-react-native","rel":"next","children":["Future of React Native"," →"]}]}]]}]]}]
+8:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"What's new in React Native 0.62 | naturalclar.dev"}],["$","meta","3",{"name":"description","content":"\nこの記事は [React Native Tech Blog #2](https://ducklings.connpass.com/event/169637/) で発表した内容です。\n\nReact Native の最新バージョン、0.62 がリリースされました。\nマイナーバージョンのアップデートは最後に行われたのが 2019年の9月なので半年ぶりのマイナーバージョンアップとなります。\n\nこの記事で..."}],["$","meta","4",{"name":"author","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","5",{"name":"keywords","content":"react, react-native, nextjs, blog"}],["$","meta","6",{"name":"creator","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","7",{"name":"publisher","content":"Naturalclar (Jesse Katsumata)"}],["$","meta","8",{"name":"robots","content":"index, follow"}],["$","meta","9",{"property":"og:title","content":"What's new in React Native 0.62 | naturalclar.dev"}],["$","meta","10",{"property":"og:description","content":"\nこの記事は [React Native Tech Blog #2](https://ducklings.connpass.com/event/169637/) で発表した内容です。\n\nReact Native の最新バージョン、0.62 がリリースされました。\nマイナーバージョンのアップデートは最後に行われたのが 2019年の9月なので半年ぶりのマイナーバージョンアップとなります。\n\nこの記事で..."}],["$","meta","11",{"property":"og:url","content":"https://blog.naturalclar.dev/"}],["$","meta","12",{"property":"og:site_name","content":"naturalclar.dev"}],["$","meta","13",{"property":"og:image","content":"https://blog.naturalclar.dev/twitter-card.png"}],["$","meta","14",{"property":"og:image:width","content":"1200"}],["$","meta","15",{"property":"og:image:height","content":"630"}],["$","meta","16",{"property":"og:image:alt","content":"What's new in React Native 0.62"}],["$","meta","17",{"property":"og:type","content":"website"}],["$","meta","18",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","19",{"name":"twitter:creator","content":"@natural_clar"}],["$","meta","20",{"name":"twitter:title","content":"What's new in React Native 0.62 | naturalclar.dev"}],["$","meta","21",{"name":"twitter:description","content":"\nこの記事は [React Native Tech Blog #2](https://ducklings.connpass.com/event/169637/) で発表した内容です。\n\nReact Native の最新バージョン、0.62 がリリースされました。\nマイナーバージョンのアップデートは最後に行われたのが 2019年の9月なので半年ぶりのマイナーバージョンアップとなります。\n\nこの記事で..."}],["$","meta","22",{"name":"twitter:image","content":"https://blog.naturalclar.dev/twitter-card.png"}]]
+1:null
