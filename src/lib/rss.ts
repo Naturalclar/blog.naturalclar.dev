@@ -47,6 +47,13 @@ export function generateRSSFeed() {
   })
 
   // Write RSS feed to public directory
-  const rssPath = path.join(process.cwd(), 'public', 'rss.xml')
+  const publicDir = path.join(process.cwd(), 'public')
+  const rssPath = path.join(publicDir, 'rss.xml')
+  
+  // Ensure public directory exists
+  if (!fs.existsSync(publicDir)) {
+    fs.mkdirSync(publicDir, { recursive: true })
+  }
+  
   fs.writeFileSync(rssPath, feed.rss2())
 }
