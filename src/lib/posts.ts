@@ -14,6 +14,14 @@ export interface PostData {
   excerpt: string
 }
 
+export interface PaginatedPosts {
+  posts: PostData[]
+  totalPages: number
+  currentPage: number
+  hasNextPage: boolean
+  hasPrevPage: boolean
+}
+
 export function getSortedPostsData(): PostData[] {
   const fileNames = fs.readdirSync(postsDirectory)
   const allPostsData = fileNames
@@ -46,6 +54,22 @@ export function getSortedPostsData(): PostData[] {
       return -1
     }
   })
+}
+
+export function getPaginatedPosts(page: number = 1, postsPerPage: number = 10): PaginatedPosts {
+  const allPosts = getSortedPostsData()
+  const totalPages = Math.ceil(allPosts.length / postsPerPage)
+  const startIndex = (page - 1) * postsPerPage
+  const endIndex = startIndex + postsPerPage
+  const posts = allPosts.slice(startIndex, endIndex)
+
+  return {
+    posts,
+    totalPages,
+    currentPage: page,
+    hasNextPage: page < totalPages,
+    hasPrevPage: page > 1,
+  }
 }
 
 export function getAllPostSlugs() {
