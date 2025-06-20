@@ -5,10 +5,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ### Development
-- `pnpm dev` or `pnpm develop` - Start the Gatsby development server
-- `pnpm build` - Build the static site for production
-- `pnpm clean` - Clean the Gatsby cache and public directory
-- `pnpm start` - Alias for `pnpm develop`
+- `pnpm dev` - Start the Next.js development server
+- `pnpm build` - Build the static site for production and generate RSS feed
+- `pnpm start` - Start the Next.js production server
+- `pnpm export` - Export static files (deprecated in favor of static export config)
 
 ### Code Quality
 - `pnpm lint` - Run ESLint on JavaScript/TypeScript files
@@ -19,7 +19,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
-This is a Gatsby-based static blog site with the following key architectural components:
+This is a Next.js-based static blog site with the following key architectural components:
 
 ### Content Structure
 - Blog posts are written in Markdown/MDX format in `content/blog/`
@@ -27,30 +27,33 @@ This is a Gatsby-based static blog site with the following key architectural com
 - Assets (images) are stored alongside posts or in `content/assets/`
 - Posts support frontmatter with `title` and `date` fields
 
-### Gatsby Configuration
-- **MDX Integration**: Posts are processed using `gatsby-plugin-mdx` with support for `.md` and `.mdx` files
-- **Image Processing**: Uses `gatsby-plugin-sharp` and `gatsby-remark-images` for optimized image handling
-- **RSS Feed**: Automatically generated at `/rss.xml` via `gatsby-plugin-feed`
-- **PWA Features**: Includes offline support and web app manifest
-- **Analytics**: Google Analytics integration (tracking ID: UA-92016705-3)
-
-### TypeScript Setup
-- TypeScript is enabled with `gatsby-plugin-typescript`
-- JSX compilation set to "react" mode
-- Strict type checking enabled
-- ESLint configured with TypeScript parser and React plugin
+### Next.js Configuration
+- **MDX Integration**: Posts are processed using `@next/mdx` with support for `.md` and `.mdx` files
+- **Static Site Generation**: Uses Next.js App Router with static export for build output
+- **RSS Feed**: Generated via custom script (`scripts/generate-rss.js`) that runs after build
+- **TypeScript**: Full TypeScript support with strict type checking
+- **ESLint**: Configured with Next.js ESLint plugin
 
 ### Page Generation
-- Blog post pages are dynamically created in `gatsby-node.js`
-- Each post gets a slug based on its directory name
-- Posts include previous/next navigation context
-- Template located at `src/templates/blog-post.js`
+- Blog post pages use Next.js App Router with dynamic routes at `src/app/posts/[slug]/page.tsx`
+- Posts are processed using `gray-matter` for frontmatter parsing
+- Static generation with `generateStaticParams` for all blog posts
+- Posts are fetched from `content/blog/` directory structure
 
 ### Component Structure
+- `src/app/layout.tsx` - Root layout with metadata and global styles
+- `src/app/page.tsx` - Homepage with blog post listing
+- `src/app/posts/[slug]/page.tsx` - Dynamic blog post pages
 - `src/components/Layout.tsx` - Main layout wrapper with header and footer
 - `src/components/Bio.tsx` - Author bio component
-- `src/components/seo.tsx` - SEO metadata component
-- Components use inline styles rather than CSS modules
+- `src/lib/posts.ts` - Blog post data fetching utilities
+- `src/lib/metadata.ts` - SEO metadata utilities
+- `src/lib/rss.ts` - RSS feed generation utilities
+
+### Build Output
+- **Development**: `pnpm dev` runs Next.js dev server on port 3000
+- **Production Build**: `pnpm build` creates optimized static export in `out/` directory
+- **Static Files**: Built site can be served from `out/` directory as static files
 
 ### Content Generation Workflow
 - Use `pnpm new` to scaffold new blog posts via scaffdog
@@ -60,7 +63,9 @@ This is a Gatsby-based static blog site with the following key architectural com
 ### Deployment
 - Site deploys to Netlify (status badge indicates deploy status)
 - Production URL: https://blog.naturalclar.dev
-- Node.js version pinned to 20.10.0 via Volta
+- Node.js version pinned to 22.0.0 via Volta
+- Package manager pinned to pnpm 9.15.2 via packageManager field
 
 ## Package Manager
 This project uses pnpm. Always use `pnpm` commands instead of `npm` or `yarn`.
+Specific version (9.15.2) is defined in package.json `packageManager` field for corepack.

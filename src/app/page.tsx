@@ -3,16 +3,17 @@ import Link from 'next/link'
 import { format } from 'date-fns'
 import Layout from '../components/Layout'
 import Bio from '../components/Bio'
-import { getSortedPostsData } from '../lib/posts'
+import Pagination from '../components/Pagination'
+import { getPaginatedPosts } from '../lib/posts'
 import { siteTitle } from '../data/static'
 
 export default function Home() {
-  const posts = getSortedPostsData()
+  const paginatedData = getPaginatedPosts(1, 10)
 
   return (
     <Layout title={siteTitle}>
       <Bio />
-      {posts.map((post) => (
+      {paginatedData.posts.map((post) => (
         <div key={post.slug}>
           <h3
             style={{
@@ -29,6 +30,12 @@ export default function Home() {
           <p>{post.excerpt}</p>
         </div>
       ))}
+      <Pagination
+        currentPage={paginatedData.currentPage}
+        totalPages={paginatedData.totalPages}
+        hasNextPage={paginatedData.hasNextPage}
+        hasPrevPage={paginatedData.hasPrevPage}
+      />
     </Layout>
   )
 }
