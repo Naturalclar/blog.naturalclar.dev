@@ -1,8 +1,17 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
+import powershell from 'highlight.js/lib/languages/powershell'
+import { common } from 'lowlight'
+import rehypeHighlight from 'rehype-highlight'
+import rehypeStringify from 'rehype-stringify'
 import { remark } from 'remark'
-import html from 'remark-html'
+import remarkRehype from 'remark-rehype'
+
+// rehype-highlight replaces its language registry when `languages` is passed,
+// so spread lowlight's `common` set to keep it. powershell is not in common
+// and one article uses it.
+const languages = { ...common, powershell }
 
 const postsDirectory = path.join(process.cwd(), 'content/blog')
 
@@ -102,8 +111,13 @@ export async function getPostData(
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const matterResult = matter(fileContents)
 
+  // remark-html is not used here because it goes straight to HTML and leaves
+  // no point to hook a highlighter in. Going through rehype colours the code
+  // at build time, so the pages ship plain markup and no client-side JS.
   const processedContent = await remark()
-    .use(html)
+    .use(remarkRehype)
+    .use(rehypeHighlight, { detect: false, languages })
+    .use(rehypeStringify)
     .process(matterResult.content)
   const contentHtml = processedContent.toString()
 

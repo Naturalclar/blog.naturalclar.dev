@@ -38,7 +38,7 @@ npx @react-native-community/bob create [プロジェクト名]
 
 ### RCTUIMenuManager.m
 
-```objective-c
+```objectivec
 #import <React/RCTBridgeModule.h>
 #import <React/RCTViewManager.h>
 
@@ -68,7 +68,7 @@ React Native は Swift のコードをそのまま扱うことができないの
 
 普段、Objective-C で React Native の Native Module を書く場合は、以下のように書きます。
 
-```objective-c
+```objectivec
 @implementation ModuleName
 RCT_EXPORT_MODULE();
 @end
@@ -99,7 +99,7 @@ export default MenuComponent
 Native の View Component を作成する際、props として受け取る値を定義します。
 例えば、以下の例では`title` という props を `NSString` 型として受け取り、Native 側に渡します。
 
-```objectve-c
+```objectivec
 RCT_EXPORT_VIEW_PROPERTY(title, NSString);
 ```
 
@@ -111,7 +111,7 @@ JavaScript 側では以下のように書けば title が Native 側に渡され
 
 ### Menu-Bridging-Header.h
 
-```h
+```objectivec
 #import <React/RCTBridgeModule.h>
 #import <React/RCTViewManager.h>
 #import <React/RCTView.h>

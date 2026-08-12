@@ -126,3 +126,11 @@ pre code {
   background: none;
   padding: 0;
 }
+
+/* The highlight.js theme paints its own background and padding onto .hljs.
+   Both are already handled by the pre above, so neutralise them here — the
+   selector matches the theme's specificity and this file is imported last. */
+pre code.hljs {
+  background: none;
+  padding: 0;
+}

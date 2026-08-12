@@ -18,7 +18,7 @@ Windows では "$env:USERPROFILE\AppData\Local\nvim\init.vim" においておく
 
 最終的に以下のようなスクリプトになる。
 
-```setup-nvim.ps1
+```powershell
 # create directory for init.vim if it doesn't exist
 
 $nvimDir = "$env:USERPROFILE\AppData\Local\nvim"
