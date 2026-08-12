@@ -20,16 +20,7 @@ const Layout: React.FC<Props> = ({ title, children }) => {
         marginTop: 0,
       }}
     >
-      <Link
-        href="/"
-        style={{
-          boxShadow: 'none',
-          textDecoration: 'none',
-          color: 'inherit',
-        }}
-      >
-        {title}
-      </Link>
+      <Link href="/">{title}</Link>
     </h1>
   ) : (
     <h3
@@ -38,16 +29,7 @@ const Layout: React.FC<Props> = ({ title, children }) => {
         marginTop: 0,
       }}
     >
-      <Link
-        href="/"
-        style={{
-          boxShadow: 'none',
-          textDecoration: 'none',
-          color: 'inherit',
-        }}
-      >
-        {title}
-      </Link>
+      <Link href="/">{title}</Link>
     </h3>
   )
 
