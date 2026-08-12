@@ -7,7 +7,7 @@ import { siteTitle } from '../data/static'
 import { getPaginatedPosts } from '../lib/posts'
 
 export default function Home() {
-  const paginatedData = getPaginatedPosts(1, 10)
+  const paginatedData = getPaginatedPosts(1)
 
   return (
     <Layout title={siteTitle}>
