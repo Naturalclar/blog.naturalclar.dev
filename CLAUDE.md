@@ -22,6 +22,19 @@ Three entries in `package.json` are stale and fail if run. Don't reach for them,
 - `pnpm export` — `next export` was removed in Next 14
 - `pnpm test` — a placeholder `echo`; there is no test framework in this repository
 
+## Workflow
+
+Work on a branch off `master`; never commit to `master` directly.
+
+**Pushing is not the end of a change — open the pull request as part of the same step, without waiting to be asked.** A pushed branch with no PR is invisible: nobody is looking at the branch list, so the work reads as unfinished. Treat `git push -u origin <branch>` and opening the PR as one action.
+
+- Put `Closes #N` in the PR body when the change resolves an issue, so merging closes it
+- There is no PR template in this repository
+- Merge with squash. The history uses `<subject> (#N)` titles — see #87, #88, #94, #96
+- CI runs on both `push` and `pull_request` (see the CI section below), so a branch is checked twice. Let it pass before merging
+
+Stopping after the push and asking whether to open a PR is the wrong default here — open it, and say so.
+
 ## Architecture
 
 A Next.js App Router blog that builds to a fully static export and deploys to Netlify at https://blog.naturalclar.dev. There is no server at runtime: no middleware, no Server Actions, no route handlers, no rewrites, and `images.unoptimized` is set. Anything requiring a Next.js server will not work here.
