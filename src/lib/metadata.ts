@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { author, siteDescription, siteTitle, siteUrl } from '../data/static'
 
 interface SEOProps {
@@ -15,7 +15,9 @@ export function generateMetadata({
   thumbnail,
 }: SEOProps = {}): Metadata {
   const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`
-  const imageUrl = thumbnail ? `${siteUrl}${thumbnail}` : `${siteUrl}/twitter-card.png`
+  const imageUrl = thumbnail
+    ? `${siteUrl}${thumbnail}`
+    : `${siteUrl}/twitter-card.png`
 
   return {
     title: fullTitle,

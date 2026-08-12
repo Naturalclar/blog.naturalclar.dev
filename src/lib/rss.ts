@@ -1,12 +1,12 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import { Feed } from 'feed'
-import fs from 'fs'
-import path from 'path'
-import { getSortedPostsData } from './posts'
 import { author, siteDescription, siteTitle, siteUrl } from '../data/static'
+import { getSortedPostsData } from './posts'
 
 export function generateRSSFeed() {
   const posts = getSortedPostsData()
-  
+
   const feed = new Feed({
     title: siteTitle,
     description: siteDescription,
@@ -49,11 +49,11 @@ export function generateRSSFeed() {
   // Write RSS feed to public directory
   const publicDir = path.join(process.cwd(), 'public')
   const rssPath = path.join(publicDir, 'rss.xml')
-  
+
   // Ensure public directory exists
   if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, { recursive: true })
   }
-  
+
   fs.writeFileSync(rssPath, feed.rss2())
 }

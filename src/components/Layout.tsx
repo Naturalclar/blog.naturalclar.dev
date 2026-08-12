@@ -1,8 +1,8 @@
 'use client'
 
-import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import type React from 'react'
 
 type Props = {
   title: string
@@ -12,7 +12,7 @@ type Props = {
 const Layout: React.FC<Props> = ({ title, children }) => {
   const pathname = usePathname()
   const isRoot = pathname === '/'
-  
+
   const header = isRoot ? (
     <h1
       style={{
@@ -71,4 +71,3 @@ const Layout: React.FC<Props> = ({ title, children }) => {
 }
 
 export default Layout
-

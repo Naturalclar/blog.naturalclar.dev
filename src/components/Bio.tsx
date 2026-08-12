@@ -1,7 +1,6 @@
-import React from 'react'
 import Image from 'next/image'
 
-import { author, social } from "../data/static";
+import { author, social } from '../data/static'
 
 const Bio = () => {
   return (
@@ -36,4 +35,4 @@ const Bio = () => {
   )
 }
 
-export default Bio;
+export default Bio

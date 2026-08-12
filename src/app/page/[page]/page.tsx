@@ -1,12 +1,11 @@
-import React from 'react'
-import Link from 'next/link'
 import { format } from 'date-fns'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import Layout from '../../../components/Layout'
 import Bio from '../../../components/Bio'
+import Layout from '../../../components/Layout'
 import Pagination from '../../../components/Pagination'
-import { getPaginatedPosts } from '../../../lib/posts'
 import { siteTitle } from '../../../data/static'
+import { getPaginatedPosts } from '../../../lib/posts'
 
 interface PageProps {
   params: {
@@ -16,13 +15,13 @@ interface PageProps {
 
 export default function Page({ params }: PageProps) {
   const pageNumber = parseInt(params.page, 10)
-  
-  if (isNaN(pageNumber) || pageNumber < 1) {
+
+  if (Number.isNaN(pageNumber) || pageNumber < 1) {
     notFound()
   }
 
   const paginatedData = getPaginatedPosts(pageNumber, 10)
-  
+
   if (paginatedData.posts.length === 0 && pageNumber > 1) {
     notFound()
   }
@@ -60,10 +59,10 @@ export default function Page({ params }: PageProps) {
 export async function generateStaticParams() {
   const paginatedData = getPaginatedPosts(1, 10)
   const pages = []
-  
+
   for (let i = 2; i <= paginatedData.totalPages; i++) {
     pages.push({ page: i.toString() })
   }
-  
+
   return pages
 }

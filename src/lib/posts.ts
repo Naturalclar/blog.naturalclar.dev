@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import matter from 'gray-matter'
 import { remark } from 'remark'
 import html from 'remark-html'
@@ -25,24 +25,26 @@ export interface PaginatedPosts {
 export function getSortedPostsData(): PostData[] {
   const fileNames = fs.readdirSync(postsDirectory)
   const allPostsData = fileNames
-    .filter((name) => fs.statSync(path.join(postsDirectory, name)).isDirectory())
+    .filter((name) =>
+      fs.statSync(path.join(postsDirectory, name)).isDirectory()
+    )
     .map((name) => {
       const slug = name
       const fullPath = path.join(postsDirectory, name, 'index.md')
-      
+
       if (!fs.existsSync(fullPath)) {
         return null
       }
-      
+
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const matterResult = matter(fileContents)
-      
+
       return {
         slug,
         title: matterResult.data.title || slug,
         date: matterResult.data.date || '',
         content: matterResult.content,
-        excerpt: matterResult.content.substring(0, 200) + '...',
+        excerpt: `${matterResult.content.substring(0, 200)}...`,
       }
     })
     .filter((post): post is PostData => post !== null)
@@ -56,7 +58,10 @@ export function getSortedPostsData(): PostData[] {
   })
 }
 
-export function getPaginatedPosts(page: number = 1, postsPerPage: number = 10): PaginatedPosts {
+export function getPaginatedPosts(
+  page: number = 1,
+  postsPerPage: number = 10
+): PaginatedPosts {
   const allPosts = getSortedPostsData()
   const totalPages = Math.ceil(allPosts.length / postsPerPage)
   const startIndex = (page - 1) * postsPerPage
@@ -75,7 +80,9 @@ export function getPaginatedPosts(page: number = 1, postsPerPage: number = 10): 
 export function getAllPostSlugs() {
   const fileNames = fs.readdirSync(postsDirectory)
   return fileNames
-    .filter((name) => fs.statSync(path.join(postsDirectory, name)).isDirectory())
+    .filter((name) =>
+      fs.statSync(path.join(postsDirectory, name)).isDirectory()
+    )
     .map((name) => ({
       params: {
         slug: name,
@@ -83,7 +90,9 @@ export function getAllPostSlugs() {
     }))
 }
 
-export async function getPostData(slug: string): Promise<PostData & { contentHtml: string }> {
+export async function getPostData(
+  slug: string
+): Promise<PostData & { contentHtml: string }> {
   const fullPath = path.join(postsDirectory, slug, 'index.md')
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const matterResult = matter(fileContents)
@@ -99,14 +108,14 @@ export async function getPostData(slug: string): Promise<PostData & { contentHtm
     title: matterResult.data.title || slug,
     date: matterResult.data.date || '',
     content: matterResult.content,
-    excerpt: matterResult.content.substring(0, 200) + '...',
+    excerpt: `${matterResult.content.substring(0, 200)}...`,
   }
 }
 
 export function getAdjacentPosts(currentSlug: string) {
   const posts = getSortedPostsData()
-  const currentIndex = posts.findIndex(post => post.slug === currentSlug)
-  
+  const currentIndex = posts.findIndex((post) => post.slug === currentSlug)
+
   return {
     previous: currentIndex > 0 ? posts[currentIndex - 1] : null,
     next: currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null,

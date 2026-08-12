@@ -59,6 +59,9 @@ typings/
 out/
 build/
 
+# TypeScript incremental build info
+*.tsbuildinfo
+
 # Legacy gatsby files (if any remain)
 .cache/
 public
