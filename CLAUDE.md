@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Always use `pnpm` — the version is pinned to 9.15.2 via the `packageManager` field, and Node 22.0.0 via Volta.
 
 - `pnpm dev` — dev server on port 3000
-- `pnpm build` — static export into `out/`, then generates the RSS feed (see the RSS caveat below)
+- `pnpm build` — static export into `out/`, then writes `out/rss.xml`
 - `pnpm lint` — `biome check`: lint, format check, and import order in one pass
 - `pnpm format` — `biome check --write`: applies fixes in place
 - `pnpm new` — scaffolds `content/blog/{title}/index.md` via scaffdog, prompting for a title
@@ -34,11 +34,11 @@ Posts live in `content/blog/{slug}/index.md`, one directory per post, with image
 
 Site-wide constants live in `src/data/site.json`. `src/data/static.ts` re-exports them as named exports for the app (`src/lib/metadata.ts` and the components), and `scripts/generate-rss.js` `require`s the same JSON. Edit the JSON, not the re-exports — it is the single source shared across the TypeScript and CommonJS sides.
 
-### RSS generation, and its ordering bug
+### RSS generation
 
-`pnpm build` runs `next build && node scripts/generate-rss.js`. The script writes to `public/rss.xml` — but `next build` has already copied `public/` into `out/` by then.
+`pnpm build` runs `next build && node scripts/generate-rss.js`. The script writes `out/rss.xml` — directly into the export directory, not into `public/`.
 
-**On a clean checkout the feed never reaches `out/`.** Verified: after `rm -rf out public && pnpm build`, `public/rss.xml` exists and `out/rss.xml` does not. A second local build appears to work only because it copies the *previous* run's stale file. CI and Netlify build from a clean tree, so they hit the broken case every time. Fix by writing into `out/` or by generating before `next build` — but note that `out/` does not exist until `next build` runs.
+That ordering is load-bearing, so don't "tidy" it by moving the write to `public/`: `next build` copies `public/` into `out/` before the script runs, so a feed written there would reach `out/` only on a later rebuild that happened to find the previous run's file. This was a real bug (#89) — clean checkouts, which is what CI and Netlify build from, shipped no feed at all. The script now throws if `out/` is absent rather than silently writing somewhere that never gets deployed.
 
 One duplication remains in the same area: `scripts/generate-rss.js` re-implements the post reading that `src/lib/posts.ts` already does — its own `readdirSync` walk, `gray-matter` parse, excerpt slice, and sort. The two must be kept in agreement by hand. Being CommonJS, the script cannot import the TypeScript module; closing this properly needs a TypeScript-aware runner for the script.
 

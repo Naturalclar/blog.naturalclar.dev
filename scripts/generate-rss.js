@@ -82,16 +82,19 @@ function generateRSSFeed() {
     })
   })
 
-  // Write RSS feed to public directory
-  const publicDir = path.join(process.cwd(), 'public')
-  const rssPath = path.join(publicDir, 'rss.xml')
+  // Write the feed straight into the export directory. Writing it to public/
+  // instead would be too late: `next build` copies public/ into out/ before
+  // this script runs, so the feed would only ever reach out/ on a rebuild that
+  // happened to find a previous run's file.
+  const outDir = path.join(process.cwd(), 'out')
 
-  // Ensure public directory exists
-  if (!fs.existsSync(publicDir)) {
-    fs.mkdirSync(publicDir, { recursive: true })
+  if (!fs.existsSync(outDir)) {
+    throw new Error(
+      `Export directory not found at ${outDir}. Run \`next build\` first — this script is meant to run after it, as \`pnpm build\` does.`
+    )
   }
 
-  fs.writeFileSync(rssPath, feed.rss2())
+  fs.writeFileSync(path.join(outDir, 'rss.xml'), feed.rss2())
 }
 
 generateRSSFeed()
