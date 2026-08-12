@@ -12,6 +12,7 @@ const Bio = () => {
       }}
     >
       <Image
+        className="avatar"
         src="https://www.github.com/Naturalclar.png"
         width={50}
         height={50}
@@ -19,7 +20,6 @@ const Bio = () => {
         style={{
           marginRight: '16px',
           marginBottom: 0,
-          minWidth: 50,
           borderRadius: '100%',
         }}
       />
