@@ -1,3 +1,9 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Everything below is deliberately unlayered, so it wins over Tailwind's
+   preflight and the prose styles, which live in @layer base/utilities. */
+
 html,
 body {
   padding: 0;
@@ -31,6 +37,28 @@ a:focus-visible {
   outline: 2px solid #0069c2;
   outline-offset: 2px;
   border-radius: 2px;
+}
+
+/* Applied here rather than as a className so the JSX stays on one line: a
+   lint suppression only covers the line that follows it, and that div carries
+   one for dangerouslySetInnerHTML. max-w-none because the 680px container in
+   Layout already sets the measure; prose's own 65ch would narrow it further. */
+.article-body {
+  @apply prose max-w-none;
+
+  /* prose ships a dark code block. The site's is light, and the highlight.js
+     github theme from #103 is built for a light background — swapping these
+     two variables is the supported way to change it, and avoids fighting
+     prose's `:where(pre)` on specificity. */
+  --tw-prose-pre-bg: #f4f4f4;
+  --tw-prose-pre-code: #24292e;
+}
+
+/* prose renders literal backticks around inline code. The background this
+   file already gives it is the affordance instead. */
+.article-body :where(code)::before,
+.article-body :where(code)::after {
+  content: none;
 }
 
 /* Body copy is the opposite case: a link inside a paragraph has to be
@@ -82,6 +110,24 @@ a:focus-visible {
   box-sizing: border-box;
 }
 
+/* Preflight also strips paragraph and list spacing. prose restores both
+   inside the article; the listing on the home page has no such wrapper, and
+   its excerpts ran into the date without this. */
+p {
+  margin: 1em 0;
+}
+
+ul,
+ol {
+  list-style: revert;
+  padding-left: 40px;
+  margin: 1em 0;
+}
+
+/* Preflight strips the browser's default heading sizes. Inside the article
+   prose supplies its own, but the site chrome — the header in Layout, the
+   listing titles, the article title — relied on the defaults, so restore
+   them here at the UA scale. */
 h1,
 h2,
 h3,
@@ -89,6 +135,37 @@ h4,
 h5,
 h6 {
   font-family: Montserrat, sans-serif;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+
+h3 {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+
+h4 {
+  font-size: 1em;
+  margin: 1.33em 0;
+}
+
+h5 {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+
+h6 {
+  font-size: 0.67em;
+  margin: 2.33em 0;
 }
 
 /* Article images come from Markdown as plain <img> with no width or height
@@ -98,6 +175,15 @@ h6 {
    override the height attribute next/image sets on the Bio avatar. */
 img {
   max-width: 100%;
+}
+
+/* Tailwind's preflight sets `height: auto` on every img, which leaves the
+   remote avatar sized from whatever aspect ratio it happens to have. Pin it
+   so a non-square source cannot distort the layout. */
+.avatar {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
 }
 
 blockquote {

@@ -79,12 +79,29 @@ One duplication remains in the same area: `scripts/generate-rss.js` re-implement
 
 The page size lives in one place, `POSTS_PER_PAGE` in `src/lib/posts.ts`, and reaches the callers as the parameter's default — so call it as `getPaginatedPosts(page)` and don't pass a size. `generateStaticParams` decides *which* `/page/N` routes exist while the page component decides *which posts* each one slices out; if those two ever disagree the build still succeeds, and the damage shows up only as missing or blank pagination pages.
 
+### Styling
+
+**Tailwind CSS 4** with `@tailwindcss/typography`, configured in CSS rather than a JS config: `src/app/globals.css` opens with `@import "tailwindcss"` and `@plugin "@tailwindcss/typography"`, and `postcss.config.mjs` wires up `@tailwindcss/postcss`.
+
+Three things about this setup are easy to get wrong:
+
+- **Everything after those two directives is deliberately unlayered.** Tailwind's own output sits in `@layer base/components/utilities`, and unlayered CSS beats layered CSS regardless of specificity — that is what lets the rules in this file override preflight and prose. Don't wrap them in `@layer`.
+- **Preflight resets more than it looks like.** Heading sizes, paragraph margins and list styling are all stripped site-wide. `prose` restores them inside the article, but the header, the listing and anything else outside it need the defaults written back — which is what the `p`, `ul, ol` and `h1`–`h6` rules in `globals.css` are for. Removing them silently flattens the home page.
+- **`prose` is applied through `@apply` in `globals.css`, not a `className`.** The article `<div>` carries a lint suppression for `dangerouslySetInnerHTML`, and a suppression only covers the line directly after it — adding classes to the JSX wraps the attributes and breaks it.
+
+Where prose and the existing styling disagree, prefer prose's own customisation hooks over specificity fights: the code block colours come from `--tw-prose-pre-bg` / `--tw-prose-pre-code` set on `.article-body`, because `prose` targets `:where(pre)` and would otherwise outrank a bare `pre` rule.
+
+Component styling is still a mix: `src/components/` and the page files carry inline `style={{}}` objects that predate Tailwind. Migrating them is tracked separately — until then, expect both.
+
 ### Tooling
 
-**Biome** (`biome.json`) is the sole toolchain for linting, formatting, and import sorting; it replaced ESLint + Prettier. Two configuration choices matter:
+**Biome** (`biome.json`) is the sole toolchain for linting, formatting, and import sorting; it replaced ESLint + Prettier. Three configuration choices matter:
 
 - `vcs.useIgnoreFile` is on, so `.gitignore` drives exclusions
 - `content/` is excluded, so authored posts are never reformatted
+- `css.parser.tailwindDirectives` is on, without which `@plugin` and `@apply` fail to parse
+
+Note Biome reads the literal string `biome-ignore` inside CSS comments as a suppression directive and errors on it, so don't mention the mechanism by name in a stylesheet comment.
 
 Formatting follows the previous Prettier conventions: single quotes, no semicolons, 2-space indent, `es5` trailing commas.
 
