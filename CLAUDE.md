@@ -22,17 +22,38 @@ Three entries in `package.json` are stale and fail if run. Don't reach for them,
 - `pnpm export` — `next export` was removed in Next 14
 - `pnpm test` — a placeholder `echo`; there is no test framework in this repository
 
+## Workflow
+
+Work on a branch off `master`; never commit to `master` directly.
+
+**Pushing is not the end of a change — open the pull request as part of the same step, without waiting to be asked.** A pushed branch with no PR is invisible: nobody is looking at the branch list, so the work reads as unfinished. Treat `git push -u origin <branch>` and opening the PR as one action.
+
+- Put `Closes #N` in the PR body when the change resolves an issue, so merging closes it
+- There is no PR template in this repository
+- Merge with squash. The history uses `<subject> (#N)` titles — see #87, #88, #94, #96
+- CI runs on both `push` and `pull_request` (see the CI section below), so a branch is checked twice. Let it pass before merging
+
+Stopping after the push and asking whether to open a PR is the wrong default here — open it, and say so.
+
 ## Architecture
 
 A Next.js App Router blog that builds to a fully static export and deploys to Netlify at https://blog.naturalclar.dev. There is no server at runtime: no middleware, no Server Actions, no route handlers, no rewrites, and `images.unoptimized` is set. Anything requiring a Next.js server will not work here.
 
 ### Content pipeline
 
-Posts live in `content/blog/{slug}/index.md`, one directory per post, with images alongside them or in `content/assets/`. Frontmatter carries `title` and `date`.
+Posts live in `content/blog/{slug}/index.md`, one directory per post, with images alongside them. Frontmatter carries `title` and `date`.
 
 `src/lib/posts.ts` is the single entry point for post data. It reads the directory with `fs`, parses frontmatter with `gray-matter`, and converts the body to HTML with `remark` + `remark-html` at build time. Markdown is deliberately *not* in `pageExtensions` — `.md` files are data read by that module, never routes. The resulting `contentHtml` is injected with `dangerouslySetInnerHTML` in `src/app/posts/[slug]/page.tsx`, which carries a `biome-ignore` justifying it (the input is this repository's own Markdown).
 
 Site-wide constants live in `src/data/site.json`. `src/data/static.ts` re-exports them as named exports for the app (`src/lib/metadata.ts` and the components), and `scripts/generate-rss.js` `require`s the same JSON. Edit the JSON, not the re-exports — it is the single source shared across the TypeScript and CommonJS sides.
+
+### Static assets
+
+`public/` is the served static directory and **is tracked in git** — it holds `robots.txt` and `twitter-card.png` (the OG image `src/lib/metadata.ts` points every page at). `next build` copies it to the export root, so those files answer at `/robots.txt` and `/twitter-card.png`.
+
+The favicon is `src/app/favicon.ico`, using the App Router file convention rather than `public/`: that is what emits the `<link rel="icon">` tag into the HTML, and it adds one route to the static page count.
+
+Until #95 these lived in a root `static/` directory and in `content/assets/`, neither of which Next.js serves from — they reached `out/static/` and nowhere respectively, so `/robots.txt`, `/favicon.ico`, and the OG image were all 404. Both directories are gone now; don't reintroduce them. Anything that should answer at a URL belongs in `public/`.
 
 ### RSS generation
 
