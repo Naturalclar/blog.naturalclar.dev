@@ -4,68 +4,63 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-### Development
-- `pnpm dev` - Start the Next.js development server
-- `pnpm build` - Build the static site for production and generate RSS feed
-- `pnpm start` - Start the Next.js production server
-- `pnpm export` - Export static files (deprecated in favor of static export config)
+Always use `pnpm` — the version is pinned to 9.15.2 via the `packageManager` field, and Node 22.0.0 via Volta.
 
-### Code Quality
-- `pnpm lint` - Check linting, formatting, and import order with Biome
-- `pnpm format` - Apply Biome fixes and formatting in place
+- `pnpm dev` — dev server on port 3000
+- `pnpm build` — static export into `out/`, then generates the RSS feed (see the RSS caveat below)
+- `pnpm lint` — `biome check`: lint, format check, and import order in one pass
+- `pnpm format` — `biome check --write`: applies fixes in place
+- `pnpm new` — scaffolds `content/blog/{title}/index.md` via scaffdog, prompting for a title
 
-### Content Generation
-- `pnpm new` - Generate new blog post using scaffdog (prompts for title)
+To preview a production build, serve the static output (`npx serve@latest out`).
+
+### Scripts that do not work
+
+Three entries in `package.json` are stale and fail if run. Don't reach for them, and don't assume they indicate a supported workflow:
+
+- `pnpm start` — `next start` is incompatible with `output: 'export'` and exits with an error
+- `pnpm export` — `next export` was removed in Next 14
+- `pnpm test` — a placeholder `echo`; there is no test framework in this repository
 
 ## Architecture
 
-This is a Next.js-based static blog site with the following key architectural components:
+A Next.js App Router blog that builds to a fully static export and deploys to Netlify at https://blog.naturalclar.dev. There is no server at runtime: no middleware, no Server Actions, no route handlers, no rewrites, and `images.unoptimized` is set. Anything requiring a Next.js server will not work here.
 
-### Content Structure
-- Blog posts are written in Markdown in `content/blog/`
-- Each blog post lives in its own directory with an `index.md` file
-- Assets (images) are stored alongside posts or in `content/assets/`
-- Posts support frontmatter with `title` and `date` fields
+### Content pipeline
 
-### Next.js Configuration
-- **Markdown Pipeline**: Posts are read from `content/blog/` by `src/lib/posts.ts` and converted to HTML with `remark` + `remark-html` at build time. Markdown is not registered as a page extension, so `.md` files are data, not routes
-- **Static Site Generation**: Uses Next.js App Router with static export for build output
-- **RSS Feed**: Generated via custom script (`scripts/generate-rss.js`) that runs after build
-- **TypeScript**: Full TypeScript support with strict type checking
-- **Biome**: Single toolchain for linting, formatting, and import sorting (`biome.json`). Replaces the former ESLint + Prettier setup; `content/` is excluded so authored posts are never reformatted
+Posts live in `content/blog/{slug}/index.md`, one directory per post, with images alongside them or in `content/assets/`. Frontmatter carries `title` and `date`.
 
-### Page Generation
-- Blog post pages use Next.js App Router with dynamic routes at `src/app/posts/[slug]/page.tsx`
-- Posts are processed using `gray-matter` for frontmatter parsing
-- Static generation with `generateStaticParams` for all blog posts
-- Posts are fetched from `content/blog/` directory structure
+`src/lib/posts.ts` is the single entry point for post data. It reads the directory with `fs`, parses frontmatter with `gray-matter`, and converts the body to HTML with `remark` + `remark-html` at build time. Markdown is deliberately *not* in `pageExtensions` — `.md` files are data read by that module, never routes. The resulting `contentHtml` is injected with `dangerouslySetInnerHTML` in `src/app/posts/[slug]/page.tsx`, which carries a `biome-ignore` justifying it (the input is this repository's own Markdown).
 
-### Component Structure
-- `src/app/layout.tsx` - Root layout with metadata and global styles
-- `src/app/page.tsx` - Homepage with blog post listing
-- `src/app/posts/[slug]/page.tsx` - Dynamic blog post pages
-- `src/components/Layout.tsx` - Main layout wrapper with header and footer
-- `src/components/Bio.tsx` - Author bio component
-- `src/lib/posts.ts` - Blog post data fetching utilities
-- `src/lib/metadata.ts` - SEO metadata utilities
-- `src/lib/rss.ts` - RSS feed generation utilities
+Site-wide constants live in `src/data/site.json`. `src/data/static.ts` re-exports them as named exports for the app (`src/lib/metadata.ts` and the components), and `scripts/generate-rss.js` `require`s the same JSON. Edit the JSON, not the re-exports — it is the single source shared across the TypeScript and CommonJS sides.
 
-### Build Output
-- **Development**: `pnpm dev` runs Next.js dev server on port 3000
-- **Production Build**: `pnpm build` creates optimized static export in `out/` directory
-- **Static Files**: Built site can be served from `out/` directory as static files
+### RSS generation, and its ordering bug
 
-### Content Generation Workflow
-- Use `pnpm new` to scaffold new blog posts via scaffdog
-- Posts are created in `content/blog/{title}/index.md` format
-- Scaffdog template automatically adds current timestamp and title frontmatter
+`pnpm build` runs `next build && node scripts/generate-rss.js`. The script writes to `public/rss.xml` — but `next build` has already copied `public/` into `out/` by then.
 
-### Deployment
-- Site deploys to Netlify (status badge indicates deploy status)
-- Production URL: https://blog.naturalclar.dev
-- Node.js version pinned to 22.0.0 via Volta
-- Package manager pinned to pnpm 9.15.2 via packageManager field
+**On a clean checkout the feed never reaches `out/`.** Verified: after `rm -rf out public && pnpm build`, `public/rss.xml` exists and `out/rss.xml` does not. A second local build appears to work only because it copies the *previous* run's stale file. CI and Netlify build from a clean tree, so they hit the broken case every time. Fix by writing into `out/` or by generating before `next build` — but note that `out/` does not exist until `next build` runs.
 
-## Package Manager
-This project uses pnpm. Always use `pnpm` commands instead of `npm` or `yarn`.
-Specific version (9.15.2) is defined in package.json `packageManager` field for corepack.
+One duplication remains in the same area: `scripts/generate-rss.js` re-implements the post reading that `src/lib/posts.ts` already does — its own `readdirSync` walk, `gray-matter` parse, excerpt slice, and sort. The two must be kept in agreement by hand. Being CommonJS, the script cannot import the TypeScript module; closing this properly needs a TypeScript-aware runner for the script.
+
+### Pagination
+
+`getPaginatedPosts(page, perPage)` in `src/lib/posts.ts` backs the home page (`src/app/page.tsx`) and `src/app/page/[page]/page.tsx`, which pre-renders pages 2..N via `generateStaticParams`. The page size of `10` is hardcoded at all three call sites rather than shared — change one and you must change the others or the page count and slicing disagree.
+
+### Tooling
+
+**Biome** (`biome.json`) is the sole toolchain for linting, formatting, and import sorting; it replaced ESLint + Prettier. Two configuration choices matter:
+
+- `vcs.useIgnoreFile` is on, so `.gitignore` drives exclusions
+- `content/` is excluded, so authored posts are never reformatted
+
+Formatting follows the previous Prettier conventions: single quotes, no semicolons, 2-space indent, `es5` trailing commas.
+
+Because `eslint-config-next` was removed, **the Next.js-specific rules (`@next/next/*`) and the React Hooks rules are not enforced** — Biome does not implement them. Nothing checks for `exhaustive-deps` violations or `no-img-element`.
+
+`tsconfig.json` defines `@/*` path aliases, but no source file uses them; imports are relative throughout. Match the surrounding relative style rather than introducing aliases piecemeal.
+
+`main.css` at the repository root is unreferenced; the stylesheet actually in use is `src/app/globals.css`, imported from `src/app/layout.tsx`.
+
+### CI
+
+`.github/workflows/ci.yml` runs `pnpm lint` then `pnpm build` on Node 22 for every push and pull request. `.github/workflows/label.yml` auto-labels new issues by keyword — an issue whose title or body contains "post" gets `Post Idea`, and "feature" gets `feature request`.
