@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Always use `pnpm` — the version is pinned to 9.15.2 via the `packageManager` field, and Node 22.0.0 via Volta.
 
 - `pnpm dev` — dev server on port 3000
-- `pnpm build` — static export into `out/`, then writes `out/rss.xml`
+- `pnpm build` — static export into `out/`, then copies article assets and writes `out/rss.xml`
 - `pnpm lint` — `biome check`: lint, format check, and import order in one pass
 - `pnpm format` — `biome check --write`: applies fixes in place
 - `pnpm new` — scaffolds `content/blog/{title}/index.md` via scaffdog, prompting for a title
@@ -41,7 +41,7 @@ A Next.js App Router blog that builds to a fully static export and deploys to Ne
 
 ### Content pipeline
 
-Posts live in `content/blog/{slug}/index.md`, one directory per post, with images alongside them. Frontmatter carries `title` and `date`.
+Posts live in `content/blog/{slug}/index.md`, one directory per post, with images alongside them and referenced relatively (`![alt](./diagram.png)`). Frontmatter carries `title` and `date`.
 
 `src/lib/posts.ts` is the single entry point for post data. It reads the directory with `fs`, parses frontmatter with `gray-matter`, and converts the body to HTML with `remark` + `remark-html` at build time. Markdown is deliberately *not* in `pageExtensions` — `.md` files are data read by that module, never routes. The resulting `contentHtml` is injected with `dangerouslySetInnerHTML` in `src/app/posts/[slug]/page.tsx`, which carries a `biome-ignore` justifying it (the input is this repository's own Markdown).
 
@@ -55,9 +55,17 @@ The favicon is `src/app/favicon.ico`, using the App Router file convention rathe
 
 Until #95 these lived in a root `static/` directory and in `content/assets/`, neither of which Next.js serves from — they reached `out/static/` and nowhere respectively, so `/robots.txt`, `/favicon.ico`, and the OG image were all 404. Both directories are gone now; don't reintroduce them. Anything that should answer at a URL belongs in `public/`.
 
+### Post-build scripts
+
+`pnpm build` is `next build`, then two Node scripts that write into `out/` — the export directory Netlify deploys. Both throw if `out/` is absent rather than writing somewhere that never ships, so run them only after a build.
+
+`scripts/copy-post-assets.js` copies everything except `index.md` from `content/blog/{slug}/` into `out/posts/{slug}/`. `content/` is read as data and is never copied by Next.js, so without this the relative image references in articles resolve to nothing — which was #97, and left every article image 404. `trailingSlash` puts each article at `/posts/{slug}/`, so its images belong next to its `index.html`. The rule is deliberately "every file but the Markdown", which also copies assets no article currently references.
+
+`scripts/generate-rss.js` writes `out/rss.xml`.
+
 ### RSS generation
 
-`pnpm build` runs `next build && node scripts/generate-rss.js`. The script writes `out/rss.xml` — directly into the export directory, not into `public/`.
+The feed goes directly into the export directory, not into `public/`.
 
 That ordering is load-bearing, so don't "tidy" it by moving the write to `public/`: `next build` copies `public/` into `out/` before the script runs, so a feed written there would reach `out/` only on a later rebuild that happened to find the previous run's file. This was a real bug (#89) — clean checkouts, which is what CI and Netlify build from, shipped no feed at all. The script now throws if `out/` is absent rather than silently writing somewhere that never gets deployed.
 

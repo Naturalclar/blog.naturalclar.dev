@@ -19,7 +19,7 @@
   "author": "Jesse Katsumata <jesse.katsumata@gmail.com>",
   "main": "n/a",
   "scripts": {
-    "build": "next build && node scripts/generate-rss.js",
+    "build": "next build && node scripts/copy-post-assets.js && node scripts/generate-rss.js",
     "dev": "next dev",
     "start": "next start",
     "export": "next export",
