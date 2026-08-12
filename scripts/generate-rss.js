@@ -1,41 +1,43 @@
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 const { Feed } = require('feed')
 
 function readPostsFromDirectory() {
   const postsDirectory = path.join(process.cwd(), 'content/blog')
   const fileNames = fs.readdirSync(postsDirectory)
-  
+
   return fileNames
-    .filter((name) => fs.statSync(path.join(postsDirectory, name)).isDirectory())
+    .filter((name) =>
+      fs.statSync(path.join(postsDirectory, name)).isDirectory()
+    )
     .map((name) => {
       const fullPath = path.join(postsDirectory, name, 'index.md')
-      
+
       if (!fs.existsSync(fullPath)) {
         return null
       }
-      
+
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const matter = require('gray-matter')
       const matterResult = matter(fileContents)
-      
+
       return {
         slug: name,
         title: matterResult.data.title || name,
         date: matterResult.data.date || '',
         content: matterResult.content,
-        excerpt: matterResult.content.substring(0, 200) + '...',
+        excerpt: `${matterResult.content.substring(0, 200)}...`,
       }
     })
-    .filter(post => post !== null)
-    .sort((a, b) => a.date < b.date ? 1 : -1)
+    .filter((post) => post !== null)
+    .sort((a, b) => (a.date < b.date ? 1 : -1))
 }
 
 function generateRSSFeed() {
   const posts = readPostsFromDirectory()
   const siteUrl = 'https://blog.naturalclar.dev'
   const author = 'Naturalclar (Jesse Katsumata)'
-  
+
   const feed = new Feed({
     title: 'naturalclar.dev',
     description: "Naturalclar's personal blog",
@@ -78,12 +80,12 @@ function generateRSSFeed() {
   // Write RSS feed to public directory
   const publicDir = path.join(process.cwd(), 'public')
   const rssPath = path.join(publicDir, 'rss.xml')
-  
+
   // Ensure public directory exists
   if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, { recursive: true })
   }
-  
+
   fs.writeFileSync(rssPath, feed.rss2())
 }
 

@@ -1,11 +1,10 @@
-import React from 'react'
-import Link from 'next/link'
 import { format } from 'date-fns'
-import Layout from '../components/Layout'
+import Link from 'next/link'
 import Bio from '../components/Bio'
+import Layout from '../components/Layout'
 import Pagination from '../components/Pagination'
-import { getPaginatedPosts } from '../lib/posts'
 import { siteTitle } from '../data/static'
+import { getPaginatedPosts } from '../lib/posts'
 
 export default function Home() {
   const paginatedData = getPaginatedPosts(1, 10)

@@ -11,8 +11,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `pnpm export` - Export static files (deprecated in favor of static export config)
 
 ### Code Quality
-- `pnpm lint` - Run ESLint on JavaScript/TypeScript files
-- `pnpm format` - Format code using Prettier
+- `pnpm lint` - Check linting, formatting, and import order with Biome
+- `pnpm format` - Apply Biome fixes and formatting in place
 
 ### Content Generation
 - `pnpm new` - Generate new blog post using scaffdog (prompts for title)
@@ -32,7 +32,7 @@ This is a Next.js-based static blog site with the following key architectural co
 - **Static Site Generation**: Uses Next.js App Router with static export for build output
 - **RSS Feed**: Generated via custom script (`scripts/generate-rss.js`) that runs after build
 - **TypeScript**: Full TypeScript support with strict type checking
-- **ESLint**: Configured with Next.js ESLint plugin
+- **Biome**: Single toolchain for linting, formatting, and import sorting (`biome.json`). Replaces the former ESLint + Prettier setup; `content/` is excluded so authored posts are never reformatted
 
 ### Page Generation
 - Blog post pages use Next.js App Router with dynamic routes at `src/app/posts/[slug]/page.tsx`

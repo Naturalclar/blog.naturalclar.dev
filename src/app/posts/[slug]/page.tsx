@@ -1,12 +1,15 @@
-import React from 'react'
-import Link from 'next/link'
 import { format } from 'date-fns'
-import { Metadata } from 'next'
-import Layout from '../../../components/Layout'
+import type { Metadata } from 'next'
+import Link from 'next/link'
 import Bio from '../../../components/Bio'
-import { getAllPostSlugs, getPostData, getAdjacentPosts } from '../../../lib/posts'
-import { generateMetadata as generateSEOMetadata } from '../../../lib/metadata'
+import Layout from '../../../components/Layout'
 import { siteTitle } from '../../../data/static'
+import { generateMetadata as generateSEOMetadata } from '../../../lib/metadata'
+import {
+  getAdjacentPosts,
+  getAllPostSlugs,
+  getPostData,
+} from '../../../lib/posts'
 
 interface BlogPostProps {
   params: {
@@ -21,7 +24,9 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }: BlogPostProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: BlogPostProps): Promise<Metadata> {
   const post = await getPostData(params.slug)
   return generateSEOMetadata({
     title: post.title,
@@ -44,6 +49,9 @@ export default async function BlogPost({ params }: BlogPostProps) {
       >
         {post.date && format(new Date(post.date), 'MMMM dd, yyyy')}
       </p>
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: contentHtml is
+          built at build time from the repository's own Markdown via remark, so
+          there is no untrusted input. */}
       <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
       <hr
         style={{
@@ -51,7 +59,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
         }}
       />
       <Bio />
-      
+
       <ul
         style={{
           display: 'flex',
