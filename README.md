@@ -68,7 +68,7 @@ pnpm format
 
 - **Next.js** - React framework with static site generation
 - **TypeScript** - Type safety
-- **MDX** - Enhanced markdown with React components
+- **remark** - Markdown parsed and rendered to HTML at build time
 - **Biome** - Linting, formatting, and import sorting
 - **gray-matter** - Frontmatter parsing
 - **Feed** - RSS feed generation
