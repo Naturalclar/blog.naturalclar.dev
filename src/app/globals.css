@@ -34,6 +34,15 @@ h6 {
   font-family: Montserrat, sans-serif;
 }
 
+/* Article images come from Markdown as plain <img> with no width or height
+   attributes, at an intrinsic size several times the 656px content column.
+   max-width alone constrains them and the aspect ratio follows, because
+   height is already auto. Deliberately no `height: auto` here: it would
+   override the height attribute next/image sets on the Bio avatar. */
+img {
+  max-width: 100%;
+}
+
 blockquote {
   border-left: 4px solid #ccc;
   padding: 0 1em;
