@@ -30,27 +30,13 @@ export default function Pagination({
       <div>
         {hasPrevPage ? (
           <Link
+            className="pagination-link"
             href={currentPage === 2 ? '/' : `/page/${currentPage - 1}`}
-            style={{
-              textDecoration: 'none',
-              padding: '0.5rem 1rem',
-              border: '1px solid #ccc',
-              borderRadius: '4px',
-            }}
           >
             ← Previous
           </Link>
         ) : (
-          <span
-            style={{
-              padding: '0.5rem 1rem',
-              border: '1px solid #e0e0e0',
-              borderRadius: '4px',
-              color: '#ccc',
-            }}
-          >
-            ← Previous
-          </span>
+          <span className="pagination-disabled">← Previous</span>
         )}
       </div>
 
@@ -58,15 +44,13 @@ export default function Pagination({
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
           <Link
             key={page}
+            aria-current={page === currentPage ? 'page' : undefined}
+            className={
+              page === currentPage
+                ? 'pagination-link pagination-number pagination-number-current'
+                : 'pagination-link pagination-number'
+            }
             href={page === 1 ? '/' : `/page/${page}`}
-            style={{
-              textDecoration: 'none',
-              padding: '0.5rem 0.75rem',
-              border: '1px solid #ccc',
-              borderRadius: '4px',
-              backgroundColor: page === currentPage ? '#007acc' : 'transparent',
-              color: page === currentPage ? 'white' : 'inherit',
-            }}
           >
             {page}
           </Link>
@@ -75,28 +59,11 @@ export default function Pagination({
 
       <div>
         {hasNextPage ? (
-          <Link
-            href={`/page/${currentPage + 1}`}
-            style={{
-              textDecoration: 'none',
-              padding: '0.5rem 1rem',
-              border: '1px solid #ccc',
-              borderRadius: '4px',
-            }}
-          >
+          <Link className="pagination-link" href={`/page/${currentPage + 1}`}>
             Next →
           </Link>
         ) : (
-          <span
-            style={{
-              padding: '0.5rem 1rem',
-              border: '1px solid #e0e0e0',
-              borderRadius: '4px',
-              color: '#ccc',
-            }}
-          >
-            Next →
-          </span>
+          <span className="pagination-disabled">Next →</span>
         )}
       </div>
     </nav>

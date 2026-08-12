@@ -37,6 +37,9 @@ export async function generateMetadata({
 export default async function BlogPost({ params }: BlogPostProps) {
   const post = await getPostData(params.slug)
   const { previous, next } = getAdjacentPosts(params.slug)
+  // Hoisted so the div below stays on one line — a biome-ignore comment only
+  // covers the line that follows it, not a wrapped attribute list.
+  const markup = { __html: post.contentHtml }
 
   return (
     <Layout title={siteTitle}>
@@ -49,10 +52,12 @@ export default async function BlogPost({ params }: BlogPostProps) {
       >
         {post.date && format(new Date(post.date), 'MMMM dd, yyyy')}
       </p>
+      {/* article-body scopes the Markdown styling in globals.css so it does
+          not leak into the header, the listing, or the pagination. */}
       {/* biome-ignore lint/security/noDangerouslySetInnerHtml: contentHtml is
           built at build time from the repository's own Markdown via remark, so
           there is no untrusted input. */}
-      <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+      <div className="article-body" dangerouslySetInnerHTML={markup} />
       <hr
         style={{
           marginBottom: '16px',

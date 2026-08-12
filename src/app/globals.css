@@ -16,9 +16,66 @@ body {
     sans-serif;
 }
 
+/* Site chrome — the header, listing titles and pagination — deliberately
+   reads as plain text. Hover and focus are the only affordances there. */
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid #0069c2;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Body copy is the opposite case: a link inside a paragraph has to be
+   identifiable without hovering, so it carries both colour and an underline.
+   #0069c2 is 5.53:1 on white (AA) and 3.80:1 against the black body text. */
+.article-body a {
+  color: #0069c2;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.article-body a:hover {
+  color: #00457a;
+  text-decoration-thickness: 2px;
+}
+
+/* Pagination controls read as buttons, so they take a border and background
+   on hover rather than the underline the rest of the site uses. */
+.pagination-link,
+.pagination-disabled {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.pagination-link:hover {
+  text-decoration: none;
+  border-color: #0069c2;
+  background-color: #f2f7fb;
+}
+
+.pagination-disabled {
+  border-color: #e0e0e0;
+  color: #ccc;
+}
+
+.pagination-number {
+  padding: 0.5rem 0.75rem;
+}
+
+.pagination-number-current,
+.pagination-number-current:hover {
+  border-color: #0069c2;
+  background-color: #0069c2;
+  color: #fff;
 }
 
 * {
