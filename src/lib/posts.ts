@@ -58,9 +58,14 @@ export function getSortedPostsData(): PostData[] {
   })
 }
 
+// Callers should leave postsPerPage alone: the page component and
+// generateStaticParams have to agree on it, or the routes that get
+// pre-rendered stop matching the posts each one slices out.
+export const POSTS_PER_PAGE = 10
+
 export function getPaginatedPosts(
   page: number = 1,
-  postsPerPage: number = 10
+  postsPerPage: number = POSTS_PER_PAGE
 ): PaginatedPosts {
   const allPosts = getSortedPostsData()
   const totalPages = Math.ceil(allPosts.length / postsPerPage)

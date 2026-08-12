@@ -20,7 +20,7 @@ export default function Page({ params }: PageProps) {
     notFound()
   }
 
-  const paginatedData = getPaginatedPosts(pageNumber, 10)
+  const paginatedData = getPaginatedPosts(pageNumber)
 
   if (paginatedData.posts.length === 0 && pageNumber > 1) {
     notFound()
@@ -57,7 +57,7 @@ export default function Page({ params }: PageProps) {
 }
 
 export async function generateStaticParams() {
-  const paginatedData = getPaginatedPosts(1, 10)
+  const paginatedData = getPaginatedPosts(1)
   const pages = []
 
   for (let i = 2; i <= paginatedData.totalPages; i++) {
