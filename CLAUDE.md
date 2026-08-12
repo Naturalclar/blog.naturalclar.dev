@@ -22,13 +22,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a Next.js-based static blog site with the following key architectural components:
 
 ### Content Structure
-- Blog posts are written in Markdown/MDX format in `content/blog/`
+- Blog posts are written in Markdown in `content/blog/`
 - Each blog post lives in its own directory with an `index.md` file
 - Assets (images) are stored alongside posts or in `content/assets/`
 - Posts support frontmatter with `title` and `date` fields
 
 ### Next.js Configuration
-- **MDX Integration**: Posts are processed using `@next/mdx` with support for `.md` and `.mdx` files
+- **Markdown Pipeline**: Posts are read from `content/blog/` by `src/lib/posts.ts` and converted to HTML with `remark` + `remark-html` at build time. Markdown is not registered as a page extension, so `.md` files are data, not routes
 - **Static Site Generation**: Uses Next.js App Router with static export for build output
 - **RSS Feed**: Generated via custom script (`scripts/generate-rss.js`) that runs after build
 - **TypeScript**: Full TypeScript support with strict type checking
