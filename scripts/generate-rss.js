@@ -1,6 +1,13 @@
 const fs = require('node:fs')
 const path = require('node:path')
 const { Feed } = require('feed')
+const {
+  author,
+  authorEmail,
+  siteDescription,
+  siteTitle,
+  siteUrl,
+} = require('../src/data/site.json')
 
 function readPostsFromDirectory() {
   const postsDirectory = path.join(process.cwd(), 'content/blog')
@@ -35,12 +42,10 @@ function readPostsFromDirectory() {
 
 function generateRSSFeed() {
   const posts = readPostsFromDirectory()
-  const siteUrl = 'https://blog.naturalclar.dev'
-  const author = 'Naturalclar (Jesse Katsumata)'
 
   const feed = new Feed({
-    title: 'naturalclar.dev',
-    description: "Naturalclar's personal blog",
+    title: siteTitle,
+    description: siteDescription,
     id: siteUrl,
     link: siteUrl,
     language: 'en',
@@ -54,7 +59,7 @@ function generateRSSFeed() {
     },
     author: {
       name: author,
-      email: 'jesse.katsumata@gmail.com',
+      email: authorEmail,
       link: siteUrl,
     },
   })
@@ -69,7 +74,7 @@ function generateRSSFeed() {
       author: [
         {
           name: author,
-          email: 'jesse.katsumata@gmail.com',
+          email: authorEmail,
           link: siteUrl,
         },
       ],

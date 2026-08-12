@@ -32,7 +32,7 @@ Posts live in `content/blog/{slug}/index.md`, one directory per post, with image
 
 `src/lib/posts.ts` is the single entry point for post data. It reads the directory with `fs`, parses frontmatter with `gray-matter`, and converts the body to HTML with `remark` + `remark-html` at build time. Markdown is deliberately *not* in `pageExtensions` — `.md` files are data read by that module, never routes. The resulting `contentHtml` is injected with `dangerouslySetInnerHTML` in `src/app/posts/[slug]/page.tsx`, which carries a `biome-ignore` justifying it (the input is this repository's own Markdown).
 
-Site-wide constants (`author`, `social`, `siteTitle`, `siteDescription`, `siteUrl`) live in `src/data/static.ts` and feed both `src/lib/metadata.ts` and the components.
+Site-wide constants live in `src/data/site.json`. `src/data/static.ts` re-exports them as named exports for the app (`src/lib/metadata.ts` and the components), and `scripts/generate-rss.js` `require`s the same JSON. Edit the JSON, not the re-exports — it is the single source shared across the TypeScript and CommonJS sides.
 
 ### RSS generation, and its ordering bug
 
@@ -40,10 +40,7 @@ Site-wide constants (`author`, `social`, `siteTitle`, `siteDescription`, `siteUr
 
 **On a clean checkout the feed never reaches `out/`.** Verified: after `rm -rf out public && pnpm build`, `public/rss.xml` exists and `out/rss.xml` does not. A second local build appears to work only because it copies the *previous* run's stale file. CI and Netlify build from a clean tree, so they hit the broken case every time. Fix by writing into `out/` or by generating before `next build` — but note that `out/` does not exist until `next build` runs.
 
-Two related traps in the same area:
-
-- `src/lib/rss.ts` is dead code. It duplicates the script's logic and is imported by nothing. Editing it has no effect on the build; the script at `scripts/generate-rss.js` is what runs.
-- That script is CommonJS and cannot import `src/data/static.ts`, so it **hardcodes its own copies** of `siteUrl`, `author`, and the site title. Changing `src/data/static.ts` alone will silently desync the feed.
+One duplication remains in the same area: `scripts/generate-rss.js` re-implements the post reading that `src/lib/posts.ts` already does — its own `readdirSync` walk, `gray-matter` parse, excerpt slice, and sort. The two must be kept in agreement by hand. Being CommonJS, the script cannot import the TypeScript module; closing this properly needs a TypeScript-aware runner for the script.
 
 ### Pagination
 
