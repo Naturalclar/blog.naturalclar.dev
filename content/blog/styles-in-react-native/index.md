@@ -91,7 +91,7 @@ StyleSheet にはいくつか API が提供されています。
 
 例えば
 
-```JSX
+```jsx
 import {StyleSheet} from 'react-native'
 
 const styles = StyleSheet.create({
@@ -107,7 +107,7 @@ console.log(styles.container) // 3 のような numberが返ってくる。
 
 `StyleSheet.flatten()`を使用すれば、id から取得した Object が返ってくるので Debug しやすくなります。
 
-```JSX
+```jsx
 import {StyleSheet} from 'react-native'
 
 const styles = StyleSheet.create({
