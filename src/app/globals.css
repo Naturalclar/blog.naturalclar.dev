@@ -329,3 +329,38 @@ pre code.hljs {
   background: none;
   padding: 0;
 }
+
+/* A code block that named a file in its fence, wrapped by rehype-code-title.
+   The caption and the block have to read as one object, so the figure carries
+   the outer margin and the pre gives up its own, and only the outer corners
+   of the pair are rounded.
+
+   Scoped to .article-body because prose sets margins on :where(figure) and
+   colour and size on :where(figcaption); an unscoped `figure` would sit at
+   lower specificity and lose. */
+.article-body .code-block {
+  margin: 1.5em 0;
+}
+
+/* The radius and the horizontal padding are prose's, measured rather than
+   guessed: the typography plugin's `.prose :where(pre)` outranks the bare
+   `pre` rule above, so an uncaptioned block renders at 6px and 1rem. These
+   match so the two kinds of block look like one family. */
+.article-body .code-block-title {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-bottom: 0;
+  border-radius: 6px 6px 0 0;
+  background: #eaeaea;
+  color: #444;
+  font-family: "Courier New", monospace;
+  font-size: 0.85em;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.article-body .code-block > pre {
+  margin: 0;
+  border-radius: 0 0 6px 6px;
+}
