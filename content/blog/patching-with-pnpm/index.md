@@ -1,13 +1,11 @@
 ---
-title: 'patching-with-pnpm'
+title: 'pnpm で node_modules 内のパッケージにパッチを当てる方法'
 date: '2024-01-06T01:44:03.725Z'
 ---
 
-## `pnpm` で `node_modules` 内のパッケージにパッチを当てる方法
-
 プロジェクトで `node_modules` の中にある特定のパッケージに変更を加える必要がある場面に直面した。
 
-### `yarn` v1 での対応
+## `yarn` v1 での対応
 
 以前はパッケージマネージャとして `yarn` v1 を採用していて、その時は `patch-package` を使うことで対応することができた。
 
@@ -29,7 +27,7 @@ npx patch-package [パッケージ名]
 }
 ```
 
-### `pnpm` での対応
+## `pnpm` での対応
 
 `pnpm` では `node_modules` が symlink で管理されているため `node_modules` を直接書き換える対応は行えない。`patch-package` も `pnpm` には非対応である。
 
