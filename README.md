@@ -22,11 +22,13 @@ pnpm dev
 # Build for production (creates static export in out/ directory)
 pnpm build
 
-# Start production server
+# Serve the built site from out/ to preview it
 pnpm start
 ```
 
-Visit `http://localhost:3000` to view the site locally during development.
+Visit `http://localhost:3000` to view the site, both for `pnpm dev` and for `pnpm start`.
+
+There is no production server: the build is a fully static export, so `pnpm start` serves the files in `out/` rather than running Next.js.
 
 ## ✍️ Writing Posts
 

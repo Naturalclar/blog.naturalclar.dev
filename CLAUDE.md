@@ -11,16 +11,11 @@ Always use `pnpm` — the version is pinned to 9.15.2 via the `packageManager` f
 - `pnpm lint` — `biome check`: lint, format check, and import order in one pass
 - `pnpm format` — `biome check --write`: applies fixes in place
 - `pnpm new` — scaffolds `content/blog/{title}/index.md` via scaffdog, prompting for a title
+- `pnpm start` — serves the built `out/` directory on port 3000, for checking a production build
 
-To preview a production build, serve the static output (`npx serve@latest out`).
+`pnpm start` runs `pnpm dlx serve out`, not `next start`: the build is a static export, so there is no Next.js server to start. It needs `pnpm build` to have run first.
 
-### Scripts that do not work
-
-Three entries in `package.json` are stale and fail if run. Don't reach for them, and don't assume they indicate a supported workflow:
-
-- `pnpm start` — `next start` is incompatible with `output: 'export'` and exits with an error
-- `pnpm export` — `next export` was removed in Next 14
-- `pnpm test` — a placeholder `echo`; there is no test framework in this repository
+**There is no test script and no test framework.** `pnpm test` was a placeholder `echo` that exited 0, which meant anything treating it as a gate got a pass from a repository with no tests; it was removed in #91 along with `pnpm export`, so both now fail loudly as unknown commands. Don't add a `test` script back without a suite behind it.
 
 ## Workflow
 

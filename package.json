@@ -21,12 +21,10 @@
   "scripts": {
     "build": "next build && node scripts/copy-post-assets.js && node scripts/generate-rss.js",
     "dev": "next dev",
-    "start": "next start",
-    "export": "next export",
     "format": "biome check --write",
     "lint": "biome check",
     "new": "scaffdog generate",
-    "test": "echo \"Write tests! -> https://nextjs.org/docs/testing\""
+    "start": "pnpm dlx serve out"
   },
   "dependencies": {
     "date-fns": "^3.3.1",
