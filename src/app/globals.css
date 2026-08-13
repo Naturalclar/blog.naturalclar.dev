@@ -1,8 +1,10 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* Everything below is deliberately unlayered, so it wins over Tailwind's
-   preflight and the prose styles, which live in @layer base/utilities. */
+/* Rules here are unlayered unless stated otherwise, so they win over
+   Tailwind's preflight and the prose styles, which live in @layer
+   base/utilities. The one @layer base block below is the exception, and says
+   why. */
 
 html,
 body {
@@ -110,62 +112,65 @@ a:focus-visible {
   box-sizing: border-box;
 }
 
-/* Preflight also strips paragraph and list spacing. prose restores both
-   inside the article; the listing on the home page has no such wrapper, and
-   its excerpts ran into the date without this. */
-p {
-  margin: 1em 0;
-}
+/* These restore what preflight strips: paragraph and list spacing, and the
+   browser's default heading sizes. The site chrome relies on them — prose
+   supplies its own inside the article.
 
-ul,
-ol {
-  list-style: revert;
-  padding-left: 40px;
-  margin: 1em 0;
-}
+   They live in @layer base deliberately. Written unlayered they would beat
+   every Tailwind utility, so `mt-0` on the header or `list-none` on the
+   prev/next list would silently do nothing. In the base layer, utilities and
+   prose both outrank them, which is the order you want. */
+@layer base {
+  p {
+    margin: 1em 0;
+  }
 
-/* Preflight strips the browser's default heading sizes. Inside the article
-   prose supplies its own, but the site chrome — the header in Layout, the
-   listing titles, the article title — relied on the defaults, so restore
-   them here at the UA scale. */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: Montserrat, sans-serif;
-  font-weight: 700;
-}
+  ul,
+  ol {
+    list-style: revert;
+    padding-left: 40px;
+    margin: 1em 0;
+  }
 
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+  }
 
-h2 {
-  font-size: 1.5em;
-  margin: 0.83em 0;
-}
+  h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+  }
 
-h3 {
-  font-size: 1.17em;
-  margin: 1em 0;
-}
+  h2 {
+    font-size: 1.5em;
+    margin: 0.83em 0;
+  }
 
-h4 {
-  font-size: 1em;
-  margin: 1.33em 0;
-}
+  h3 {
+    font-size: 1.17em;
+    margin: 1em 0;
+  }
 
-h5 {
-  font-size: 0.83em;
-  margin: 1.67em 0;
-}
+  h4 {
+    font-size: 1em;
+    margin: 1.33em 0;
+  }
 
-h6 {
-  font-size: 0.67em;
-  margin: 2.33em 0;
+  h5 {
+    font-size: 0.83em;
+    margin: 1.67em 0;
+  }
+
+  h6 {
+    font-size: 0.67em;
+    margin: 2.33em 0;
+  }
 }
 
 /* Article images come from Markdown as plain <img> with no width or height

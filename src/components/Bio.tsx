@@ -4,30 +4,19 @@ import { author, social } from '../data/static'
 
 const Bio = () => {
   return (
-    <div
-      style={{
-        display: `flex`,
-        alignItems: 'center',
-        marginBottom: '40px',
-      }}
-    >
+    <div className="mb-10 flex items-center">
       <Image
-        className="avatar"
+        className="avatar mr-4 rounded-full"
         src="https://www.github.com/Naturalclar.png"
         width={50}
         height={50}
         alt={author}
-        style={{
-          marginRight: '16px',
-          marginBottom: 0,
-          borderRadius: '100%',
-        }}
       />
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <p style={{ margin: 0 }}>
+      <div className="flex flex-col gap-2">
+        <p className="m-0">
           Author: <strong>{author}</strong>
         </p>
-        <p style={{ margin: 0 }}>
+        <p className="m-0">
           <a href={`${social.x}`}>X</a> <a href={`${social.github}`}>Github</a>
         </p>
       </div>

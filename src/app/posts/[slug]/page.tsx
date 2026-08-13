@@ -44,12 +44,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
   return (
     <Layout title={siteTitle}>
       <h1>{post.title}</h1>
-      <p
-        style={{
-          display: 'block',
-          marginBottom: '16px',
-        }}
-      >
+      <p className="mb-4">
         {post.date && format(new Date(post.date), 'MMMM dd, yyyy')}
       </p>
       {/* article-body scopes the Markdown styling in globals.css so it does
@@ -58,22 +53,10 @@ export default async function BlogPost({ params }: BlogPostProps) {
           built at build time from the repository's own Markdown via remark, so
           there is no untrusted input. */}
       <div className="article-body" dangerouslySetInnerHTML={markup} />
-      <hr
-        style={{
-          marginBottom: '16px',
-        }}
-      />
+      <hr className="mb-4" />
       <Bio />
 
-      <ul
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          listStyle: 'none',
-          padding: 0,
-        }}
-      >
+      <ul className="flex list-none flex-wrap justify-between p-0">
         <li>
           {previous && (
             <Link href={`/posts/${previous.slug}`} rel="prev">
