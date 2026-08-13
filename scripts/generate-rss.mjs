@@ -1,13 +1,15 @@
-const fs = require('node:fs')
-const path = require('node:path')
-const { Feed } = require('feed')
-const {
-  author,
-  authorEmail,
-  siteDescription,
-  siteTitle,
-  siteUrl,
-} = require('../src/data/site.json')
+import fs from 'node:fs'
+import path from 'node:path'
+import { Feed } from 'feed'
+import matter from 'gray-matter'
+import site from '../src/data/site.json' with { type: 'json' }
+import { toExcerpt } from '../src/lib/excerpt.mjs'
+
+// ESM rather than CommonJS so this can import the shared excerpt helper, which
+// has to be a module the TypeScript side can import too. Before that the
+// excerpt was computed here independently and produced raw Markdown in the
+// feed — see #112.
+const { author, authorEmail, siteDescription, siteTitle, siteUrl } = site
 
 function readPostsFromDirectory() {
   const postsDirectory = path.join(process.cwd(), 'content/blog')
@@ -25,7 +27,6 @@ function readPostsFromDirectory() {
       }
 
       const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const matter = require('gray-matter')
       const matterResult = matter(fileContents)
 
       return {
@@ -33,7 +34,7 @@ function readPostsFromDirectory() {
         title: matterResult.data.title || name,
         date: matterResult.data.date || '',
         content: matterResult.content,
-        excerpt: `${matterResult.content.substring(0, 200)}...`,
+        excerpt: toExcerpt(matterResult.content),
       }
     })
     .filter((post) => post !== null)
