@@ -9,7 +9,9 @@ date: '2024-01-06T01:44:03.725Z'
 
 ### `yarn` v1 での対応
 
-以前はパッケージマネージャとして `yarn` v1 を採用していて、その時は [patch-package](https://github.com/ds300/patch-package) を使うことで対応することができた。
+以前はパッケージマネージャとして `yarn` v1 を採用していて、その時は `patch-package` を使うことで対応することができた。
+
+https://github.com/ds300/patch-package
 
 `patch-package` を使う際はまず `node_modules` の中身のファイルを必要に応じて書き換えて、その後に以下のコマンドを使うことでパッチファイルが作成できた。
 

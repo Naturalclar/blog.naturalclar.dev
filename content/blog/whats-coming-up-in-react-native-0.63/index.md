@@ -13,7 +13,9 @@ React Native 0.62 の新機能については[この記事](https://blog.natural
 
 まず、React Native のリリースプロセスについて、少し説明します。
 React Native は facebook が開発しているフレームワークですが、リリースプロセスは facebook 社外のコミュニティである React Native Community が行っています。
-そのリリースプロセスや、各バージョンでリリースされる機能については、[@react-native-community/releases](https://github.com/react-native-community/releases) のリポジトリに記載されています。
+そのリリースプロセスや、各バージョンでリリースされる機能については、`@react-native-community/releases` のリポジトリに記載されています。
+
+https://github.com/react-native-community/releases
 
 0.63 で予定されている機能は[この issue](https://github.com/react-native-community/releases/issues/186) にて議論されています。
 

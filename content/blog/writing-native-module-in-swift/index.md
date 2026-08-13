@@ -7,7 +7,9 @@ date: '2020-12-05T13:00:00.000Z'
 
 この度、iOS 14 で新しく追加された機能である、UIButton に追加できる UIMenu を React Native で使う為の Native Component を作成しました。
 
-[react-native-menu/menu](https://github.com/react-native-menu/menu) で見る事ができて、自分が現在携わっているプロダクトでも活用しています。
+以下のリポジトリで見る事ができて、自分が現在携わっているプロダクトでも活用しています。
+
+https://github.com/react-native-menu/menu
 
 今回、このモジュールを Swift で書いたのですが、Swift で Native Module を書くための資料が自分の観測範囲ではかなり少ないので、学びを共有します。
 
@@ -15,7 +17,9 @@ date: '2020-12-05T13:00:00.000Z'
 
 ## プロジェクトのセットアップ
 
-Native Module を新しく作成するためのテンプレートはいくつかあるのですが、自分は[@react-native-community/bob](https://github.com/callstack/react-native-builder-bob)を勧めます。
+Native Module を新しく作成するためのテンプレートはいくつかあるのですが、自分は `@react-native-community/bob` を勧めます。
+
+https://github.com/callstack/react-native-builder-bob
 
 理由としては以下の通りです。
 

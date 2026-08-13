@@ -102,7 +102,9 @@ MLKit を使うことで顔面解析や自然言語解析など、様々なこ�
 
 次に、Shopify のエンジニアである Haris氏の LT です。
 
-開発していると無限に増えがちな色や FontSize、Margin などに対して Shopify が OSS として提供している [Restyle](https://github.com/shopify/restyle) を使ってどう対応しているかと言う話でした。
+開発していると無限に増えがちな色や FontSize、Margin などに対して Shopify が OSS として提供している Restyle を使ってどう対応しているかと言う話でした。
+
+https://github.com/shopify/restyle
 
 Restyle を使うことで使い回されるテーマや、スタイルはほとんど同じなんだけど役割が違う箇所、色とSpaceは同じなんだけどFontsizeは微妙に違う箇所などに対して悩むことを少なくします。さらに、TypeScript で型も保管されるので、非常に使いやすそうな印象を受けました。
 
@@ -133,9 +135,13 @@ React Native Windows では Windows PC はもちろん、タブレットPC、2-i
 
 この LT では、同じコードのはずなのに、自分の環境では動いて、他の環境では動かない「おま環」問題について、envinfo や Solidarity を使ってどう対処していくかという内容でした。
 
-[envinfo](https://github.com/tabrindle/envinfo) は自分のPCのスペックや、PC の中に入っている node や yarn、npm、python がどのバージョンであるかを一覧として表示するための便利なツールです。必要な情報に絞って、cli に入れることで、issue を上げる時にその人の環境がわかるので、デバッグをするときに役に立ちます。今では、多くのライブラリのなかで使われており、react-native の cli でも `react-native info` コマンドで表示される情報を取得するために、 envinfo が使われています。
+https://github.com/tabrindle/envinfo
 
-[solidarity](https://github.com/infinitered/solidarity) は動作する環境の情報をsnapshotとしてgithubに保存できるツールです。内部ではenvinfoが使われています。
+envinfo は自分のPCのスペックや、PC の中に入っている node や yarn、npm、python がどのバージョンであるかを一覧として表示するための便利なツールです。必要な情報に絞って、cli に入れることで、issue を上げる時にその人の環境がわかるので、デバッグをするときに役に立ちます。今では、多くのライブラリのなかで使われており、react-native の cli でも `react-native info` コマンドで表示される情報を取得するために、 envinfo が使われています。
+
+https://github.com/infinitered/solidarity
+
+solidarity は動作する環境の情報をsnapshotとしてgithubに保存できるツールです。内部ではenvinfoが使われています。
 solidarity を使うことで、他のチームメンバーなどがプロジェクトをクローンして動かない、みたいなことがあった時に、コマンド一つで「動作していた環境」と「動作していない環境」のdiffを容易にとることができます。
 
 ## 後編に続く
