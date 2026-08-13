@@ -2,16 +2,96 @@
   "https://gist.github.com/poteto/37c076bf112a07ba39d0e5f0645fec43": {
     "title": "[DEPRECATED] React Compiler compatibility module for codebases unable to use React 19",
     "description": "[DEPRECATED] React Compiler compatibility module for codebases unable to use React 19 - babel.config.js",
-    "siteName": "Gist"
+    "siteName": "Gist",
+    "image": "/ogp/d0bbaf64586620adce0f1916773749fe.png"
   },
   "https://github.com/Naturalclar/blog.naturalclar.dev": {
     "title": "GitHub - Naturalclar/blog.naturalclar.dev: Naturalclar's blog",
     "description": "Naturalclar's blog. Contribute to Naturalclar/blog.naturalclar.dev development by creating an account on GitHub.",
     "siteName": "GitHub"
   },
+  "https://github.com/Naturalclar/talks": {
+    "title": "GitHub - Naturalclar/talks: Slides for tech meetups, made with mdx-deck",
+    "description": "Slides for tech meetups, made with mdx-deck. Contribute to Naturalclar/talks development by creating an account on GitHub.",
+    "siteName": "GitHub",
+    "image": "/ogp/06f64d5e1b7bbebdd3726fb568a75fad.png"
+  },
+  "https://github.com/adamzolyak/issue-labeler-action": {
+    "title": "GitHub - TinkurLab/issue-labeler-action: 🏷 A GitHub Action that adds labels to an issue based on a string in the issue description.",
+    "description": "🏷 A GitHub Action that adds labels to an issue based on a string in the issue description. - TinkurLab/issue-labeler-action",
+    "siteName": "GitHub",
+    "image": "/ogp/6203b9d06f7d4f993f8c84a67be5a079.png"
+  },
+  "https://github.com/callstack/react-native-builder-bob": {
+    "title": "GitHub - callstack/react-native-builder-bob: Simple set of CLIs to scaffold and build React Native libraries for different targets",
+    "description": "Simple set of CLIs to scaffold and build React Native libraries for different targets - callstack/react-native-builder-bob",
+    "siteName": "GitHub",
+    "image": "/ogp/ee250f0e3d66616c42ed499381d3efcc.png"
+  },
+  "https://github.com/cats-oss/scaffdog": {
+    "title": "GitHub - scaffdog/scaffdog: :dog: scaffdog is Markdown driven scaffolding tool.",
+    "description": ":dog: scaffdog is Markdown driven scaffolding tool. - scaffdog/scaffdog",
+    "siteName": "GitHub",
+    "image": "/ogp/1ad1175cfb02a357d7f70d08da72f2ec.png"
+  },
+  "https://github.com/ds300/patch-package": {
+    "title": "GitHub - ds300/patch-package: Fix broken node modules instantly  🏃🏽‍♀️💨",
+    "description": "Fix broken node modules instantly  🏃🏽‍♀️💨. Contribute to ds300/patch-package development by creating an account on GitHub.",
+    "siteName": "GitHub",
+    "image": "/ogp/a0a5fd50b722b5a9ec78a6a4e5d6fa26.png"
+  },
+  "https://github.com/facebook/react/tree/main/compiler": {
+    "title": "react/compiler at main · react/react",
+    "description": "The library for web and native user interfaces. Contribute to react/react development by creating an account on GitHub.",
+    "siteName": "GitHub",
+    "image": "/ogp/65b8a2551815d9463fddff5bd49966d9.png"
+  },
+  "https://github.com/infinitered/solidarity": {
+    "title": "GitHub - infinitered/solidarity: Solidarity is an environment checker for project dependencies across multiple machines.",
+    "description": "Solidarity is an environment checker for project dependencies across multiple machines. - infinitered/solidarity",
+    "siteName": "GitHub",
+    "image": "/ogp/c2c97753a763add13a2c2695b84a67dd.png"
+  },
+  "https://github.com/react-native-community/cli/pull/687": {
+    "title": "[#683] Convert merge.js to typescript by Naturalclar · Pull Request #687 · react-native-community/cli",
+    "description": "The React Native Community CLI — Command line tools to help you build React Native apps - [#683] Convert merge.js to typescript by Naturalclar · Pull Request #687 · react-native-community/cli",
+    "siteName": "GitHub",
+    "image": "/ogp/6cb97c002c7dc64fdb32548f1e51f6e9.png"
+  },
+  "https://github.com/react-native-community/releases": {
+    "title": "GitHub - react-native-community/releases: React Native releases",
+    "description": "React Native releases. Contribute to react-native-community/releases development by creating an account on GitHub.",
+    "siteName": "GitHub",
+    "image": "/ogp/4d917c1a749179e1b5e4ca5d418920d8.png"
+  },
+  "https://github.com/react-native-menu/menu": {
+    "title": "GitHub - react-native-menu/menu: UIMenu Component for React Native",
+    "description": "UIMenu Component for React Native. Contribute to react-native-menu/menu development by creating an account on GitHub.",
+    "siteName": "GitHub",
+    "image": "/ogp/5e5b7df4d1a5762a919facb5a460d9b9.png"
+  },
   "https://github.com/react-navigation/hooks": {
     "title": "GitHub - react-navigation/hooks: React hooks for convenient react-navigation use",
     "description": "React hooks for convenient react-navigation use. Contribute to react-navigation/hooks development by creating an account on GitHub.",
-    "siteName": "GitHub"
+    "siteName": "GitHub",
+    "image": "/ogp/fb1ebc6c352e0600f20d2a273171e354.png"
+  },
+  "https://github.com/react-spring/react-three-fiber": {
+    "title": "GitHub - pmndrs/react-three-fiber: 🇨🇭 A React renderer for Three.js",
+    "description": "🇨🇭 A React renderer for Three.js. Contribute to pmndrs/react-three-fiber development by creating an account on GitHub.",
+    "siteName": "GitHub",
+    "image": "/ogp/0cc212945ca971177e22e77fbbb20249.png"
+  },
+  "https://github.com/shopify/restyle": {
+    "title": "GitHub - Shopify/restyle: A type-enforced system for building UI components in React Native with TypeScript.",
+    "description": "A type-enforced system for building UI components in React Native with TypeScript. - Shopify/restyle",
+    "siteName": "GitHub",
+    "image": "/ogp/ea095ed397be02ad80bfef5eefb29e17.png"
+  },
+  "https://github.com/tabrindle/envinfo": {
+    "title": "GitHub - tabrindle/envinfo: Generate a report about your development environment for debugging and issue reporting",
+    "description": "Generate a report about your development environment for debugging and issue reporting - tabrindle/envinfo",
+    "siteName": "GitHub",
+    "image": "/ogp/52124b6192a3e72d9c892b9e43d1f90a.png"
   }
 }
