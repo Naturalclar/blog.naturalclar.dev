@@ -77,6 +77,20 @@ a:focus-visible {
   text-decoration-thickness: 2px;
 }
 
+/* The social links in Bio are icons, so the site-wide underline on hover
+   would draw a line under a glyph. They shift colour instead. Written here
+   rather than as utilities because `a:hover` above is unlayered and would
+   beat a `hover:no-underline` utility. */
+.social-link {
+  display: inline-flex;
+  color: #555;
+}
+
+.social-link:hover {
+  color: #0069c2;
+  text-decoration: none;
+}
+
 /* Pagination controls read as buttons, so they take a border and background
    on hover rather than the underline the rest of the site uses. */
 .pagination-link,
