@@ -18,7 +18,7 @@ Flipper とは、Facebook が開発しているネイティブアプリ用のデ
 この度、React Native でもその恩恵を受けられるようになった他、React Devtools など、React Native ならではのツールも組み込まれるようになりました。
 React Devtools は新しい v4 が組み込まれているので、従来の React devtools よりもよりスッキリした見た目で使いやすくなっております。
 
-![flipper-devtools](./flipper-devtools.png)
+![Flipper のウィンドウ。左サイドバーで React DevTools を選択し、Components のツリーと、選択中の TouchableText の props・state・style が表示されている。右には React Native の初期画面を映した iPhone シミュレータ](./flipper-devtools.png)
 
 また、Redux Inspector など、追加のプラグインもいれられるようになっています。
 
@@ -30,7 +30,7 @@ React Native で開発している人なら誰もが一度は「赤い画面」�
 
 React Native 0.62 では試験的に LogBox という新しいエラーメッセージの UI を試せるようになります。
 
-![logbox](./logbox.png)
+![LogBox の画面 2 つ。左は赤いヘッダーの Component Exception で、エラー文とコンポーネントスタックが並ぶ。右は黄色いヘッダーの Warning。どちらも下部に Dismiss と Minimize がある](./logbox.png)
 
 エントリーポイントである `index.js` にて、`unstable_enableLogBox()` を呼び出すことで新しい LogBox の UI が有効化されます。
 
@@ -42,7 +42,7 @@ unstable_enableLogBox()
 
 ## Appearance API
 
-![appearance](./appearance.png)
+![同じログイン画面の Light Theme と Dark Theme を並べた比較。背景が白と黒で反転し、下部の Sign Up と Login のボタンの色は共通](./appearance.png)
 
 0.62 では端末の Appearance 設定を取得できる Appearance API が追加されました。
 端末のテーマ設定に合わせて、アプリのテーマを Dark Mode や Light Mode に変更することができます。

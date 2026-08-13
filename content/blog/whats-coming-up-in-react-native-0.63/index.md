@@ -30,7 +30,7 @@ https://github.com/react-native-community/releases
 
 ### LogBox
 
-![logbox](./logbox.png)
+![LogBox の画面 2 つ。左は赤いヘッダーの Component Exception で、エラー文とコンポーネントスタックが並ぶ。右は黄色いヘッダーの Warning。どちらも下部に Dismiss と Minimize がある](./logbox.png)
 
 LogBox は React Native 0.62 で試験的に導入された、新しいエラー画面です。
 0.62 ではオプトインでしたが、次のバージョンからは、デフォルトで入るようになります。

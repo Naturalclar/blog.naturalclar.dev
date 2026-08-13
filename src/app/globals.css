@@ -166,6 +166,12 @@ a:focus-visible {
 .social-link {
   display: inline-flex;
   color: #555;
+  /* The icons are 20px, which is the whole link — under the 24px floor in
+     WCAG 2.2 SC 2.5.8, and two of them 12px apart. The padding takes the
+     target to 32px; the matching negative margin keeps the row looking
+     exactly as it did, so this buys hit area and nothing else. */
+  padding: 6px;
+  margin: -6px;
 }
 
 .social-link:hover {

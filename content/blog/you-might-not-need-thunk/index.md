@@ -35,15 +35,15 @@ redux-thunk で非同期処理の流れを簡単に書くと：
 ```js fooReducer.ts
 
 type FooState = {
-  loadng: boolean,
+  loading: boolean,
   list: Item[],
-  error: stirng
+  error: string
 }
 
 const initialState:FooState  = {
   loading: false,
   list: [],
-  error: string
+  error: '',
 }
 
 export const fooReducer = (state:FooState = initialState, action:FooAction) => {
@@ -109,7 +109,7 @@ react-redux の v7.1 から、hooks に対応した API が出たのでそれら
 - dispatch を使うのは、非同期処理が終わってからの一回のみで済ませる。
 
 ```js useFoo.ts
-import { useState, useCallback } form 'react'
+import { useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { State, FooAction } from './types'
 
@@ -190,7 +190,7 @@ export const FooList = () => {
 このような形で、ページ遷移時に非同期で何かを取得してくる処理を thunk 無しでも実現することができます。
 
 また、このように非同期処理のロジックを custom hooks に閉じ込めておくことで、別のページで同じ処理が必要になった時に hooks を使い回すことができます
-上の Compnent の例では、useEffect も useFoo の中に入れることで、完全にロジックと Component を分割させることができます。
+上の Component の例では、useEffect も useFoo の中に入れることで、完全にロジックと Component を分割させることができます。
 
 ## あとがき
 
