@@ -2,6 +2,10 @@ name: CI
 
 on: [push, pull_request]
 
+# Least privilege for the build; the deploy job widens it for itself only.
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,3 +31,35 @@ jobs:
       run: pnpm lint
     - name: Build
       run: pnpm build
+    # Deploying from this job rather than a workflow of its own means the
+    # export that ships is the one that was just linted and built, and there
+    # is only one place where the Node and pnpm versions are written down.
+    - name: Upload the export for Pages
+      if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: out
+
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Never two deploys at once, and never cancel one halfway: the site is
+    # replaced wholesale, so an interrupted deploy is a broken site.
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4

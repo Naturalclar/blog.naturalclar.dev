@@ -1,6 +1,6 @@
 # naturalclar.dev
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4eeb8f5b-187b-4276-8175-2756306151bd/deploy-status)](https://app.netlify.com/sites/blissful-goldwasser-9f3e3a/deploys)
+[![CI](https://github.com/Naturalclar/blog.naturalclar.dev/actions/workflows/ci.yml/badge.svg)](https://github.com/Naturalclar/blog.naturalclar.dev/actions/workflows/ci.yml)
 
 A personal tech blog built with Next.js, focusing on React Native, TypeScript, and modern web development.
 
@@ -74,7 +74,7 @@ pnpm format
 - **Biome** - Linting, formatting, and import sorting
 - **gray-matter** - Frontmatter parsing
 - **Feed** - RSS feed generation
-- **Netlify** - Hosting and deployment
+- **GitHub Pages** - Hosting and deployment
 
 ## 📝 License
 

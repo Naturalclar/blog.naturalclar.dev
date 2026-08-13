@@ -32,7 +32,7 @@ Stopping after the push and asking whether to open a PR is the wrong default her
 
 ## Architecture
 
-A Next.js App Router blog that builds to a fully static export and deploys to Netlify at https://blog.naturalclar.dev. There is no server at runtime: no middleware, no Server Actions, no route handlers, no rewrites, and `images.unoptimized` is set. Anything requiring a Next.js server will not work here.
+A Next.js App Router blog that builds to a fully static export and deploys to GitHub Pages at https://blog.naturalclar.dev. There is no server at runtime: no middleware, no Server Actions, no route handlers, no rewrites, and `images.unoptimized` is set. Anything requiring a Next.js server will not work here.
 
 ### Content pipeline
 
@@ -58,11 +58,16 @@ A URL written on a line of its own becomes an Open Graph card; a URL inside a se
 
 **You normally do not run it by hand.** `.github/workflows/ogp.yml` runs it and opens a pull request with the result: automatically when a push to `master` touches `content/**`, and on demand through *Run workflow*, which takes an `all` checkbox for the `--all` behaviour. Running it locally still works and is the fastest way to check one link.
 
-Deliberately not part of `pnpm build`: CI and Netlify build from clean checkouts, so a build-time fetch would put every deploy at the mercy of every host an article links to. The workflow is the opposite arrangement — the fetch happens on its own schedule and lands as a reviewable commit, and the build only ever reads what is committed.
+Deliberately not part of `pnpm build`: the deploy builds from a clean checkout, so a build-time fetch would put every deploy at the mercy of every host an article links to. The workflow is the opposite arrangement — the fetch happens on its own schedule and lands as a reviewable commit, and the build only ever reads what is committed.
 
 ### Static assets
 
 `public/` is the served static directory and **is tracked in git** — it holds `robots.txt` and `twitter-card.png` (the OG image `src/lib/metadata.ts` points every page at). `next build` copies it to the export root, so those files answer at `/robots.txt` and `/twitter-card.png`.
+
+Two files there exist for the host rather than for readers, and both have to be in `public/` rather than the repository root, because the Pages artifact is `out/` and only `public/` is copied into it:
+
+- `CNAME` holds `blog.naturalclar.dev`. It is what keeps the custom domain attached — a deploy whose artifact lacks it can clear the setting.
+- `.nojekyll` is insurance. Pages deployed through Actions is served as-is with no Jekyll step, so it changes nothing today; it matters only if the Pages source is ever switched back to a branch, where Jekyll would drop `_next/` for its leading underscore and take every stylesheet and script with it. `next build` does copy dotfiles, which was worth checking rather than assuming.
 
 The favicon is `src/app/favicon.ico`, using the App Router file convention rather than `public/`: that is what emits the `<link rel="icon">` tag into the HTML, and it adds one route to the static page count.
 
@@ -70,7 +75,7 @@ Until #95 these lived in a root `static/` directory and in `content/assets/`, ne
 
 ### Post-build scripts
 
-`pnpm build` is `next build`, then two Node scripts that write into `out/` — the export directory Netlify deploys. Both throw if `out/` is absent rather than writing somewhere that never ships, so run them only after a build.
+`pnpm build` is `next build`, then two Node scripts that write into `out/` — the export directory that gets uploaded as the Pages artifact. Both throw if `out/` is absent rather than writing somewhere that never ships, so run them only after a build.
 
 `scripts/copy-post-assets.js` copies everything except `index.md` from `content/blog/{slug}/` into `out/posts/{slug}/`. `content/` is read as data and is never copied by Next.js, so without this the relative image references in articles resolve to nothing — which was #97, and left every article image 404. `trailingSlash` puts each article at `/posts/{slug}/`, so its images belong next to its `index.html`. The rule is deliberately "every file but the Markdown", which also copies assets no article currently references.
 
@@ -80,7 +85,7 @@ Until #95 these lived in a root `static/` directory and in `content/assets/`, ne
 
 The feed goes directly into the export directory, not into `public/`.
 
-That ordering is load-bearing, so don't "tidy" it by moving the write to `public/`: `next build` copies `public/` into `out/` before the script runs, so a feed written there would reach `out/` only on a later rebuild that happened to find the previous run's file. This was a real bug (#89) — clean checkouts, which is what CI and Netlify build from, shipped no feed at all. The script now throws if `out/` is absent rather than silently writing somewhere that never gets deployed.
+That ordering is load-bearing, so don't "tidy" it by moving the write to `public/`: `next build` copies `public/` into `out/` before the script runs, so a feed written there would reach `out/` only on a later rebuild that happened to find the previous run's file. This was a real bug (#89) — clean checkouts, which is what the deploy builds from, shipped no feed at all. The script now throws if `out/` is absent rather than silently writing somewhere that never gets deployed.
 
 One duplication remains in the same area: `scripts/generate-rss.mjs` re-implements the post reading that `src/lib/posts.ts` already does — its own `readdirSync` walk, `gray-matter` parse and sort. The excerpt is no longer among them, since both call `toExcerpt`, but the walk itself must still be kept in agreement by hand. Closing it properly needs a TypeScript-aware runner so the script can import `posts.ts` directly.
 
@@ -124,9 +129,17 @@ Because `eslint-config-next` was removed, **the Next.js-specific rules (`@next/n
 
 ### CI
 
-`.github/workflows/ci.yml` runs `pnpm lint` then `pnpm build` on Node 22 for every push and pull request. `.github/workflows/label.yml` auto-labels new issues by keyword — an issue whose title or body contains "post" gets `Post Idea`, and "feature" gets `feature request`.
+`.github/workflows/ci.yml` runs `pnpm lint` then `pnpm build` on Node 22 for every push and pull request, **and deploys**: on a push to `master` the same job uploads `out/` as the Pages artifact and a second job publishes it. Deploying from the job that built it means the export that ships is the one that was just linted and built, and the Node and pnpm versions are written down once.
+
+The deploy job carries its own `pages: write` / `id-token: write`; the workflow default is `contents: read`, so a pull request build never holds deploy permissions. Its concurrency group does **not** cancel in progress — the site is replaced wholesale, so an interrupted deploy is a broken site.
+
+The Pages source must stay on **GitHub Actions** (Settings → Pages). Switching it to a branch would both break this workflow and reintroduce Jekyll — see the static assets section.
+
+**There are no deploy previews.** A pull request is checked by `ci.yml` alone; nothing renders the result before merge. Netlify used to provide one, and that is the visible cost of #138.
+
+`.github/workflows/label.yml` auto-labels new issues by keyword — an issue whose title or body contains "post" gets `Post Idea`, and "feature" gets `feature request`.
 
 `.github/workflows/ogp.yml` refreshes the OGP cache and opens a pull request (see the OGP section above). Two things about it are worth knowing before changing it:
 
 - **It needs write permissions the repository does not grant by default.** Settings → Actions → General → Workflow permissions must be *Read and write*, with *Allow GitHub Actions to create and approve pull requests* ticked. Without them the run fails at the push or the `gh pr create`.
-- **Its pull request does not run `ci.yml`.** GitHub does not trigger workflows from events raised with `GITHUB_TOKEN`, so the CI check is simply absent there. Netlify still builds a deploy preview — it listens to its own webhook — which is the useful check for a cache change anyway, since it shows the cards.
+- **Its pull request gets no checks at all.** GitHub does not trigger workflows from events raised with `GITHUB_TOKEN`, so `ci.yml` never runs on it, and since the move off Netlify there is no deploy preview either. The run summary in the workflow's own log — which URLs were fetched, which failed — is the only evidence of what it did. Read it before merging.
