@@ -24,12 +24,14 @@
     "format": "biome check --write",
     "lint": "biome check",
     "new": "scaffdog generate",
+    "ogp": "node scripts/fetch-ogp.mjs",
     "start": "pnpm dlx serve out"
   },
   "dependencies": {
     "date-fns": "^3.3.1",
     "feed": "^4.2.2",
     "gray-matter": "^4.0.3",
+    "hast-util-from-html": "^2.0.3",
     "highlight.js": "11.12.0",
     "lowlight": "3.3.0",
     "mdast-util-to-string": "4.0.0",
@@ -39,7 +41,9 @@
     "rehype-highlight": "7.0.2",
     "rehype-stringify": "10.0.1",
     "remark": "^15",
-    "remark-rehype": "11.1.2"
+    "remark-gfm": "^4.0.1",
+    "remark-rehype": "11.1.2",
+    "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.8",

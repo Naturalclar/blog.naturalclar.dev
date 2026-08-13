@@ -6,8 +6,10 @@ import { common } from 'lowlight'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeStringify from 'rehype-stringify'
 import { remark } from 'remark'
+import remarkGfm from 'remark-gfm'
 import remarkRehype from 'remark-rehype'
 import { toExcerpt } from './excerpt.mjs'
+import rehypeOgpCard from './rehype-ogp-card.mjs'
 
 // rehype-highlight replaces its language registry when `languages` is passed,
 // so spread lowlight's `common` set to keep it. powershell is not in common
@@ -116,8 +118,10 @@ export async function getPostData(
   // no point to hook a highlighter in. Going through rehype colours the code
   // at build time, so the pages ship plain markup and no client-side JS.
   const processedContent = await remark()
+    .use(remarkGfm)
     .use(remarkRehype)
     .use(rehypeHighlight, { detect: false, languages })
+    .use(rehypeOgpCard)
     .use(rehypeStringify)
     .process(matterResult.content)
   const contentHtml = processedContent.toString()
