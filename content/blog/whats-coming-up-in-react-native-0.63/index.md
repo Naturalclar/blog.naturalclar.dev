@@ -65,7 +65,7 @@ const PressableExample = () => {
 
 PlatformColor は端末で設定されている基本色を取得するのに使用されます。
 
-iOS なら UI Standard Colors や UI Element Colors のような [UI Colors](https://developer.apple.com/documentation/uikit/uicolor), Android は [R.attrs](- [Android R.attr](https://developer.android.com/reference/android/R.attr) に設定されている値が取得できます。
+iOS なら UI Standard Colors や UI Element Colors のような [UI Colors](https://developer.apple.com/documentation/uikit/uicolor), Android は [R.attr](https://developer.android.com/reference/android/R.attr) に設定されている値が取得できます。
 
 それぞれ、DarkMode と LightColor の色が用意されているので、この API を使うだけで、自前で LightMode と DarkMode の色を設定しなくても Dark Mode の対応が行えるようになっています。
 

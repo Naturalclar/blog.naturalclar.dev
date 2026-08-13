@@ -30,7 +30,7 @@ export const HelloWorld = () => (
 
 react-native は Web と同じ様に書くことができますが、CSS ファイルをそのまま使うことはできません。
 
-かわりに、react-native が提供する`[StyleSheet](https://facebook.github.io/react-native/docs/styleSheet )]`という API を使用します。
+かわりに、react-native が提供する [`StyleSheet`](https://facebook.github.io/react-native/docs/stylesheet) という API を使用します。
 
 ```jsx
 import React from 'react'
@@ -217,7 +217,7 @@ react-native の Style は基本的に Web の CSS と同じように使えま�
 
 react-native の画面はすべて、FlexBox で表現します。
 
-これは、react-native が View の部分にて `[yoga](https://github.com/facebook/yoga)`という Facebook 製のクロスプラットフォームで Flexbox を実装するライブラリを使用しているためです。
+これは、react-native が View の部分にて [`yoga`](https://github.com/facebook/yoga) という Facebook 製のクロスプラットフォームで Flexbox を実装するライブラリを使用しているためです。
 
 なので、`display` property は`flex`がデフォルトで、その他対応しているのは`none`のみです。`grid`は使えません。
 
@@ -243,5 +243,5 @@ WIP
 ## 参考サイト
 
 - [react-native: StyleSheet](https://facebook.github.io/react-native/docs/stylesheet)
-- [react-native: Layout Props](https://facebook.github.io/react-native/docs/layout-props.html))
+- [react-native: Layout Props](https://facebook.github.io/react-native/docs/layout-props.html)
 - [Taming React Native’s ScrollView with flex](https://medium.com/@peterpme/taming-react-natives-scrollview-with-flex-144e6ff76c08)
