@@ -46,6 +46,16 @@ Site-wide constants live in `src/data/site.json`. `src/data/static.ts` re-export
 
 The listing summary, the meta description and the RSS item description all come from one place too: `toExcerpt` in `src/lib/excerpt.mjs`. It parses the Markdown and flattens it to text rather than slicing the source, which is what used to leak link syntax and code fences into all three (#112). It is plain `.mjs` on purpose — TypeScript for the app, importable from the RSS script, which is why that script is ESM.
 
+### OGP cards
+
+A URL written on a line of its own becomes an Open Graph card; a URL inside a sentence stays an inline link. `remark-gfm` is what turns a bare URL into a link node at all — without it they rendered as plain text, not even clickable (#117).
+
+`src/lib/rehype-ogp-card.mjs` does the replacement and **reads `src/data/ogp.json` only** — the build never touches the network. A URL with no cache entry is left as an ordinary link, so an unrefreshed cache costs presentation, never a red build.
+
+`pnpm ogp` refreshes that cache: it walks `content/blog/`, fetches the URLs it does not already have, downloads their OG images into `public/ogp/`, drops entries and images no article references any more, and writes the result. Run it after adding a link, from somewhere with network access, and commit both the JSON and the images. `--all` re-fetches everything rather than only the missing entries.
+
+Deliberately not part of `pnpm build`: CI and Netlify build from clean checkouts, so a build-time fetch would put every deploy at the mercy of every host an article links to.
+
 ### Static assets
 
 `public/` is the served static directory and **is tracked in git** — it holds `robots.txt` and `twitter-card.png` (the OG image `src/lib/metadata.ts` points every page at). `next build` copies it to the export root, so those files answer at `/robots.txt` and `/twitter-card.png`.

@@ -77,6 +77,82 @@ a:focus-visible {
   text-decoration-thickness: 2px;
 }
 
+/* OGP cards replace a paragraph holding nothing but a URL. They sit inside
+   .article-body, so they have to opt out of the body-copy link treatment
+   above — a bordered card with an underlined blue title reads as a mistake.
+   Scoped through .article-body to outrank `.article-body a`, which a bare
+   .ogp-card loses to on specificity. */
+.article-body .ogp-card {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  margin: 1.5em 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.article-body .ogp-card:hover {
+  border-color: #0069c2;
+  background-color: #f8fafc;
+  text-decoration: none;
+}
+
+.ogp-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.9rem 1rem;
+}
+
+.ogp-card-title {
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.ogp-card-description {
+  font-size: 0.875em;
+  color: #555;
+  /* Two lines, so a long description cannot stretch the card out of shape. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.ogp-card-site {
+  font-size: 0.8125em;
+  color: #777;
+}
+
+.ogp-card-image {
+  flex: 0 0 auto;
+  width: 160px;
+  object-fit: cover;
+  /* prose gives images their own margins; inside the card they are the card. */
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  /* Scoped the same way as the rule above, so the two do not sit at
+     descending specificity. */
+  .article-body .ogp-card {
+    flex-direction: column-reverse;
+  }
+
+  .article-body .ogp-card-image {
+    width: 100%;
+    height: 140px;
+  }
+}
+
 /* The social links in Bio are icons, so the site-wide underline on hover
    would draw a line under a glyph. They shift colour instead. Written here
    rather than as utilities because `a:hover` above is unlayered and would
