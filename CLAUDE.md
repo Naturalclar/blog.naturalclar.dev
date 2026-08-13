@@ -114,9 +114,7 @@ Formatting follows the previous Prettier conventions: single quotes, no semicolo
 
 Because `eslint-config-next` was removed, **the Next.js-specific rules (`@next/next/*`) and the React Hooks rules are not enforced** — Biome does not implement them. Nothing checks for `exhaustive-deps` violations or `no-img-element`.
 
-`tsconfig.json` defines `@/*` path aliases, but no source file uses them; imports are relative throughout. Match the surrounding relative style rather than introducing aliases piecemeal.
-
-`main.css` at the repository root is unreferenced; the stylesheet actually in use is `src/app/globals.css`, imported from `src/app/layout.tsx`.
+**Imports are relative everywhere, and `tsconfig.json` no longer declares path aliases.** They were configured but unused, and #93 removed them rather than adopting them: `scripts/*.mjs` are run by Node directly, so `@/…` cannot resolve there, and the `.mjs` modules under `src/lib/` are imported from both sides. Aliases could therefore only ever cover part of the tree, with an invisible boundary — an alias added to `src/lib/excerpt.mjs` would pass lint and `tsc` and break `pnpm build` at the RSS step. One convention avoids that.
 
 ### CI
 
