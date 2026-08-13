@@ -3,8 +3,6 @@ title: 'Cleaning up unavailable XCode simulators'
 date: '2019-12-15T12:50:32.429Z'
 ---
 
-# メモ
-
 最近 Macbook の容量がいっぱいになっていたので、`ncdu` を使って何が容量を食っているかをしらべてみたところ、
 XCode の iOS Simulator が容量を食っていることが判明した。
 
