@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fromHtml } from 'hast-util-from-html'
@@ -119,9 +120,13 @@ async function downloadImage(imageUrl, url) {
 
   // Named after the page URL rather than the image URL so a re-fetch
   // overwrites in place instead of leaving the old file behind.
-  const name =
-    Buffer.from(url).toString('base64url').replace(/=+$/, '').slice(0, 40) +
-    extension
+  //
+  // A hash, not the encoded URL: this was base64url truncated to 40
+  // characters, which is only the first 30 characters of the URL, so every
+  // github.com URL sharing a prefix landed on one file. The first --all run
+  // produced 13 images for 17 entries — /Naturalclar/talks was served the
+  // blog repository's image, and three react-native-* entries shared one.
+  const name = `${createHash('sha256').update(url).digest('hex').slice(0, 32)}${extension}`
 
   fs.mkdirSync(IMAGE_DIR, { recursive: true })
   fs.writeFileSync(
@@ -130,6 +135,29 @@ async function downloadImage(imageUrl, url) {
   )
 
   return `/ogp/${name}`
+}
+
+/**
+ * True when the title carries nothing the URL did not already say.
+ *
+ * Some sites answer a non-browser fetch with a placeholder: YouTube gives
+ * this fetcher no og:title and `<title>- YouTube</title>`, which would cache
+ * a card headed "- YouTube" — strictly less than the plain link it replaces.
+ * Failing the fetch instead leaves the URL as an ordinary link.
+ */
+function isUninformative(title, url, siteName) {
+  const stripped = title.replace(/^[\s\-–—|·:]+|[\s\-–—|·:]+$/g, '')
+
+  if (!stripped) {
+    return true
+  }
+
+  const host = new URL(url).hostname.replace(/^www\./, '').split('.')[0]
+
+  return (
+    stripped.toLowerCase() === host.toLowerCase() ||
+    stripped.toLowerCase() === siteName?.toLowerCase()
+  )
 }
 
 async function fetchMetadata(url) {
@@ -148,6 +176,12 @@ async function fetchMetadata(url) {
     throw new Error('no og:title or <title>')
   }
 
+  const siteName = metaContent(tree, ['og:site_name'])
+
+  if (isUninformative(title, url, siteName)) {
+    throw new Error(`title says nothing but the site name (${title})`)
+  }
+
   const entry = {
     title,
     description: metaContent(tree, [
@@ -155,7 +189,7 @@ async function fetchMetadata(url) {
       'twitter:description',
       'description',
     ]),
-    siteName: metaContent(tree, ['og:site_name']),
+    siteName,
   }
 
   const imageUrl = metaContent(tree, ['og:image', 'twitter:image'])
