@@ -18,6 +18,9 @@ import { CACHE_PATH, loadOgpCache, standaloneLinkUrl } from '../src/lib/ogp.mjs'
 
 const IMAGE_DIR = path.join(process.cwd(), 'public/ogp')
 const TIMEOUT_MS = 15000
+const RETRIES = 2
+const BACKOFF_MS = [2000, 5000]
+const MAX_BACKOFF_MS = 15000
 const USER_AGENT =
   'Mozilla/5.0 (compatible; blog.naturalclar.dev OGP fetcher; +https://blog.naturalclar.dev)'
 
@@ -102,8 +105,39 @@ async function fetchWithTimeout(url, init = {}) {
   }
 }
 
+/**
+ * Fetch, retrying while the host is rate-limiting us.
+ *
+ * GitHub renders repository cards on demand and answers 429 when asked for
+ * too many at once — one run asked for eighteen and lost a card that way.
+ * Retry-After is honoured when sent, since the host knows better than a
+ * fixed backoff does.
+ */
+async function fetchWithRetry(url, init = {}) {
+  let response = await fetchWithTimeout(url, init)
+
+  for (
+    let attempt = 0;
+    response.status === 429 && attempt < RETRIES;
+    attempt++
+  ) {
+    const after = Number(response.headers.get('retry-after'))
+    const wait = Math.min(
+      Number.isFinite(after) && after > 0 ? after * 1000 : BACKOFF_MS[attempt],
+      MAX_BACKOFF_MS
+    )
+
+    console.log(`  429 from ${new URL(url).hostname}, waiting ${wait}ms`)
+    await new Promise((resolve) => setTimeout(resolve, wait))
+
+    response = await fetchWithTimeout(url, init)
+  }
+
+  return response
+}
+
 async function downloadImage(imageUrl, url) {
-  const response = await fetchWithTimeout(imageUrl)
+  const response = await fetchWithRetry(imageUrl)
 
   if (!response.ok) {
     throw new Error(`image responded ${response.status}`)
@@ -161,7 +195,7 @@ function isUninformative(title, url, siteName) {
 }
 
 async function fetchMetadata(url) {
-  const response = await fetchWithTimeout(url)
+  const response = await fetchWithRetry(url)
 
   if (!response.ok) {
     throw new Error(`responded ${response.status}`)
@@ -207,6 +241,28 @@ async function fetchMetadata(url) {
   )
 }
 
+/**
+ * Carry a committed image across a re-fetch that came back without one.
+ *
+ * `--all` rebuilds every entry from scratch, so a host that rate-limits the
+ * image on this run but not the last would otherwise *remove* a good image —
+ * a refresh that makes the site worse. The file is only kept if it is still
+ * on disk, so a hand-deleted image is not resurrected as a dead reference.
+ */
+function keepImage(entry, previous) {
+  if (
+    entry.image ||
+    !previous?.image ||
+    !fs.existsSync(path.join(process.cwd(), 'public', previous.image))
+  ) {
+    return entry
+  }
+
+  console.log(`  image kept from the previous run (${previous.image})`)
+
+  return { ...entry, image: previous.image }
+}
+
 const urls = collectUrls()
 const cache = loadOgpCache()
 const refreshAll = process.argv.includes('--all')
@@ -223,7 +279,7 @@ let failed = 0
 
 for (const url of pending) {
   try {
-    cache[url] = await fetchMetadata(url)
+    cache[url] = keepImage(await fetchMetadata(url), cache[url])
     ok += 1
     console.log(`  ok    ${url} — ${cache[url].title}`)
   } catch (error) {
