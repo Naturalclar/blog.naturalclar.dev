@@ -10,11 +10,11 @@ React Europe ではオンラインカンファレンスの他に、２日に渡�
 
 ## トークまとめ
 
-各トークの概要やタイムテーブルなどは[公式サイト](https://remote.reactsummit.com/)に記載されています。
+各トークの概要やタイムテーブルなどは[公式サイト](https://www.react-europe.org/)に記載されています。
 
 ツイッターでは [#ReactEurope](https://twitter.com/hashtag/ReactEurope) のハッシュタグでつぶやかれています。
 
-また、[Discord](​https://discord.gg/r6yjG2g) にて質問を募集していました。
+また、[Discord](https://discord.gg/r6yjG2g) にて質問を募集していました。
 
 YouTube Live のリンクは[こちら](https://www.youtube.com/watch?v=41Ia291KIvI)
 
