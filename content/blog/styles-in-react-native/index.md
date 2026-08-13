@@ -1,5 +1,5 @@
 ---
-title: 'styles in react-native'
+title: 'Styles in React Native'
 date: '2019-10-02T23:21:16.554Z'
 ---
 
