@@ -5,7 +5,9 @@ date: '2019-09-10T01:59:49.395Z'
 
 ## 背景
 
-[react-native-cli](https://github.com/react-native-community/cli/pull/687) の [good first issue](https://github.com/react-native-community/cli/pull/687) に取り組んでいた時に発見した話
+react-native-cli の good first issue に取り組んでいた時に発見した話
+
+https://github.com/react-native-community/cli/pull/687
 
 Good first issue の内容は、Flow で書かれていたコードの TS 化である。
 

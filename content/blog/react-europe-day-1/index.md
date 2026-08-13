@@ -53,7 +53,9 @@ Next は React を使ってアプリを高速で書けるフレームワーク�
 
 ３つ目のセッションでは、react-springなどのライブラリの作者である[@0xca0a](https://twitter.com/0xca0a)がreact-three-fiberについて話していました。
 
-[React Three Fiber](https://github.com/react-spring/react-three-fiber) は React で Webgl を扱えるようになるライブラリです。[Three.js](https://threejs.org/) をベースとして作られており、Three.js の機能をすべて使うことができます。Three.js の Wrapper では無いので、Three.js に大きな変更があったとしても、React Three Fiber は継続して使用することができます。
+https://github.com/react-spring/react-three-fiber
+
+React Three Fiber は React で Webgl を扱えるようになるライブラリです。[Three.js](https://threejs.org/) をベースとして作られており、Three.js の機能をすべて使うことができます。Three.js の Wrapper では無いので、Three.js に大きな変更があったとしても、React Three Fiber は継続して使用することができます。
 
 React Reconciler をベースとして作られており、DOMを持たないので、Webではもちろん、React Native を使って Mobile でも使うことができるようです。
 

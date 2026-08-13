@@ -43,7 +43,9 @@ Component を作成するたびに上記作業を行うのはとても手間に�
 ## scaffdog の導入
 
 Component を大量に作成するときに、毎回規定のファイルを作成するのが面倒なので、
-自分は [scaffdog](https://github.com/cats-oss/scaffdog) というツールを使用しています。
+自分は scaffdog というツールを使用しています。
+
+https://github.com/cats-oss/scaffdog
 
 Scaffdog は markdown 式に Template を作成出来る scaffolding ツールです。
 例えば、以下のような markdown のファイルを作成します。
@@ -157,8 +159,12 @@ scaffdog は、Component 以外にも、Gatsby で新しく Blog 記事を作成
 
 自分が使っているものは、以下のリポジトリの`.scaffdog` フォルダに入っているので、ぜひ確認してください。
 
-blog: https://github.com/Naturalclar/blog.naturalclar.dev
+ブログのリポジトリ
 
-slides: https://github.com/Naturalclar/talks
+https://github.com/Naturalclar/blog.naturalclar.dev
+
+スライドのリポジトリ
+
+https://github.com/Naturalclar/talks
 
 ぜひ、scaffdog を活用してみてください。

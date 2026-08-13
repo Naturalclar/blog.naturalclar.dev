@@ -113,5 +113,10 @@ export function c(size: number) {
 
 ## 参考
 
-React 18 で react-compiler を使うためのワークアラウンドのgist - https://gist.github.com/poteto/37c076bf112a07ba39d0e5f0645fec43
-React Compiler のソースコード - https://github.com/facebook/react/tree/main/compiler
+React 18 で react-compiler を使うためのワークアラウンドの gist
+
+https://gist.github.com/poteto/37c076bf112a07ba39d0e5f0645fec43
+
+React Compiler のソースコード
+
+https://github.com/facebook/react/tree/main/compiler
