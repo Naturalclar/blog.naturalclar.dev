@@ -32,8 +32,6 @@ redux-thunk で非同期処理の流れを簡単に書くと：
 
 コードで書くとこういう感じです：
 
-`fooReducer.ts`
-
 ```js fooReducer.ts
 
 type FooState = {
@@ -61,8 +59,6 @@ export const fooReducer = (state:FooState = initialState, action:FooAction) => {
   }
 }
 ```
-
-`fooAction.ts`
 
 ```js fooAction.ts
 export const fooAction = (): ThunkAction => async (dispatch: Dispatch) => {
@@ -112,8 +108,6 @@ react-redux の v7.1 から、hooks に対応した API が出たのでそれら
 - loading は useState で保持して、hooks 内で完結させる。
 - dispatch を使うのは、非同期処理が終わってからの一回のみで済ませる。
 
-`useFoo.ts`
-
 ```js useFoo.ts
 import { useState, useCallback } form 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -144,8 +138,6 @@ export const useFoo = () => {
 
 loading と error を持つ必要がなくなったので、reducer も簡略化することができます。
 
-`fooReducer.ts`
-
 ```js fooReducer.ts
 
 type FooState = {
@@ -167,8 +159,6 @@ export const fooReducer = (state:FooState = initialState, action:FooAction) => {
 ```
 
 component での使用例はこんな感じです
-
-`FooList.tsx`
 
 ```js FooList.tsx
 import React, { useEffect } from 'react'

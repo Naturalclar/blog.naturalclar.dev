@@ -9,6 +9,7 @@ import { remark } from 'remark'
 import remarkGfm from 'remark-gfm'
 import remarkRehype from 'remark-rehype'
 import { toExcerpt } from './excerpt.mjs'
+import rehypeCodeTitle from './rehype-code-title.mjs'
 import rehypeOgpCard from './rehype-ogp-card.mjs'
 
 // rehype-highlight replaces its language registry when `languages` is passed,
@@ -121,6 +122,7 @@ export async function getPostData(
     .use(remarkGfm)
     .use(remarkRehype)
     .use(rehypeHighlight, { detect: false, languages })
+    .use(rehypeCodeTitle)
     .use(rehypeOgpCard)
     .use(rehypeStringify)
     .process(matterResult.content)
