@@ -8,7 +8,8 @@
   "https://github.com/Naturalclar/blog.naturalclar.dev": {
     "title": "GitHub - Naturalclar/blog.naturalclar.dev: Naturalclar's blog",
     "description": "Naturalclar's blog. Contribute to Naturalclar/blog.naturalclar.dev development by creating an account on GitHub.",
-    "siteName": "GitHub"
+    "siteName": "GitHub",
+    "image": "/ogp/ba70b9420777bf0bf525da3ddff91d0c.png"
   },
   "https://github.com/Naturalclar/talks": {
     "title": "GitHub - Naturalclar/talks: Slides for tech meetups, made with mdx-deck",
