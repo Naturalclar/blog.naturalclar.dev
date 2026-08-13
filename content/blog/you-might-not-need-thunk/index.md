@@ -49,11 +49,11 @@ const initialState:FooState  = {
 
 export const fooReducer = (state:FooState = initialState, action:FooAction) => {
   switch(action.type) {
-    case: 'FOO_START':
+    case 'FOO_START':
       return { ...state, loading: true}
-    case: 'FOO_SUCCESS':
+    case 'FOO_SUCCESS':
       return { ...state, loading: false, list: action.result}
-    case: 'FOO_FAILED':
+    case 'FOO_FAILED':
       return { ...state, loading: false, error: action.error}
     default:
       return state;
@@ -151,7 +151,7 @@ const initialState:FooState  = {
 
 export const fooReducer = (state:FooState = initialState, action:FooAction) => {
   switch(action.type) {
-    case: 'FOO_SUCCESS':
+    case 'FOO_SUCCESS':
       return { ...state, list: action.result}
     default:
       return state;
