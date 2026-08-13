@@ -10,6 +10,12 @@ html,
 body {
   padding: 0;
   margin: 0;
+  /* Articles quote Windows paths, env vars and URLs, which are single
+     unbreakable tokens wider than a phone. Without this they push the page
+     itself sideways — the whole document scrolls, not just the offending
+     line. Inherited, so it reaches prose too; `pre` is unaffected because
+     `white-space: pre` stops it wrapping and it scrolls on its own. */
+  overflow-wrap: break-word;
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -232,8 +238,16 @@ a:focus-visible {
     font-weight: 700;
   }
 
+  /* Only h1 is fluid, because it is the only heading the site chrome renders
+     large: the post title and the home page site title. The article's own
+     headings come from prose, which outranks this block.
+
+     clamp rather than a breakpoint — the long Japanese titles get gradually
+     worse as the viewport narrows rather than crossing a threshold. The upper
+     bound is the browser default the rest of this block restores, so nothing
+     changes at the 680px container width and above. */
   h1 {
-    font-size: 2em;
+    font-size: clamp(1.5rem, 1.1rem + 2.2vw, 2rem);
     margin: 0.67em 0;
   }
 
