@@ -23,6 +23,9 @@ importers:
       lowlight:
         specifier: 3.3.0
         version: 3.3.0
+      mdast-util-to-string:
+        specifier: 4.0.0
+        version: 4.0.0
       next:
         specifier: ^14.2.35
         version: 14.2.35(react-dom@18.2.0(react@18.2.0))(react@18.2.0)

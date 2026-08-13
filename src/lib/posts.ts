@@ -7,6 +7,7 @@ import rehypeHighlight from 'rehype-highlight'
 import rehypeStringify from 'rehype-stringify'
 import { remark } from 'remark'
 import remarkRehype from 'remark-rehype'
+import { toExcerpt } from './excerpt.mjs'
 
 // rehype-highlight replaces its language registry when `languages` is passed,
 // so spread lowlight's `common` set to keep it. powershell is not in common
@@ -53,7 +54,7 @@ export function getSortedPostsData(): PostData[] {
         title: matterResult.data.title || slug,
         date: matterResult.data.date || '',
         content: matterResult.content,
-        excerpt: `${matterResult.content.substring(0, 200)}...`,
+        excerpt: toExcerpt(matterResult.content),
       }
     })
     .filter((post): post is PostData => post !== null)
@@ -127,7 +128,7 @@ export async function getPostData(
     title: matterResult.data.title || slug,
     date: matterResult.data.date || '',
     content: matterResult.content,
-    excerpt: `${matterResult.content.substring(0, 200)}...`,
+    excerpt: toExcerpt(matterResult.content),
   }
 }
 
