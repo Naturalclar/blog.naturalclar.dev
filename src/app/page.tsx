@@ -14,14 +14,8 @@ export default function Home() {
       <Bio />
       {paginatedData.posts.map((post) => (
         <div key={post.slug}>
-          <h3
-            style={{
-              marginBottom: '4px',
-            }}
-          >
-            <Link href={`/posts/${post.slug}`} style={{ boxShadow: 'none' }}>
-              {post.title}
-            </Link>
+          <h3 className="mb-1">
+            <Link href={`/posts/${post.slug}`}>{post.title}</Link>
           </h3>
           <small>
             {post.date && format(new Date(post.date), 'MMMM dd, yyyy')}

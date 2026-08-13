@@ -13,35 +13,20 @@ const Layout: React.FC<Props> = ({ title, children }) => {
   const pathname = usePathname()
   const isRoot = pathname === '/'
 
+  // The Montserrat family the h3 used to set inline is already applied to
+  // every heading in globals.css, so it is not repeated here.
   const header = isRoot ? (
-    <h1
-      style={{
-        marginBottom: '24px',
-        marginTop: 0,
-      }}
-    >
+    <h1 className="mt-0 mb-6">
       <Link href="/">{title}</Link>
     </h1>
   ) : (
-    <h3
-      style={{
-        fontFamily: 'Montserrat, sans-serif',
-        marginTop: 0,
-      }}
-    >
+    <h3 className="mt-0">
       <Link href="/">{title}</Link>
     </h3>
   )
 
   return (
-    <div
-      style={{
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        maxWidth: '680px',
-        padding: '24px 12px',
-      }}
-    >
+    <div className="mx-auto max-w-[680px] px-3 py-6">
       {header}
       {children}
       <footer>

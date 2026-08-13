@@ -18,15 +18,7 @@ export default function Pagination({
   }
 
   return (
-    <nav
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginTop: '2rem',
-        padding: '1rem 0',
-      }}
-    >
+    <nav className="mt-8 flex items-center justify-between py-4">
       <div>
         {hasPrevPage ? (
           <Link
@@ -40,7 +32,7 @@ export default function Pagination({
         )}
       </div>
 
-      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+      <div className="flex items-center gap-2">
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
           <Link
             key={page}
