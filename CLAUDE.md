@@ -52,9 +52,11 @@ A URL written on a line of its own becomes an Open Graph card; a URL inside a se
 
 `src/lib/rehype-ogp-card.mjs` does the replacement and **reads `src/data/ogp.json` only** — the build never touches the network. A URL with no cache entry is left as an ordinary link, so an unrefreshed cache costs presentation, never a red build.
 
-`pnpm ogp` refreshes that cache: it walks `content/blog/`, fetches the URLs it does not already have, downloads their OG images into `public/ogp/`, drops entries and images no article references any more, and writes the result. Run it after adding a link, from somewhere with network access, and commit both the JSON and the images. `--all` re-fetches everything rather than only the missing entries.
+`pnpm ogp` refreshes that cache: it walks `content/blog/`, fetches the URLs it does not already have, downloads their OG images into `public/ogp/`, drops entries and images no article references any more, and writes the result. `--all` re-fetches everything rather than only the missing entries — which is what you need to fill in an entry cached without its `image`, since a plain run skips any URL already present.
 
-Deliberately not part of `pnpm build`: CI and Netlify build from clean checkouts, so a build-time fetch would put every deploy at the mercy of every host an article links to.
+**You normally do not run it by hand.** `.github/workflows/ogp.yml` runs it and opens a pull request with the result: automatically when a push to `master` touches `content/**`, and on demand through *Run workflow*, which takes an `all` checkbox for the `--all` behaviour. Running it locally still works and is the fastest way to check one link.
+
+Deliberately not part of `pnpm build`: CI and Netlify build from clean checkouts, so a build-time fetch would put every deploy at the mercy of every host an article links to. The workflow is the opposite arrangement — the fetch happens on its own schedule and lands as a reviewable commit, and the build only ever reads what is committed.
 
 ### Static assets
 
@@ -119,3 +121,8 @@ Because `eslint-config-next` was removed, **the Next.js-specific rules (`@next/n
 ### CI
 
 `.github/workflows/ci.yml` runs `pnpm lint` then `pnpm build` on Node 22 for every push and pull request. `.github/workflows/label.yml` auto-labels new issues by keyword — an issue whose title or body contains "post" gets `Post Idea`, and "feature" gets `feature request`.
+
+`.github/workflows/ogp.yml` refreshes the OGP cache and opens a pull request (see the OGP section above). Two things about it are worth knowing before changing it:
+
+- **It needs write permissions the repository does not grant by default.** Settings → Actions → General → Workflow permissions must be *Read and write*, with *Allow GitHub Actions to create and approve pull requests* ticked. Without them the run fails at the push or the `gh pr create`.
+- **Its pull request does not run `ci.yml`.** GitHub does not trigger workflows from events raised with `GITHUB_TOKEN`, so the CI check is simply absent there. Netlify still builds a deploy preview — it listens to its own webhook — which is the useful check for a cache change anyway, since it shows the cards.

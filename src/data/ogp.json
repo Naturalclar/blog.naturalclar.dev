@@ -1,4 +1,14 @@
 {
+  "https://gist.github.com/poteto/37c076bf112a07ba39d0e5f0645fec43": {
+    "title": "[DEPRECATED] React Compiler compatibility module for codebases unable to use React 19",
+    "description": "[DEPRECATED] React Compiler compatibility module for codebases unable to use React 19 - babel.config.js",
+    "siteName": "Gist"
+  },
+  "https://github.com/Naturalclar/blog.naturalclar.dev": {
+    "title": "GitHub - Naturalclar/blog.naturalclar.dev: Naturalclar's blog",
+    "description": "Naturalclar's blog. Contribute to Naturalclar/blog.naturalclar.dev development by creating an account on GitHub.",
+    "siteName": "GitHub"
+  },
   "https://github.com/react-navigation/hooks": {
     "title": "GitHub - react-navigation/hooks: React hooks for convenient react-navigation use",
     "description": "React hooks for convenient react-navigation use. Contribute to react-navigation/hooks development by creating an account on GitHub.",
