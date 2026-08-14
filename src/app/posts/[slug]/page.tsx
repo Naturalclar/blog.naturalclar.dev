@@ -1,8 +1,8 @@
-import { format } from 'date-fns'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Bio from '../../../components/Bio'
 import Layout from '../../../components/Layout'
+import PostDate from '../../../components/PostDate'
 import { siteTitle } from '../../../data/static'
 import { generateMetadata as generateSEOMetadata } from '../../../lib/metadata'
 import {
@@ -45,7 +45,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
     <Layout title={siteTitle}>
       <h1>{post.title}</h1>
       <p className="mb-4">
-        {post.date && format(new Date(post.date), 'MMMM dd, yyyy')}
+        <PostDate date={post.date} />
       </p>
       {/* article-body scopes the Markdown styling in globals.css so it does
           not leak into the header, the listing, or the pagination. */}
