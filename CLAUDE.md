@@ -93,6 +93,8 @@ One duplication remains in the same area: `scripts/generate-rss.mjs` re-implemen
 
 `getPaginatedPosts(page, postsPerPage)` in `src/lib/posts.ts` backs the home page (`src/app/page.tsx`) and `src/app/page/[page]/page.tsx`, which pre-renders pages 2..N via `generateStaticParams`.
 
+Both pages hand the result to `src/components/PostList.tsx` and render nothing of the listing themselves. They used to hold a full copy each — entry markup and the `Pagination` block — so a change to either had to be made twice, and a change made once looked correct until someone paged forward. Anything that touches how a post is listed belongs in that component.
+
 The page size lives in one place, `POSTS_PER_PAGE` in `src/lib/posts.ts`, and reaches the callers as the parameter's default — so call it as `getPaginatedPosts(page)` and don't pass a size. `generateStaticParams` decides *which* `/page/N` routes exist while the page component decides *which posts* each one slices out; if those two ever disagree the build still succeeds, and the damage shows up only as missing or blank pagination pages.
 
 ### Styling
