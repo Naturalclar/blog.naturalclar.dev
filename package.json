@@ -28,7 +28,6 @@
     "start": "pnpm dlx serve out"
   },
   "dependencies": {
-    "date-fns": "^3.3.1",
     "feed": "^4.2.2",
     "gray-matter": "^4.0.3",
     "hast-util-from-html": "^2.0.3",
