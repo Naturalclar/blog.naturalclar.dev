@@ -60,22 +60,28 @@ export default async function BlogPost({ params }: BlogPostProps) {
       <hr className="mb-4" />
       <Bio />
 
-      <ul className="flex list-none flex-wrap justify-between p-0">
-        <li>
-          {previous && (
-            <Link href={`/posts/${previous.slug}`} rel="prev">
-              ← {previous.title}
-            </Link>
-          )}
-        </li>
-        <li>
-          {next && (
-            <Link href={`/posts/${next.slug}`} rel="next">
-              {next.title} →
-            </Link>
-          )}
-        </li>
-      </ul>
+      {/* The label is Japanese because the document is (`lang="ja"`), even
+          though some chrome around it is still English. It is what a screen
+          reader announces when it reaches this landmark, so it belongs in the
+          reader's language rather than the interface's. */}
+      <nav aria-label="前後の記事">
+        <ul className="flex list-none flex-wrap justify-between p-0">
+          <li>
+            {previous && (
+              <Link href={`/posts/${previous.slug}`} rel="prev">
+                ← {previous.title}
+              </Link>
+            )}
+          </li>
+          <li>
+            {next && (
+              <Link href={`/posts/${next.slug}`} rel="next">
+                {next.title} →
+              </Link>
+            )}
+          </li>
+        </ul>
+      </nav>
     </Layout>
   )
 }
