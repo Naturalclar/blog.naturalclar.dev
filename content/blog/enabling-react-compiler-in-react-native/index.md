@@ -1,6 +1,7 @@
 ---
 title: 'React Native で React Compiler を有効にする'
 date: '2024-05-26T07:23:20.571Z'
+tags: ['react-native', 'react']
 ---
 
 先日、React Conf で React Compiler のオープンソース化が発表されました。

@@ -1,6 +1,7 @@
 ---
 title: 'Eslint/Prettier から biome に移行'
 date: '2024-05-22T00:26:06.959Z'
+tags: ['tooling']
 ---
 
 Eslint/Prettier から biome に移行する際のメモ。

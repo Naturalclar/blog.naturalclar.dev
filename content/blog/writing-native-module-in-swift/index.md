@@ -1,6 +1,7 @@
 ---
 title: 'React Native の Native Module を Swift で書く'
 date: '2020-12-05T13:00:00.000Z'
+tags: ['react-native']
 ---
 
 この記事は [React Native アドベントカレンダー](https://qiita.com/advent-calendar/2020/react-native) の 5 日目の記事です。

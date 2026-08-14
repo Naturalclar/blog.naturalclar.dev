@@ -1,6 +1,7 @@
 ---
 title: 'React Native アプリで TypeScript の paths alias を適用する'
 date: '2024-04-13T13:29:47.565Z'
+tags: ['react-native', 'typescript']
 ---
 
 React Native で typescript の paths の alias を適用するにはいくつか方法がありますが、この記事では追加のライブラリを必要としない方法を紹介します。

@@ -1,6 +1,7 @@
 ---
 title: "What's coming up in React Native 0.63"
 date: '2020-04-20T13:49:18.607Z'
+tags: ['react-native']
 ---
 
 最近、React Native の最新バージョン、0.62 がリリースされました。

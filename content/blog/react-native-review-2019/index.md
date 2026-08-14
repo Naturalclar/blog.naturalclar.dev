@@ -1,6 +1,7 @@
 ---
 title: 'React Native 2019年の振り返りと今後について'
 date: '2019-12-03T13:47:58.582Z'
+tags: ['react-native', 'retrospective']
 ---
 
 この記事は [React Native アドベントカレンダー][qiita-react-native-advent-calendar]の 3 日目の記事です。

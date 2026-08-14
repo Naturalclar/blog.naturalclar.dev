@@ -1,6 +1,7 @@
 ---
 title: 'noUnusedParametersがtrueでも部分的にignoreできる話'
 date: '2019-09-10T01:59:49.395Z'
+tags: ['typescript']
 ---
 
 ## 背景

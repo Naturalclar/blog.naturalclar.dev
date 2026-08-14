@@ -1,6 +1,7 @@
 ---
 title: 'Styles in React Native'
 date: '2019-10-02T23:21:16.554Z'
+tags: ['react-native', 'conference']
 ---
 
 [meguro.css #7](https://megurocss.connpass.com/event/145780/)で発表すること。

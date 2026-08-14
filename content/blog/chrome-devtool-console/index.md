@@ -1,6 +1,7 @@
 ---
 title: Chrome Developer ToolsのConsole
 date: '2019-08-29T18:00:00.000Z'
+tags: ['tooling']
 ---
 
 Chrome Devtool でパッと document 上の全てを検索できるようになりたい人のメモ

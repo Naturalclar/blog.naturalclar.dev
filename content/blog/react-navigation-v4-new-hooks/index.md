@@ -1,6 +1,7 @@
 ---
 title: 'new hooks in react-navigation v4'
 date: '2019-10-02T23:03:23.363Z'
+tags: ['react-native']
 ---
 
 https://github.com/react-navigation/hooks

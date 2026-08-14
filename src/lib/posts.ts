@@ -8,6 +8,7 @@ import rehypeStringify from 'rehype-stringify'
 import { remark } from 'remark'
 import remarkGfm from 'remark-gfm'
 import remarkRehype from 'remark-rehype'
+import tagVocabulary from '../data/tags.json'
 import { toExcerpt } from './excerpt.mjs'
 import rehypeCodeTitle from './rehype-code-title.mjs'
 import rehypeOgpCard from './rehype-ogp-card.mjs'
@@ -25,6 +26,38 @@ export interface PostData {
   date: string
   content: string
   excerpt: string
+  tags: string[]
+}
+
+export const TAGS: string[] = tagVocabulary
+
+/**
+ * A post's tags, checked against src/data/tags.json.
+ *
+ * Failing the build on an unknown tag is the point: a typo would otherwise
+ * pre-render its own /tags/react-nativ/ page holding one post, and nothing
+ * would look broken from any page that already existed.
+ */
+function readTags(data: { tags?: unknown }, slug: string): string[] {
+  const tags = data.tags
+
+  if (tags === undefined) {
+    return []
+  }
+
+  if (!Array.isArray(tags)) {
+    throw new Error(`${slug}: frontmatter \`tags\` must be a list`)
+  }
+
+  for (const tag of tags) {
+    if (!TAGS.includes(tag)) {
+      throw new Error(
+        `${slug}: unknown tag "${tag}". Known tags are ${TAGS.join(', ')} — add it to src/data/tags.json if it is new.`
+      )
+    }
+  }
+
+  return tags
 }
 
 export interface PaginatedPosts {
@@ -58,6 +91,7 @@ export function getSortedPostsData(): PostData[] {
         date: matterResult.data.date || '',
         content: matterResult.content,
         excerpt: toExcerpt(matterResult.content),
+        tags: readTags(matterResult.data, slug),
       }
     })
     .filter((post): post is PostData => post !== null)
@@ -135,7 +169,19 @@ export async function getPostData(
     date: matterResult.data.date || '',
     content: matterResult.content,
     excerpt: toExcerpt(matterResult.content),
+    tags: readTags(matterResult.data, slug),
   }
+}
+
+/** Tags that at least one post carries, in the order src/data/tags.json lists them. */
+export function getAllTags(): string[] {
+  const used = new Set(getSortedPostsData().flatMap((post) => post.tags))
+
+  return TAGS.filter((tag) => used.has(tag))
+}
+
+export function getPostsByTag(tag: string): PostData[] {
+  return getSortedPostsData().filter((post) => post.tags.includes(tag))
 }
 
 export function getAdjacentPosts(currentSlug: string) {

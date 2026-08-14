@@ -35,6 +35,7 @@ function readPostsFromDirectory() {
         date: matterResult.data.date || '',
         content: matterResult.content,
         excerpt: toExcerpt(matterResult.content),
+        tags: matterResult.data.tags ?? [],
       }
     })
     .filter((post) => post !== null)
@@ -71,6 +72,7 @@ function generateRSSFeed() {
       id: `${siteUrl}/posts/${post.slug}`,
       link: `${siteUrl}/posts/${post.slug}`,
       description: post.excerpt,
+      category: post.tags.map((name) => ({ name })),
       content: post.content,
       author: [
         {

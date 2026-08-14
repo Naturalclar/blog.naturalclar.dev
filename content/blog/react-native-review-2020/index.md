@@ -1,6 +1,7 @@
 ---
 title: 'React Native 2020年の振り返り'
 date: '2020-12-03T13:00:00.000Z'
+tags: ['react-native', 'retrospective']
 ---
 
 この記事は [React Native アドベントカレンダー](https://qiita.com/advent-calendar/2020/react-native) の 3 日目の記事です。
