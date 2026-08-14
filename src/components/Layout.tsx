@@ -34,9 +34,13 @@ const Layout: React.FC<Props> = ({ title, children }) => {
     <div className="mx-auto max-w-[680px] px-3 py-6">
       <header>{header}</header>
       <main>{children}</main>
+      {/* The tag index is linked from here rather than from the listing: the
+          tag pages need a way in from outside a post, and the footer is the
+          one place on every page that can offer it without competing with the
+          articles. */}
       <footer>
-        © {new Date().getFullYear()}, Built with{' '}
-        <a href="https://nextjs.org">Next.js</a>
+        <Link href="/tags/">タグ一覧</Link> · © {new Date().getFullYear()},
+        Built with <a href="https://nextjs.org">Next.js</a>
       </footer>
     </div>
   )

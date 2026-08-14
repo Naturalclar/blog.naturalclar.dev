@@ -163,6 +163,28 @@ a:focus-visible {
    would draw a line under a glyph. They shift colour instead. Written here
    rather than as utilities because `a:hover` above is unlayered and would
    beat a `hover:no-underline` utility. */
+/* The tag index: name on the left, count on the right, in a column narrow
+   enough that the eye can pair them. Unlayered for the same reason .tag-list
+   is — the `ul, ol` rule in @layer base would otherwise put bullets and a
+   40px indent back. */
+.tag-index {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 18em;
+}
+
+.tag-index li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4em 0;
+}
+
+.tag-index-count {
+  color: #666;
+  font-variant-numeric: tabular-nums;
+}
+
 /* The dated-article notice. Warm enough to be noticed above a wall of prose,
    restrained enough not to be the loudest thing on a page that is otherwise
    black text on white. Sits outside .article-body, so prose does not reach it
