@@ -27,6 +27,7 @@ export interface PostData {
   content: string
   excerpt: string
   tags: string[]
+  outdated: boolean
 }
 
 export const TAGS: string[] = tagVocabulary
@@ -92,6 +93,7 @@ export function getSortedPostsData(): PostData[] {
         content: matterResult.content,
         excerpt: toExcerpt(matterResult.content),
         tags: readTags(matterResult.data, slug),
+        outdated: matterResult.data.outdated === true,
       }
     })
     .filter((post): post is PostData => post !== null)
@@ -170,6 +172,7 @@ export async function getPostData(
     content: matterResult.content,
     excerpt: toExcerpt(matterResult.content),
     tags: readTags(matterResult.data, slug),
+    outdated: matterResult.data.outdated === true,
   }
 }
 

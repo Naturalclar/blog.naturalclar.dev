@@ -163,6 +163,21 @@ a:focus-visible {
    would draw a line under a glyph. They shift colour instead. Written here
    rather than as utilities because `a:hover` above is unlayered and would
    beat a `hover:no-underline` utility. */
+/* The dated-article notice. Warm enough to be noticed above a wall of prose,
+   restrained enough not to be the loudest thing on a page that is otherwise
+   black text on white. Sits outside .article-body, so prose does not reach it
+   and no `:where()` override is needed. */
+.outdated-notice {
+  margin: 0 0 1.5em;
+  padding: 0.75em 1em;
+  border-left: 4px solid #d9a441;
+  border-radius: 0 4px 4px 0;
+  background: #fdf8ee;
+  color: #5c4a1a;
+  font-size: 0.9em;
+  line-height: 1.7;
+}
+
 /* Tags read as metadata, not as prose or as buttons. Unlayered so it beats the
    `ul, ol` rule in @layer base, which restores the browser's bullets and 40px
    indent for the rest of the site. */
