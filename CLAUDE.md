@@ -36,7 +36,7 @@ A Next.js App Router blog that builds to a fully static export and deploys to Gi
 
 ### Content pipeline
 
-Posts live in `content/blog/{slug}/index.md`, one directory per post, with images alongside them and referenced relatively (`![alt](./diagram.png)`). Frontmatter carries `title` and `date`.
+Posts live in `content/blog/{slug}/index.md`, one directory per post, with images alongside them and referenced relatively (`![alt](./diagram.png)`). Frontmatter carries `title`, `date`, `tags` (see below) and an optional `outdated` flag.
 
 `src/lib/posts.ts` is the single entry point for post data. It reads the directory with `fs`, parses frontmatter with `gray-matter`, and converts the body to HTML at build time through `remark` → `remark-rehype` → `rehype-highlight` → `rehype-code-title` → `rehype-ogp-card` → `rehype-stringify`.
 
@@ -106,6 +106,14 @@ Frontmatter carries `tags: ['react-native', 'typescript']`, and **`src/data/tags
 **Tag pages are not paginated.** They hand `PostList` a single-page `PaginatedPosts` shape, and `Pagination` returns `null` when `totalPages <= 1`, so nothing renders. The largest tag holds 13 of 25 posts; splitting that would mean a second set of routes for no reader benefit. `getPaginatedPosts` is the piece to reach for if a tag ever outgrows it.
 
 `scripts/generate-rss.mjs` reads `tags` straight from the frontmatter for its `<category>` elements rather than going through `posts.ts` — the same hand-kept duplication as the rest of that script.
+
+### Dated articles
+
+`outdated: true` in the frontmatter puts a notice above the article body, via `src/components/OutdatedNotice.tsx`. It is **set per article, never derived from the date**: `you-might-not-need-thunk` and `typescript-allowing-unused-param` are 2019 posts whose advice still holds, while `whats-new-in-react-native-0.62` recommends an API that no longer exists. An "older than N years" rule would be wrong in both directions.
+
+Five articles carry it today — the React Native version write-ups and the Re-architecture piece, whose subject matter has since changed under them. The year in the notice comes from the post's own date, formatted in `Asia/Tokyo` for the same reason `PostDate` is.
+
+The notice renders **outside `.article-body`** so `prose` does not reach it; a callout inside the article body would inherit typography's paragraph and link rules and need a `:where()` fight to undo them.
 
 ### Styling
 

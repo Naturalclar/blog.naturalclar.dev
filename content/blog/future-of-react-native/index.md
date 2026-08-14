@@ -2,6 +2,7 @@
 title: 'Future of React Native'
 date: '2020-02-05T16:37:46.346Z'
 tags: ['react-native', 'conference']
+outdated: true
 ---
 
 この記事は [Meguro.es #25](https://meguroes.connpass.com/event/159506/) で登壇した内容です。

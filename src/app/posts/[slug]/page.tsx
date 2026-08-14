@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Bio from '../../../components/Bio'
 import Layout from '../../../components/Layout'
+import OutdatedNotice from '../../../components/OutdatedNotice'
 import PostDate from '../../../components/PostDate'
 import TagList from '../../../components/TagList'
 import { siteTitle } from '../../../data/static'
@@ -51,6 +52,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
       <div className="mb-4">
         <TagList tags={post.tags} />
       </div>
+      {post.outdated && <OutdatedNotice date={post.date} />}
       {/* article-body scopes the Markdown styling in globals.css so it does
           not leak into the header, the listing, or the pagination. */}
       {/* biome-ignore lint/security/noDangerouslySetInnerHtml: contentHtml is
