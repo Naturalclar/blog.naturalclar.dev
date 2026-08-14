@@ -26,9 +26,14 @@ const Layout: React.FC<Props> = ({ title, children }) => {
   )
 
   return (
+    /* header/main/footer rather than three bare divs: without a main there is
+       nothing for "skip to content" to target, and a screen reader moving by
+       landmark treats the whole page — site title, Bio and all — as one
+       region. None of the three carries styling; the wrappers are semantic
+       only, which is why the layout does not move. */
     <div className="mx-auto max-w-[680px] px-3 py-6">
-      {header}
-      {children}
+      <header>{header}</header>
+      <main>{children}</main>
       <footer>
         © {new Date().getFullYear()}, Built with{' '}
         <a href="https://nextjs.org">Next.js</a>

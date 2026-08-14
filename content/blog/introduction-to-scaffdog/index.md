@@ -1,6 +1,7 @@
 ---
 title: 'テンプレートファイルを楽々作成する'
 date: '2019-09-14T02:52:37.526Z'
+tags: ['tooling', 'react-native']
 ---
 
 React Native で開発していて、新しい Component を作成するとき、どういうファイルを作成するでしょう。

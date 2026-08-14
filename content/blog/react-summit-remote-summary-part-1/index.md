@@ -1,6 +1,7 @@
 ---
 title: 'React Summit Remote Edition まとめ(前編)'
 date: '2020-04-18T00:41:59.159Z'
+tags: ['react-native', 'conference']
 ---
 
 2020/04/17 に開催された [React Summit Remote Edition](https://remote.reactsummit.com/) を視聴していたのでそのレポートを書きます。

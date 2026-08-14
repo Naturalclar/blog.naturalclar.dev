@@ -1,6 +1,7 @@
 ---
 title: 登壇メモ
 date: '2019-08-28T18:00:00.000Z'
+tags: ['conference', 'memo']
 thumbnail: './twitter-card.png'
 ---
 

@@ -1,7 +1,8 @@
-import { format } from 'date-fns'
 import Link from 'next/link'
 import type { PaginatedPosts } from '../lib/posts'
 import Pagination from './Pagination'
+import PostDate from './PostDate'
+import TagList from './TagList'
 
 type Props = {
   data: PaginatedPosts
@@ -26,8 +27,9 @@ const PostList: React.FC<Props> = ({ data }) => (
           <Link href={`/posts/${post.slug}`}>{post.title}</Link>
         </h3>
         <small>
-          {post.date && format(new Date(post.date), 'MMMM dd, yyyy')}
+          <PostDate date={post.date} />
         </small>
+        <TagList tags={post.tags} />
         <p>{post.excerpt}</p>
       </div>
     ))}

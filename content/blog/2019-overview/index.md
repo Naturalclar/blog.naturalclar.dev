@@ -1,6 +1,7 @@
 ---
 title: 'Looking back on 2019'
 date: '2019-12-31T11:19:30.349Z'
+tags: ['retrospective']
 ---
 
 ## 2019年振り返り

@@ -1,6 +1,7 @@
 ---
 title: 'Windows の PowerShell で dotfiles にある neovim 用の init.vim を設定する方法'
 date: '2024-02-23T15:13:39.303Z'
+tags: ['tooling']
 ---
 
 最近 Windows で開発するようになったのでメモ。

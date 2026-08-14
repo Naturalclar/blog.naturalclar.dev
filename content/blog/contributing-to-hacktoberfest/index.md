@@ -1,6 +1,7 @@
 ---
 title: 'Contributing to Hacktoberfest'
 date: '2019-10-15T01:55:31.679Z'
+tags: ['react-native', 'memo']
 ---
 
 Hacktoberfest で貢献したい Issue メモ

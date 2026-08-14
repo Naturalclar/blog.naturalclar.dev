@@ -1,6 +1,7 @@
 ---
 title: 'React Europe Conference Day 1 まとめ'
 date: '2020-05-14T09:57:03.315Z'
+tags: ['react', 'conference']
 ---
 
 2020/05/14 に開催された [React Europe](https://www.react-europe.org/) を一部視聴していたのでそのレポートを書きます。

@@ -97,6 +97,16 @@ Both pages hand the result to `src/components/PostList.tsx` and render nothing o
 
 The page size lives in one place, `POSTS_PER_PAGE` in `src/lib/posts.ts`, and reaches the callers as the parameter's default — so call it as `getPaginatedPosts(page)` and don't pass a size. `generateStaticParams` decides *which* `/page/N` routes exist while the page component decides *which posts* each one slices out; if those two ever disagree the build still succeeds, and the damage shows up only as missing or blank pagination pages.
 
+### Tags
+
+Frontmatter carries `tags: ['react-native', 'typescript']`, and **`src/data/tags.json` is the vocabulary** — `readTags` in `src/lib/posts.ts` throws on anything not in that list. That is deliberate: a typo would otherwise pre-render its own `/tags/react-nativ/` page holding one post, and nothing would look broken from any page that already existed. Adding a tag means adding it to the JSON first.
+
+`getAllTags()` returns only tags at least one post carries, in the order the JSON lists them, and it is what `generateStaticParams` in `src/app/tags/[tag]/page.tsx` iterates — so an unused entry in the vocabulary costs nothing and produces no route.
+
+**Tag pages are not paginated.** They hand `PostList` a single-page `PaginatedPosts` shape, and `Pagination` returns `null` when `totalPages <= 1`, so nothing renders. The largest tag holds 13 of 25 posts; splitting that would mean a second set of routes for no reader benefit. `getPaginatedPosts` is the piece to reach for if a tag ever outgrows it.
+
+`scripts/generate-rss.mjs` reads `tags` straight from the frontmatter for its `<category>` elements rather than going through `posts.ts` — the same hand-kept duplication as the rest of that script.
+
 ### Styling
 
 **Tailwind CSS 4** with `@tailwindcss/typography`, configured in CSS rather than a JS config: `src/app/globals.css` opens with `@import "tailwindcss"` and `@plugin "@tailwindcss/typography"`, and `postcss.config.mjs` wires up `@tailwindcss/postcss`.

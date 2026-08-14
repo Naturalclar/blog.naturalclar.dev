@@ -1,6 +1,7 @@
 ---
 title: You might not need thunk
 date: '2019-09-01T10:00:00.000Z'
+tags: ['react']
 ---
 
 状態管理に redux を使っている人は以下の様なことをやりたいことがあるでしょう。

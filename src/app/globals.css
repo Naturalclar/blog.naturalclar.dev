@@ -163,6 +163,23 @@ a:focus-visible {
    would draw a line under a glyph. They shift colour instead. Written here
    rather than as utilities because `a:hover` above is unlayered and would
    beat a `hover:no-underline` utility. */
+/* Tags read as metadata, not as prose or as buttons. Unlayered so it beats the
+   `ul, ol` rule in @layer base, which restores the browser's bullets and 40px
+   indent for the rest of the site. */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75em;
+  margin: 0.25em 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85em;
+}
+
+.tag-list a {
+  color: #666;
+}
+
 .social-link {
   display: inline-flex;
   color: #555;

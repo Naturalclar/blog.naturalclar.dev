@@ -1,6 +1,7 @@
 ---
 title: "What's new in React Native 0.62"
 date: '2020-03-21T08:48:32.044Z'
+tags: ['react-native', 'conference']
 ---
 
 この記事は [React Native Tech Blog #2](https://ducklings.connpass.com/event/169637/) で発表した内容です。
