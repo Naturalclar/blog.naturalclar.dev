@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={montserrat.variable}>
+    <html lang="ja" className={montserrat.variable}>
       <body>{children}</body>
     </html>
   )
