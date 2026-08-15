@@ -1,0 +1,66 @@
+name: Link check
+
+# Reports which external links in the archive have rotted. Deliberately its
+# own workflow rather than a step in ci.yml: ci.yml builds and deploys from a
+# clean checkout on every push, and a link check there would put every deploy
+# at the mercy of every host the articles link to — the same reason `pnpm ogp`
+# is not part of `pnpm build`.
+#
+# So this never blocks a merge. It runs on demand, and monthly so that rot is
+# noticed without anyone remembering to look. Drop the schedule if a failing
+# run a month is more noise than signal.
+
+on:
+  workflow_dispatch:
+    inputs:
+      host:
+        description: 'Check only this hostname, e.g. github.com. Empty checks everything.'
+        type: string
+        default: ''
+  schedule:
+    # 09:00 on the 1st, Asia/Tokyo — cron is UTC, so 00:00.
+    - cron: '0 0 1 * *'
+
+permissions:
+  contents: read
+
+# The report is about the archive as it is now; an older run still going has
+# nothing to add.
+concurrency:
+  group: link-check
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.2
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check the links
+        # The script exits 1 when something is broken or unreachable, so the
+        # run shows red in the Actions list — but the summary is written
+        # either way, because a red run whose report was swallowed says only
+        # that something is wrong and not what.
+        run: |
+          set +e
+          pnpm links ${{ inputs.host && format('--host={0}', inputs.host) || '' }} | tee links.log
+          status=${PIPESTATUS[0]}
+          {
+            echo '```'
+            cat links.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          rm links.log
+          exit "$status"
