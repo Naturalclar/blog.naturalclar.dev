@@ -89,4 +89,4 @@ react-native-communityに入るという目標を達成できたらその次はr
 
 このブログもデフォルトの設定からほとんど何も弄ってない状態なのでもうちょっと整備していきたい。
 
-[leko]: https://www.github.com/leko
+[leko]: https://github.com/leko

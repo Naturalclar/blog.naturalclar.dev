@@ -181,8 +181,8 @@ React Native Advent Calendar, 4 日目は キッチハイクの ariiyuさん([@a
 [qiita-react-native-advent-calendar]: https://qiita.com/advent-calendar/2019/react-native
 [qiita-prev]: https://qiita.com/watanabe_yu/items/e59008eda79356d23918
 [twitter-account]: https://twitter.com/natural_clar
-[react-native]: https://facebook.github.io/react-native/
-[expo]: https://expo.io/
+[react-native]: https://reactnative.dev/
+[expo]: https://expo.dev/
 [react-native-typescript-template]: https://github.com/react-native-community/react-native-template-typescript
 [connpass-typescript-meetup]: https://typescript-jp.connpass.com/
 [react-native-web]: https://github.com/necolas/react-native-web
