@@ -15,7 +15,7 @@ thumbnail: './twitter-card.png'
 
   東京都港区三田 3-11-24 国際興業三田第 2 ビル 9 階
 
-- slide: [https://code-surfer-v3.naturalclar.now.sh/](https://code-surfer-v3.naturalclar.now.sh/)
+- slide: [https://code-surfer-v3.naturalclar.vercel.app/](https://code-surfer-v3.naturalclar.vercel.app/)
 
 ## Ginza.js#4
 
@@ -25,7 +25,7 @@ thumbnail: './twitter-card.png'
 
   東京都中央区銀座 6-10-1 GINZA SIX 10F
 
-- slide: [https://you-may-not-need-thunk.naturalclar.now.sh](https://you-may-not-need-thunk.naturalclar.now.sh)
+- slide: [https://you-may-not-need-thunk.naturalclar.vercel.app/](https://you-may-not-need-thunk.naturalclar.vercel.app/)
 
 ## React Native Tokyo
 
@@ -35,7 +35,7 @@ thumbnail: './twitter-card.png'
 
 東京都港区六本木 6-10-1(六本木ヒルズ森タワー)
 
-- slide: [https://visual-regression-test-with-react-native.naturalclar.now.sh/](https://visual-regression-test-with-react-native.naturalclar.now.sh/)
+- slide: [https://visual-regression-test-with-react-native.naturalclar.vercel.app/](https://visual-regression-test-with-react-native.naturalclar.vercel.app/)
 
 ## React LT 会
 
