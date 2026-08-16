@@ -22,7 +22,7 @@ tags: ['memo']
 Gatsby に Good first issue があるからそれに Contribute できたらしたい。
 [issue #13511](https://github.com/gatsbyjs/gatsby/issues/13511)
 
-### iPad から github にブログ記事を直接上げれる仕組み
+### iPad から github にブログ記事を直接上げられる仕組み
 
 react-native + firebase で github login の仕組みを作る。
 良い感じの markdown エディタを作りたい。

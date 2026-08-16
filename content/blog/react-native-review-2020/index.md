@@ -28,7 +28,7 @@ Community の Discord で facebook や microsoft, callstack のメンバーが�
 #### 2/5 react-navigation v5 リリース
 
 React Native において画面遷移を行うライブラリの筆頭である、[react-navigation](https://github.com/react-navigation) の v5 がリリースされました。
-このリリースでは今までの JSON ベースの設定から React Component ベースの設計にガラッと使い方が変わり、より直感的に使えるようになりました。（その分 Migration も大変だった)
+このリリースでは今までの JSON ベースの設定から React Component ベースの設計にガラッと使い方が変わり、より直感的に使えるようになりました。（その分 Migration も大変だった）
 navigation を扱う上で便利な hooks も増え、各画面の設定が楽にできるようになりました。
 v5 からは TypeScript で書かれており、v4 と比べて安全に使えるのも魅力的ですね。
 
@@ -98,7 +98,7 @@ React Native での描画のアニメーションをネイティブ層で処理�
 
 v2 では、ネイティブ層とのつなぎ込みに [Turbo Modules](https://github.com/react-native-community/discussions-and-proposals/blob/master/proposals/0002-Turbo-Modules.md) の仕組みを使用しており、通常、ネイティブ層とのブリッジで非同期にしか処理できなかったものも、同期的に処理できるようになり、よりスムーズなアニメーションが実現可能となりました。
 
-Turbo Modules の仕組み自体は、まだ大々的に OSS として切り出せれておらず、サードパーティでの組み込みが厳しい状態となっているなか、それを取り組み始めているサードパーティモジュールの1つとしてとても注目されています。
+Turbo Modules の仕組み自体は、まだ大々的に OSS として切り出されておらず、サードパーティでの組み込みが厳しい状態となっているなか、それを取り組み始めているサードパーティモジュールの1つとしてとても注目されています。
 
 ## 2020/07
 
@@ -166,7 +166,7 @@ Turbo Module 対応がライブラリ内部で完結できる例として、今�
 
 今年も React Native の開発周りは大きく変更されてきました。
 特に、年初のアップデートによりデバッグが快適になったのはそのまま良い開発体験に直結してくると感じています。
-React Native で散々遅いと言われてきたパフォーマンス問題に関しても、hermes のアップデートや Turbo Module の普及化によって日々日々改善されており、JavaScript で手軽にアプリが書けるというのは JavaScript を普段から書いている開発者にとってはとても喜ばしいことですね。
+React Native で散々遅いと言われてきたパフォーマンス問題に関しても、hermes のアップデートや Turbo Module の普及化によって日々改善されており、JavaScript で手軽にアプリが書けるというのは JavaScript を普段から書いている開発者にとってはとても喜ばしいことですね。
 
 Microsoft の参入による Windows、 MacOS のサポートや、React Native Web の開発が少し活発になってきたことによって、React Native の世界は iOS/Android だけに留まらない存在になってきました。
 

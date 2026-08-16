@@ -1,0 +1,33 @@
+{
+  "rules": {
+    "preset-ja-technical-writing": {
+      "no-invalid-control-character": true,
+      "no-zero-width-spaces": true,
+      "no-nfd": true,
+      "no-hankaku-kana": true,
+      "no-unmatched-pair": true,
+      "ja-no-abusage": true,
+      "no-dropping-the-ra": true,
+      "ja-no-successive-word": {
+        "allow": ["一つ"]
+      },
+
+      "no-mix-dearu-desumasu": false,
+
+      "sentence-length": false,
+      "max-comma": false,
+      "max-ten": false,
+      "max-kanji-continuous-len": false,
+      "arabic-kanji-numbers": false,
+      "ja-no-mixed-period": false,
+      "no-double-negative-ja": false,
+      "no-doubled-conjunctive-particle-ga": false,
+      "no-doubled-conjunction": false,
+      "no-doubled-joshi": false,
+      "no-exclamation-question-mark": false,
+      "ja-no-weak-phrase": false,
+      "ja-no-redundant-expression": false,
+      "ja-unnatural-alphabet": false
+    }
+  }
+}
