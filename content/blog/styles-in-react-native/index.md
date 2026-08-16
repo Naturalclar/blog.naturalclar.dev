@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 ...
 ```
 
-作成した Style を適応するには`style` prop に入れます。
+作成した Style を適用するには`style` prop に入れます。
 
 ```jsx
 import React from 'react-native'

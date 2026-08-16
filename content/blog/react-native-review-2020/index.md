@@ -142,7 +142,7 @@ React Native Web の v0.14 がリリースされました。
 自分は Component の開発のために React Native Web と Storybook を組み合わせて使っているのですが、今までは Modal の Component の使用感が Web で確認しづらい状態だったのが、これによって大きく改善されました。
 
 また、前回のリリースで追加された Pressable に、従来の押された状態の他に、Hover された状態や Focus された状態など、Web ならではの状態が追加されました。
-この追加によって、React Native  で書かれたコンポーネントでも、より Web に寄り添った体験を手軽に提供できるようになりました。
+この追加によって、React Native  で書かれたコンポーネントでも、より Web に寄り添った体験を手軽に提供できるようになりました。
 
 #### 11/23 React Native v0.64 rc リリース
 
@@ -160,7 +160,7 @@ Turbo Module 対応がライブラリ内部で完結できる例として、今�
 #### 11/26 React Native Skia の Linux 対応リリース
 
 [React Native Skia](https://github.com/Kudo/react-native-skia)は[React Native EU 2020](https://www.react-native.eu/)で発表されたライブラリの一つです。
-[react-native-v8](https://github.com/Kudo/react-native-v8)の作者、Kudo Chien 氏が JSI 等、React Native の新しいアーキテクチャをフル活用して、React Native 内で Skia を使って画面を描画するといった PoC なのですが、そこになんと、[Linux 上でも描画できるようにする PR](https://github.com/Kudo/react-native-skia/pull/4)が出されました。 まだ PoC の範疇ですが、これをもとに Linux のアプリも React Native で書けるといった未来があるかもしれません。
+[react-native-v8](https://github.com/Kudo/react-native-v8)の作者、Kudo Chien 氏が JSI 等、React Native の新しいアーキテクチャをフル活用して、React Native 内で Skia を使って画面を描画するといった PoC なのですが、そこになんと、[Linux 上でも描画できるようにする PR](https://github.com/Kudo/react-native-skia/pull/4)が出されました。 まだ PoC の範疇ですが、これをもとに Linux のアプリも React Native で書けるといった未来があるかもしれません。
 
 ## 最後に
 

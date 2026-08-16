@@ -52,7 +52,7 @@ Alt Track の最初のトークは React Native のリリースや React Native 
 
 React Native は Facebook が開発しているフレームワークですが、現在、新しいバージョンのリリースは自分も属している社外コミュニティである React Native Community が行っています。
 
-React Native のリリースプロセスは一筋縄では行きません。
+React Native のリリースプロセスは一筋縄では行きません。
 最近はフロントエンドの動きは落ち着いてきたと言われていますが、それでも常に動き続けてはいるので、React Native はそれに追従する必要があります。
 最新の React を追うのに加えて、Android や iOS も毎年新しいバージョンがリリースされるため、それらに追従する必要もでてきます。
 

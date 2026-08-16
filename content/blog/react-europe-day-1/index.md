@@ -27,7 +27,7 @@ React Europe カンファレンス最初のトークは、[@johnadetutu93](https
 
 react は [hooks api](https://react.dev/reference/react/hooks) が導入されて以来、その便利さに使用者が爆発的に増えています。
 
-react-spring も例外ではなく、`useSpring` や `useTransition`, `useChain` などのカスタムフックが実装され、より便利にアニメーションが作成できるようになりました。
+react-spring も例外ではなく、`useSpring` や `useTransition`, `useChain` などのカスタムフックが実装され、より便利にアニメーションが作成できるようになりました。
 
 このトークではライブコーディングを交えて、React Spring を hooks でどう動かすかについて紹介していました。
 
@@ -70,7 +70,7 @@ React Reconciler をベースとして作られており、DOMを持たないの
 
 このトークは静的サイトジェネレーターの歴史から始まり、それらの利点、そして欠点について話していました。
 
-多くの静的サイトジェネレーターの欠点の一つは、ページ数が多くなるにつれビルド時間がとても長くなることです。これは、デプロイの前にすべてのページをビルドしないといけないために発生します。
+多くの静的サイトジェネレーターの欠点の一つは、ページ数が多くなるにつれビルド時間がとても長くなることです。これは、デプロイの前にすべてのページをビルドしないといけないために発生します。
 
 Gatsby は Gatsby Cloud というサービスを立ち上げ、その問題を解消しています。Gatsby Cloud を使うことによって、新しく追加したページのみをビルドする、Incremental Build の機能が使えるようになります。
 
@@ -86,7 +86,7 @@ Gatsby Cloud では、 Streaming Build という機能があり、Gatsby の設�
 また、Gatsby の 2020年の予定についても触れていました。
 現在、Gatsby の Core のコードはすべて [TypeScript に置き換えられようとしています](https://github.com/gatsbyjs/gatsby/issues/21995)。
 
-また、Gatsby のサイト上でi18nを容易に行うようにするためのAPIも実装中であるとのことです。
+また、Gatsby のサイト上でi18nを容易に行うようにするためのAPIも実装中であるとのことです。
 
 現在、Gatsby のドキュメントは様々な言語に[翻訳されています](https://github.com/gatsbyjs/gatsby-ja)。
 それらの翻訳も、新しい Gatsby の i18n api によって、Gatsby のドキュメントに組み込まれるようになるとのこと。
