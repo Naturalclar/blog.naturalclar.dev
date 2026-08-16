@@ -60,6 +60,26 @@ A URL written on a line of its own becomes an Open Graph card; a URL inside a se
 
 Deliberately not part of `pnpm build`: the deploy builds from a clean checkout, so a build-time fetch would put every deploy at the mercy of every host an article links to. The workflow is the opposite arrangement — the fetch happens on its own schedule and lands as a reviewable commit, and the build only ever reads what is committed.
 
+### Link checking
+
+The archive spans 2019 onward and a lot of what it points at has moved or gone away. `pnpm links` (`scripts/check-links.mjs`) walks `content/blog/` and reports what has rotted, in five buckets that are deliberately not collapsed into pass/fail:
+
+- **broken** — 4xx/5xx. The page is gone.
+- **unreachable** — DNS, TLS or timeout. The *host* could not be reached, which is not the same claim; conflating the two makes the checker cry wolf on every blip.
+- **moved** — reached, but the final URL after redirects differs. Still works for a reader, so it does not fail the run.
+- **refused** — 401/403/429. The host turned the checker away, not the page. GitHub does this readily.
+- **ok**
+
+Only *broken* and *unreachable* set a non-zero exit. `--host=` narrows a run to one hostname, `--timeout=` and `--concurrency=` are for the fixture tests.
+
+It walks `link`, `image` **and `definition`** nodes: a reference-style link keeps its URL in the definition at the foot of the article and nowhere else, and `2019-overview` writes its links that way — a walk over `link` alone silently misses them. Requests are HEAD first, falling back to GET on 403/405/501, because plenty of servers refuse HEAD without meaning the page is gone; 429 is retried honouring `Retry-After`, the same as the OGP fetcher.
+
+`.github/workflows/links.yml` is where it actually runs — on demand, and monthly. **Not in `ci.yml`**, for the same reason `pnpm ogp` is not in `pnpm build`: `ci.yml` deploys, and a link check there would let any third-party host redden a deploy. Nothing about link rot should be able to block a merge.
+
+Results from a sandboxed environment are not evidence. A proxy that denies CONNECT shows up as 55 *unreachable* and a gateway that blocks `github.com` shows up as 55 *refused* — neither says anything about the archive. Trust the workflow run, not a local one.
+
+Fixing what it finds is a separate judgement call: rewriting an old article to chase link rot is not obviously right for a dated archive. The checker exists to make the damage visible, not to decide that.
+
 ### Static assets
 
 `public/` is the served static directory and **is tracked in git** — it holds `robots.txt` and `twitter-card.png` (the OG image `src/lib/metadata.ts` points every page at). `next build` copies it to the export root, so those files answer at `/robots.txt` and `/twitter-card.png`.
@@ -158,6 +178,8 @@ The deploy job carries its own `pages: write` / `id-token: write`; the workflow 
 The Pages source must stay on **GitHub Actions** (Settings → Pages). Switching it to a branch would both break this workflow and reintroduce Jekyll — see the static assets section.
 
 **There are no deploy previews.** A pull request is checked by `ci.yml` alone; nothing renders the result before merge. Netlify used to provide one, and that is the visible cost of #138.
+
+`.github/workflows/links.yml` checks the archive's external links (see the Link checking section above). It is the one workflow that is *expected* to go red sometimes — a broken link is a report, not a build failure, and nothing downstream depends on it.
 
 `.github/workflows/label.yml` auto-labels new issues by keyword — an issue whose title or body contains "post" gets `Post Idea`, and "feature" gets `feature request`.
 

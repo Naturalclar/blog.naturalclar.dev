@@ -23,6 +23,7 @@
     "dev": "next dev",
     "format": "biome check --write",
     "lint": "biome check",
+    "links": "node scripts/check-links.mjs",
     "new": "scaffdog generate",
     "ogp": "node scripts/fetch-ogp.mjs",
     "start": "pnpm dlx serve out"
