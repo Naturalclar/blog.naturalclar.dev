@@ -52,7 +52,7 @@ Alt Track の最初のトークは React Native のリリースや React Native 
 
 React Native は Facebook が開発しているフレームワークですが、現在、新しいバージョンのリリースは自分も属している社外コミュニティである React Native Community が行っています。
 
-React Native のリリースプロセスは一筋縄では行きません。
+React Native のリリースプロセスは一筋縄では行きません。
 最近はフロントエンドの動きは落ち着いてきたと言われていますが、それでも常に動き続けてはいるので、React Native はそれに追従する必要があります。
 最新の React を追うのに加えて、Android や iOS も毎年新しいバージョンがリリースされるため、それらに追従する必要もでてきます。
 
@@ -63,7 +63,7 @@ React Native のリリースプロセスは一筋縄では行きません。
 React Native のリリースプロセスについては [react-native-community/releases](https://github.com/react-native-community/releases) のリポジトリにも記載されています。
 
 このトークでチラッと議題に上がったのは開発元である Facebook が React Native をどのように使っているかです。
-Facebook は内部で独自の Monorepo を持っており、React Native はその中の一つです。内部で行われた変更が、Github上でも公開されている React Native のリポジトリにミラーリングされるようになっているようです。
+Facebook は内部で独自の Monorepo を持っており、React Native はその中の1つです。内部で行われた変更が、Github上でも公開されている React Native のリポジトリにミラーリングされるようになっているようです。
 
 トークタイトルの The 1.0 is a Lie についてですが、一般的に、ライブラリのバージョンは 1.0 を持って「安定」していると言うケースが多いです。
 
@@ -95,7 +95,7 @@ React Native が 1.0.0 に到達するにはまだまだ時間がかかりそう
 モバイルアプリで機械学習が行える [ML Kit](https://firebase.google.com/products/ml-kit?gclid=EAIaIQobChMI7M7U-_Hw6AIVEp_CCh34HgpIEAAYASAAEgIvOvD_BwE) の紹介と、それを React Native に組み込む方法について、説明していました。
 
 MLKit は Google が提供している機械学習用の API であり、 Firebase と連携して使うことができます。
-React Native には Firebase との連携が行える [React Native Firebase](https://rnfirebase.io/) があるので、それを使うことで、React Native のアプリでも機械学習を用いたアプリを作成することができます。
+React Native には Firebase との連携が行える [React Native Firebase](https://rnfirebase.io/) があるので、それを使うことで、React Native のアプリでも機械学習を用いたアプリを作成できます。
 
 MLKit を使うことで顔面解析や自然言語解析など、様々なことが行えるようになります。
 
@@ -143,7 +143,7 @@ envinfo は自分のPCのスペックや、PC の中に入っている node や 
 https://github.com/infinitered/solidarity
 
 solidarity は動作する環境の情報をsnapshotとしてgithubに保存できるツールです。内部ではenvinfoが使われています。
-solidarity を使うことで、他のチームメンバーなどがプロジェクトをクローンして動かない、みたいなことがあった時に、コマンド一つで「動作していた環境」と「動作していない環境」のdiffを容易にとることができます。
+solidarity を使うことで、他のチームメンバーなどがプロジェクトをクローンして動かない、みたいなことがあった時に、コマンド1つで「動作していた環境」と「動作していない環境」のdiffを容易にとることができます。
 
 ## 後編に続く
 

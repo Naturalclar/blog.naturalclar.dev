@@ -213,9 +213,9 @@ class MenuView: UIButton {
 
 `@objc` が先頭についている部分は、Objective-C からアクセスできる部分です。React Component の props から渡ってきた部分や、JavaScript の世界に返すものはすべて `@objc`を先頭に付けています。
 
-渡ってきた props の一つ、actions は `NSDictionary` の配列、JavaScript で言えば JSON の配列です。ここでは UIMenu で使う項目の配列を取得して、別ファイルに定義してある RCTMenuAction を受け取った JSON から作成します。
+渡ってきた props の1つ、actions は `NSDictionary` の配列、JavaScript で言えば JSON の配列です。ここでは UIMenu で使う項目の配列を取得して、別ファイルに定義してある RCTMenuAction を受け取った JSON から作成します。
 
-もう一つの props、onPressAction は `RCTBubblingEventBlock`、これは JavaScript の関数が props として渡ってきたものです。ほかに、`RCTDirectEventBlock` もあるんですが、違いは把握してないです、誰か教えてください。
+もう1つの props、onPressAction は `RCTBubblingEventBlock`、これは JavaScript の関数が props として渡ってきたものです。ほかに、`RCTDirectEventBlock` もあるんですが、違いは把握してないです、誰か教えてください。
 
 このクラスでは UIMenu が押されたときに、`sendButtonAction`を通して、押された項目の event id を JavaScript 側から渡された onPressAction の引数として返しています。
 

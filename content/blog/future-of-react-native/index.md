@@ -29,7 +29,7 @@ outdated: true
 Bridge 間の通信は JSON を通じて行われます。JavaScript のコードもネイティブ側のコードも JSON を通じて非同期的に通信を行います。
 ネイティブ側では UIModuleManager というモジュールが UI を描画します。React Native の View は FlexBox レイアウトで描かれますが、ネイティブ側には FlexBox レイアウトの知識がありません。そこで、Yoga と言う Facebook 製のレイアウトエンジンを使って受け取った Style の情報を処理して、その情報を UIModuleManager に渡します。ネイティブ機能の呼び出しもまた JavaScript から Bridge を通して非同期的にネイティブコードを呼び出す作りになっています。
 
-React Native は長い間この設計で動いていました。JavaScript と ネイティブ側のコードが Bridge を挟んでお互いへの関心なく動作していました。しかし、この設計には問題がありました。Bridge 間のすべての通信は非同期で行われるため、ネイティブ側のコードはいつコードが呼ばれても良いように、すべての Module を起動時に読み込む必要があります。また、Bridge は一つしか無いので、非常に多くの処理を行っている時、ボトルネックになり得ます。View の部分も、一度 UIModuleManager が JSON を受け取ってからそれを Yoga に持っていき、処理されたものを扱う必要があったため、コストがかかっていました。
+React Native は長い間この設計で動いていました。JavaScript と ネイティブ側のコードが Bridge を挟んでお互いへの関心なく動作していました。しかし、この設計には問題がありました。Bridge 間のすべての通信は非同期で行われるため、ネイティブ側のコードはいつコードが呼ばれても良いように、すべての Module を起動時に読み込む必要があります。また、Bridge は1つしか無いので、非常に多くの処理を行っている時、ボトルネックになり得ます。View の部分も、一度 UIModuleManager が JSON を受け取ってからそれを Yoga に持っていき、処理されたものを扱う必要があったため、コストがかかっていました。
 
 これらの問題を解決するために、React Native Re-architecture がはじまりました。
 
@@ -53,7 +53,7 @@ React Native を V8 で動かす [react-native-v8](https://github.com/Kudo/react
 
 JSI はすでに大部分が実装されていて、React Native のコアリポジトリの中に実装があります。
 
-また、JSI のもう一つの大きな特徴は、C++ のホストオブジェクトへの参照を持っており、C++ のメソッドをそのまま実行できると言うところにあります。これは、Bridge を使っていた時に問題になっていたすべての実行が非同期になってしまうことを解決するものとなります。
+また、JSI のもう1つの大きな特徴は、C++ のホストオブジェクトへの参照を持っており、C++ のメソッドをそのまま実行できると言うところにあります。これは、Bridge を使っていた時に問題になっていたすべての実行が非同期になってしまうことを解決するものとなります。
 
 また、C++ は iOS と Android がそのまま使用できる数少ない言語となります。Android の Java のコードは JNI (Java Native Interface) を通して C++ に変換されて実行されています。iOS の Objective-C はその名の通り C++ と緩和性の良い言語なので、そのまま使うことができます。
 
@@ -79,7 +79,7 @@ React Native Fabric は React Concurrent Mode が本格的に使えるように�
 
 Turbo Modules と React Native Fabric は両方 JSI を使うことが前提となっています。JSI は前述したとおり、C++ を直接呼び出せることによって高いパフォーマンスを出すことが出来るものです。C++ は静的型言語なので、これを実現するには型が必須となります。TypeScript や FlowType を使って、JS に型を付けて、C++ にも型を付けるとなると手間が大きいため、JS の型情報から C++ の型情報を作成する CodeGen と言うツールが作成されています。React Native は内部で FlowType を使っていますが、CodeGen は TypeScript の型にも適用可能となっています。FlowType の変換には FlowType の Parser、TypeScript の型には TypeScript の Parser を使って型を変換します。ただ、曖昧な型は C++ では許されないので、必然的に any を排除する必要が出てきます。
 
-CodeGen のもう一つの使い方として、型の Diff を取ることによってアプリのアップデートが CodePush 可能かどうかを判別することができます。JS のコードの変化によって、Native の呼び出しへの型の変更が無ければ、CodePush のみでアップデートをかけられると判断することができます。
+CodeGen のもう1つの使い方として、型の Diff を取ることによってアプリのアップデートが CodePush 可能かどうかを判別できます。JS のコードの変化によって、Native の呼び出しへの型の変更が無ければ、CodePush のみでアップデートをかけられると判断できます。
 
 CodeGen のコードも今は React Native のコア部分に実装されています。これもまた、ツールとして切り出されると認識しています。
 

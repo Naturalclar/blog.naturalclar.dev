@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 ...
 ```
 
-作成した Style を適応するには`style` prop に入れます。
+作成した Style を適用するには`style` prop に入れます。
 
 ```jsx
 import React from 'react-native'
@@ -193,7 +193,7 @@ Floating Action Button 画面右下に置きたいときや、キャンセルボ
 }
 ```
 
-要素自体は Override することができます。
+要素自体は Override できます。
 
 ```jsx
 const styles = StyleSheet.create({
@@ -232,7 +232,7 @@ react-native では、基本的に要素が上から下に向かって描かれ�
 
 ### ショートハンドは使えない
 
-react-native では基本的に　`margin: '10 0'` のようなショートハンドは使えず、基本的に 1 Property に一つの値しか受け付けません。
+react-native では基本的に　`margin: '10 0'` のようなショートハンドは使えず、基本的に 1 Property に1つの値しか受け付けません。
 
 `margin`を Component 全体に均等に適用したい場合は、`margin: 10`と書けますが、上下左右で別の値を使う場合は、それぞれ`marginRight`, `marginTop`などに設定する必要があります。上下が同じ値、左右が同じ値の場合は`marginVertical`, `marginHorizontal`というプロパティを使えば、記入を少なくできます。
 

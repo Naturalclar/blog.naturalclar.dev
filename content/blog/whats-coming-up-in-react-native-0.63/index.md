@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 
 DynamicColorIOS は Appearance に合わせた色を取得できる iOS専用の新しい API です。
 
-light mode, dark mode でそれぞれ使用する色を設定することができます。
+light mode, dark mode でそれぞれ使用する色を設定できます。
 
 ```jsx
 const headerTextColor = DynamicColorIOS({

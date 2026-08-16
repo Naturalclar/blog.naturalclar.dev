@@ -47,7 +47,7 @@ unstable_enableLogBox()
 ![同じログイン画面の Light Theme と Dark Theme を並べた比較。背景が白と黒で反転し、下部の Sign Up と Login のボタンの色は共通](./appearance.png)
 
 0.62 では端末の Appearance 設定を取得できる Appearance API が追加されました。
-端末のテーマ設定に合わせて、アプリのテーマを Dark Mode や Light Mode に変更することができます。
+端末のテーマ設定に合わせて、アプリのテーマを Dark Mode や Light Mode に変更できます。
 
 `getColorScheme` 関数を呼び出すことで、端末のテーマ設定を取得できます。
 
