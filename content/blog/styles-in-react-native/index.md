@@ -32,7 +32,7 @@ export const HelloWorld = () => (
 
 react-native は Web と同じ様に書くことができますが、CSS ファイルをそのまま使うことはできません。
 
-かわりに、react-native が提供する [`StyleSheet`](https://facebook.github.io/react-native/docs/stylesheet) という API を使用します。
+かわりに、react-native が提供する [`StyleSheet`](https://reactnative.dev/docs/stylesheet) という API を使用します。
 
 ```jsx
 import React from 'react'
@@ -244,6 +244,6 @@ WIP
 
 ## 参考サイト
 
-- [react-native: StyleSheet](https://facebook.github.io/react-native/docs/stylesheet)
-- [react-native: Layout Props](https://facebook.github.io/react-native/docs/layout-props.html)
+- [react-native: StyleSheet](https://reactnative.dev/docs/stylesheet)
+- [react-native: Layout Props](https://reactnative.dev/docs/layout-props)
 - [Taming React Native’s ScrollView with flex](https://medium.com/@peterpme/taming-react-natives-scrollview-with-flex-144e6ff76c08)

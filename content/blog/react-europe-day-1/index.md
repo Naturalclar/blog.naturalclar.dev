@@ -25,7 +25,7 @@ React Europe カンファレンス最初のトークは、[@johnadetutu93](https
 
 彼は [react-spring](https://www.react-spring.io/) という React のアニメーションライブラリの開発チームの一員で、発表内容も react-spring にフォーカスしているものでした。
 
-react は [hooks api](https://reactjs.org/docs/hooks-reference.html) が導入されて以来、その便利さに使用者が爆発的に増えています。
+react は [hooks api](https://react.dev/reference/react/hooks) が導入されて以来、その便利さに使用者が爆発的に増えています。
 
 react-spring も例外ではなく、`useSpring` や `useTransition`, `useChain` などのカスタムフックが実装され、より便利にアニメーションが作成できるようになりました。
 
@@ -54,19 +54,19 @@ Next は React を使ってアプリを高速で書けるフレームワーク�
 
 ３つ目のセッションでは、react-springなどのライブラリの作者である[@0xca0a](https://twitter.com/0xca0a)がreact-three-fiberについて話していました。
 
-https://github.com/react-spring/react-three-fiber
+https://github.com/pmndrs/react-three-fiber
 
 React Three Fiber は React で Webgl を扱えるようになるライブラリです。[Three.js](https://threejs.org/) をベースとして作られており、Three.js の機能をすべて使うことができます。Three.js の Wrapper では無いので、Three.js に大きな変更があったとしても、React Three Fiber は継続して使用することができます。
 
 React Reconciler をベースとして作られており、DOMを持たないので、Webではもちろん、React Native を使って Mobile でも使うことができるようです。
 
-また、[drei](https://github.com/react-spring/drei)という react-three-fiber のヘルパーについても少し説明されていました。`<HTML/>`というComponentを使うことで、webglの中にhtmlの内容を埋め込めるというのを実演していました。
+また、[drei](https://github.com/pmndrs/drei)という react-three-fiber のヘルパーについても少し説明されていました。`<HTML/>`というComponentを使うことで、webglの中にhtmlの内容を埋め込めるというのを実演していました。
 
 ### Scaling the Web with Gatsby
 
 前半最後のセッションは Gatsby のコアチームの一員である[@chatsidhartha](https://twitter.com/chatsidhartha) が、Gatsby のこれまでと今後について話していました。
 
-[Gatsby](https://www.gatsbyjs.org/) は React を使ってページを作成したり、GraphQLを使ってデータを取得して、少ない手順で静的サイトを作成できるフレームワークです。
+[Gatsby](https://www.gatsbyjs.com/) は React を使ってページを作成したり、GraphQLを使ってデータを取得して、少ない手順で静的サイトを作成できるフレームワークです。
 
 このトークは静的サイトジェネレーターの歴史から始まり、それらの利点、そして欠点について話していました。
 

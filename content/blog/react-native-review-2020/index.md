@@ -69,7 +69,7 @@ Appearance Module が追加され、ダークモードの対応が容易にな�
 
 #### 4/1 Expo SDK 37 のリリース
 
-[Expo](https://expo.io/) は React Native を元に作成されたフレームワークです。
+[Expo](https://expo.dev/) は React Native を元に作成されたフレームワークです。
 
 React Native の開発には JavaScript の知識の他に、iOS、Android のビルド知識が一定数必要な場合があるのですが、Expo はそのネイティブのビルド部分等を隠蔽して、JavaScript で完結できる仕組みになっています。
 
