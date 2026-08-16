@@ -103,6 +103,8 @@ Frontmatter carries `tags: ['react-native', 'typescript']`, and **`src/data/tags
 
 `getAllTags()` returns only tags at least one post carries, in the order the JSON lists them, and it is what `generateStaticParams` in `src/app/tags/[tag]/page.tsx` iterates — so an unused entry in the vocabulary costs nothing and produces no route.
 
+`src/app/tags/page.tsx` is the index over those same tags, and it takes `getAllTags()`'s order as-is — the hand-ordered "most central first" of `tags.json`, which stays put as the archive grows, unlike sorting by count. It is linked from the footer in `src/components/Layout.tsx` rather than from the listing: the tag pages need a way in from outside a post, and the footer is the one place on every page that can offer it without competing with the articles. Until #157 there was no such link and `/tags/` itself 404ed, so a tag page was reachable only from an article and was a dead end once you got there.
+
 **Tag pages are not paginated.** They hand `PostList` a single-page `PaginatedPosts` shape, and `Pagination` returns `null` when `totalPages <= 1`, so nothing renders. The largest tag holds 13 of 25 posts; splitting that would mean a second set of routes for no reader benefit. `getPaginatedPosts` is the piece to reach for if a tag ever outgrows it.
 
 `scripts/generate-rss.mjs` reads `tags` straight from the frontmatter for its `<category>` elements rather than going through `posts.ts` — the same hand-kept duplication as the rest of that script.
