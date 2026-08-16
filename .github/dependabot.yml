@@ -1,0 +1,54 @@
+version: 2
+
+# Two ecosystems, because this repository has two sets of pinned versions
+# that rot independently: the dependencies in package.json, and the actions
+# the workflows call. Nothing else here is versioned by Dependabot — the Node
+# and pnpm pins live in `volta` and `packageManager`, which it does not touch,
+# so those stay a manual decision.
+
+updates:
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      # Monthly, not weekly. This is a blog with no test suite: every update
+      # is reviewed by reading it and watching `pnpm lint && pnpm build` go
+      # green, and a weekly cadence turns that into a chore that gets ignored.
+      # Security updates ignore this schedule and arrive when they arrive.
+      interval: monthly
+      day: monday
+      time: '09:00'
+      timezone: Asia/Tokyo
+    open-pull-requests-limit: 5
+    commit-message:
+      # The history is `<type>: <subject>`, squash-merged as
+      # `<subject> (#N)` — see CLAUDE.md.
+      prefix: chore
+      prefix-development: chore
+    groups:
+      # One pull request a month for everything routine. Majors are
+      # deliberately left out of the group so each arrives on its own and can
+      # be read on its own: next 14→15 drags React 19 behind it, and
+      # tailwindcss and biome have both moved config formats across a major.
+      minor-and-patch:
+        patterns: ['*']
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: monthly
+      day: monday
+      time: '09:00'
+      timezone: Asia/Tokyo
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: chore
+    groups:
+      # These move rarely and together — actions/checkout, setup-node,
+      # upload-pages-artifact and deploy-pages are all first-party. Majors
+      # included: an action major is usually a runtime bump, and splitting
+      # them would mean four pull requests to read the same release note.
+      actions:
+        patterns: ['*']
