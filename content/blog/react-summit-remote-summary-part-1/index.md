@@ -42,7 +42,7 @@ YouTube Live のリンクは残っているのでそこから視聴し直すこ�
 
 JAM Stack の概念の説明から JIT (Just In Time) ではなく AOT (Ahead Of Time) にページをビルドして届けることの重要性、それを可能とする Next.js 9 の紹介を行っていました。
 
-Next.js を使ってサイトを作成することで、Code を Push した時に、それが即座に反映され、Pull Request の中でも Preview が見れるようになっています。
+Next.js を使ってサイトを作成することで、Code を Push した時に、それが即座に反映され、Pull Request の中でも Preview が見られるようになっています。
 
 ### Alt Track: The 1.0 is a Lie by Lorenzo Sciandra 3:31~
 

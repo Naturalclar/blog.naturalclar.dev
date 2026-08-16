@@ -29,6 +29,10 @@ jobs:
       run: pnpm install --frozen-lockfile
     - name: Lint
       run: pnpm lint
+    # Safe to gate a deploy on, unlike the link check: textlint reads only
+    # the repository's own Markdown, so it is deterministic and offline.
+    - name: Lint the prose
+      run: pnpm lint:text
     - name: Build
       run: pnpm build
     # Deploying from this job rather than a workflow of its own means the

@@ -9,6 +9,7 @@ Always use `pnpm` — the version is pinned to 9.15.2 via the `packageManager` f
 - `pnpm dev` — dev server on port 3000
 - `pnpm build` — static export into `out/`, then copies article assets and writes `out/rss.xml`
 - `pnpm lint` — `biome check`: lint, format check, and import order in one pass
+- `pnpm lint:text` — textlint over the articles. Separate from `pnpm lint` because the two cover disjoint trees: Biome excludes `content/`, textlint reads nothing else. Both run in CI
 - `pnpm format` — `biome check --write`: applies fixes in place
 - `pnpm new` — scaffolds `content/blog/{title}/index.md` via scaffdog, prompting for a title
 - `pnpm start` — serves the built `out/` directory on port 3000, for checking a production build
@@ -169,11 +170,20 @@ Formatting follows the previous Prettier conventions: single quotes, no semicolo
 
 Because `eslint-config-next` was removed, **the Next.js-specific rules (`@next/next/*`) and the React Hooks rules are not enforced** — Biome does not implement them. Nothing checks for `exhaustive-deps` violations or `no-img-element`.
 
+**textlint** (`.textlintrc.json`) covers what Biome deliberately does not: the Japanese prose in `content/`. It runs as its own CI step, which is safe in `ci.yml` — unlike the link check — because it reads only this repository's Markdown and so is deterministic and offline.
+
+`preset-ja-technical-writing` is installed but **most of it is switched off**, and the file lists every rule explicitly rather than relying on defaults, so turning one on is a deliberate edit. Only rules that catch *errors* are enabled — invisible characters, unmatched brackets, doubled words, ら抜き言葉, 誤用. The style half (`sentence-length`, `no-doubled-joshi`, `ja-no-redundant-expression`, `arabic-kanji-numbers`, …) is off: it reported 270 problems across 24 of the 25 articles, and rewriting how the author wrote in 2019 to satisfy a linter is not what this repository wants. A linter that fails on day one gets switched off on day two.
+
+Two rules are configured against false positives that were measured, not guessed:
+
+- `ja-no-successive-word` takes `allow: ["一つ"]`. It reads the idiom `一つ一つ` as a doubled word — three hits in `writing-native-module-in-swift` alone — and `arabic-kanji-numbers` (now off) used to rewrite it to `1つ一つ`.
+- `no-mix-dearu-desumasu` is **off**. It hard-prefers ですます rather than following the document: it flagged `patching-with-pnpm` and `typescript-allowing-unused-param`, both written entirely in である, with a tally reading `である: 1, ですます: 0`. Enabling it would mean rewriting the voice of those articles.
+
 **Imports are relative everywhere, and `tsconfig.json` no longer declares path aliases.** They were configured but unused, and #93 removed them rather than adopting them: `scripts/*.mjs` are run by Node directly, so `@/…` cannot resolve there, and the `.mjs` modules under `src/lib/` are imported from both sides. Aliases could therefore only ever cover part of the tree, with an invisible boundary — an alias added to `src/lib/excerpt.mjs` would pass lint and `tsc` and break `pnpm build` at the RSS step. One convention avoids that.
 
 ### CI
 
-`.github/workflows/ci.yml` runs `pnpm lint` then `pnpm build` on Node 22 for every push and pull request, **and deploys**: on a push to `master` the same job uploads `out/` as the Pages artifact and a second job publishes it. Deploying from the job that built it means the export that ships is the one that was just linted and built, and the Node and pnpm versions are written down once.
+`.github/workflows/ci.yml` runs `pnpm lint`, `pnpm lint:text` and then `pnpm build` on Node 22 for every push and pull request, **and deploys**: on a push to `master` the same job uploads `out/` as the Pages artifact and a second job publishes it. Deploying from the job that built it means the export that ships is the one that was just linted and built, and the Node and pnpm versions are written down once.
 
 The deploy job carries its own `pages: write` / `id-token: write`; the workflow default is `contents: read`, so a pull request build never holds deploy permissions. Its concurrency group does **not** cancel in progress — the site is replaced wholesale, so an interrupted deploy is a broken site.
 

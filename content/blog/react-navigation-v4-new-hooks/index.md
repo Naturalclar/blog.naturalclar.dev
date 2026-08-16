@@ -40,6 +40,6 @@ function MyScreen() {
 }
 ```
 
-react navigation の stack は mount が発火されるタイミングがわかりにくいので、screen 毎の`useEffect`のような hooks がが使える様になったのはありがたいですね。
+react navigation の stack は mount が発火されるタイミングがわかりにくいので、screen 毎の`useEffect`のような hooks が使える様になったのはありがたいですね。
 
 なお、次に来る react-navigation v5 はフルリライトでガラッと使い方が変わるので、この hooks を活用出来る期間はそう長くはないかもしれません。

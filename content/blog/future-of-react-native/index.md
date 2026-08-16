@@ -63,7 +63,7 @@ C++ は他の多くのプラットフォームもサポートしている言語�
 
 Turbo Modules は上記の JSI を使って、Bluetooth や位置情報などの端末のネイティブ機能の呼び出しを同期的に行っていく改善です。同期的に呼び出しが行えると言うことは、必要な時に呼び出しを行えば良いので、起動時にすべての modules を読み込む必要はなくなります。これでアプリの起動は劇的に早くなります。また、同期的に呼ばれることによって、その機能のパフォーマンスも改善します。
 
-Turbo Modules はすでに React Native のコア部分に実装されているネイティブ機能においては実装されてています。
+Turbo Modules はすでに React Native のコア部分に実装されているネイティブ機能においては実装されています。
 [react-native-ble-manager](https://github.com/innoveit/react-native-ble-manager) など、サードパーティが作成している Native Module に関してはまだ適応されていませんが、Turbo Modules の部分が OSS として切り離されたら、サードパーティの Native Modules も Turbo Modules が適応できるようになります。
 
 ## React Native Fabric
