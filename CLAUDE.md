@@ -72,7 +72,9 @@ The archive spans 2019 onward and a lot of what it points at has moved or gone a
 
 Only *broken* and *unreachable* set a non-zero exit. `--host=` narrows a run to one hostname, `--timeout=` and `--concurrency=` are for the fixture tests.
 
-It walks `link`, `image` **and `definition`** nodes: a reference-style link keeps its URL in the definition at the foot of the article and nowhere else, and `2019-overview` writes its links that way — a walk over `link` alone silently misses them. Requests are HEAD first, falling back to GET on 403/405/501, because plenty of servers refuse HEAD without meaning the page is gone; 429 is retried honouring `Retry-After`, the same as the OGP fetcher.
+It walks `link`, `image` **and `definition`** nodes: a reference-style link keeps its URL in the definition at the foot of the article and nowhere else, and `2019-overview` writes its links that way — a walk over `link` alone silently misses them.
+
+Article-to-article links are checked too, against the filesystem rather than the network. They used to be written as absolute `https://blog.naturalclar.dev/{slug}/` URLs, and two of them survived the move off Gatsby still pointing at a URL shape this site no longer serves — the first Link check run caught both as 404s. They are relative now (`/posts/{slug}/`), which cannot rot the same way, but relative links need no fetching and so would have dropped out of the run entirely; `checkInternal` verifies the slug exists instead, and a typo fails like a dead host. Only `/posts/` is verified — `/page/N/` and `/tags/x/` are generated from data the script would have to duplicate, and no article links to one. Requests are HEAD first, falling back to GET on 403/405/501, because plenty of servers refuse HEAD without meaning the page is gone; 429 is retried honouring `Retry-After`, the same as the OGP fetcher.
 
 `.github/workflows/links.yml` is where it actually runs — on demand, and monthly. **Not in `ci.yml`**, for the same reason `pnpm ogp` is not in `pnpm build`: `ci.yml` deploys, and a link check there would let any third-party host redden a deploy. Nothing about link rot should be able to block a merge.
 
