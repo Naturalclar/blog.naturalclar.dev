@@ -21,7 +21,7 @@ v0.58 が今年最初のReact Native のリリースとなりました。
 
 今年は日本で [TypeScript Meetup][connpass-typescript-meetup] が開催されたり、国内で TypeScript が爆発的に広まってきた一年でしたね。
 
-今では[react-native-typescript-template][react-native-typescript-template]を使って、コマンド一つで typescript 対応済みの react-native プロジェクトが作成できます。
+今では[react-native-typescript-template][react-native-typescript-template]を使って、コマンド1つで typescript 対応済みの react-native プロジェクトが作成できます。
 
 ```
 npx react-native init MyApp --template react-native-template-typescript
@@ -33,7 +33,7 @@ npx react-native init MyApp --template react-native-template-typescript
 
 React Native のリポジトリに [Lean Core][lean-core-issue] の Issue が立ちました。
 
-Lean Core とは React Native の意向の一つで肥大化する React Native のリポジトリを軽くしようという試みです。
+Lean Core とは React Native の意向の1つで肥大化する React Native のリポジトリを軽くしようという試みです。
 Checkbox, Async-Storage, WebView, Cli 等、必ずしも本体に含まれていなくても良い Package を React Native Community に移管して、React Native 本体から削減されていくことになります。
 
 Umbrella 方式の `Good first issue` として立ち上がり、自分も参加コメントをしたのですが、まだ Native Component 周りの自信がなく、チキってしまったため、やれずじまいでした。
@@ -73,8 +73,8 @@ Android の実行速度がこれにより格段に速くなりました。
 
 #### 7/11 react-navigation-hooks
 
-react-native の主要 Routing ライブラリの一つである [react-navigation][react-navigation] が、Hooks ライブラリの [react-navigation-hooks][react-navigation-hooks] をリリースしました。
-これによって、今まで props で渡していた navigation を `useNavigation` を使って、Context内のどのComponentからも取得することができるようになりました。
+react-native の主要 Routing ライブラリの1つである [react-navigation][react-navigation] が、Hooks ライブラリの [react-navigation-hooks][react-navigation-hooks] をリリースしました。
+これによって、今まで props で渡していた navigation を `useNavigation` を使って、Context内のどのComponentからも取得できるようになりました。
 より汎用的なnavigationが行えるようになり、とても便利になりましたね。
 
 #### 7/11 react-redux v7.1.0
@@ -95,7 +95,7 @@ v0.61にて、Fast Refreshが実装されました。
 
 また、地味に Metro Bundler が `console.log` を出力するようになったので、[react-native-debugger][react-native-debugger] などを立ち上げなくても debug が容易になりました。
 
-この二つの変更と、v0.60 での Native Module の繋ぎこみがだいぶ楽になったおかげで、自分は正直Expoはもう使わなくても良いのではないかと思うくらい、素のReact Nativeでの開発が快適になったように感じます。
+この2つの変更と、v0.60 での Native Module の繋ぎこみがだいぶ楽になったおかげで、自分は正直Expoはもう使わなくても良いのではないかと思うくらい、素のReact Nativeでの開発が快適になったように感じます。
 
 実際、Expo では共通の Expo サーバを使ったアプリのビルド待ちがあるため、Expo よりも React Native での開発のほうが効率的とさえ思います。
 

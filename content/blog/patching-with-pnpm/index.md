@@ -8,7 +8,7 @@ tags: ['tooling']
 
 ## `yarn` v1 での対応
 
-以前はパッケージマネージャとして `yarn` v1 を採用していて、その時は `patch-package` を使うことで対応することができた。
+以前はパッケージマネージャとして `yarn` v1 を採用していて、その時は `patch-package` を使うことで対応できた。
 
 https://github.com/ds300/patch-package
 

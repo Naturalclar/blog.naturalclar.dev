@@ -156,7 +156,7 @@ npx scaffdog generate
 
 ## scaffdog の他の活用法
 
-scaffdog は、Component 以外にも、Gatsby で新しく Blog 記事を作成するときや、mdx-deck で新しく Slide を作成するときなど、様々な場面で使用することができます。
+scaffdog は、Component 以外にも、Gatsby で新しく Blog 記事を作成するときや、mdx-deck で新しく Slide を作成するときなど、様々な場面で使用できます。
 
 自分が使っているものは、以下のリポジトリの`.scaffdog` フォルダに入っているので、ぜひ確認してください。
 

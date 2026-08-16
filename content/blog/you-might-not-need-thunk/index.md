@@ -93,7 +93,7 @@ export const fooAction = (): ThunkAction => async (dispatch: Dispatch) => {
 
 つまりやりたいことは：
 
-- Action の発火は必要な状態が変わる一回に済ませたい。
+- Action の発火は必要な状態が変わる1回に済ませたい。
 - Loading は redux 外で管理したい。
 - 非同期処理の共通部分を使いまわしたい。
 
@@ -102,12 +102,12 @@ export const fooAction = (): ThunkAction => async (dispatch: Dispatch) => {
 react の custom hooks を使えば解決します。
 react-redux の v7.1 から、hooks に対応した API が出たのでそれらを使っていきます。
 
-上で書いた redux-thunk の例を custom hooks を使って簡略化することができます。
+上で書いた redux-thunk の例を custom hooks を使って簡略化できます。
 
 以下のことをやっていきます。
 
 - loading は useState で保持して、hooks 内で完結させる。
-- dispatch を使うのは、非同期処理が終わってからの一回のみで済ませる。
+- dispatch を使うのは、非同期処理が終わってからの1回のみで済ませる。
 
 ```js useFoo.ts
 import { useState, useCallback } from 'react'
@@ -137,7 +137,7 @@ export const useFoo = () => {
 
 ```
 
-loading と error を持つ必要がなくなったので、reducer も簡略化することができます。
+loading と error を持つ必要がなくなったので、reducer も簡略化できます。
 
 ```js fooReducer.ts
 
@@ -188,7 +188,7 @@ export const FooList = () => {
 }
 ```
 
-このような形で、ページ遷移時に非同期で何かを取得してくる処理を thunk 無しでも実現することができます。
+このような形で、ページ遷移時に非同期で何かを取得してくる処理を thunk 無しでも実現できます。
 
 また、このように非同期処理のロジックを custom hooks に閉じ込めておくことで、別のページで同じ処理が必要になった時に hooks を使い回すことができます
 上の Component の例では、useEffect も useFoo の中に入れることで、完全にロジックと Component を分割させることができます。
