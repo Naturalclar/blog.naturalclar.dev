@@ -59,6 +59,12 @@
     "siteName": "GitHub",
     "image": "/ogp/6cb97c002c7dc64fdb32548f1e51f6e9.png"
   },
+  "https://github.com/react-native-community/react-native-tab-view/issues/898": {
+    "title": "Support infinite tabs natively · Issue #898 · satya164/react-native-tab-view",
+    "description": "We should support infinite tabs in the library, so user can swipe in either direction infinitely. Considerations The length of the routes array is unknown upfront, and routes can be added both to the beginning of the array and the end of...",
+    "siteName": "GitHub",
+    "image": "/ogp/9af61189dd228d626b81c55733bbed08.png"
+  },
   "https://github.com/react-native-community/releases": {
     "title": "GitHub - react-native-community/releases: React Native releases",
     "description": "React Native releases. Contribute to react-native-community/releases development by creating an account on GitHub.",
