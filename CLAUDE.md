@@ -183,6 +183,14 @@ The Pages source must stay on **GitHub Actions** (Settings → Pages). Switching
 
 `.github/workflows/label.yml` auto-labels new issues by keyword — an issue whose title or body contains "post" gets `Post Idea`, and "feature" gets `feature request`.
 
+### Dependabot
+
+`.github/dependabot.yml` covers two ecosystems, `npm` and `github-actions`, both monthly. Monthly rather than weekly because there is no test suite: every update is reviewed by reading it and watching `pnpm lint && pnpm build` go green, and a weekly cadence turns that into a chore that gets skipped. Security updates ignore the schedule regardless.
+
+Routine updates are **grouped into one pull request** per ecosystem. For npm the group is minor and patch only — majors are deliberately left out so each arrives alone and can be read alone, which is what you want when `next` 14→15 drags React 19 behind it, or when `tailwindcss` and `biome` move config formats. For actions the group takes majors too: they are nearly all first-party and an action major is usually a runner bump, so splitting them would mean four pull requests against one release note.
+
+Dependabot does **not** touch the Node and pnpm pins — those live in `volta` and `packageManager`, and stay a manual decision. Its pull requests do get CI, unlike the OGP workflow's: they come from branches in this repository pushed by a different app, so `ci.yml` runs on both the push and the pull request.
+
 `.github/workflows/ogp.yml` refreshes the OGP cache and opens a pull request (see the OGP section above). Two things about it are worth knowing before changing it:
 
 - **It needs write permissions the repository does not grant by default.** Settings → Actions → General → Workflow permissions must be *Read and write*, with *Allow GitHub Actions to create and approve pull requests* ticked. Without them the run fails at the push or the `gh pr create`.
