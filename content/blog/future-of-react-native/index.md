@@ -9,7 +9,7 @@ outdated: true
 
 ## はじめに
 
-最近 [React Native Community](https://github.com/react-native-community) の Github org の一員となりました。去年の [Advent Calendar](https://blog.naturalclar.dev/react-native-review-2019/) で目標を立てていたのですが、新年入って１週間足らずで達成できました。Community の一員になれた経緯はまた別の記事で書こうと思います。Community の一員として Contributors の Discord channel に招待されて、色々な知見が手に入るので、今回はその一部をシェアします。
+最近 [React Native Community](https://github.com/react-native-community) の Github org の一員となりました。去年の [Advent Calendar](/posts/react-native-review-2019/) で目標を立てていたのですが、新年入って１週間足らずで達成できました。Community の一員になれた経緯はまた別の記事で書こうと思います。Community の一員として Contributors の Discord channel に招待されて、色々な知見が手に入るので、今回はその一部をシェアします。
 
 ## The New React Native
 

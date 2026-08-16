@@ -6,7 +6,7 @@ tags: ['react-native', 'retrospective']
 
 この記事は [React Native アドベントカレンダー](https://qiita.com/advent-calendar/2020/react-native) の 3 日目の記事です。
 
-去年、[React Native 2019 年の振り返り](https://blog.naturalclar.dev/react-native-review-2019/)を書いたので、今年もやります。
+去年、[React Native 2019 年の振り返り](/posts/react-native-review-2019/)を書いたので、今年もやります。
 
 それでは、振り返っていきましょう。
 

@@ -36,8 +36,11 @@ const timeoutMs = Number(flag('timeout', TIMEOUT_MS))
 const concurrency = Number(flag('concurrency', CONCURRENCY))
 const hostFilter = flag('host')
 
+const POSTS_DIRECTORY = path.join(process.cwd(), 'content/blog')
+
 /**
- * Every external URL in the archive, with the articles that reference it.
+ * Every link in the archive, with the articles that reference it, split into
+ * the ones that need the network and the ones that do not.
  *
  * `definition` is in the list alongside `link` and `image` because a
  * reference-style link (`[text][ref]` with `[ref]: https://…` at the foot of
@@ -45,11 +48,11 @@ const hostFilter = flag('host')
  * its links that way, so a walk over `link` alone would miss them entirely.
  */
 function collectLinks() {
-  const postsDirectory = path.join(process.cwd(), 'content/blog')
-  const links = new Map()
+  const external = new Map()
+  const internal = new Map()
 
-  for (const slug of fs.readdirSync(postsDirectory).sort()) {
-    const file = path.join(postsDirectory, slug, 'index.md')
+  for (const slug of fs.readdirSync(POSTS_DIRECTORY).sort()) {
+    const file = path.join(POSTS_DIRECTORY, slug, 'index.md')
 
     if (!fs.existsSync(file)) {
       continue
@@ -60,20 +63,54 @@ function collectLinks() {
 
     visit(tree, ['link', 'image', 'definition'], (node) => {
       const url = node.url ?? ''
+      const into = /^https?:\/\//.test(url)
+        ? external
+        : url.startsWith('/')
+          ? internal
+          : null
 
-      if (!/^https?:\/\//.test(url)) {
+      if (!into) {
         return
       }
 
-      if (!links.has(url)) {
-        links.set(url, new Set())
+      if (!into.has(url)) {
+        into.set(url, new Set())
       }
 
-      links.get(url).add(slug)
+      into.get(url).add(slug)
     })
   }
 
-  return [...links].map(([url, slugs]) => ({ url, slugs: [...slugs] }))
+  const shape = (map) =>
+    [...map].map(([url, slugs]) => ({ url, slugs: [...slugs] }))
+
+  return { external: shape(external), internal: shape(internal) }
+}
+
+/**
+ * An article link to another article, checked against the filesystem.
+ *
+ * These used to be written as absolute https://blog.naturalclar.dev/{slug}/
+ * URLs, which is how two of them survived the move off Gatsby pointing at a
+ * URL shape this site no longer serves — the first Link check run caught both
+ * as 404s. Rewriting them relative fixes that, but it also takes them out of
+ * the run above, since nothing relative needs fetching. So they are checked
+ * here instead, and a typo in a slug fails the same way a dead host does.
+ *
+ * Only /posts/ is verified. The other internal routes — /page/N/, /tags/x/ —
+ * are generated from data this script would have to duplicate to know about,
+ * and no article links to one.
+ */
+function checkInternal({ url, slugs }) {
+  const post = url.match(/^\/posts\/([^/#?]+)\/?/)
+
+  if (!post) {
+    return { url, slugs, state: 'ok', detail: 'not verified' }
+  }
+
+  return fs.existsSync(path.join(POSTS_DIRECTORY, post[1], 'index.md'))
+    ? { url, slugs, state: 'ok', detail: 'post exists' }
+    : { url, slugs, state: 'broken', detail: `no post named ${post[1]}` }
 }
 
 async function fetchWithTimeout(url, init) {
@@ -194,13 +231,20 @@ const SECTIONS = [
   ['refused', 'Refused the checker'],
 ]
 
-const links = collectLinks().filter(
+const { external, internal } = collectLinks()
+
+// --host= is about reaching one host, so it takes the internal links out too
+// rather than leaving them in every narrowed run's output.
+const links = external.filter(
   ({ url }) => !hostFilter || new URL(url).hostname === hostFilter
 )
+const relative = hostFilter ? [] : internal
 
-console.log(`checking ${links.length} external link(s) in content/blog/`)
+console.log(
+  `checking ${links.length} external and ${relative.length} internal link(s) in content/blog/`
+)
 
-const results = await pool(links, check)
+const results = [...(await pool(links, check)), ...relative.map(checkInternal)]
 
 for (const [state, heading] of SECTIONS) {
   const matching = results.filter((result) => result.state === state)

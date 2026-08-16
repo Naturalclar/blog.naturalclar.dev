@@ -6,7 +6,7 @@ outdated: true
 ---
 
 最近、React Native の最新バージョン、0.62 がリリースされました。
-React Native 0.62 の新機能については[この記事](https://blog.naturalclar.dev/whats-new-in-react-native-0.62/)にて記載しています。
+React Native 0.62 の新機能については[この記事](/posts/whats-new-in-react-native-0.62/)にて記載しています。
 
 そして、次のバージョンの Release Candidate である 0.63-rc.0 も新しくリリースされました。
 この記事では、次のバージョン、React Native 0.63 で予定されている新機能についてまとめます。
