@@ -30,7 +30,7 @@
     "start": "pnpm dlx serve out"
   },
   "dependencies": {
-    "feed": "^4.2.2",
+    "feed": "^6.0.0",
     "gray-matter": "^4.0.3",
     "hast-util-from-html": "^2.0.3",
     "highlight.js": "11.12.0",
