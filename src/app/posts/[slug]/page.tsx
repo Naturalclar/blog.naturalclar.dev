@@ -14,9 +14,10 @@ import {
 } from '../../../lib/posts'
 
 interface BlogPostProps {
-  params: {
+  // Awaited since Next 15 — see the note in src/app/page/[page]/page.tsx.
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -29,7 +30,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: BlogPostProps): Promise<Metadata> {
-  const post = await getPostData(params.slug)
+  const { slug } = await params
+  const post = await getPostData(slug)
   return generateSEOMetadata({
     title: post.title,
     description: post.excerpt,
@@ -37,8 +39,9 @@ export async function generateMetadata({
 }
 
 export default async function BlogPost({ params }: BlogPostProps) {
-  const post = await getPostData(params.slug)
-  const { previous, next } = getAdjacentPosts(params.slug)
+  const { slug } = await params
+  const post = await getPostData(slug)
+  const { previous, next } = getAdjacentPosts(slug)
   // Hoisted so the div below stays on one line — a biome-ignore comment only
   // covers the line that follows it, not a wrapped attribute list.
   const markup = { __html: post.contentHtml }

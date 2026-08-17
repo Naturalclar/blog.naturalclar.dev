@@ -35,6 +35,8 @@ Stopping after the push and asking whether to open a PR is the wrong default her
 
 A Next.js App Router blog that builds to a fully static export and deploys to GitHub Pages at https://blog.naturalclar.dev. There is no server at runtime: no middleware, no Server Actions, no route handlers, no rewrites, and `images.unoptimized` is set. Anything requiring a Next.js server will not work here.
 
+**Next 16 with React 19.** The three dynamic routes take `params` as a `Promise` and `await` it — the Next 15 breaking change, which is why `next` 14→16 could not be a version bump alone. Nothing about *when* the work happens changed: `output: 'export'` still renders every page once at build time, so awaiting params is a signature, not a runtime cost. The export gained one route, `/_not-found/`, and Next now writes four RSC payload `.txt` files per route instead of one, which is most of the 8.0M → 9.3M growth in `out/`. `out/404.html` is unaffected and is still what GitHub Pages serves.
+
 ### Content pipeline
 
 Posts live in `content/blog/{slug}/index.md`, one directory per post, with images alongside them and referenced relatively (`![alt](./diagram.png)`). Frontmatter carries `title`, `date`, `tags` (see below) and an optional `outdated` flag.
@@ -199,7 +201,7 @@ The Pages source must stay on **GitHub Actions** (Settings → Pages). Switching
 
 `.github/dependabot.yml` covers two ecosystems, `npm` and `github-actions`, both monthly. Monthly rather than weekly because there is no test suite: every update is reviewed by reading it and watching `pnpm lint && pnpm build` go green, and a weekly cadence turns that into a chore that gets skipped. Security updates ignore the schedule regardless.
 
-Routine updates are **grouped into one pull request** per ecosystem. For npm the group is minor and patch only — majors are deliberately left out so each arrives alone and can be read alone, which is what you want when `next` 14→15 drags React 19 behind it, or when `tailwindcss` and `biome` move config formats. For actions the group takes majors too: they are nearly all first-party and an action major is usually a runner bump, so splitting them would mean four pull requests against one release note.
+Routine updates are **grouped into one pull request** per ecosystem. For npm the group is minor and patch only — majors are deliberately left out so each arrives alone and can be read alone, which is what you want when `next` 14→16 drags React 19 and an awaited-`params` migration behind it (#173), or when `tailwindcss` and `biome` move config formats. For actions the group takes majors too: they are nearly all first-party and an action major is usually a runner bump, so splitting them would mean four pull requests against one release note.
 
 Dependabot does **not** touch the Node and pnpm pins — those live in `volta` and `packageManager`, and stay a manual decision. Its pull requests do get CI, unlike the OGP workflow's: they come from branches in this repository pushed by a different app, so `ci.yml` runs on both the push and the pull request.
 

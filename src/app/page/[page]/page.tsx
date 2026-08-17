@@ -6,13 +6,18 @@ import { siteTitle } from '../../../data/static'
 import { getPaginatedPosts } from '../../../lib/posts'
 
 interface PageProps {
-  params: {
+  // A Promise since Next 15: route params are awaited rather than read. The
+  // page still renders once at build time — `output: 'export'` has not
+  // changed — so this is a signature change, not a change in when the work
+  // happens.
+  params: Promise<{
     page: string
-  }
+  }>
 }
 
-export default function Page({ params }: PageProps) {
-  const pageNumber = parseInt(params.page, 10)
+export default async function Page({ params }: PageProps) {
+  const { page } = await params
+  const pageNumber = parseInt(page, 10)
 
   if (Number.isNaN(pageNumber) || pageNumber < 1) {
     notFound()

@@ -8,22 +8,25 @@ import { generateMetadata as generateSEOMetadata } from '../../../lib/metadata'
 import { getAllTags, getPostsByTag } from '../../../lib/posts'
 
 interface TagPageProps {
-  params: {
+  // Awaited since Next 15 — see the note in src/app/page/[page]/page.tsx.
+  params: Promise<{
     tag: string
-  }
+  }>
 }
 
 export async function generateMetadata({
   params,
 }: TagPageProps): Promise<Metadata> {
+  const { tag } = await params
   return generateSEOMetadata({
-    title: `#${params.tag}`,
-    description: `${params.tag} タグの記事一覧`,
+    title: `#${tag}`,
+    description: `${tag} タグの記事一覧`,
   })
 }
 
-export default function TagPage({ params }: TagPageProps) {
-  const posts = getPostsByTag(params.tag)
+export default async function TagPage({ params }: TagPageProps) {
+  const { tag } = await params
+  const posts = getPostsByTag(tag)
 
   if (posts.length === 0) {
     notFound()
@@ -34,7 +37,7 @@ export default function TagPage({ params }: TagPageProps) {
   // it would mean a second set of routes for no reader benefit. If a tag ever
   // outgrows that, getPaginatedPosts is the piece to reach for.
   return (
-    <Layout title={`${siteTitle} - #${params.tag}`}>
+    <Layout title={`${siteTitle} - #${tag}`}>
       <Bio />
       <PostList
         data={{
