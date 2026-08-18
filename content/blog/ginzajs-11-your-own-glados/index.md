@@ -157,4 +157,6 @@ https://naturalclar.dev/slides-ginza-js-2026-08/
 
 ## リンク
 
-https://naturalclar.dev
+セッション間の SendMessage について
+
+https://code.claude.com/docs/en/cross-session-messaging
