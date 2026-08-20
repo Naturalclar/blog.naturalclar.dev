@@ -1,4 +1,10 @@
 {
+  "https://code.claude.com/docs/en/cross-session-messaging": {
+    "title": "Message your other Claude Code sessions - Claude Code Docs",
+    "description": "Let Claude list and message your other Claude Code sessions on this machine, and reach your sessions on other machines or on the web.",
+    "siteName": "Claude Code Docs",
+    "image": "/ogp/90ee76df68d8eab993044de12c1c3f40.png"
+  },
   "https://gist.github.com/poteto/37c076bf112a07ba39d0e5f0645fec43": {
     "title": "[DEPRECATED] React Compiler compatibility module for codebases unable to use React 19",
     "description": "[DEPRECATED] React Compiler compatibility module for codebases unable to use React 19 - babel.config.js",
@@ -100,5 +106,10 @@
     "description": "Generate a report about your development environment for debugging and issue reporting - tabrindle/envinfo",
     "siteName": "GitHub",
     "image": "/ogp/52124b6192a3e72d9c892b9e43d1f90a.png"
+  },
+  "https://naturalclar.dev/slides-ginza-js-2026-08/": {
+    "title": "自分だけのGLaDOSをつくる - Ginza.js #11",
+    "description": "Ginza.js #11 の発表スライド。Markdown のノートと Claude Code のスキルと Git だけで、1日を一緒に回す相棒を組んでいる話。",
+    "image": "/ogp/c2fb4fd897e39927b520a6ad2d90c73d.png"
   }
 }
