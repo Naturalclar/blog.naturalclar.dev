@@ -87,6 +87,88 @@ function collectLinks() {
   return { external: shape(external), internal: shape(internal) }
 }
 
+const COMPONENTS_DIRECTORY = path.join(process.cwd(), 'src/components')
+const SITE_DATA = path.join(process.cwd(), 'src/data/site.json')
+
+/**
+ * The links the site chrome carries, which appear on every page.
+ *
+ * Until #175 this walk stopped at content/blog/, so the archive's links were
+ * reported monthly while the Bio's — on the home page, every article, every
+ * tag page — were checked by nothing. The avatar is the sharp case: it is an
+ * `<img src>`, so a URL that stops resolving breaks the image site-wide and
+ * the first person to notice is a reader.
+ *
+ * Two sources, both narrow on purpose:
+ *
+ * - `src/data/site.json`, where the social links and the avatar live. Every
+ *   http(s) value is taken except `siteUrl`, which is this site's own root
+ *   rather than something it points out at.
+ * - `href=` and `src=` literals in src/components/. Anchoring on the attribute
+ *   is what keeps this from matching the example URLs in doc comments, which
+ *   is why the whole of src/ is not scanned for anything URL-shaped.
+ *
+ * src/data/ogp.json is deliberately not read: `pnpm ogp` drops any entry no
+ * article references, so its 19 keys are a strict subset of the article links
+ * already collected above. Reading it would report each of them twice.
+ */
+function collectSiteLinks() {
+  const links = new Map()
+
+  const add = (url, where) => {
+    if (!/^https?:\/\//.test(url)) {
+      return
+    }
+
+    if (!links.has(url)) {
+      links.set(url, new Set())
+    }
+
+    links.get(url).add(where)
+  }
+
+  // Both sources are optional so a run against a directory that only has
+  // content/blog/ still works — that is how the fixture tests drive this.
+  if (fs.existsSync(SITE_DATA)) {
+    const site = JSON.parse(fs.readFileSync(SITE_DATA, 'utf8'))
+
+    for (const [key, value] of Object.entries(site)) {
+      if (key === 'siteUrl') {
+        continue
+      }
+
+      if (typeof value === 'string') {
+        add(value, 'src/data/site.json')
+      } else if (value && typeof value === 'object') {
+        for (const nested of Object.values(value)) {
+          add(nested, 'src/data/site.json')
+        }
+      }
+    }
+  }
+
+  if (fs.existsSync(COMPONENTS_DIRECTORY)) {
+    for (const name of fs.readdirSync(COMPONENTS_DIRECTORY).sort()) {
+      if (!name.endsWith('.tsx')) {
+        continue
+      }
+
+      const source = fs.readFileSync(
+        path.join(COMPONENTS_DIRECTORY, name),
+        'utf8'
+      )
+
+      for (const match of source.matchAll(
+        /(?:href|src)=["'](https?:\/\/[^"']+)["']/g
+      )) {
+        add(match[1], `src/components/${name}`)
+      }
+    }
+  }
+
+  return [...links].map(([url, where]) => ({ url, slugs: [...where] }))
+}
+
 /**
  * An article link to another article, checked against the filesystem.
  *
@@ -233,15 +315,29 @@ const SECTIONS = [
 
 const { external, internal } = collectLinks()
 
+// One URL can be both an article link and a chrome link. Merging by URL keeps
+// it a single fetch and a single report line, naming every place it appears.
+const merged = new Map()
+
+for (const { url, slugs } of [...external, ...collectSiteLinks()]) {
+  if (!merged.has(url)) {
+    merged.set(url, new Set())
+  }
+
+  for (const where of slugs) {
+    merged.get(url).add(where)
+  }
+}
+
 // --host= is about reaching one host, so it takes the internal links out too
 // rather than leaving them in every narrowed run's output.
-const links = external.filter(
-  ({ url }) => !hostFilter || new URL(url).hostname === hostFilter
-)
+const links = [...merged]
+  .map(([url, where]) => ({ url, slugs: [...where] }))
+  .filter(({ url }) => !hostFilter || new URL(url).hostname === hostFilter)
 const relative = hostFilter ? [] : internal
 
 console.log(
-  `checking ${links.length} external and ${relative.length} internal link(s) in content/blog/`
+  `checking ${links.length} external and ${relative.length} internal link(s)`
 )
 
 const results = [...(await pool(links, check)), ...relative.map(checkInternal)]

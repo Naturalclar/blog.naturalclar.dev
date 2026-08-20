@@ -4,6 +4,10 @@ import site from './site.json'
 
 export const author = site.author
 export const authorEmail = site.authorEmail
+// In the JSON rather than hardcoded in Bio, so scripts/check-links.mjs can see
+// it: it is an <img src>, and a URL that stops resolving breaks the avatar on
+// every page of the site (#175).
+export const avatar = site.avatar
 export const social = site.social
 export const siteDescription = site.siteDescription
 export const siteTitle = site.siteTitle
