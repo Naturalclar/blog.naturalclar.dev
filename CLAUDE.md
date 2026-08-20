@@ -106,6 +106,10 @@ Two files there exist for the host rather than for readers, and both have to be 
 
 The favicon is `src/app/favicon.ico`, using the App Router file convention rather than `public/`: that is what emits the `<link rel="icon">` tag into the HTML, and it adds one route to the static page count.
 
+`sitemap.xml` is the opposite case — generated, not static. `src/app/sitemap.ts` builds it from `getSortedPostsData`, `getAllTags` and `getPaginatedPosts`, the same functions the three dynamic routes derive their paths from, so it cannot drift the way a second hand-kept walk would. It **must carry `export const dynamic = 'force-static'`**: Next treats a sitemap as a route handler, a route handler is dynamic until told otherwise, and under `output: 'export'` that fails the build outright rather than emitting the file. `public/robots.txt` names it. The 404 route is deliberately absent — it is noindex, and it answers at `out/404/` and `out/_not-found/` as well.
+
+The sitemap and the canonicals are built independently and should agree: 37 URLs each today. If a route is ever added, comparing the two sets is the cheapest way to prove nothing was missed.
+
 Until #95 these lived in a root `static/` directory and in `content/assets/`, neither of which Next.js serves from — they reached `out/static/` and nowhere respectively, so `/robots.txt`, `/favicon.ico`, and the OG image were all 404. Both directories are gone now; don't reintroduce them. Anything that should answer at a URL belongs in `public/`.
 
 ### Post-build scripts
