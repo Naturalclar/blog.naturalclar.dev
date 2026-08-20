@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { author, social } from '../data/static'
+import { author, avatar, social } from '../data/static'
 import { GitHubIcon, XIcon } from './SocialIcons'
 
 const Bio = () => {
@@ -8,7 +8,7 @@ const Bio = () => {
     <div className="mb-10 flex items-center">
       <Image
         className="avatar mr-4 rounded-full"
-        src="https://www.github.com/Naturalclar.png"
+        src={avatar}
         width={50}
         height={50}
         alt={author}

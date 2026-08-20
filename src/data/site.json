@@ -4,8 +4,9 @@
   "siteTitle": "naturalclar.dev",
   "siteDescription": "Naturalclar's personal blog",
   "siteUrl": "https://blog.naturalclar.dev",
+  "avatar": "https://github.com/Naturalclar.png",
   "social": {
     "x": "https://x.com/natural_clar",
-    "github": "https://www.github.com/Naturalclar"
+    "github": "https://github.com/Naturalclar"
   }
 }
