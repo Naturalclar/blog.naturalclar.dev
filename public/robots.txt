@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://blog.naturalclar.dev/sitemap.xml
