@@ -9,6 +9,7 @@ import { getAllTags, getPostsByTag } from '../../lib/posts'
 export const metadata: Metadata = generateSEOMetadata({
   title: 'タグ',
   description: 'タグ別の記事一覧',
+  path: '/tags/',
 })
 
 export default function TagsIndex() {

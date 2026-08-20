@@ -49,6 +49,16 @@ A fence can also name a file — ```` ```js fooReducer.ts ```` — and `src/lib/
 
 Site-wide constants live in `src/data/site.json`. `src/data/static.ts` re-exports them as named exports for the app (`src/lib/metadata.ts` and the components), and `scripts/generate-rss.mjs` imports the same JSON. Edit the JSON, not the re-exports — it is the single source shared across both sides.
 
+### Per-page metadata
+
+`generateMetadata` in `src/lib/metadata.ts` builds every page's head. **Its `path` option is not optional in practice** — it sets both `alternates.canonical` and `openGraph.url`, and a caller that omits it inherits `/`, which is the defect #177 fixed: all 40 pages told crawlers they were the home page while carrying a correct per-page `og:title`, so a share preview looked right and resolved somewhere else. Pass the path the site actually serves, trailing slash included, since `trailingSlash: true` means the slashless spelling redirects.
+
+Two routes exist only to carry that path: `src/app/page.tsx` and `src/app/page/[page]/page.tsx` export metadata whose title and description are the inherited defaults. Deleting those exports looks harmless and silently sends both back to claiming `/`.
+
+`publishedTime` is what makes a page an `article` rather than a `website`, and `src/app/posts/[slug]/page.tsx` is the only caller that passes it.
+
+`src/app/not-found.tsx` is the exception: `robots: { index: false }` and `alternates: { canonical: null }`. The `null` matters — the export writes that route to `out/404.html`, `out/404/` and `out/_not-found/`, and the last two answer 200 at real paths, so inheriting the root's canonical would leave a noindex page pointing at a different URL.
+
 The listing summary, the meta description and the RSS item description all come from one place too: `toExcerpt` in `src/lib/excerpt.mjs`. It parses the Markdown and flattens it to text rather than slicing the source, which is what used to leak link syntax and code fences into all three (#112). It is plain `.mjs` on purpose — TypeScript for the app, importable from the RSS script, which is why that script is ESM.
 
 ### OGP cards
