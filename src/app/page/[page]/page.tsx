@@ -1,8 +1,10 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Bio from '../../../components/Bio'
 import Layout from '../../../components/Layout'
 import PostList from '../../../components/PostList'
 import { siteTitle } from '../../../data/static'
+import { generateMetadata as generateSEOMetadata } from '../../../lib/metadata'
 import { getPaginatedPosts } from '../../../lib/posts'
 
 interface PageProps {
@@ -13,6 +15,16 @@ interface PageProps {
   params: Promise<{
     page: string
   }>
+}
+
+// A pagination page is the case a canonical exists for: /page/2/ holds the
+// same entries the listing will hold once enough posts push them down. Title
+// and description are the inherited defaults, unchanged.
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { page } = await params
+  return generateSEOMetadata({ path: `/page/${page}/` })
 }
 
 export default async function Page({ params }: PageProps) {

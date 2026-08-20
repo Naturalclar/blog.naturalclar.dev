@@ -21,6 +21,7 @@ export async function generateMetadata({
   return generateSEOMetadata({
     title: `#${tag}`,
     description: `${tag} タグの記事一覧`,
+    path: `/tags/${tag}/`,
   })
 }
 
