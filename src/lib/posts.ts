@@ -38,16 +38,30 @@ export const TAGS: string[] = tagVocabulary
  * Failing the build on an unknown tag is the point: a typo would otherwise
  * pre-render its own /tags/react-nativ/ page holding one post, and nothing
  * would look broken from any page that already existed.
+ *
+ * Missing tags fail too, and for the same reason. They used to return `[]`,
+ * which meant a post with no `tags` built, listed and read normally while
+ * appearing on no tag page and in no RSS category — the one failure nothing
+ * put in front of you (#179). Every article carries tags, so requiring them
+ * costs nothing and closes the silent case.
  */
 function readTags(data: { tags?: unknown }, slug: string): string[] {
   const tags = data.tags
 
   if (tags === undefined) {
-    return []
+    throw new Error(
+      `${slug}: frontmatter is missing \`tags\`. Pick from ${TAGS.join(', ')} — a post with no tags appears on no tag page.`
+    )
   }
 
   if (!Array.isArray(tags)) {
     throw new Error(`${slug}: frontmatter \`tags\` must be a list`)
+  }
+
+  if (tags.length === 0) {
+    throw new Error(
+      `${slug}: frontmatter \`tags\` is empty. Pick from ${TAGS.join(', ')}.`
+    )
   }
 
   for (const tag of tags) {
