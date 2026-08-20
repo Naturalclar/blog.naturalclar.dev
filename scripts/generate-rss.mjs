@@ -50,12 +50,17 @@ function generateRSSFeed() {
     description: siteDescription,
     id: siteUrl,
     link: siteUrl,
-    language: 'en',
+    // Every article is Japanese, and the pages have said lang="ja" since #143;
+    // the feed kept declaring English, which is what a reader's client groups
+    // and filters on.
+    language: 'ja',
     image: `${siteUrl}/twitter-card.png`,
     favicon: `${siteUrl}/favicon.ico`,
     copyright: `All rights reserved ${new Date().getFullYear()}, ${author}`,
     updated: new Date(posts[0]?.date || new Date()),
-    generator: 'Next.js',
+    // Not Next.js: it never sees this file. The script runs after the export,
+    // and writes straight into out/ for the reason in #89.
+    generator: 'scripts/generate-rss.mjs',
     feedLinks: {
       rss2: `${siteUrl}/rss.xml`,
     },
