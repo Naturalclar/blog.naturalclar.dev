@@ -173,7 +173,7 @@ React Native Advent Calendar, 4 日目は キッチハイクの ariiyuさん([@a
 [hermes]: https://github.com/facebook/hermes
 [react-fabric]: https://github.com/react-native-community/discussions-and-proposals/issues/4
 [react-devtools]: https://github.com/facebook/react/tree/master/packages/react-devtools
-[react-navigation-next]: https://reactnavigation.org/docs/en/next/getting-started.html
+[react-navigation-next]: https://reactnavigation.org/docs/getting-started
 [lean-core-issue]: https://github.com/react/react-native/issues/23313
 [rn-diff-purge]: https://github.com/react-native-community/rn-diff-purge
 [upgrade-helper]: https://react-native-community.github.io/upgrade-helper/
