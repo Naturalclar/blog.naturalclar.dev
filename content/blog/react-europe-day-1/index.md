@@ -64,7 +64,7 @@ React Reconciler をベースとして作られており、DOMを持たないの
 
 ### Scaling the Web with Gatsby
 
-前半最後のセッションは Gatsby のコアチームの一員である[@chatsidhartha](https://twitter.com/chatsidhartha) が、Gatsby のこれまでと今後について話していました。
+前半最後のセッションは Gatsby のコアチームの一員である[@SidChatterjee](https://x.com/SidChatterjee) が、Gatsby のこれまでと今後について話していました。
 
 [Gatsby](https://www.gatsbyjs.com/) は React を使ってページを作成したり、GraphQLを使ってデータを取得して、少ない手順で静的サイトを作成できるフレームワークです。
 
