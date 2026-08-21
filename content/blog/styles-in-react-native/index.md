@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
 
 `absoluteFill`と全く同じです。以前はこちらのみが Override 可能でしたが、今では差異はなくなりました。
 
-[参考コード](https://github.com/facebook/react-native/blob/master/Libraries/StyleSheet/StyleSheet.js#L255)
+[参考コード](https://github.com/react/react-native/blob/main/packages/react-native/Libraries/StyleSheet/StyleSheet.js)
 
 ## React-Native と Web の違い
 
