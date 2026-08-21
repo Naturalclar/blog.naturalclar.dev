@@ -96,7 +96,7 @@ javascript を bytecode に変換し処理を高速化する javascript engine �
 
 React Native での描画のアニメーションをネイティブ層で処理することにより、アニメーションを使っていても高いパフォーマンスを維持できるライブラリ、[react-native-reanimated](https://github.com/software-mansion/react-native-reanimated)の v2 のアルファ版がリリースされました。
 
-v2 では、ネイティブ層とのつなぎ込みに [Turbo Modules](https://github.com/react-native-community/discussions-and-proposals/blob/master/proposals/0002-Turbo-Modules.md) の仕組みを使用しており、通常、ネイティブ層とのブリッジで非同期にしか処理できなかったものも、同期的に処理できるようになり、よりスムーズなアニメーションが実現可能となりました。
+v2 では、ネイティブ層とのつなぎ込みに [Turbo Modules](https://github.com/react-native-community/discussions-and-proposals/issues/40) の仕組みを使用しており、通常、ネイティブ層とのブリッジで非同期にしか処理できなかったものも、同期的に処理できるようになり、よりスムーズなアニメーションが実現可能となりました。
 
 Turbo Modules の仕組み自体は、まだ大々的に OSS として切り出されておらず、サードパーティでの組み込みが厳しい状態となっているなか、それを取り組み始めているサードパーティモジュールの1つとしてとても注目されています。
 
