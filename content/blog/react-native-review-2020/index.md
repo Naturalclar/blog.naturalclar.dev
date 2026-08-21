@@ -63,7 +63,7 @@ Appearance Module が追加され、ダークモードの対応が容易にな�
 
 この日に大幅なデザインの変更が行われて、React Native の公式ドキュメントに近いデザインになり、検索も使いやすくなりました。
 
-今は [Lean Core](https://github.com/facebook/react-native/issues/23313) の動きもあって、React Native 本体が提供している API を最低限に絞っているので、自分の要求にあったモジュールを探すのに、非常に便利なツールとなっています。
+今は [Lean Core](https://github.com/react/react-native/issues/23313) の動きもあって、React Native 本体が提供している API を最低限に絞っているので、自分の要求にあったモジュールを探すのに、非常に便利なツールとなっています。
 
 ## 2020/04
 
