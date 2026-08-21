@@ -132,7 +132,9 @@ The feed goes directly into the export directory, not into `public/`.
 
 That ordering is load-bearing, so don't "tidy" it by moving the write to `public/`: `next build` copies `public/` into `out/` before the script runs, so a feed written there would reach `out/` only on a later rebuild that happened to find the previous run's file. This was a real bug (#89) — clean checkouts, which is what the deploy builds from, shipped no feed at all. The script now throws if `out/` is absent rather than silently writing somewhere that never gets deployed.
 
-One duplication remains in the same area: `scripts/generate-rss.mjs` re-implements the post reading that `src/lib/posts.ts` already does — its own `readdirSync` walk, `gray-matter` parse and sort. The excerpt is no longer among them, since both call `toExcerpt`, but the walk itself must still be kept in agreement by hand. Closing it properly needs a TypeScript-aware runner so the script can import `posts.ts` directly.
+The script no longer walks `content/blog/` itself. `src/lib/read-posts.mjs` is the one walk — `readdirSync`, the `index.md` check, the `gray-matter` parse, the tag validation and the sort — and both sides import it: `posts.ts` layers the types and the Markdown pipeline on top, the RSS script takes the result as-is. It is `.mjs` for the same reason `excerpt.mjs` is, and #180 closed the last copy that had to be kept in agreement by hand.
+
+That also closed a gap that was wider than it looked: the feed used to read `data.tags ?? []` while `posts.ts` validated against the vocabulary, so a bad tag failed the feed only because `next build` runs first in `pnpm build`. Running `node scripts/generate-rss.mjs` on its own now fails on an unknown, missing or empty tag with the same message the build gives.
 
 ### Pagination
 
@@ -156,7 +158,7 @@ Frontmatter carries `tags: ['react-native', 'typescript']`, and **`src/data/tags
 
 **Tag pages are not paginated.** They hand `PostList` a single-page `PaginatedPosts` shape, and `Pagination` returns `null` when `totalPages <= 1`, so nothing renders. The largest tag holds 13 of 25 posts; splitting that would mean a second set of routes for no reader benefit. `getPaginatedPosts` is the piece to reach for if a tag ever outgrows it.
 
-`scripts/generate-rss.mjs` reads `tags` straight from the frontmatter for its `<category>` elements rather than going through `posts.ts` — the same hand-kept duplication as the rest of that script.
+`scripts/generate-rss.mjs` builds its `<category>` elements from the same validated tags, since #180 gave it the shared walk — a tag outside the vocabulary fails the feed as it fails the build.
 
 ### Dated articles
 

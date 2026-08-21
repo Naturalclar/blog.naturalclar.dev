@@ -1,49 +1,17 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { Feed } from 'feed'
-import matter from 'gray-matter'
 import site from '../src/data/site.json' with { type: 'json' }
-import { toExcerpt } from '../src/lib/excerpt.mjs'
+import { readPosts } from '../src/lib/read-posts.mjs'
 
-// ESM rather than CommonJS so this can import the shared excerpt helper, which
-// has to be a module the TypeScript side can import too. Before that the
-// excerpt was computed here independently and produced raw Markdown in the
-// feed — see #112.
+// ESM rather than CommonJS so this can import the shared modules under
+// src/lib/, which have to be ones the TypeScript side can import too. The
+// excerpt was the first (#112); the walk over content/blog/ followed in #180,
+// after living here as a second copy that had to be kept in agreement by hand.
 const { author, authorEmail, siteDescription, siteTitle, siteUrl } = site
 
-function readPostsFromDirectory() {
-  const postsDirectory = path.join(process.cwd(), 'content/blog')
-  const fileNames = fs.readdirSync(postsDirectory)
-
-  return fileNames
-    .filter((name) =>
-      fs.statSync(path.join(postsDirectory, name)).isDirectory()
-    )
-    .map((name) => {
-      const fullPath = path.join(postsDirectory, name, 'index.md')
-
-      if (!fs.existsSync(fullPath)) {
-        return null
-      }
-
-      const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const matterResult = matter(fileContents)
-
-      return {
-        slug: name,
-        title: matterResult.data.title || name,
-        date: matterResult.data.date || '',
-        content: matterResult.content,
-        excerpt: toExcerpt(matterResult.content),
-        tags: matterResult.data.tags ?? [],
-      }
-    })
-    .filter((post) => post !== null)
-    .sort((a, b) => (a.date < b.date ? 1 : -1))
-}
-
 function generateRSSFeed() {
-  const posts = readPostsFromDirectory()
+  const posts = readPosts()
 
   const feed = new Feed({
     title: siteTitle,

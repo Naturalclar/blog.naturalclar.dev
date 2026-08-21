@@ -1,6 +1,3 @@
-import fs from 'node:fs'
-import path from 'node:path'
-import matter from 'gray-matter'
 import powershell from 'highlight.js/lib/languages/powershell'
 import { common } from 'lowlight'
 import rehypeHighlight from 'rehype-highlight'
@@ -8,8 +5,12 @@ import rehypeStringify from 'rehype-stringify'
 import { remark } from 'remark'
 import remarkGfm from 'remark-gfm'
 import remarkRehype from 'remark-rehype'
-import tagVocabulary from '../data/tags.json'
-import { toExcerpt } from './excerpt.mjs'
+import {
+  readPost,
+  readPostSlugs,
+  readPosts,
+  TAGS as tagVocabulary,
+} from './read-posts.mjs'
 import rehypeCodeTitle from './rehype-code-title.mjs'
 import rehypeOgpCard from './rehype-ogp-card.mjs'
 
@@ -17,8 +18,6 @@ import rehypeOgpCard from './rehype-ogp-card.mjs'
 // so spread lowlight's `common` set to keep it. powershell is not in common
 // and one article uses it.
 const languages = { ...common, powershell }
-
-const postsDirectory = path.join(process.cwd(), 'content/blog')
 
 export interface PostData {
   slug: string
@@ -32,49 +31,6 @@ export interface PostData {
 
 export const TAGS: string[] = tagVocabulary
 
-/**
- * A post's tags, checked against src/data/tags.json.
- *
- * Failing the build on an unknown tag is the point: a typo would otherwise
- * pre-render its own /tags/react-nativ/ page holding one post, and nothing
- * would look broken from any page that already existed.
- *
- * Missing tags fail too, and for the same reason. They used to return `[]`,
- * which meant a post with no `tags` built, listed and read normally while
- * appearing on no tag page and in no RSS category — the one failure nothing
- * put in front of you (#179). Every article carries tags, so requiring them
- * costs nothing and closes the silent case.
- */
-function readTags(data: { tags?: unknown }, slug: string): string[] {
-  const tags = data.tags
-
-  if (tags === undefined) {
-    throw new Error(
-      `${slug}: frontmatter is missing \`tags\`. Pick from ${TAGS.join(', ')} — a post with no tags appears on no tag page.`
-    )
-  }
-
-  if (!Array.isArray(tags)) {
-    throw new Error(`${slug}: frontmatter \`tags\` must be a list`)
-  }
-
-  if (tags.length === 0) {
-    throw new Error(
-      `${slug}: frontmatter \`tags\` is empty. Pick from ${TAGS.join(', ')}.`
-    )
-  }
-
-  for (const tag of tags) {
-    if (!TAGS.includes(tag)) {
-      throw new Error(
-        `${slug}: unknown tag "${tag}". Known tags are ${TAGS.join(', ')} — add it to src/data/tags.json if it is new.`
-      )
-    }
-  }
-
-  return tags
-}
-
 export interface PaginatedPosts {
   posts: PostData[]
   totalPages: number
@@ -83,42 +39,12 @@ export interface PaginatedPosts {
   hasPrevPage: boolean
 }
 
+/**
+ * The walk itself lives in read-posts.mjs, which scripts/generate-rss.mjs
+ * imports too — see the note there. This adds only the types.
+ */
 export function getSortedPostsData(): PostData[] {
-  const fileNames = fs.readdirSync(postsDirectory)
-  const allPostsData = fileNames
-    .filter((name) =>
-      fs.statSync(path.join(postsDirectory, name)).isDirectory()
-    )
-    .map((name) => {
-      const slug = name
-      const fullPath = path.join(postsDirectory, name, 'index.md')
-
-      if (!fs.existsSync(fullPath)) {
-        return null
-      }
-
-      const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const matterResult = matter(fileContents)
-
-      return {
-        slug,
-        title: matterResult.data.title || slug,
-        date: matterResult.data.date || '',
-        content: matterResult.content,
-        excerpt: toExcerpt(matterResult.content),
-        tags: readTags(matterResult.data, slug),
-        outdated: matterResult.data.outdated === true,
-      }
-    })
-    .filter((post): post is PostData => post !== null)
-
-  return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1
-    } else {
-      return -1
-    }
-  })
+  return readPosts() as PostData[]
 }
 
 // Callers should leave postsPerPage alone: the page component and
@@ -146,24 +72,13 @@ export function getPaginatedPosts(
 }
 
 export function getAllPostSlugs() {
-  const fileNames = fs.readdirSync(postsDirectory)
-  return fileNames
-    .filter((name) =>
-      fs.statSync(path.join(postsDirectory, name)).isDirectory()
-    )
-    .map((name) => ({
-      params: {
-        slug: name,
-      },
-    }))
+  return readPostSlugs().map((slug: string) => ({ params: { slug } }))
 }
 
 export async function getPostData(
   slug: string
 ): Promise<PostData & { contentHtml: string }> {
-  const fullPath = path.join(postsDirectory, slug, 'index.md')
-  const fileContents = fs.readFileSync(fullPath, 'utf8')
-  const matterResult = matter(fileContents)
+  const post = readPost(slug) as PostData
 
   // remark-html is not used here because it goes straight to HTML and leaves
   // no point to hook a highlighter in. Going through rehype colours the code
@@ -175,19 +90,9 @@ export async function getPostData(
     .use(rehypeCodeTitle)
     .use(rehypeOgpCard)
     .use(rehypeStringify)
-    .process(matterResult.content)
-  const contentHtml = processedContent.toString()
+    .process(post.content)
 
-  return {
-    slug,
-    contentHtml,
-    title: matterResult.data.title || slug,
-    date: matterResult.data.date || '',
-    content: matterResult.content,
-    excerpt: toExcerpt(matterResult.content),
-    tags: readTags(matterResult.data, slug),
-    outdated: matterResult.data.outdated === true,
-  }
+  return { ...post, contentHtml: processedContent.toString() }
 }
 
 /** Tags that at least one post carries, in the order src/data/tags.json lists them. */
