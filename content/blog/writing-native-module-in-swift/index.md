@@ -274,4 +274,4 @@ JavaScript から渡された JSON の値を一つ一つ、Swift で使える型
 
 ## 参考記事
 
-- [Swift in React Native - the Ultimate Guide Part 1: Modules](https://teabreak.e-spres-oh.com/swift-in-react-native-the-ultimate-guide-part-1-modules-9bb8d054db03)
+- [Swift in React Native - the Ultimate Guide Part 1: Modules](https://medium.com/tea-break-by-e-spres-oh/swift-in-react-native-the-ultimate-guide-part-1-modules-9bb8d054db03)
