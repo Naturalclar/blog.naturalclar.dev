@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import Bio from '../../../components/Bio'
 import Layout from '../../../components/Layout'
 import OutdatedNotice from '../../../components/OutdatedNotice'
 import PostDate from '../../../components/PostDate'
+import PostLink from '../../../components/PostLink'
 import TagList from '../../../components/TagList'
 import { siteTitle } from '../../../data/static'
 import { generateMetadata as generateSEOMetadata } from '../../../lib/metadata'
@@ -77,16 +77,16 @@ export default async function BlogPost({ params }: BlogPostProps) {
         <ul className="flex list-none flex-wrap justify-between p-0">
           <li>
             {previous && (
-              <Link href={`/posts/${previous.slug}`} rel="prev">
+              <PostLink slug={previous.slug} rel="prev">
                 ← {previous.title}
-              </Link>
+              </PostLink>
             )}
           </li>
           <li>
             {next && (
-              <Link href={`/posts/${next.slug}`} rel="next">
+              <PostLink slug={next.slug} rel="next">
                 {next.title} →
-              </Link>
+              </PostLink>
             )}
           </li>
         </ul>
