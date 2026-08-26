@@ -21,7 +21,7 @@ updates:
     open-pull-requests-limit: 5
     commit-message:
       # The history is `<type>: <subject>`, squash-merged as
-      # `<subject> (#N)` — see CLAUDE.md.
+      # `<subject> (#N)` — see AGENTS.md.
       prefix: chore
       prefix-development: chore
     groups:
