@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import type { PaginatedPosts } from '../lib/posts'
 import Pagination from './Pagination'
 import PostDate from './PostDate'
+import PostLink from './PostLink'
 import TagList from './TagList'
 
 type Props = {
@@ -24,7 +24,7 @@ const PostList: React.FC<Props> = ({ data }) => (
          to be obviously larger than the gaps inside one. */
       <div key={post.slug} className="mb-10">
         <h3 className="mb-1">
-          <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+          <PostLink slug={post.slug}>{post.title}</PostLink>
         </h3>
         <small>
           <PostDate date={post.date} />
