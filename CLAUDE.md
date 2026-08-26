@@ -198,6 +198,8 @@ Component styling is still a mix: `src/components/` and the page files carry inl
 
 Note Biome reads the literal string `biome-ignore` inside CSS comments as a suppression directive and errors on it, so don't mention the mechanism by name in a stylesheet comment.
 
+**`next-env.d.ts` is generated and untracked**, which is what `create-next-app`'s own template does in all six of its variants. It has to be untracked rather than merely un-formatted, because `next dev` and `next build` write *different* contents into it — `./.next/dev/types/…` versus `./.next/types/…` — so whichever command ran last decided whether the working tree was dirty, and the two variants flip-flopped through history carrying no information (#195). Both commands recreate it from nothing, so no checkout needs it; a clean clone with the file absent builds, and `next build` still type-checks (verified by planting a type error and watching it fail). It used to be tracked *and* excluded from Biome by name, an exclusion #173 added when Next 16 started writing double quotes and semicolons into it. That exclusion is gone: `vcs.useIgnoreFile` means `.gitignore` already keeps Biome off it, which is the first bullet above doing its job.
+
 Formatting follows the previous Prettier conventions: single quotes, no semicolons, 2-space indent, `es5` trailing commas.
 
 Because `eslint-config-next` was removed, **the Next.js-specific rules (`@next/next/*`) and the React Hooks rules are not enforced** — Biome does not implement them. Nothing checks for `exhaustive-deps` violations or `no-img-element`.
