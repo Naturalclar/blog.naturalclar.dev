@@ -11,7 +11,7 @@ Always use `pnpm` — the version is pinned to 9.15.2 via the `packageManager` f
 - `pnpm lint` — `biome check`: lint, format check, and import order in one pass
 - `pnpm lint:text` — textlint over the articles. Separate from `pnpm lint` because the two cover disjoint trees: Biome excludes `content/`, textlint reads nothing else. Both run in CI
 - `pnpm format` — `biome check --write`: applies fixes in place
-- `pnpm new` — scaffolds `content/blog/{title}/index.md` via scaffdog, prompting for a title
+- `pnpm new` — scaffolds `content/blog/{slug}/index.md` via scaffdog, asking for the slug, the title and the tags separately
 - `pnpm start` — serves the built `out/` directory on port 3000, for checking a production build
 
 `pnpm start` runs `pnpm dlx serve out`, not `next start`: the build is a static export, so there is no Next.js server to start. It needs `pnpm build` to have run first.
