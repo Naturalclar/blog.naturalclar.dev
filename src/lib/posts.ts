@@ -1,23 +1,10 @@
-import powershell from 'highlight.js/lib/languages/powershell'
-import { common } from 'lowlight'
-import rehypeHighlight from 'rehype-highlight'
-import rehypeStringify from 'rehype-stringify'
-import { remark } from 'remark'
-import remarkGfm from 'remark-gfm'
-import remarkRehype from 'remark-rehype'
 import {
   readPost,
   readPostSlugs,
   readPosts,
   TAGS as tagVocabulary,
 } from './read-posts.mjs'
-import rehypeCodeTitle from './rehype-code-title.mjs'
-import rehypeOgpCard from './rehype-ogp-card.mjs'
-
-// rehype-highlight replaces its language registry when `languages` is passed,
-// so spread lowlight's `common` set to keep it. powershell is not in common
-// and one article uses it.
-const languages = { ...common, powershell }
+import { renderMarkdown } from './render-markdown.mjs'
 
 export interface PostData {
   slug: string
@@ -80,19 +67,11 @@ export async function getPostData(
 ): Promise<PostData & { contentHtml: string }> {
   const post = readPost(slug) as PostData
 
-  // remark-html is not used here because it goes straight to HTML and leaves
-  // no point to hook a highlighter in. Going through rehype colours the code
-  // at build time, so the pages ship plain markup and no client-side JS.
-  const processedContent = await remark()
-    .use(remarkGfm)
-    .use(remarkRehype)
-    .use(rehypeHighlight, { detect: false, languages })
-    .use(rehypeCodeTitle)
-    .use(rehypeOgpCard)
-    .use(rehypeStringify)
-    .process(post.content)
+  // No `absoluteBase`: a page's own URLs stay relative, because the browser
+  // resolves them against the page. Only the feed needs them absolute.
+  const contentHtml = await renderMarkdown(post.content)
 
-  return { ...post, contentHtml: processedContent.toString() }
+  return { ...post, contentHtml }
 }
 
 /** Tags that at least one post carries, in the order src/data/tags.json lists them. */
