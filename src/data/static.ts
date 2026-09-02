@@ -1,5 +1,5 @@
-// Values live in site.json so that scripts/generate-rss.js, which is plain
-// CommonJS and cannot import TypeScript, reads the same source.
+// Values live in site.json so that scripts/generate-rss.mjs, which runs under
+// plain node and cannot import TypeScript, reads the same source.
 import site from './site.json'
 
 export const author = site.author
