@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { pagePath } from '../lib/routes.mjs'
 
 interface PaginationProps {
   currentPage: number
@@ -21,10 +22,7 @@ export default function Pagination({
     <nav className="mt-8 flex items-center justify-between py-4">
       <div>
         {hasPrevPage ? (
-          <Link
-            className="pagination-link"
-            href={currentPage === 2 ? '/' : `/page/${currentPage - 1}`}
-          >
+          <Link className="pagination-link" href={pagePath(currentPage - 1)}>
             ← Previous
           </Link>
         ) : (
@@ -42,7 +40,7 @@ export default function Pagination({
                 ? 'pagination-link pagination-number pagination-number-current'
                 : 'pagination-link pagination-number'
             }
-            href={page === 1 ? '/' : `/page/${page}`}
+            href={pagePath(page)}
           >
             {page}
           </Link>
@@ -51,7 +49,7 @@ export default function Pagination({
 
       <div>
         {hasNextPage ? (
-          <Link className="pagination-link" href={`/page/${currentPage + 1}`}>
+          <Link className="pagination-link" href={pagePath(currentPage + 1)}>
             Next →
           </Link>
         ) : (

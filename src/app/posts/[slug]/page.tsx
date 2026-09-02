@@ -12,6 +12,7 @@ import {
   getAllPostSlugs,
   getPostData,
 } from '../../../lib/posts'
+import { postPath } from '../../../lib/routes.mjs'
 
 interface BlogPostProps {
   // Awaited since Next 15 — see the note in src/app/page/[page]/page.tsx.
@@ -35,7 +36,7 @@ export async function generateMetadata({
   return generateSEOMetadata({
     title: post.title,
     description: post.excerpt,
-    path: `/posts/${slug}/`,
+    path: postPath(slug),
     // The only caller that passes this, and so the only one that comes out as
     // an `article` rather than a `website`.
     publishedTime: post.date || undefined,
