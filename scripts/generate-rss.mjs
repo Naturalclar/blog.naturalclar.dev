@@ -42,8 +42,19 @@ function generateRSSFeed() {
   posts.forEach((post) => {
     feed.addItem({
       title: post.title,
+      // `id` becomes <guid isPermaLink="false">, which is an opaque key
+      // rather than a URL claim — readers use it for "have I shown this
+      // already". It deliberately keeps the slashless spelling it has always
+      // had: changing it would mark all 26 articles unread again in every
+      // subscriber's client, including posts from 2019, and buy nothing.
       id: `${siteUrl}/posts/${post.slug}`,
-      link: `${siteUrl}/posts/${post.slug}`,
+      // `link` is the URL a reader actually follows, so it has to be the one
+      // the site serves. `trailingSlash: true` puts the article at
+      // /posts/{slug}/, which is what its canonical, its og:url and its
+      // sitemap entry all say; without the slash every item cost a 301, and
+      // anything comparing the feed to the sitemap saw two URLs per post
+      // (#204).
+      link: `${siteUrl}/posts/${post.slug}/`,
       description: post.excerpt,
       category: post.tags.map((name) => ({ name })),
       content: post.content,
