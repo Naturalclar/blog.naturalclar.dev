@@ -3,14 +3,16 @@ import path from 'node:path'
 import { Feed } from 'feed'
 import site from '../src/data/site.json' with { type: 'json' }
 import { readPosts } from '../src/lib/read-posts.mjs'
+import { renderMarkdown } from '../src/lib/render-markdown.mjs'
 
 // ESM rather than CommonJS so this can import the shared modules under
 // src/lib/, which have to be ones the TypeScript side can import too. The
 // excerpt was the first (#112); the walk over content/blog/ followed in #180,
-// after living here as a second copy that had to be kept in agreement by hand.
+// after living here as a second copy that had to be kept in agreement by hand;
+// the Markdown pipeline followed in #203.
 const { author, authorEmail, siteDescription, siteTitle, siteUrl } = site
 
-function generateRSSFeed() {
+async function generateRSSFeed() {
   const posts = readPosts()
 
   const feed = new Feed({
@@ -39,7 +41,7 @@ function generateRSSFeed() {
     },
   })
 
-  posts.forEach((post) => {
+  for (const post of posts) {
     feed.addItem({
       title: post.title,
       // `id` becomes <guid isPermaLink="false">, which is an opaque key
@@ -57,7 +59,15 @@ function generateRSSFeed() {
       link: `${siteUrl}/posts/${post.slug}/`,
       description: post.excerpt,
       category: post.tags.map((name) => ({ name })),
-      content: post.content,
+      // <content:encoded> is rendered as HTML by readers, so it has to be
+      // HTML. It carried `post.content` — the raw Markdown — until #203,
+      // which reached subscribers as 102 literal headings and 144 literal
+      // code fences. `absoluteBase` is what the pages do not need: a feed
+      // item is read in a client with no base to resolve `./diagram.png` or
+      // `/ogp/….png` against.
+      content: await renderMarkdown(post.content, {
+        absoluteBase: `${siteUrl}/posts/${post.slug}/`,
+      }),
       author: [
         {
           name: author,
@@ -67,7 +77,7 @@ function generateRSSFeed() {
       ],
       date: new Date(post.date),
     })
-  })
+  }
 
   // Write the feed straight into the export directory. Writing it to public/
   // instead would be too late: `next build` copies public/ into out/ before
@@ -84,5 +94,5 @@ function generateRSSFeed() {
   fs.writeFileSync(path.join(outDir, 'rss.xml'), feed.rss2())
 }
 
-generateRSSFeed()
+await generateRSSFeed()
 console.log('RSS feed generated successfully!')
