@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { tagPath } from '../lib/routes.mjs'
 
 type Props = {
   tags: string[]
@@ -18,7 +19,7 @@ const TagList: React.FC<Props> = ({ tags }) =>
         <li key={tag}>
           {/* `#${tag}` as one expression, not `#{tag}`: two adjacent children
               make React emit a `<!-- -->` separator between the text nodes. */}
-          <Link href={`/tags/${tag}/`}>{`#${tag}`}</Link>
+          <Link href={tagPath(tag)}>{`#${tag}`}</Link>
         </li>
       ))}
     </ul>

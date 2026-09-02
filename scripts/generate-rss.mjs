@@ -4,6 +4,7 @@ import { Feed } from 'feed'
 import site from '../src/data/site.json' with { type: 'json' }
 import { readPosts } from '../src/lib/read-posts.mjs'
 import { renderMarkdown } from '../src/lib/render-markdown.mjs'
+import { postUrl } from '../src/lib/routes.mjs'
 
 // ESM rather than CommonJS so this can import the shared modules under
 // src/lib/, which have to be ones the TypeScript side can import too. The
@@ -56,7 +57,7 @@ async function generateRSSFeed() {
       // sitemap entry all say; without the slash every item cost a 301, and
       // anything comparing the feed to the sitemap saw two URLs per post
       // (#204).
-      link: `${siteUrl}/posts/${post.slug}/`,
+      link: postUrl(post.slug),
       description: post.excerpt,
       category: post.tags.map((name) => ({ name })),
       // <content:encoded> is rendered as HTML by readers, so it has to be
@@ -66,7 +67,7 @@ async function generateRSSFeed() {
       // item is read in a client with no base to resolve `./diagram.png` or
       // `/ogp/….png` against.
       content: await renderMarkdown(post.content, {
-        absoluteBase: `${siteUrl}/posts/${post.slug}/`,
+        absoluteBase: postUrl(post.slug),
       }),
       author: [
         {

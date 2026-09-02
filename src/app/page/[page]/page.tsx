@@ -6,6 +6,7 @@ import PostList from '../../../components/PostList'
 import { siteTitle } from '../../../data/static'
 import { generateMetadata as generateSEOMetadata } from '../../../lib/metadata'
 import { getPaginatedPosts } from '../../../lib/posts'
+import { pagePath } from '../../../lib/routes.mjs'
 
 interface PageProps {
   // A Promise since Next 15: route params are awaited rather than read. The
@@ -24,7 +25,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { page } = await params
-  return generateSEOMetadata({ path: `/page/${page}/` })
+  return generateSEOMetadata({ path: pagePath(Number(page)) })
 }
 
 export default async function Page({ params }: PageProps) {

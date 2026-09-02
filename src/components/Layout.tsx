@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type React from 'react'
+import { TAGS_PATH } from '../lib/routes.mjs'
 
 type Props = {
   title: string
@@ -39,7 +40,7 @@ const Layout: React.FC<Props> = ({ title, children }) => {
           one place on every page that can offer it without competing with the
           articles. */}
       <footer>
-        <Link href="/tags/">タグ一覧</Link> · © {new Date().getFullYear()},
+        <Link href={TAGS_PATH}>タグ一覧</Link> · © {new Date().getFullYear()},
         Built with <a href="https://nextjs.org">Next.js</a>
       </footer>
     </div>

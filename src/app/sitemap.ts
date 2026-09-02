@@ -1,11 +1,17 @@
 import type { MetadataRoute } from 'next'
-import { siteUrl } from '../data/static'
 import {
   getAllTags,
   getPaginatedPosts,
   getPostsByTag,
   getSortedPostsData,
 } from '../lib/posts'
+import {
+  absoluteUrl,
+  pageUrl,
+  postUrl,
+  TAGS_PATH,
+  tagUrl,
+} from '../lib/routes.mjs'
 
 /**
  * Required under `output: 'export'`. Next treats a sitemap as a route handler,
@@ -41,25 +47,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const { totalPages } = getPaginatedPosts(1)
 
   const listing = [
-    { url: `${siteUrl}/`, lastModified: lastModified(posts[0]?.date) },
+    { url: pageUrl(1), lastModified: lastModified(posts[0]?.date) },
     ...Array.from({ length: totalPages - 1 }, (_, index) => {
       const page = index + 2
       return {
-        url: `${siteUrl}/page/${page}/`,
+        url: pageUrl(page),
         lastModified: lastModified(getPaginatedPosts(page).posts[0]?.date),
       }
     }),
   ]
 
   const articles = posts.map((post) => ({
-    url: `${siteUrl}/posts/${post.slug}/`,
+    url: postUrl(post.slug),
     lastModified: lastModified(post.date),
   }))
 
   const tags = [
-    { url: `${siteUrl}/tags/`, lastModified: lastModified(posts[0]?.date) },
+    { url: absoluteUrl(TAGS_PATH), lastModified: lastModified(posts[0]?.date) },
     ...getAllTags().map((tag) => ({
-      url: `${siteUrl}/tags/${tag}/`,
+      url: tagUrl(tag),
       lastModified: lastModified(getPostsByTag(tag)[0]?.date),
     })),
   ]

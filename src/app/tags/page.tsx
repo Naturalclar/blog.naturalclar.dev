@@ -5,11 +5,12 @@ import Layout from '../../components/Layout'
 import { siteTitle } from '../../data/static'
 import { generateMetadata as generateSEOMetadata } from '../../lib/metadata'
 import { getAllTags, getPostsByTag } from '../../lib/posts'
+import { TAGS_PATH, tagPath } from '../../lib/routes.mjs'
 
 export const metadata: Metadata = generateSEOMetadata({
   title: 'タグ',
   description: 'タグ別の記事一覧',
-  path: '/tags/',
+  path: TAGS_PATH,
 })
 
 export default function TagsIndex() {
@@ -30,7 +31,7 @@ export default function TagsIndex() {
       <ul className="tag-index">
         {tags.map(({ tag, count }) => (
           <li key={tag}>
-            <Link href={`/tags/${tag}/`}>{`#${tag}`}</Link>
+            <Link href={tagPath(tag)}>{`#${tag}`}</Link>
             <span className="tag-index-count">{count}</span>
           </li>
         ))}

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { postPath } from '../lib/routes.mjs'
 
 type Props = {
   slug: string
@@ -30,7 +31,7 @@ type Props = {
  * reintroduce this silently.
  */
 export default function PostLink({ slug, rel, children }: Props) {
-  const href = `/posts/${slug}/`
+  const href = postPath(slug)
 
   if (slug.includes('.')) {
     return (

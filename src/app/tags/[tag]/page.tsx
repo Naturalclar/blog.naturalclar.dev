@@ -6,6 +6,7 @@ import PostList from '../../../components/PostList'
 import { siteTitle } from '../../../data/static'
 import { generateMetadata as generateSEOMetadata } from '../../../lib/metadata'
 import { getAllTags, getPostsByTag } from '../../../lib/posts'
+import { tagPath } from '../../../lib/routes.mjs'
 
 interface TagPageProps {
   // Awaited since Next 15 — see the note in src/app/page/[page]/page.tsx.
@@ -21,7 +22,7 @@ export async function generateMetadata({
   return generateSEOMetadata({
     title: `#${tag}`,
     description: `${tag} タグの記事一覧`,
-    path: `/tags/${tag}/`,
+    path: tagPath(tag),
   })
 }
 
