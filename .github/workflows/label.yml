@@ -1,19 +1,64 @@
 name: 'Set Issue Label'
+
 on:
   issues:
     types: [opened]
 
+# The default for this repository is read-only; adding a label needs write.
+permissions:
+  issues: write
+
 jobs:
-  test:
+  label:
     runs-on: ubuntu-latest
     steps:
-      - uses: Naturalclar/issue-action@v2.0.2
-        with:
-          keywords: '["post"]'
-          action: '["Post Idea"]'
-          github-token: '${{ secrets.GITHUB_TOKEN }}'
-      - uses: Naturalclar/issue-action@v2.0.2
-        with:
-          keywords: '["feature"]'
-          action: '["feature request"]'
-          github-token: '${{ secrets.GITHUB_TOKEN }}'
+      # The label comes from a `[Prefix]` at the start of the title — the
+      # convention the older issues use (`[Post] About RNTester`, `[Feature]
+      # Mobile version`).
+      #
+      # Deliberately not a keyword search over the whole issue, which is what
+      # this workflow did until #202. That matched the bare word "post"
+      # against the title *and* body, and this is a blog whose URLs are
+      # /posts/: measured over the repository's own titles, 13 matched and
+      # only 6 were actually article ideas.
+      #
+      # Deliberately not `Naturalclar/issue-action` either. Its v2 matcher
+      # interpolates the keyword straight into a RegExp —
+      # `\b${keyword}\b` — so `[post]` becomes a character class rather than
+      # a literal, and no escaping helps: `\b` cannot sit next to `[`, so
+      # every bracketed spelling matches nothing at all. The prefix
+      # convention is not expressible through that input.
+      - name: Label from the [Prefix] in the title
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          # Passed through the environment rather than interpolated into the
+          # script: an issue title is untrusted text, and `${{ }}` inside
+          # `run:` would splice it into the shell.
+          TITLE: ${{ github.event.issue.title }}
+          NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+
+          # Quoted so the brackets stay literal — unquoted, `[post]` is a
+          # glob character class matching any one of p, o, s, t.
+          case "${TITLE,,}" in
+            '[post]'*)
+              label='Post Idea'
+              color='0e8a16'
+              description='An idea for an article' ;;
+            '[feature]'*)
+              label='feature request'
+              color='a2eeef'
+              description='A change to the site itself' ;;
+            *)
+              echo "No [Post] or [Feature] prefix, leaving unlabelled: $TITLE"
+              exit 0 ;;
+          esac
+
+          # --force makes this idempotent: it creates the label the first time
+          # and updates it afterwards. Both labels were missing from the
+          # repository, which would have failed `gh issue edit` on its own.
+          gh label create "$label" --color "$color" --description "$description" --force
+          gh issue edit "$NUMBER" --add-label "$label"
+          echo "Labelled #$NUMBER as $label"

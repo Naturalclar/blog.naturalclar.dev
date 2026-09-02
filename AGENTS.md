@@ -242,7 +242,13 @@ The Pages source must stay on **GitHub Actions** (Settings → Pages). Switching
 
 `.github/workflows/links.yml` checks the archive's external links (see the Link checking section above). It is the one workflow that is *expected* to go red sometimes — a broken link is a report, not a build failure, and nothing downstream depends on it.
 
-`.github/workflows/label.yml` auto-labels new issues by keyword — an issue whose title or body contains "post" gets `Post Idea`, and "feature" gets `feature request`.
+`.github/workflows/label.yml` labels a new issue from a `[Prefix]` at the **start of its title**: `[Post]` gets `Post Idea`, `[Feature]` gets `feature request`, anything else is left alone. That is the convention the older issues use — `[Post] About RNTester`, `[Feature] Mobile version`. The step creates the label before applying it (`gh label create --force`), so it is self-sufficient; both labels had been deleted from the repository at some point and nothing recreated them.
+
+It used to search for the bare words "post" and "feature" across the title *and* body, which is wrong for this repository specifically: the site's URLs are `/posts/`, so almost every issue mentions the word. Measured over the repository's own titles, 13 matched and 6 were actually article ideas (#202).
+
+It also no longer uses `Naturalclar/issue-action`. That action's v2 matcher interpolates the keyword straight into a `RegExp` — `` `\b${keyword}\b` `` — so a bracketed keyword becomes a character class rather than a literal, and no escaping rescues it: `\b` cannot sit next to `[`, so every bracketed spelling matches nothing at all. The prefix convention is not expressible through that input, which is why the fix is a `case` statement rather than a configuration change. Note the patterns in it must stay quoted — unquoted, `[post]` is a shell glob matching any one of `p`, `o`, `s`, `t`.
+
+Worth knowing for any future workflow here: the issue title reaches the script through `env:` rather than `${{ }}` inside `run:`, because a title is untrusted text and `${{ }}` splices it into the shell.
 
 ### Dependabot
 
