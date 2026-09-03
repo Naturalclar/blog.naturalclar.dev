@@ -10,8 +10,8 @@ import path from 'node:path'
  * value depends on a reader being able to follow a named path to the code. A
  * path that has rotted does worse than say nothing: it sends someone looking
  * for a file that is not there and casts doubt on the reasoning around it.
- * That is what #205 was, a comment pointing at `scripts/generate-rss.js` three
- * releases after the file became `.mjs`.
+ * That is what #205 was: a comment still spelling `scripts/generate-rss.mjs`
+ * with a `.js` extension, three releases after the rename.
  *
  * Safe in ci.yml by the same test textlint passes and `pnpm links` fails: it
  * reads only this repository's own files, so it is deterministic and offline,
@@ -51,9 +51,12 @@ const PATH_PATTERN = new RegExp(
 
 /**
  * `content/` is deliberately not scanned. Article prose cites paths from the
- * projects it is about — `src/components/Button.ts`,
- * `src/screens/LoginScreen.ts` and `src/Entrypoint/Options.ts` all appear in
- * articles, and none of them are files here.
+ * projects it is about — a Button component, a LoginScreen, an Entrypoint
+ * Options module — and none of those are files here.
+ *
+ * Note this file is subject to its own check, so it cannot spell a dead path
+ * out either. That is why those three are described rather than quoted, and
+ * why the self-test fixture below is assembled from parts.
  */
 const SKIP_PREFIXES = ['content/']
 
@@ -112,8 +115,12 @@ export function findMissingPaths(files = trackedFiles()) {
  * rests on the comment above the pattern, not on this.
  */
 function selfTest() {
+  // Assembled rather than written out: this file is scanned by its own check,
+  // and a literal dead path here would fail the run.
+  const MISSING_FIXTURE = ['src', 'lib', 'definitely-not-here.mjs'].join('/')
+
   const cases = [
-    ['src/lib/definitely-not-here.mjs', true, 'a missing .mjs path'],
+    [MISSING_FIXTURE, true, 'a missing .mjs path'],
     ['src/lib/routes.mjs', false, 'a real .mjs path'],
     ['src/components/PostLink.tsx', false, 'a real .tsx path, not truncated'],
     ['src/data/tags.json', false, 'a real .json path, not truncated'],
