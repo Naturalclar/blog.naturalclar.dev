@@ -24,6 +24,7 @@
     "format": "biome check --write",
     "lint": "biome check",
     "lint:text": "textlint \"content/blog/*/index.md\"",
+    "lint:paths": "node scripts/check-paths.mjs",
     "links": "node scripts/check-links.mjs",
     "new": "scaffdog generate",
     "ogp": "node scripts/fetch-ogp.mjs",

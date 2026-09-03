@@ -33,6 +33,10 @@ jobs:
     # the repository's own Markdown, so it is deterministic and offline.
     - name: Lint the prose
       run: pnpm lint:text
+    # Same test textlint passes and the link check fails: it reads only this
+    # repository's own files, so no third-party host can redden a deploy.
+    - name: Check the paths named in docs and comments
+      run: pnpm lint:paths
     - name: Build
       run: pnpm build
     # Deploying from this job rather than a workflow of its own means the
